@@ -1,0 +1,45 @@
+.fade-in {
+	animation: slide-in ease 0.3;
+}
+
+//
+
+// .slide-in {
+// 	transform: translateX(0px);
+// 	opacity: 1;
+// }
+
+.slide-in {
+	animation: slide-in ease 0.2s;
+	// transition: 0.5s;
+}
+
+.slide-out {
+	animation: slide-out ease 0.2s;
+	// transform: translateX(20px);
+	// opacity: 0;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes slide-in {
+	from {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+}
+
+@keyframes slide-out {
+	from {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+}

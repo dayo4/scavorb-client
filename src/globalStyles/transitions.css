@@ -1,0 +1,186 @@
+/* VUE.JS  TRANSITIONS*/
+
+/* fold-unfold  -> USED IN: Global Notify */
+
+/* .fold-unfold-enter-active {
+    transition: all 0.4s 0.4s ease;
+}
+
+.fold-unfold-leave-active {
+    transition: all 0.2s ease-in-out;
+}
+
+.fold-unfold-enter, .slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+} */
+
+/* fadE-in  -> USED IN: App.vue */
+
+.fade-in-enter-active {
+    transition: all 0.8s ease;
+}
+
+.fade-in-leave-active {
+    transition: all 0.2s ease-in-out;
+}
+
+.fade-in-enter {
+    /* transform: translateY(20px); */
+    opacity: 0;
+}
+
+.fade-in-leave-to {
+    transform: translateX(-100px);
+    opacity: 0;
+}
+
+/* slide-fadE  -> USED IN: login title switch, globalDropdown, */
+
+.slide-fade-leave-active, .slide-fade-enter-active {
+    transition: all 0.3s ease-in-out;
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+/* slide-up-fade   -> USED IN: Loadings */
+
+.slide-up-fade-enter-active {
+    transition: all 0.3s ease;
+}
+
+.slide-up-fade-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-up-fade-enter, .slide-down-fade-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+/* slide-down-fade   -> USED IN: profile mediaTab*/
+
+.slide-down-fade-enter-active {
+    transition: all 0.4s ease;
+}
+
+.slide-down-fade-leave-active {
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-down-fade-enter, .slide-down-fade-leave-to {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+/* bounce  -> USED IN: login username*/
+
+/* .bounce-enter-active {
+    animation: bounce-in 0.5s ease-in-out;
+}
+
+.bounce-leave-active {
+    animation: bounce-in 0.5s ease-in-out reverse;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
+
+/* expand -> USED IN: login alert*/
+
+.expand-enter-active, .expand-leave-active {
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.expand-enter, .expand-leave-to {
+    transform: rotateX(-95deg);
+}
+
+/* expand fade animation  -> USED IN: */
+
+@keyframes expand-fade {
+    0% {
+        top: 50%;
+        left: 50%;
+        width: 0px;
+        height: 0px;
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}
+
+/* basic fade/slide animation */
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-right {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-left {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* error shaking animation -> USED IN Validation Errors: NewPostCompose, User login,  */
+
+.vibrate {
+    animation: vibrate 0.1s ease;
+}
+
+@keyframes vibrate {
+    20% {
+        transform: translateX(10px);
+    }
+    40% {
+        transform: translateX(0px);
+    }
+    60% {
+        transform: translateX(10px);
+    }
+    80% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}

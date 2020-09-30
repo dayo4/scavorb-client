@@ -1,0 +1,272 @@
+<template>
+    <Container ownID="MC-Home">
+        <section class="Top noselect br3">
+            <div class="Intro">
+                <div>Adedayo Adeniyi</div>
+                <div>A Fullstack Web Applications Developer</div>
+            </div>
+
+            <div class="Img">
+                <img src="/defaults/usr/me.jpg" alt="profile image" draggable="false" />
+                <div class="Icon" @click="$router.push({path: '/profile/dayo'})">
+                    <span class="flex a-i-center j-c-center">
+                        <!--<span class="icon-camera font-12 cursor-pointer" title="Take Photo"></span> -->
+                        <span class="icon-user"></span>
+                    </span>
+                    <span>View Profile</span>
+                </div>
+            </div>
+        </section>
+
+        <hr class="shadow-8" />
+        <section class="Section_2">
+            <h2 class="text-center t-blue-grey--1">
+                <span class="icon-chart-line-1 mr-3"></span>
+                <span>
+                    Deliverables
+                    <!-- <i class="font-2">Few</i> -->
+                </span>
+            </h2>
+            <div class="Tiles flex wrap j-c-center py-8">
+                <div class="shadow-3" v-for="(L, i) in list" :key="i">
+                    <div>
+                        <img :src="'/defaults/pgs/icons/'+L.img+'.jpg'" draggable="false" />
+                    </div>
+                    <div>{{ L.text }}</div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="shadow-8" />
+        <section>
+            <h2 class="text-center t-blue-grey--1">
+                <span class="icon-chart-line-1 mr-3"></span>
+                <span>
+                    Skills Chart
+                    <i class="font-2">Few</i>
+                </span>
+            </h2>
+            <SkillChart></SkillChart>
+        </section>
+        <hr class="shadow-8" />
+        <!-- Flipper Component -->
+        <!-- <Flipper></Flipper> -->
+        <!-- Flipper Component -->
+        <!-- <hr class="shadow-8" /> -->
+
+        <h2 class="text-center t-blue-grey--1">
+            <span class="icon-mail-alt mr-3"></span>
+            <span>
+                Message Me
+                <i class="font-3">I'm available</i>
+            </span>
+        </h2>
+        <!-- Contact Component -->
+        <Contact></Contact>
+        <!-- Contact Component -->
+    </Container>
+</template>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator"
+
+// import { $Posts } from "@/myStore"
+// import { $Notify, $Obstacle } from "@/plugins"
+
+import Container from '@/components/navs/reusables/Container.vue'
+// import Flipper from '@/components/pages/Flipper.vue'
+import Contact from '@/components/pages/Contact.vue'
+import SkillChart from '@/components/pages/SkillChart.vue'
+
+@Component({
+    components: {
+        Container,
+        // Flipper,
+        Contact,
+        SkillChart
+    },
+})
+export default class Home extends Vue {
+
+    list = [
+        { img: 'resp', text: 'Fully Responsive Webpages' },
+        { img: 'scale', text: 'Easily Scalable Apps' },
+        { img: 'clean', text: 'Clean And Readable Code' },
+        { img: 'flexb', text: 'Flexible Implementation' },
+        { img: 'effect', text: 'Cost Effective Service' },
+        { img: 'effect', text: 'Genuine and Minimal Design' },
+    ]
+}
+</script>
+<style lang="scss" scoped>
+.Top {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    background-color: $blue-grey--3;
+    background-image: url("/defaults/pgs/cd.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // filter: blur(3px);
+    // -webkit-filter: blur(3px);
+
+    & .Intro {
+        width: calc(100% - 175px);
+        padding: 40px 0 0 20px;
+        & > div {
+            padding: 15px 6px;
+            // color: white;
+            letter-spacing: 1px;
+            font-weight: bold;
+            border-radius: 28px;
+            border-left: solid 5px $pink-1;
+            // background-color: rgba(106, 108, 109, 0.534);
+            text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
+            // background-color: rgba(236, 239, 241, 0.356);
+            // box-shadow: 0 0 10px rgba(236, 239, 241, 0.356),
+            //     0 0 20px rgba(236, 239, 241, 0.356),
+            //     0 0 40px rgba(236, 239, 241, 0.356);
+        }
+        & > div:nth-child(1) {
+            color: $cyan-3;
+            // text-shadow: 0 0 6px;
+            // font-weight: 900;
+            font-size: 28px;
+            max-width: 260px;
+        }
+        & > div:nth-child(2) {
+            color: $pink-5;
+            // text-shadow: 0 0 3px;
+            font-size: 37px;
+            margin-top: 40px;
+            max-width: 700px;
+        }
+    }
+
+    & .Img {
+        position: absolute;
+        right: -27px;
+        top: 90px;
+        box-shadow: 0 0 20px $cyan;
+        background-color: $cyan--4;
+        background: linear-gradient(
+            to right,
+            $blue-grey-5 15%,
+            $cyan--4 40%,
+            $cyan 60%,
+            $cyan--4 90%
+        );
+        border-radius: 50% 4% 4% 50%;
+        // width: 245px;
+        // height: 245px;
+        width: 175px;
+        height: 175px;
+        & img {
+            width: 175px;
+            height: 175px;
+            min-width: 175px;
+            min-height: 175px;
+            border-radius: 50% 4% 4% 50%;
+            border: solid transparent 13px;
+            transition: all 0.5s;
+        }
+        & .Icon {
+            position: relative;
+            & > span {
+                position: absolute;
+                cursor: pointer;
+                font-weight: bold;
+                // border: solid $cyan--4 0.5px;
+                border-radius: 50px;
+                color: $cyan--3;
+                background-color: $blue-grey-5;
+                transition: 0.4s;
+                &:hover {
+                    color: $cyan--1;
+                }
+            }
+            & > span:first-child {
+                height: 35px;
+                width: 35px;
+                bottom: 70px;
+                left: -17px;
+                font-size: 24px;
+            }
+            & > span:last-child {
+                padding: 1px 5px;
+                bottom: 57px;
+                left: -40px;
+                font-size: 13px;
+            }
+        }
+    }
+}
+hr {
+    color: white !important;
+}
+.Section_2 {
+    & .Tiles {
+        & > div {
+            width: 150px;
+            height: 230px;
+            background-color: white;
+            border-radius: 28px;
+            margin: 0px 20px 20px 20px;
+            border-top: solid 3px $cyan;
+            border-bottom: solid 3px $cyan;
+            & img {
+                width: 60%;
+                height: 60%;
+            }
+
+            & > div:first-child {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 150px;
+            }
+            & > div:last-child {
+                padding: 2px 5px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 18px;
+                color: $blue-grey;
+            }
+        }
+    }
+}
+
+@include xs-only {
+    .Top {
+        & .Intro {
+            width: calc(100% - 150px);
+            padding: 40px 0 0 2px;
+            & > div:nth-child(2) {
+                font-size: 32px;
+                // margin-top: 40px;
+                // max-width: 700px;
+            }
+        }
+
+        & .Img {
+            width: 150px;
+            height: 150px;
+            & img {
+                width: 150px;
+                height: 150px;
+                min-width: 150px;
+                min-height: 150px;
+            }
+        }
+    }
+
+    .Section_2 {
+        & .Tiles {
+            & > div {
+                margin: 0px 8px 30px 8px;
+            }
+        }
+    }
+}
+</style>

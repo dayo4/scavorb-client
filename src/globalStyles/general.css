@@ -1,0 +1,54 @@
+/* general */
+
+::placeholder {
+    color: rgb(182, 182, 182);
+}
+
+div[contenteditable="true"]:empty::before {
+    content: attr(placeholder);
+    color: #808080;
+}
+
+div[contenteditable="true"] {
+    max-height: 100px;
+    overflow-y: scroll !important;
+}
+
+div[contenteditable="true"], input {
+    outline: none;
+}
+
+.doNotScroll {
+    overflow: hidden !important;
+}
+
+::-webkit-scrollbar {
+    transition: all 0.5s;
+    width: 5px;
+    height: 1px;
+    z-index: 10;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c2bfbb;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
+body {
+    background: linear-gradient( to right, #eceff1 0%, white 35%, white 65%, #eceff1 100%);
+    /* background-color: #880e4f; */
+    /* padding-top: 52px; */ 
+    /* width: 100vw; */
+    overflow: hidden;
+    /* height: 100vh; */
+}

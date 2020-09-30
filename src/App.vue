@@ -1,32 +1,58 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <TopNav />
+        <HoverPanel />
+        <Notify />
+        <ReadQueue />
+        <Input />
+        <Process />
+
+        <transition name="fade-in">
+            <router-view />
+        </transition>
+
+        <!-- <Footer /> -->
+        <BottomNav />
+        <Auth />
+        <!--<component :is="loadAuth"></component> -->
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator"
+import { $Auth } from "@/myStore"
 
-#nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+import TopNav from "@/components/navs/TopNav.vue"
+import Footer from "@/components/navs/Footer.vue"
+import BottomNav from "@/components/navs/BottomNav.vue"
+import HoverPanel from "@/components/navs/HoverPanel.vue"
+import Process from "@/components/GlobalComponents/notification/Process.vue"
+import Notify from "@/components/GlobalComponents/notification/Notify.vue"
 
-    &.router-link-exact-active {
-      color: #42b983;
+@Component({
+    components: {
+        TopNav,
+        Footer,
+        BottomNav,
+        HoverPanel,
+        Process,
+        Notify,
+        ReadQueue: () => import("@/components/posts/misc/ReadQueue.vue"),
+        Input: () => import("@/components/GlobalComponents/Input.vue"),
+        Auth: () => import("@/components/auth/Auth.vue"),
+    },
+    // computed: {
+    //     // loadAuth: () => import(/* webpackChunkName: "auth" */ "@/components/auth/Auth.vue")
+    // }
+})
+
+export default class App extends Vue {
+    mounted () {
+        $Auth.getSysSettings()
     }
-  }
 }
+</script>
+
+<style lang="scss">
 </style>
