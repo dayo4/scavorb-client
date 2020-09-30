@@ -76,7 +76,7 @@ export default class About extends Vue {
             Q: 'Do you build Single Page web Applications(SPAs)',
             A: `<p>Yes! SPAs are web apps that give you a similar mobile apps experience on the web without the need to download and install on your device. Progressive, faster navigation, fully customized, and no loading between pages...</p>
 
-            <p>A good example is <a href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">myownsymbol.com<a> created from scratch by me, both frontend and backend in Javascript technologies.</p>
+            <p>A good example is <a href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">scavorb.com<a> created from scratch by me, both frontend and backend in Javascript technologies.</p>
             <p>Unlike most websites built on wordpress requiring mostly basic templates to setup, SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
             `
         },
@@ -86,12 +86,6 @@ export default class About extends Vue {
         },
     ]
 
-    about: `loves exploring deeper the nature of things and experimenting with different strategies. A kind of deep analysis which had being quite a problem forever hamstringing me from putting things out there. But going into programming had recently given me a chance to get things done.
-learning programming had recently helped me 
-
-        Deep knowledge of API design principles and best practices,
-        I am a fullstack web developer who loves exploring deeper the nature of things and experimenting with different strategies. I enjoy engaging in intuitive conversations and visualization about the abstract design of nature and derive pleasure in driving the architecture of things towards perfection. 
-        I'm often quite definite about missions, not relenting until a useful solution is delivered.`
 }
 </script>
 <style lang="scss" scoped>
@@ -193,3 +187,11 @@ learning programming had recently helped me
     }
 }
 </style>
+
+/*     about: `loves exploring deeper the nature of things and experimenting with different strategies. A kind of deep analysis which had being quite a problem forever hamstringing me from putting things out there. But going into programming had recently given me a chance to get things done.
+learning programming had recently helped me 
+
+        Deep knowledge of API design principles and best practices,
+        I am a fullstack web developer who loves exploring deeper the nature of things and experimenting with different strategies. I enjoy engaging in intuitive conversations and visualization about the abstract design of nature and derive pleasure in driving the architecture of things towards perfection. 
+        I'm often quite definite about missions, not relenting until a useful solution is delivered.`
+ */
