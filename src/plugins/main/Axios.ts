@@ -6,6 +6,7 @@ import router from '@/router'
 import { $Auth } from '@/myStore'
 import LSAgent from '@/plugins/storage/LSAgent'
 
+const devMode = process.env.NODE_ENV === 'development'
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || 'http://127.0.0.1:3000/'
@@ -13,7 +14,7 @@ import LSAgent from '@/plugins/storage/LSAgent'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const config = {
-  baseURL: (process.env.baseURL || process.env.apiUrl || 'http://127.0.0.1:3000/') + 'scv-v1/',
+  baseURL: (devMode ? 'http://127.0.0.1:3000/' : process.env.BASE_URL) + 'scv-v1/',
   timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 }
@@ -39,7 +40,9 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function (response) {
     // Do something with response data
-    console.log(response)
+    if (devMode)
+      console.log(response)
+
     return response
   },
 
@@ -47,7 +50,9 @@ _axios.interceptors.response.use(
   function ({ response }) {
     // Do something with response error
     const error = response ? response.data.message : 'Unable to connect!'
-    console.log(response)
+    if (devMode)
+      console.log(response)
+
     if (response)
     {
       if (response.status === 401)

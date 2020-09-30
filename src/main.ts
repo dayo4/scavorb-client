@@ -16,13 +16,13 @@ import moment from 'moment'
 import VueMeta from 'vue-meta'
 
 // import VueGtag from 'vue-gtag'
-
+const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.BASE_URL : 'http://127.0.0.1:3000/'
 
 Vue.prototype.$moment = moment
 /* Add assets baseurl to global scope */
-Vue.prototype.$postBaseUrl = (process.env.baseURL || process.env.apiUrl || 'http://127.0.0.1:3000/') + 'pst/'
-Vue.prototype.$userBaseUrl = (process.env.baseURL || process.env.apiUrl || 'http://127.0.0.1:3000/') + 'usr/'
-
+Vue.prototype.$postBaseUrl = BASE_URL + 'pst/'
+Vue.prototype.$userBaseUrl = BASE_URL + 'usr/'
+console.log(process.env)
 Vue.config.productionTip = false
 /*google analytics gtag*/
 // Vue.use(VueGtag, {
