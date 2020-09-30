@@ -10,7 +10,7 @@ import '@/polyfills'
 /* import modules */
 import Vue from 'vue'
 import App from './App.vue'
-import './registerServiceWorker.ts'
+import './registerServiceWorker'
 import router from './router'
 import moment from 'moment'
 import VueMeta from 'vue-meta'
