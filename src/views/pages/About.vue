@@ -86,11 +86,12 @@ export default class About extends Vue {
         },
     ]
 
-    about: `
+    about: `loves exploring deeper the nature of things and experimenting with different strategies. A kind of deep analysis which had being quite a problem forever hamstringing me from putting things out there. But going into programming had recently given me a chance to get things done.
+learning programming had recently helped me 
+
         Deep knowledge of API design principles and best practices,
-        I enjoy engaging in intuitive conversations and visualization about the abstract design of nature and derive pleasure in driving the architecture of things towards perfection. 
-        But i'm also definite about my missions, often not relenting until a useful solution is delivered.
-    `
+        I am a fullstack web developer who loves exploring deeper the nature of things and experimenting with different strategies. I enjoy engaging in intuitive conversations and visualization about the abstract design of nature and derive pleasure in driving the architecture of things towards perfection. 
+        I'm often quite definite about missions, not relenting until a useful solution is delivered.`
 }
 </script>
 <style lang="scss" scoped>
