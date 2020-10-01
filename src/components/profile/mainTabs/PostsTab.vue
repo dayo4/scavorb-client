@@ -45,7 +45,6 @@
 
         <!-- If no posts found -->
         <div v-if="posts && posts.length === 0">
-            >
             <h2
                 class="t-blue-grey text-center text-cap font-9 mt-8 letter-space-1"
             >{{ user&&user.id === profile.id ? 'You Currently Have No Posts.' : profile.name + ' Currently Has No Posts.' }}</h2>
@@ -85,8 +84,7 @@ export default class PostsTab extends Vue {
 
     mounted () {
         $Obstacle.create('.Tab_2', {
-            font: 45,
-            text: ''
+            pageLoader: true
         })
         $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.destroy('.Tab_2'))
     }

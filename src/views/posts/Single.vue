@@ -17,7 +17,7 @@
                             >View Profile</button>-->
                             <button
                                 v-if="user && user.id === post.user_id"
-                                @click="editPost(post.id)"
+                                @click="editPost(post.slug)"
                                 class="icon-edit btn a-s-center font-3 py-1 px-2 m-1 bg-pink--2 t-white br1"
                             >Edit Post</button>
                         </div>
@@ -123,7 +123,7 @@
                                 >View Profile</button>
                                 <button
                                     v-if="user && user.id === post.user_id"
-                                    @click="editPost(post.id)"
+                                    @click="editPost(post.slug)"
                                     class="icon-edit btn a-s-center font-3 py-1 px-2 m-1 bg-pink--2 t-white br1"
                                 >Edit Post</button>
                             </div>
@@ -197,7 +197,7 @@ export default class PostView extends Vue {
     @Watch('$route')
     refreshProfile () {
         $Posts.$single.fetch({
-            post_id: this.$route.params.post_id
+            slug: this.$route.params.slug
         })
     }
 
@@ -213,10 +213,10 @@ export default class PostView extends Vue {
         }).finally(() => $Process.hide())
     }
 
-    editPost (post_id) {
+    editPost (slug) {
         $Posts.$compose.fetch({
-            post_id: post_id
-        }).then((data) => {
+            slug: slug
+        }, true).then((data) => {
             if (data)
                 this.$router.push({ path: '/compose', query: { mode: 'edit' } })
             // let route = this.$router.resolve({ path: '/compose' })
@@ -225,9 +225,9 @@ export default class PostView extends Vue {
     }
 
     thumbUp () {
-        $Posts.$single.fetch({
-            post_id: this.$route.params.post_id
-        })
+        // $Posts.$single.fetch({
+        //     post_id: this.$route.params.post_id
+        // })
     }
 }
 </script>

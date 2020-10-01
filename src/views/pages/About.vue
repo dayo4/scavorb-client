@@ -1,9 +1,18 @@
 <template>
     <Container ownID="MC-About">
-        <div class="flex j-c-center">
-            <div class="Logo bg-pink--2"></div>
+        <div class="flex j-c-center pt-5 noselect">
+            <div class="logo-base shadow-5">
+                <span>
+                    <span>
+                        <b>S</b>
+                    </span>
+                    <span></span>
+                </span>
+                <span></span>
+            </div>
         </div>
-        <h1 class="text-center t-blue-grey">MY OWN SYMBOL</h1>
+
+        <h1 class="text-center my-3 t-blue-grey">SCAVORB</h1>
 
         <section class="flex j-c-center wrap">
             <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">
@@ -21,14 +30,14 @@
                 </div>
 
                 <!-- Answer -->
-                <div class="Ans br2 px-4 noselect">
+                <div class="Ans br2 px-4 noselect" v-for="(ans, i) in QA.A" :key="i">
                     <div
-                        class="Name flex nowrap a-i-center j-c-end text-right t-blue-grey bold-5 font-3"
+                        class="Name flex nowrap a-i-center j-c-end text-right t-blue-grey bold-5 font-3 mt-10"
                     >
                         <div class="bg-grey-5 mr-2">Adedayo Adeniyi</div>
                     </div>
                     <div class="Body shadow-2 bg-grey-5 br3">
-                        <div v-html="QA.A" class="p-2 pl-4"></div>
+                        <div v-html="ans" class="p-4 pl-4"></div>
 
                         <span @click="$router.push({path: '/profile/dayo'})" class="Img br5">
                             <img class="br5 noselect" src="/defaults/usr/me.jpg" draggable="false" />
@@ -59,60 +68,48 @@ import Container from '@/components/navs/reusables/Container.vue'
 })
 export default class About extends Vue {
 
+    preventDefault (e) {
+        console.log('hh')
+        e.preventDefault()
+
+    }
     QueAns = [
         {
             Q: 'Who are you and what do you do?',
-            A: `I am a fullstack web applications developer with a drive to implement ideas in a genuine way yet minimalistic as possible. 
+            A: [ `I am a fullstack web applications developer with a drive to implement ideas in a genuine way yet minimalistic as possible. 
             The thought of moving ideas from conception to reality often hits me deep, quite relentless until a reasonable solution is derived. 
             Many run from it - it takes time and resource they claim. Well whats the purpose of time if not to lavish on what facinates you to be better?
-            But above all, i understand the need to deliver results.
-<p>It is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard. That's me!</p>
-<p class="mb-1">From creating regular SEO responsive webpages to implementing complex business and functional ui logic for web technologies. I'm versed in presenting a genuine design and overall development services. As i've done with a number of startups building their projects.</p>
+            But above all, i understand the need to deliver results.`,
+                `<p>It is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard. That's me!</p>
+<p class="mb-1">From creating regular SEO responsive webpages to implementing complex business and functional ui logic for web technologies. I'm versed in presenting a genuine design and overall development services. In my time doing this, i've worked physically and remotely with a number of people building their projects.</p>
 <p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?. Or just need someone to work with your team part-time remotely in building your next big project.</p>
-<p>We can discuss the detail <a href="/contact" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">here. Send me a message.</p>`
+<p>We can discuss the detail <a href="/contact" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">here. Send me a message.</a></p>`
+            ]
         },
-        // <p class="pt-1">In my time doing this, i've worked physically and remotely with a number of startup</p>
         {
             Q: 'Do you build Single Page web Applications(SPAs)',
-            A: `<p>Yes! SPAs are web apps that give you a similar mobile apps experience on the web without the need to download and install on your device. Progressive, faster navigation, fully customized, and no loading between pages...</p>
+            A: [ `<p>Yes! SPAs are web apps that give you a similar mobile apps experience on the web without the need to download and install on your device. Progressive, faster navigation, fully customized, and no boring loadings between pages...</p>
 
-            <p>A good example is <a href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">scavorb.com<a> created from scratch by me, both frontend and backend in Javascript technologies.</p>
+            <p>A good example is <span href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> created from scratch by me, both frontend and backend in Javascript technologies.</p>
             <p>Unlike most websites built on wordpress requiring mostly basic templates to setup, SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
+            <p>Likewise i create wordpress websites if it's what you need. Either personal or ecommerce websites.<p>
             `
+            ]
         },
         {
-            Q: 'A question for the developer about the services rendered to the client?',
-            A: 'A Response by the developer about the services rendered to the client?'
+            Q: 'Would you be available to work alongside our team on private projects?',
+            A: [ `<p>Yes! Depending on the kind of project I can be available, if you send me the detail. 
+            I've worked collaboratively with teams. from creating app pages, designing UI, to structuring business logic. </p>
+            <p>Whether you need me as your frontend developer or nodejs backend engineer, I'll be glad to join you in achieving your targets.<p>
+            `
+            ]
         },
+
     ]
 
 }
 </script>
 <style lang="scss" scoped>
-.Logo {
-    position: relative;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-
-    &::before,
-    &::after {
-        content: "";
-        position: absolute;
-        top: 47%;
-        height: 4px;
-        width: 65px;
-        background-color: $pink--2;
-    }
-
-    &::before {
-        left: -70px;
-    }
-    &::after {
-        right: -70px;
-    }
-}
-
 /* Question & Answer Styling*/
 .Ques,
 .Ans {

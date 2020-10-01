@@ -1,4 +1,22 @@
 
+function pageLoader () {
+    const div = document.createElement('div')
+    div.classList.add('Overlay')
+    div.innerHTML = `
+        <div class="logo-base logo-large logo-fast shadow-5">
+            <span>
+                <span>
+                    <b>S</b>
+                </span>
+                <span></span>
+            </span>
+            <span></span>
+        </div>
+    `
+
+    return div
+}
+
 function overlay (text?: string, icon?: string, font?: number, animate: boolean = true) {
     const span = document.createElement('span')
     span.classList.add('Overlay')
@@ -37,11 +55,17 @@ function overlayDelay (timer: number, text?: string, font?: number) {
     return span
 }
 
+function breakClick (e) {
+    e.preventDefault()
+    return
+}
+
 interface Options {
     action?: Function | void /* NOTE: Do not call the function passed as action. Otherwise the function will be executed immediately. */
     onClick?: Function  /* You can also add a click event to the obstacle to make users perform an action. */
     timer?: number
     showCountdown?: boolean
+    pageLoader?: boolean
     text?: string /* Custom text to show on the overlay if needed. Defaults to "Wait..." */
     icon?: string /* Custom icon to show on the overlay if needed. Defaults to "icon-spin6" */
     font?: number /* Custom font-size for the inner texts */
@@ -51,7 +75,7 @@ interface Options {
 
 export class Obstacle {
 
-    private stack = []
+    private stack: HTMLElement[] = []
 
 
     create (element: HTMLElement | string, opts: Options = {}) {
@@ -64,12 +88,18 @@ export class Obstacle {
         if (elem)
         {
 
+            /* Prevent duplicate element */
             const exist = this.stack.includes(elem)
 
             if (!exist)
             {
                 elem.classList.add('isDisabled')
                 this.stack.push(elem)
+
+                if (!opts.onClick)
+                {
+                    elem.addEventListener('click', breakClick, false)
+                }
 
                 if (opts.action)
                 {
@@ -79,7 +109,7 @@ export class Obstacle {
                 {
                     elem.addEventListener('click', function () {
                         opts.onClick()
-                        return false
+                        return
                     }, false)
                 }
                 if (opts.timer)
@@ -97,6 +127,10 @@ export class Obstacle {
                     setTimeout(function () {
                         $this.destroy(elem)
                     }, opts.timer)
+                }
+                else if (opts.pageLoader)
+                {
+                    elem.appendChild(pageLoader())
                 }
                 else
                 {
@@ -121,8 +155,8 @@ export class Obstacle {
 
             elem.classList.remove('isDisabled')
             elem.removeChild(overlay)
+            elem.removeEventListener('click', breakClick, false)
 
-            // console.log(this.stack)
             return
         }
         console.error('invalid target supplied to $Obstacle destroyer.')

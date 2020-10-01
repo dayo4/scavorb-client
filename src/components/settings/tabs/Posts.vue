@@ -90,11 +90,11 @@
                     >
                         <!-- slots -->
                         <template v-slot:default>
-                            <router-link :to="{path:'/posts/'+post.id}">
+                            <router-link :to="{path:'/posts-preview/'+post.slug}">
                                 <span class="icon-eye"></span>
                                 <span>View</span>
                             </router-link>
-                            <a @click="editPost(post.id)">
+                            <a @click="editPost(post.slug)">
                                 <span class="icon-edit"></span>
                                 <span>Edit</span>
                             </a>
@@ -192,10 +192,10 @@ export default class ManagePosts extends Vue {
                 $Notify.error('No Posts selected')
     }
 
-    editPost (post_id) {
+    editPost (slug: string) {
         $Posts.$compose.fetch({
-            post_id: post_id
-        }).then((data) => {
+            slug: slug
+        }, true).then((data) => {
             if (data)
                 this.$router.push({ path: '/compose', query: { mode: 'edit' } })
         })

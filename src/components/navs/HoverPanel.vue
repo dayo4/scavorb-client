@@ -2,7 +2,7 @@
     <!-- <div> -->
     <div class="HPWrapper noselect" :class="collapsed ? 'Collapsed' : ''">
         <div class="Panel bg-cyan--3">
-            <div class="Head flex a-i-center j-c-center shadow-7 t-white font-6 bold-3">Hover Panel</div>
+            <div class="Head flex a-i-center j-c-center shadow-7 t-white font-6 bold-3">scavorb</div>
 
             <div class="Body flex wrap j-c-between mt-3 p-4">
                 <div

@@ -1,82 +1,80 @@
 <template>
-    <div>
-        <section class="flex j-c-center">
-            <div class="GenFormStyle xs11 sm9 md7">
-                <section class="TopInfo icon-info bg-blue-5 p-3 mb-3 no-deco">
-                    Send me the detail of your request using the form below or talk to me through other medium
-                    <a
-                        class="icon-mail-alt t-pink--3"
-                        href="mailto:dayo4@live.com"
-                    ></a>
-                </section>
+    <section class="ContWrapper flex j-c-center">
+        <div class="GenFormStyle xs11 sm9 md7">
+            <section class="TopInfo icon-info bg-blue-5 p-3 mb-3 no-deco">
+                Send me the detail of your request using the form below or talk to me through other medium
+                <a
+                    class="icon-mail-alt t-pink--3"
+                    href="mailto:dayo4@live.com"
+                ></a>
+            </section>
 
-                <div class="Section">
-                    <span class="Head py-6 px-8">Name</span>
-                    <span v-show="name_err" class="Error t-red-1">{{name_err}}</span>
-                    <input
-                        v-model="name"
-                        @input="name_err=''"
-                        type="text"
-                        placeholder="Input your full name"
-                    />
-                </div>
-
-                <div class="Section">
-                    <span class="Head py-6 px-8">E-mail</span>
-                    <span v-if="email_err" class="Error t-red-1">{{email_err}}</span>
-                    <i v-else class="font-2">Please ensure your E-mail is correct!</i>
-                    <input
-                        v-model="email"
-                        @input="email_err=''"
-                        type="email"
-                        placeholder="Input your email"
-                    />
-                </div>
-
-                <div class="Section">
-                    <span class="Head py-6 px-8">Subject</span>
-                    <span v-show="subj_err" class="Error t-red-1">{{subj_err}}</span>
-                    <input
-                        v-model="subject"
-                        @input="subj_err=''"
-                        type="text"
-                        placeholder="Enter subject"
-                    />
-                </div>
-
-                <div class="Section">
-                    <span class="Head py-6 px-8">Your Message</span>
-                    <span v-show="msg_err" class="Error t-red-1">{{msg_err}}</span>
-                    <div
-                        ref="msg"
-                        @input="setMsg"
-                        class="TextArea bg-white font-5 br2 p-7 mt-2"
-                        contenteditable="true"
-                        placeholder="Type your message"
-                    ></div>
-                </div>
-
-                <transition name="expand">
-                    <div v-if="success || error" class="mt-5">
-                        <div
-                            :class="error ? 'bg-pink-5 t-red-1' : 'bg-lime-4 t-green-1'"
-                            class="Alert p-3 b1"
-                        >{{success || error}}</div>
-                    </div>
-                </transition>
-
-                <!-- Send button -->
-                <button
-                    ref="send"
-                    @click="send"
-                    class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5 m-auto noselect"
-                >
-                    <span class="icon-forward mr-3"></span>
-                    <span>Send Mail</span>
-                </button>
+            <div class="Section">
+                <span class="Head py-6 px-8">Name</span>
+                <span v-show="name_err" class="Error t-red-1">{{name_err}}</span>
+                <input
+                    v-model="name"
+                    @input="name_err=''"
+                    type="text"
+                    placeholder="Input your full name"
+                />
             </div>
-        </section>
-    </div>
+
+            <div class="Section">
+                <span class="Head py-6 px-8">E-mail</span>
+                <span v-if="email_err" class="Error t-red-1">{{email_err}}</span>
+                <i v-else class="font-2">Please ensure your E-mail is correct!</i>
+                <input
+                    v-model="email"
+                    @input="email_err=''"
+                    type="email"
+                    placeholder="Input your email"
+                />
+            </div>
+
+            <div class="Section">
+                <span class="Head py-6 px-8">Subject</span>
+                <span v-show="subj_err" class="Error t-red-1">{{subj_err}}</span>
+                <input
+                    v-model="subject"
+                    @input="subj_err=''"
+                    type="text"
+                    placeholder="Enter subject"
+                />
+            </div>
+
+            <div class="Section">
+                <span class="Head py-6 px-8">Your Message</span>
+                <span v-show="msg_err" class="Error t-red-1">{{msg_err}}</span>
+                <div
+                    ref="msg"
+                    @input="setMsg"
+                    class="TextArea bg-white font-5 br2 p-7 mt-2"
+                    contenteditable="true"
+                    placeholder="Type your message"
+                ></div>
+            </div>
+
+            <transition name="expand">
+                <div v-if="success || error" class="mt-5">
+                    <div
+                        :class="error ? 'bg-pink-5 t-red-1' : 'bg-lime-4 t-green-1'"
+                        class="Alert p-3 b1"
+                    >{{success || error}}</div>
+                </div>
+            </transition>
+
+            <!-- Send button -->
+            <button
+                ref="send"
+                @click="send"
+                class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5 m-auto noselect"
+            >
+                <span class="icon-forward mr-3"></span>
+                <span>Send Mail</span>
+            </button>
+        </div>
+    </section>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
@@ -200,6 +198,9 @@ export default class Contact extends Vue {
 }
 </script>
 <style lang="scss">
+.ContWrapper {
+    margin-bottom: 52px;
+}
 .TopInfo {
     & > a {
         font-size: 26px;

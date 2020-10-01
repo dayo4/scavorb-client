@@ -31,7 +31,7 @@
                     class="t-grey--4"
                 >Use the "Add to queue" option on posts to queue up your favourite contents for reading.</p>
                 <div class="flex j-c-center">
-                    <button class="btn" @click="goToPosts">View Posts Wall</button>
+                    <button class="btn" @click="goToPosts">View Posts</button>
                 </div>
             </section>
         </template>

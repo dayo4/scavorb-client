@@ -2,7 +2,21 @@
     <div>
         <div id="UpperSection">
             <div class="CoverImage" ref="CoverImage">
-                <div class="Blur noselect"></div>
+                <div class="Blur noselect">
+                    <div class="flex j-c-center pt-5">
+                        <div class="logo-base shadow-5">
+                            <span>
+                                <span>
+                                    <b>S</b>
+                                </span>
+                                <span></span>
+                            </span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <h1 class="text-center my-3 t-white">SCAVORB</h1>
+                </div>
+
                 <!-- :style="!profile.cover_image ? 'background-image: url(/defaults/4.jpg)' : 'background-image: url('+profile.cover_image+')'" -->
                 <img
                     :src="!profile.cover_image ? '/defaults/pgs/prfcv1.jpg' : $userBaseUrl + profile.cover_image"

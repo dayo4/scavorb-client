@@ -1,7 +1,7 @@
 <template>
     <nav ref="topNav" id="TopNav" class="flex a-i-center j-c-center noselect">
         <div class="bg-gradient-1 flex a-i-center j-c-between shadow-11">
-            <router-link to="/" class="Logo hide-xs px-4">Z Symbol</router-link>
+            <router-link to="/" class="Logo hide-xs px-4">scavorb</router-link>
 
             <div class="SearchBox flex ml-5 pl-4 a-i-center shadow-6">
                 <input

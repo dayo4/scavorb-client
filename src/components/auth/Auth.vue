@@ -23,13 +23,21 @@
 
             <div class="FormCont flex j-c-center bg-white h-full">
                 <div class="Pillar xs11 sm9 md7 lg5">
-                    <span class="Logo br5 t-cyan-5 bg-cyan--4 font-16 shadow-5">
-                        <i class="Icon icon-spin5 animate-spin flex a-i-center j-c-center"></i>
-                    </span>
+                    <!-- <div class="Logo"> -->
+                    <div class="Logo logo-base logo-small shadow-5">
+                        <span>
+                            <span>
+                                <b>S</b>
+                            </span>
+                            <span></span>
+                        </span>
+                        <span></span>
+                    </div>
+                    <!-- </div> -->
 
                     <!--current mode Title -->
                     <div class="Title flex j-c-center noselect">
-                        <h3 class="text-center">Scav Orb</h3>
+                        <h3 class="text-center">SCAVORB</h3>
                     </div>
 
                     <!-- Reset password -->
@@ -129,15 +137,8 @@ export default class Auth extends Vue {
 
         & .Logo {
             position: absolute;
-            padding: 0;
             top: -20px;
-            left: 46%;
-            width: 50px;
-            height: 50px;
-        }
-        & .Icon {
-            width: 50px;
-            height: 51px;
+            left: 45.3%;
         }
     }
 
@@ -231,6 +232,11 @@ export default class Auth extends Vue {
 }
 
 @include xs-only {
+    .AuthModal {
+        & .Logo {
+            left: 44% !important;
+        }
+    }
     .GenFormStyle {
         & > div {
             & > .Head {

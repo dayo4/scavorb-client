@@ -83,8 +83,7 @@ export default class AllPost extends Vue {
         //     })
         // })
         $Obstacle.create('#MC-AllPosts', {
-            font: 45,
-            text: ''
+            pageLoader: true
         })
         $Posts.fetchAll({}, true).then(ok => $Obstacle.destroy('#MC-AllPosts'))
         // this.$gtag.event('login', { method: 'Google' })

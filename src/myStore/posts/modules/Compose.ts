@@ -1,10 +1,10 @@
 import { $Auth } from '@/myStore'
-import { $Vue, $Axios, $Process, $Notify } from '@/plugins'
+import { $Axios, $Process, $Notify } from '@/plugins'
 
 
 export class Compose {
     content = ''
-    currentPost_id = null
+    currentPost_slug = null
     contentToEdit = null
     featuredImage = {
         postImageSrc: null,
@@ -58,7 +58,7 @@ export class Compose {
             const { data } = await $Axios.post("posts/new/" + $Auth.user.id, {
                 ...payload
             })
-            this.currentPost_id = data
+            this.currentPost_slug = data
             if (this.featuredImage.formData)
             {
                 this.uploadImages(this.featuredImage.formData)
@@ -77,15 +77,15 @@ export class Compose {
     }
 
     /* This fetches posts for editing and update. */
-    async fetch (payload: { post_id: string }) {
+    async fetch (payload: { slug: string }, preview = false) {
         $Process.add('Fetching content')
         try
         {
-            const { data } = await $Axios.get("posts/" + payload.post_id)
+            const { data } = await $Axios.get("posts/" + payload.slug + '/' + (preview ? 'preview' : ''))
             if (data)
             {
                 this.contentToEdit = data
-                this.currentPost_id = payload.post_id
+                this.currentPost_slug = payload.slug
                 this.featuredImage.postImageSrc = data.img
                 return data
             }
@@ -97,12 +97,12 @@ export class Compose {
     }
 
     async update (payload: { title: string, slug: string, content: string, contentImages: string[] }) {
-        // this.currentPost_id
+        // this.currentPost_slug
         try
         {
             const { data } = await $Axios.patch('posts/' + $Auth.user.id, {
                 ...payload,
-                postsIds: [ this.currentPost_id ]
+                postsIds: [ this.currentPost_slug ]
             })
             if (data)
                 if (this.featuredImage.formData)
@@ -124,7 +124,7 @@ export class Compose {
     async uploadImages (formData: FormData) {
         try
         {
-            const { data } = await $Axios.patch('posts/uploadImages/' + this.currentPost_id + '/' + $Auth.user.id,
+            const { data } = await $Axios.patch('posts/uploadImages/' + this.currentPost_slug + '/' + $Auth.user.id,
                 formData
             )
             if (data)

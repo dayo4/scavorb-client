@@ -161,6 +161,26 @@
     }
 }
 
+/* used in logo-styles */
+@keyframes rotateR {
+    from {
+            transform: rotateZ(0deg);
+        }
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+    @keyframes rotateL {
+        from {
+            transform: rotateZ(360deg);
+        }
+        to {
+            transform: rotateZ(0deg);
+        }
+	}
+    /* used in logo-styles */
+
+    
 /* error shaking animation -> USED IN Validation Errors: NewPostCompose, User login,  */
 
 .vibrate {

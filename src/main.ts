@@ -22,7 +22,7 @@ Vue.prototype.$moment = moment
 /* Add assets baseurl to global scope */
 Vue.prototype.$postBaseUrl = BASE_URL + 'pst/'
 Vue.prototype.$userBaseUrl = BASE_URL + 'usr/'
-console.log(process.env)
+
 Vue.config.productionTip = false
 /*google analytics gtag*/
 // Vue.use(VueGtag, {

@@ -60,7 +60,7 @@ import { Component, Vue, Prop } from "vue-property-decorator"
         user: () => $Auth.user,
         editorConfig: () => $Posts.$compose.editorConfig,
         /* These bellow only matter when editing or updating existing posts. Otherwise they'll be null */
-        currentPost_id: () => $Posts.$compose.currentPost_id,
+        currentPost_id: () => $Posts.$compose.currentPost_slug,
         contentToEdit: () => $Posts.$compose.contentToEdit,
     },
 })

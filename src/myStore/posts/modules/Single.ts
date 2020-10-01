@@ -3,12 +3,13 @@ import { $Axios, $Process, $Notify } from '@/plugins'
 export class SinglePost {
     post = null
 
-    async fetch (payload: { post_id: string }) {
+    async fetch (payload: { slug: string }, preview = false) {
         $Process.add()
         try
         {
-            const { data } = await $Axios.get("posts/" + payload.post_id)
+            const { data } = await $Axios.get("posts/" + payload.slug + '/' + (preview ? 'preview' : ''))
             this.post = data
+            console.log(data)
             return true
         }
         catch (e)

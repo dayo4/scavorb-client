@@ -45,11 +45,11 @@
                 ref="saveBtn"
                 @click="startProcessing"
                 class="icon-floppy btn cyan-gradient-btn"
-            >{{ currentPost_id ? 'UPDATE' : 'SAVE NEW' }}</button>
+            >{{ currentPost_slug ? 'UPDATE' : 'SAVE NEW' }}</button>
             <span
                 ref="previewBtn"
                 class="btn cyan-gradient-btn"
-                @click="preview(currentPost_id)"
+                @click="preview(currentPost_slug)"
             >PREVIEW</span>
         </div>
     </Container>
@@ -70,7 +70,7 @@ import Composer from "@/components/posts/new/Composer.vue"
         ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
     },
     computed: {
-        currentPost_id: () => $Posts.$compose.currentPost_id,
+        currentPost_slug: () => $Posts.$compose.currentPost_slug,
         postImageSrc: () => $Posts.$compose.featuredImage.postImageSrc
     },
 })
@@ -85,25 +85,19 @@ export default class Compose extends Vue {
         previewBtn
     }
 
-    preview (post_id) {
-        let $this = this
+    preview (slug) {
 
-        $Obstacle.create(this.$refs.previewBtn, {
-            timer: 10000,
-            showCountdown: true,
-            action: function () {
-                if (!post_id)
-                {
-                    $Notify.info('You have to Save content first before you can preview.')
-                    return
-                }
-                else
-                {
-                    let route = $this.$router.resolve({ path: 'posts/' + post_id })
-                    window.open(route.href, '_blank')
-                }
-            }
-        })
+
+        if (!slug)
+        {
+            $Notify.info('You have to Save content first before you can preview.')
+            return
+        }
+        else
+        {
+            let route = this.$router.resolve({ path: 'posts-preview/' + slug })
+            window.open(route.href, '_blank')
+        }
 
     }
 

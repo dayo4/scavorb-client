@@ -17,7 +17,7 @@ const routes = [
         // }
     },
     {
-        path: "/posts/:post_id",
+        path: "/posts/:slug",
         component: () => import(/* webpackPrefetch: true */'@/views/posts/Index.vue'),
         children: [
             {
@@ -26,8 +26,28 @@ const routes = [
                 component: () => import(/* webpackChunkName: "sngl-pst" */ '@/views/posts/Single.vue'),
                 beforeEnter: (to, from, next) => {
                     $Posts.$single.fetch({
-                        post_id: to.params.post_id.split('_')[ 0 ]
-                    }).then((loaded) => {
+                        slug: to.params.slug
+                    }, to.params.preview ? true : false).then((loaded) => {
+                        if (loaded)
+                        {
+                            next()
+                        }
+                    })
+                }
+            },
+        ]
+    },
+    {
+        path: "/posts-preview/:slug",
+        component: () => import(/* webpackPrefetch: true */'@/views/posts/Index.vue'),
+        children: [
+            {
+                path: '',
+                component: () => import(/* webpackChunkName: "sngl-pst" */ '@/views/posts/Single.vue'),
+                beforeEnter: (to, from, next) => {
+                    $Posts.$single.fetch({
+                        slug: to.params.slug
+                    }, true).then((loaded) => {
                         if (loaded)
                         {
                             next()
