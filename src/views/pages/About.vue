@@ -1,7 +1,7 @@
 <template>
     <Container ownID="MC-About">
-        <div class="flex j-c-center pt-5 noselect">
-            <div class="logo-base shadow-5">
+        <div class="flex j-c-center pt-5 noselect my-10">
+            <div class="logo-base logo-large shadow-5t my-10">
                 <span>
                     <span>
                         <b>S</b>
@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <h1 class="text-center my-3 t-blue-grey">SCAVORB</h1>
+        <h1 class="text-center my-3 t-blue-grey mt-10">SCAVORB</h1>
 
         <section class="flex j-c-center wrap">
             <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">
@@ -68,11 +68,6 @@ import Container from '@/components/navs/reusables/Container.vue'
 })
 export default class About extends Vue {
 
-    preventDefault (e) {
-        console.log('hh')
-        e.preventDefault()
-
-    }
     QueAns = [
         {
             Q: 'Who are you and what do you do?',
@@ -84,7 +79,7 @@ export default class About extends Vue {
             `,
                 `<p>It is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard. That's me!</p>
 <p class="mb-1">From creating regular SEO responsive webpages to implementing complex business and functional ui logic for web technologies. I'm versed in presenting a genuine design and overall development services. In my time doing this, i've worked physically and remotely with a number of people building their projects.</p>
-<p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?. Or just need someone to work with your team part-time remotely in building your next big project. I will help you bring your ideas to live.</p> 
+<p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?.  Or you are a company/agency looking to hire more talents for your course. Or just need someone to work with your team part-time remotely in building your next big project. I'll be happy to get onboard in bringing your ideas to live.</p> 
 <p>We can discuss the detail <a href="/contact" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">here. Send me a message.</a></p>`
             ]
         },
@@ -93,7 +88,7 @@ export default class About extends Vue {
             A: [ `<p>Yes! SPAs are web apps that give you a similar mobile apps experience on the web without the need to download and install on your device. Progressive, faster navigation, fully customized, and no boring loadings between pages...</p>
 
             <p>A good example is <span href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> created from scratch by me, both frontend and backend in Javascript technologies.</p>
-            <p>Unlike most websites built on wordpress requiring mostly basic templates to setup, SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
+            <p>Unlike most traditional websites built on wordpress requiring mostly basic templates to setup and with , SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
             <p>Likewise i create wordpress websites if it's what you need. Whether personal or ecommerce websites.<p>
             `
             ]

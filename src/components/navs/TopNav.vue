@@ -46,7 +46,7 @@
                 </router-link>
 
                 <!-- NOTIFICATIONS POPUP -->
-                <notifPopup />
+                <!-- <notifPopup /> -->
                 <!-- NOTIFICATIONS POPUP -->
 
                 <!-- DropBtn -->
@@ -108,11 +108,11 @@ import { Component, Vue } from "vue-property-decorator"
 import { $Auth, $Profile, $Navs } from '@/myStore'
 
 import Search from '@/components/misc/Search.vue'
-import NotifPopup from '@/components/notifications/Popup.vue'
+// import NotifPopup from '@/components/notifications/Popup.vue'
 
 @Component({
     components: {
-        NotifPopup,
+        // NotifPopup,
         Search
     },
     watch: {

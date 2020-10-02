@@ -1,12 +1,12 @@
 <template>
-    <Container ownID="MC-Home">
+    <Container ownID="MC-Home bg-blue-grey--2">
         <section class="Top noselect br3">
             <div class="Intro">
                 <div>Adedayo Adeniyi</div>
                 <div>A Fullstack Web Applications Developer</div>
             </div>
             <div class="More">
-                <div>Will handle your web development needs</div>
+                <div>I develop and implement custom web software solutions tailored to your needs.</div>
                 <div>Frontend Development</div>
                 <div>Backend Development</div>
                 <div>UI Designs</div>
@@ -17,13 +17,18 @@
 
             <div class="Img">
                 <img src="/defaults/usr/me.jpg" alt="profile image" draggable="false" />
-                <div class="Icon" @click="$router.push({path: '/profile/dayo'})">
+                <!-- <div class="Icon" @click="$router.push({path: '/profile/dayo'})"> -->
+                <span
+                    @click="$router.push({path: '/profile/dayo'})"
+                    class="Icon b1 shadow-4"
+                >View Profile</span>
+                <!-- </div> -->
+                <!-- <div class="Icon" @click="$router.push({path: '/profile/dayo'})">
                     <span class="flex a-i-center j-c-center">
-                        <!--<span class="icon-camera font-12 cursor-pointer" title="Take Photo"></span> -->
                         <span class="icon-user"></span>
                     </span>
                     <span>View Profile</span>
-                </div>
+                </div>-->
             </div>
         </section>
 
@@ -121,34 +126,25 @@ export default class Home extends Vue {
     // -webkit-filter: blur(3px);
 
     & .Intro {
-        width: calc(100% - 175px);
-        padding: 40px 0 0 20px;
+        width: calc(100% - 160px);
+        padding: 30px 0 0 20px;
         & > div {
             padding: 15px 6px;
-            // color: white;
             letter-spacing: 1px;
             font-weight: bold;
             border-radius: 28px;
             border-left: solid 5px $pink-1;
-            // background-color: rgba(106, 108, 109, 0.534);
             text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
-            // background-color: rgba(236, 239, 241, 0.356);
-            // box-shadow: 0 0 10px rgba(236, 239, 241, 0.356),
-            //     0 0 20px rgba(236, 239, 241, 0.356),
-            //     0 0 40px rgba(236, 239, 241, 0.356);
         }
         & > div:nth-child(1) {
             color: $cyan-3;
-            // text-shadow: 0 0 6px;
-            // font-weight: 900;
             font-size: 28px;
             max-width: 260px;
         }
         & > div:nth-child(2) {
             color: $pink-5;
-            // text-shadow: 0 0 3px;
-            font-size: 37px;
-            margin-top: 40px;
+            font-size: 35px;
+            margin-top: 30px;
             max-width: 700px;
         }
     }
@@ -162,12 +158,9 @@ export default class Home extends Vue {
         font-size: 14px;
         margin-left: 80px;
 
-        & > div:nth-child(1) {
-            color: $cyan-3;
-        }
         & > div {
             margin: 3px 0;
-            &::before {
+            &:not(:first-child):before {
                 content: "";
                 display: inline-block;
                 position: relative;
@@ -179,6 +172,11 @@ export default class Home extends Vue {
                 border-right: 7px solid $cyan--3;
                 transform: rotateZ(55deg);
             }
+        }
+        & > div:nth-child(1) {
+            text-shadow: none;
+            color: $pink--1;
+            margin-left: -10px;
         }
     }
 
@@ -196,59 +194,43 @@ export default class Home extends Vue {
             $cyan--4 90%
         );
         border-radius: 50% 4% 4% 50%;
-        // width: 245px;
-        // height: 245px;
-        width: 175px;
-        height: 175px;
+        width: 150px;
+        height: 150px;
         & img {
-            width: 175px;
-            height: 175px;
-            min-width: 175px;
-            min-height: 175px;
+            width: 150px;
+            height: 150px;
+            min-width: 150px;
+            min-height: 150px;
             border-radius: 50% 4% 4% 50%;
-            border: solid transparent 13px;
+            border: solid transparent 9px;
             transition: all 0.5s;
         }
         & .Icon {
-            position: relative;
-            & > span {
-                position: absolute;
-                cursor: pointer;
-                font-weight: bold;
-                // border: solid $cyan--4 0.5px;
-                border-radius: 50px;
-                color: $cyan--3;
-                background-color: $blue-grey-5;
-                transition: 0.4s;
-                &:hover {
-                    color: $cyan--1;
-                }
+            position: absolute;
+            bottom: 57px;
+            left: -40px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            color: $cyan--3;
+            background-color: $blue-grey-5;
+            transition: 0.4s;
+            text-align: center;
+            padding: 1px 5px;
+            width: 60px;
+            font-size: 14px;
+            &:hover {
+                background-color: $cyan--3;
+                color: $blue-grey-5;
             }
-            & > span:first-child {
-                height: 35px;
-                width: 35px;
-                bottom: 70px;
-                left: -17px;
-                font-size: 24px;
-            }
-            & > span:last-child {
-                padding: 1px 5px;
-                bottom: 57px;
-                left: -40px;
-                font-size: 13px;
+            &:active {
+                background-color: $cyan--1;
             }
         }
     }
 }
 
 .Section_2 {
-    // background-color: $blue-grey--3;
-    // // background-image: url("/defaults/pgs/cd.jpg");
-    // background-image: url("/defaults/pgs/p.png");
-    // background-position: center;
-    // background-repeat: no-repeat;
-    // background-size: cover;
-
     & .Tiles {
         & > div {
             width: 150px;
@@ -283,13 +265,17 @@ export default class Home extends Vue {
 
 @include xs-only {
     .Top {
+        height: 600px;
         & .Intro {
-            width: calc(100% - 150px);
-            padding: 40px 0 0 2px;
+            width: calc(100% - 120px);
+            padding: 30px 0 0 2px;
+            & > div:nth-child(1) {
+                font-size: 26px;
+            }
             & > div:nth-child(2) {
-                font-size: 32px;
-                // margin-top: 40px;
-                // max-width: 700px;
+                font-size: 28px;
+                margin-top: 10px;
+                max-width: 700px;
             }
         }
         & .More {
@@ -297,13 +283,17 @@ export default class Home extends Vue {
         }
 
         & .Img {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             & img {
-                width: 150px;
-                height: 150px;
-                min-width: 150px;
-                min-height: 150px;
+                width: 120px;
+                height: 120px;
+                min-width: 120px;
+                min-height: 120px;
+                border: solid transparent 7px;
+            }
+            & .Icon {
+                bottom: 40px;
             }
         }
     }

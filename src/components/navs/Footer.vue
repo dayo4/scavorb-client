@@ -1,5 +1,8 @@
 <template>
-    <footer v-show="$route.name != 'user-profile'" class="Footer t-blue-grey text-center">
+    <footer
+        v-show="!['user-profile','posts'].includes($route.name)"
+        class="Footer t-blue-grey text-center"
+    >
         <div>
             <span class="icon-copyright mr-4">2020 scavorb</span>
         </div>

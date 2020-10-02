@@ -4,7 +4,7 @@
             <div class="CoverImage" ref="CoverImage">
                 <div class="Blur noselect">
                     <div class="flex j-c-center pt-5">
-                        <div class="logo-base shadow-5">
+                        <div class="logo-base logo-small shadow-5">
                             <span>
                                 <span>
                                     <b>S</b>
@@ -88,9 +88,9 @@
                 </div>
                 <!-- ///// -->
                 <div class="Details t-white p-2">
-                    <h3 class="Name my-0 pt-1">{{profile.name}}</h3>
-                    <h5 class="font-7 mb-1 mt-0">@{{profile.username}}</h5>
-                    <div class="Status font-2 flex wrap mr-1">
+                    <h3 class="Name my-1 pt-1">{{profile.name}}</h3>
+                    <h5 class="font-6 mb-3 mt-0">@{{profile.username}}</h5>
+                    <div class="Status italic font-2 flex wrap mr-1">
                         <div class="mr-1 m-1 p-1 pr-2 b2 br1 w-fit">
                             <span class="icon-check-1 mr-1"></span>
                             {{profile.status}}
@@ -102,7 +102,7 @@
                         >Update</div>
                     </div>
                     <!-- <InputModal></InputModal> -->
-                    <div class="About shadow-4 font-5 mt-4 p-1 noselect">
+                    <div class="About font-5 mt-4 p-1 noselect">
                         <b class="t-pink--3 bg-white py-1 px-3 mr-3 br2">ABOUT</b>
                         <span class="font-4 bold-1 letter-space-1">{{profile.about}}</span>
                     </div>
@@ -186,7 +186,13 @@ export default class ProfileUpperSection extends Vue {
         border: solid 4px;
         border-color: #eceff1;
         box-shadow: #eceff1 inset 18px 18px 10px, #eceff1 inset -18px -18px 10px;
+
+        & h1 {
+            font-size: 18px;
+            text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
+        }
     }
+
     & .UploadActions {
         & > span {
             position: absolute;
@@ -244,28 +250,28 @@ export default class ProfileUpperSection extends Vue {
 }
 .ProfileImage {
     position: absolute;
-    left: -27px;
+    left: -15px;
     top: -90px;
     background-color: #eceff1;
     background: linear-gradient(to right, $blue-grey-5 15%, $pink--3 70%);
     border-radius: 4% 50% 50% 4%;
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
     & img {
-        width: 175px;
-        height: 175px;
-        min-width: 175px;
-        min-height: 175px;
+        width: 150px;
+        height: 150px;
+        min-width: 150px;
+        min-height: 150px;
         border-radius: 4% 50% 50% 4%;
-        border: solid transparent 13px;
+        border: solid transparent 9px;
         transition: all 0.5s;
     }
     & .UploadActions {
         position: relative;
         & > span {
             position: absolute;
-            bottom: -16px;
-            left: 90px;
+            bottom: -18px;
+            left: 40px;
             height: 40px;
             width: 40px;
             cursor: pointer;
@@ -283,15 +289,20 @@ export default class ProfileUpperSection extends Vue {
 .Details {
     min-height: 147px;
     max-height: 270px;
-    padding-left: 160px;
+    padding-left: 0px;
     background-color: $pink--3;
     overflow-y: hidden;
-    background: linear-gradient(to right, $blue-grey-5, $pink--3 15%);
+    background: linear-gradient(to right, $blue-grey-5, $pink--3 8%);
     & .Name {
-        font-size: 28px;
+        font-size: 24px;
         text-shadow: 0px 1px 3px white;
     }
+    & h5,
+    .Name {
+        margin-left: 140px;
+    }
     & .Status {
+        margin-left: 100px;
         & .Update {
             cursor: pointer;
             &:hover {
@@ -300,35 +311,53 @@ export default class ProfileUpperSection extends Vue {
         }
     }
     & .About {
-        border: solid 1px $pink-1;
-        border-radius: 4px;
+        margin-left: 100px;
+        border-radius: 10px;
+        border-top: solid 1px $pink-2;
         max-height: 150px;
         overflow-y: scroll;
         overflow-x: hidden;
     }
 }
 
-// @include md-only {
-// }
+@include sm-and-down {
+    .Details {
+        background: linear-gradient(to right, $blue-grey-5, $pink--3 11%);
+    }
+}
 // @include sm-only {
 // }
 @include xs-only {
-    .ProfileImage {
-        width: 150px;
-        height: 150px;
+    .Blur {
+        & h1 {
+            font-size: 14px !important;
+        }
+    }
+    .CoverImage {
         & img {
-            width: 150px;
-            height: 150px;
-            min-width: 150px;
-            min-height: 150px;
+            width: 170%;
+        }
+    }
+    .ProfileImage {
+        left: -15px;
+        top: -70px;
+        width: 110px;
+        height: 110px;
+        & img {
+            width: 110px;
+            height: 110px;
+            min-width: 110px;
+            min-height: 110px;
+            border: solid transparent 7px;
         }
     }
     .TopActions {
-        padding-left: 130px;
+        padding-left: 120px;
+        height: 40px;
         & a {
             & span:first-child {
                 margin: 0;
-                font-size: 22px;
+                font-size: 18px;
             }
             & span:last-child {
                 display: none;
@@ -336,13 +365,30 @@ export default class ProfileUpperSection extends Vue {
         }
     }
     .Details {
-        padding-left: 130px;
-        & .Name {
+        background: linear-gradient(to right, $blue-grey-5, $pink--3 14%);
+        & h5,
+        .Name {
             font-size: 20px;
+            margin-left: 100px;
         }
-        // & .About {
+        & .About,
+        .Status {
+            margin-left: 60px;
+        }
+    }
+}
 
-        // }
+@include xs-and-up {
+    .MiniScreenLink {
+        display: none;
+    }
+}
+@media only screen and (max-width: 360px) {
+    .Details {
+        & .About,
+        .Status {
+            margin-left: 40px;
+        }
     }
 }
 </style>

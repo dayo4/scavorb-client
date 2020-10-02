@@ -9,7 +9,7 @@
                 <div
                     v-for="item in queue"
                     :key="item.id"
-                    @click.stop="$router.push({path:'/posts/'+item.id})"
+                    @click.stop="$router.push({path:'/posts/'+item.slug})"
                     class="Post flex a-i-center pr-4"
                 >
                     <div class="PostImage flex a-i-center">
@@ -29,7 +29,7 @@
                 <h3 class="t-grey--2">Your queue is empty.</h3>
                 <p
                     class="t-grey--4"
-                >Use the "Add to queue" option on posts to queue up your favourite contents for reading.</p>
+                >Use the "Add to queue" option on posts to queue up your favourite contents for viewing later.</p>
                 <div class="flex j-c-center">
                     <button class="btn" @click="goToPosts">View Posts</button>
                 </div>

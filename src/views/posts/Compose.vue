@@ -18,8 +18,8 @@
                     @ready="addPostImage"
                     ref="imageTransformer"
                     fieldName="featuredImage"
-                    :cropWidth="1200"
-                    :cropHeight="600"
+                    :cropWidth="600"
+                    :cropHeight="350"
                 />
                 <div class="PostImage">
                     <img

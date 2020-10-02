@@ -45,7 +45,7 @@ body {
 }
 
 body {
-    background: linear-gradient( to right, #eceff1 0%, white 35%, white 65%, #eceff1 100%);
+    /* background: linear-gradient( to right, #eceff1 0%, white 35%, white 65%, #eceff1 100%); */
     /* background-color: #880e4f; */
     /* padding-top: 52px; */ 
     /* width: 100vw; */

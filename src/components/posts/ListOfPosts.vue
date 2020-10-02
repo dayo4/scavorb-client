@@ -69,36 +69,35 @@
 
                 <!-- regular posts(ARTICLE) template-->
                 <section class="Article br2 mb-3">
-                    <section class="PostImage noselect mr-2">
+                    <section class="PostImage noselect">
                         <img
                             :src="post.img ? $postBaseUrl + post.img : '/defaults/4.jpg'"
-                            @click="openPost(post.id, post.title)"
+                            @click="openPost(post.slug)"
                             draggable="false"
                             class="br2"
                         />
                     </section>
                     <section class="Details">
-                        <div
-                            @click="openPost(post.id, post.title)"
-                            class="cursor-pointer flex h-full w-full"
-                        >
+                        <div @click="openPost(post.slug)" class="cursor-pointer flex h-full w-full">
                             <img
                                 :src="$userBaseUrl + post.user.profile_image"
-                                width="55"
-                                height="55"
+                                width="30"
+                                height="30"
                                 draggable="false"
                                 class="noselect"
                             />
                             <div>
-                                <h5 class="font-3 my-1 mx-5 t-white">{{post.title}}</h5>
+                                <h5
+                                    class="font-3 my-1 mx-5 t-white"
+                                >{{post.title}}jjjjjjjjj gggggggggggggggg gggggggggg dddddd ssssss aaaaaa aaaaa rrrrr ggggg hhhh hhhh jjjj jjjj hhhh</h5>
                                 <p class="font-2 my-2 mx-5 t-grey-1 bold-3">
                                     <span
                                         class="mr-2 bold-5 t-grey-2"
                                     >{{ post.user.first_name + ' ' + post.user.last_name }}</span>
-                                    - {{post.comments}} {{post.comments.length > 1 ? 'replies' : 'reply' }}
+                                    - {{post.comments.length > 1 ? `${post.comments} ${post.comments.length > 1 ? 'replies' : 'reply' }` : ''}}
                                     <span
                                         class="icon-clock"
-                                    >{{ $moment(post.created_at).fromNow()}}</span>
+                                    >{{ $moment(post.updated_at).fromNow()}}</span>
                                 </p>
                             </div>
                         </div>
@@ -106,21 +105,21 @@
                         <!-- Dropdown component -->
                         <Dropdown
                             :ownID="post.id"
-                            :pos="{type: 'absolute', top: 8, right: 10}"
+                            :pos="{type: 'absolute', top: 4, right: 4}"
                             class="btn icon-ellipsis-vert font-8 bg-trans-2"
                             style="width:30px;"
                         >
                             <!-- slots -->
                             <template v-slot:default>
-                                <router-link :to="{path:'/posts/'+post.id}" target="_blank">
+                                <router-link :to="{path:'/posts/'+post.slug}" target="_blank">
                                     <span class="icon-eye"></span>
                                     <span>Open</span>
                                 </router-link>
-                                <a>
+                                <a v-if="user">
                                     <span class="icon-bookmarks"></span>
                                     <span>Bookmark</span>
                                 </a>
-                                <a @click="addToQueue(post.id, post.img, post.title)">
+                                <a @click="addToQueue(post.id, post.img, post.title,post.slug)">
                                     <span class="icon-plus-1"></span>
                                     <span>Add to queue</span>
                                 </a>
@@ -177,16 +176,17 @@ export default class ListOfPost extends Vue {
     //     }).finally(() => $Process.hide())
     // }
 
-    openPost (post_id, title) {
-        let route = this.$router.resolve({ path: '/posts/' + post_id + '_' + title })
+    openPost (slug: string) {
+        let route = this.$router.resolve({ path: '/posts/' + slug })
         window.open(route.href, '_blank')
     }
 
-    addToQueue (post_id, post_image: File, post_title: string) {
+    addToQueue (post_id, post_image: File, post_title: string, slug: string) {
         $ReadQueue.add({
             id: post_id,
             image: post_image ? this.$postBaseUrl + post_image : '/defaults/4.jpg',
-            title: post_title
+            title: post_title,
+            slug: slug
         })
     }
 }
@@ -198,16 +198,19 @@ export default class ListOfPost extends Vue {
 
 .Article {
     display: flex;
-    height: 200px;
+    // height: 200px;
     background-color: rgb(45, 45, 45);
 
     & .PostImage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
         height: 100%;
         min-width: 50%;
         width: 50%;
         & img {
-            height: 100%;
+            // height: 100%;
             width: 100%;
         }
     }
@@ -217,7 +220,8 @@ export default class ListOfPost extends Vue {
         padding: 8px;
         margin: 3px 2px;
         & img {
-            min-width: 55px;
+            min-width: 30px;
+            height: 30px;
             border-radius: 50%;
         }
     }
@@ -225,14 +229,14 @@ export default class ListOfPost extends Vue {
 
 @include xs-only {
     .Article {
-        height: 330px;
+        // min-height: 330px;
         flex-wrap: wrap;
 
         & .PostImage {
-            height: 250px;
+            // height: 250px;
             width: 100%;
-            margin: auto;
-            background-size: cover;
+            // margin: auto;
+            // background-size: cover;
         }
         & .Details {
             min-height: 80px;

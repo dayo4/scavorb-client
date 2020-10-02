@@ -39,7 +39,7 @@ export class LoadingProcessNotification {
 
     done () {
         this.info = 'DONE!'
-        this.icon = 'icon-thumbs-up'
+        this.icon = 'icon-info'
         let $this = this
         setTimeout(function () {
             $this.hide()

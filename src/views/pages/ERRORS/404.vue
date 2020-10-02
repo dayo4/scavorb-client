@@ -1,5 +1,5 @@
 <template>
-    <div class="flex j-c-center text-center mt-10" style="margin-top: 50px;">
+    <div class="flex j-c-center text-center mt-10 t-blue-grey--2" style="margin-top: 50px;">
         <div class="notfound">
             <!-- <div class="notfound-404">
 					<h1>Oops!</h1>
