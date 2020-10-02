@@ -5,6 +5,15 @@
                 <div>Adedayo Adeniyi</div>
                 <div>A Fullstack Web Applications Developer</div>
             </div>
+            <div class="More">
+                <div>Will handle your web development needs</div>
+                <div>Frontend Development</div>
+                <div>Backend Development</div>
+                <div>UI Designs</div>
+                <div>Single Page Applications(SPAs)</div>
+                <div>Ecommerce Development</div>
+                <div>Wordpress Development</div>
+            </div>
 
             <div class="Img">
                 <img src="/defaults/usr/me.jpg" alt="profile image" draggable="false" />
@@ -89,10 +98,10 @@ export default class Home extends Vue {
 
     list = [
         { img: 'resp', text: 'Fully Responsive Webpages' },
-        { img: 'scale', text: 'Easily Scalable Apps' },
-        { img: 'clean', text: 'Clean And Readable Code' },
-        { img: 'flexb', text: 'Flexible Implementation' },
-        { img: 'effect', text: 'Cost Effective Service' },
+        { img: 'scale', text: 'Progressive and Easily Scalable Apps' },
+        { img: 'clean', text: 'Clean and Readable Code' },
+        { img: 'flexb', text: 'Flexible Business Logic Implementation' },
+        { img: 'effect', text: 'Cost Effective Development Service' },
         { img: 'effect', text: 'Genuine and Minimal Design' },
     ]
 }
@@ -103,7 +112,8 @@ export default class Home extends Vue {
     height: 500px;
     width: 100%;
     background-color: $blue-grey--3;
-    background-image: url("/defaults/pgs/cd.jpg");
+    // background-image: url("/defaults/pgs/cd.jpg");
+    background-image: url("/defaults/pgs/prfcv1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -140,6 +150,35 @@ export default class Home extends Vue {
             font-size: 37px;
             margin-top: 40px;
             max-width: 700px;
+        }
+    }
+
+    & .More {
+        padding: 20px 0 0 0;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
+        color: white;
+        font-size: 14px;
+        margin-left: 80px;
+
+        & > div:nth-child(1) {
+            color: $cyan-3;
+        }
+        & > div {
+            margin: 3px 0;
+            &::before {
+                content: "";
+                display: inline-block;
+                position: relative;
+                left: -15px;
+                width: 3px;
+                height: 10px;
+                border-top: 5px solid transparent;
+                border-bottom: 13px solid transparent;
+                border-right: 7px solid $cyan--3;
+                transform: rotateZ(55deg);
+            }
         }
     }
 
@@ -201,17 +240,22 @@ export default class Home extends Vue {
         }
     }
 }
-hr {
-    color: white !important;
-}
+
 .Section_2 {
+    // background-color: $blue-grey--3;
+    // // background-image: url("/defaults/pgs/cd.jpg");
+    // background-image: url("/defaults/pgs/p.png");
+    // background-position: center;
+    // background-repeat: no-repeat;
+    // background-size: cover;
+
     & .Tiles {
         & > div {
             width: 150px;
             height: 230px;
             background-color: white;
             border-radius: 28px;
-            margin: 0px 20px 20px 20px;
+            margin: 0px 30px 30px 20px;
             border-top: solid 3px $cyan;
             border-bottom: solid 3px $cyan;
             & img {
@@ -247,6 +291,9 @@ hr {
                 // margin-top: 40px;
                 // max-width: 700px;
             }
+        }
+        & .More {
+            margin-left: 40px;
         }
 
         & .Img {

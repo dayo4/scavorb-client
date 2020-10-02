@@ -11,7 +11,6 @@
             <router-view />
         </transition>
 
-        <!-- <Footer /> -->
         <BottomNav />
         <Auth />
         <!--<component :is="loadAuth"></component> -->
@@ -24,7 +23,6 @@ import { $Auth } from "@/myStore"
 
 
 import TopNav from "@/components/navs/TopNav.vue"
-import Footer from "@/components/navs/Footer.vue"
 import BottomNav from "@/components/navs/BottomNav.vue"
 import HoverPanel from "@/components/navs/HoverPanel.vue"
 import Process from "@/components/GlobalComponents/notification/Process.vue"
@@ -33,7 +31,6 @@ import Notify from "@/components/GlobalComponents/notification/Notify.vue"
 @Component({
     components: {
         TopNav,
-        Footer,
         BottomNav,
         HoverPanel,
         Process,

@@ -1,5 +1,5 @@
 <template>
-    <section class="ContWrapper flex j-c-center">
+    <section class="flex j-c-center">
         <div class="GenFormStyle xs11 sm9 md7">
             <section class="TopInfo icon-info bg-blue-5 p-3 mb-3 no-deco">
                 Send me the detail of your request using the form below or talk to me through other medium
@@ -198,9 +198,6 @@ export default class Contact extends Vue {
 }
 </script>
 <style lang="scss">
-.ContWrapper {
-    margin-bottom: 52px;
-}
 .TopInfo {
     & > a {
         font-size: 26px;

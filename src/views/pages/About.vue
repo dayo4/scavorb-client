@@ -76,13 +76,15 @@ export default class About extends Vue {
     QueAns = [
         {
             Q: 'Who are you and what do you do?',
-            A: [ `I am a fullstack web applications developer with a drive to implement ideas in a genuine way yet minimalistic as possible. 
+            A: [ `I am a fullstack web applications developer with a knack to want to know how the whole of a thing works and a drive to implement ideas in a genuine way yet minimalistic as possible. 
             The thought of moving ideas from conception to reality often hits me deep, quite relentless until a reasonable solution is derived. 
             Many run from it - it takes time and resource they claim. Well whats the purpose of time if not to lavish on what facinates you to be better?
-            But above all, i understand the need to deliver results.`,
+            But above all, i understand the need to deliver results. 
+            I enjoy working both personally and teams
+            `,
                 `<p>It is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard. That's me!</p>
 <p class="mb-1">From creating regular SEO responsive webpages to implementing complex business and functional ui logic for web technologies. I'm versed in presenting a genuine design and overall development services. In my time doing this, i've worked physically and remotely with a number of people building their projects.</p>
-<p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?. Or just need someone to work with your team part-time remotely in building your next big project.</p>
+<p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?. Or just need someone to work with your team part-time remotely in building your next big project. I will help you bring your ideas to live.</p> 
 <p>We can discuss the detail <a href="/contact" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">here. Send me a message.</a></p>`
             ]
         },
@@ -92,7 +94,7 @@ export default class About extends Vue {
 
             <p>A good example is <span href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> created from scratch by me, both frontend and backend in Javascript technologies.</p>
             <p>Unlike most websites built on wordpress requiring mostly basic templates to setup, SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
-            <p>Likewise i create wordpress websites if it's what you need. Either personal or ecommerce websites.<p>
+            <p>Likewise i create wordpress websites if it's what you need. Whether personal or ecommerce websites.<p>
             `
             ]
         },

@@ -1,6 +1,6 @@
 <template>
     <Container ownID="MC-cntct">
-        <h1 class="text-center t-blue-grey">Contact Me</h1>
+        <h1 class="text-center t-blue-grey">Work With Me</h1>
 
         <!-- Contact Component -->
         <Contact></Contact>

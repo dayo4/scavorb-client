@@ -1,7 +1,7 @@
 <template>
-    <div class="CanvasCont flex j-c-center">
+    <section class="CanvasCont flex j-c-center">
         <canvas ref="Canvas" width="400" height="290"></canvas>
-    </div>
+    </section>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator"
@@ -53,6 +53,14 @@ export default class SCHT extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.CanvasCont {
+    // background-color: $blue-grey--3;
+    // background-image: url("/defaults/pgs/cd.jpg");
+    background-image: url("/defaults/pgs/p.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 canvas {
     width: 400px;
     border-left: solid crimson 1px;

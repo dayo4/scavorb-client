@@ -1,22 +1,12 @@
 <template>
-    <div class="Footer bg-trans-4 pb-1" ref="Footer">
-        <router-link to="/">
-            <span class="icon-home"></span>
-            <span>Home lllllllllllllllllllllllll</span>
-        </router-link>
-        <!-- <div @click="$router.back()">
-			<span class="icon-left-open-big" :class="backable? 't-white' : 't-grey-1'"></span>
-			<span>Back</span>
-		</div>
-		<div @click="$router.forward()">
-			<span class="icon-right-open-big" :class="backable? 't-white' : 't-grey-1'"></span>
-			<span>forward</span>
-		</div>
-		<div @click="scrollUp">
-			<span class="icon-up-big" :class="!scrolled ? 't-grey--1':'t-white'"></span>
-			<span>Scroll Up</span>
-        </div>-->
-    </div>
+    <footer v-show="$route.name != 'user-profile'" class="Footer t-blue-grey text-center">
+        <div>
+            <span class="icon-copyright mr-4">2020 scavorb</span>
+        </div>
+        <div class="mt-4">
+            <router-link class="t-blue--3 no-deco" to="/privacy">Privacy</router-link>
+        </div>
+    </footer>
 </template>
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
@@ -27,31 +17,15 @@ import { $Navs } from '@/myStore'
     //     scrolled: () => $Navs.$container.scrolled,
     // },
 })
-export default class Footer extends Vue {
-
-}
+export default class Footer extends Vue { }
 </script>
 <style  lang="scss" scoped>
 .Footer {
-    width: 100%;
-    display: flex;
-    // & > * {
-    // text-align: center;
-    // margin-left: 10px;
-    // & span {
-    // 	transition: 0.5s;
-    // }
-    // & span:first-child {
-    // 	display: block;
-    // 	font-size: 25px;
-    // }
-    // & span:last-child {
-    // 	color: white;
-    // 	font-weight: bold;
-    // 	display: block;
-    // 	font-size: 8px;
-    // }
-    // }
+    // position: absolute;
+    // width: 100%;
+    // height: 60px;
+    // bottom: 0;
+    margin: 60px 0 30px 0;
 }
 
 // @include sm-and-down {

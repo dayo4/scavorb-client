@@ -16,6 +16,11 @@ const routes = [
     name: "contact",
     component: () => import(/* webpackPrefetch: true, webpackChunkName: "cntct" */ "@/views/pages/Contact.vue")
   },
+  {
+    path: "/privacy",
+    name: "privacy",
+    component: () => import(/* webpackPrefetch: true, webpackChunkName: "cntct" */ "@/views/pages/Privacy.vue")
+  },
   // {
   //   path: "/services",
   //   name: "services",

@@ -7,6 +7,8 @@
             :class="MainCB ? MainCB : `${ noSideNav ? 'xs12' : 'xs12 lg9'}`"
         >
             <slot></slot>
+
+            <Footer />
         </div>
 
         <!-- SIDE NAVIGATION SLOT -->
@@ -16,11 +18,15 @@
     </div>
 </template>
 <script lang="ts">
+
+import Footer from "@/components/navs/Footer.vue"
 import { Component, Vue, Prop } from "vue-property-decorator"
 import { $Navs } from '@/myStore'
 
 @Component({
-
+    components: {
+        Footer
+    }
 })
 export default class GBLMContainer extends Vue {
     // $ref!: {
@@ -45,12 +51,14 @@ export default class GBLMContainer extends Vue {
     height: 100vh;
 }
 .MC-ViewArea {
+    position: relative;
     padding-top: 52px;
     padding-bottom: 45px;
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
 @include sm-and-down {
     .MC-ViewArea {
         padding-top: 49px;
