@@ -27,8 +27,8 @@
                         ref="coverUpload"
                         @ready="finalizeImageUpload"
                         fieldName="coverImage"
-                        :cropWidth="1050"
-                        :cropHeight="250"
+                        :cropWidth="1100"
+                        :cropHeight="310"
                     />
                     <span class="flex a-i-center j-c-around shadow-4 bg-trans-2">
                         <span

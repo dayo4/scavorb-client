@@ -4,7 +4,7 @@ export class Mailer {
     success: string = ''
     error: string = ''
 
-    async send (payload: { name: string, email: string, subject: string, message: string }) {
+    async send (payload: { name: string, email: string, subject: string, message: string, token: string }) {
         $Process.add('Sending Message...')
         this.error = this.success = ''
         try

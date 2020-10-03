@@ -5,7 +5,7 @@
                 Send me the detail of your request using the form below or talk to me through other medium
                 <a
                     class="icon-mail-alt t-pink--3"
-                    href="mailto:dayo4@live.com"
+                    href="mailto:scavorb@gmail.com"
                 ></a>
             </section>
 
@@ -55,6 +55,15 @@
                 ></div>
             </div>
 
+            <!-- reCaptcha shows up here -->
+            <transition name="expand">
+                <div v-show="showCaptcha" class="mt-2">
+                    <i>Please check the reCaptcha checkbox below</i>
+                    <div ref="reCaptcha"></div>
+                </div>
+            </transition>
+            <!-- reCaptcha shows up here -->
+
             <transition name="expand">
                 <div v-if="success || error" class="mt-5">
                     <div
@@ -84,12 +93,21 @@ import { $Validator, $Obstacle } from "@/plugins"
 
 @Component({
     computed: {
-        error: () => $Pages.$mailer.error,
-        success: () => $Pages.$mailer.success
+        error: {
+            get: () => $Pages.$mailer.error,
+            set: (v) => $Pages.$mailer.error = v,
+        },
+        success: {
+            get: () => $Pages.$mailer.success,
+            set: (v) => $Pages.$mailer.success = v,
+        }
     }
 })
 export default class Contact extends Vue {
+    error!: string
+    success!: string
     $refs!: {
+        reCaptcha
         msg
         send
     }
@@ -103,6 +121,49 @@ export default class Contact extends Vue {
     subj_err = ''
     msg_err = ''
 
+    showCaptcha = false
+
+    mounted () {
+        let _this = this
+        // @ts-ignore
+        grecaptcha.ready(() => {
+            // @ts-ignore
+            grecaptcha.render(this.$refs.reCaptcha, {
+                'sitekey': '6LdDQ9MZAAAAAAXOm_j-i-gaGUjqzNcIDDDyAXzw',
+                'error-callback': function (err) {
+                    _this.error = err
+                },
+                'callback': function (token: string) {
+                    $Obstacle.create(_this.$refs.send, {
+                        icon: '',
+                        action: function () {
+                            $Pages.$mailer.send({
+                                name: _this.name,
+                                email: _this.email,
+                                subject: _this.subject,
+                                message: _this.msg,
+                                token: token
+                            }).then(done => {
+                                $Obstacle.destroy(_this.$refs.send)
+                                // @ts-ignore
+                                grecaptcha.reset()
+                                _this.showCaptcha = false
+                                if (done)
+                                {
+                                    _this.name = _this.email = _this.subject = _this.msg = ''
+                                    _this.$refs.msg.textContent = ''
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        })
+    }
+    beforeDestroy () {
+        this.error = this.success = ''
+    }
+
     setMsg (e) {
         this.msg = e.target.textContent
         if (this.msg_err)
@@ -111,11 +172,16 @@ export default class Contact extends Vue {
         }
     }
 
-    reCAPTCHA () {
-
-    }
 
     send () {
+        if (this.validate())
+        {
+            this.showCaptcha = true
+
+        }
+    }
+
+    validate () {
         const schema = [
             {
                 fieldName: 'Email',
@@ -142,7 +208,7 @@ export default class Contact extends Vue {
                     required: true,
                     string: true,
                     min: 3,
-                    max: 50
+                    max: 100
                 }
             },
             {
@@ -151,50 +217,23 @@ export default class Contact extends Vue {
                 rules: {
                     required: true,
                     string: true,
-                    min: 50,
+                    min: 20,
                     max: 4000
                 }
             }
         ]
 
-        let _this = this
         if ($Validator.validate(schema))
         {
-            /* "grecaptcha" is loaded directly from scripts */
-            // grecaptcha.ready(function () {
-            //     grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit' }).then(function (token) {
-            //         // Add your logic to submit to your backend server here.
-            //         console.log(token)
-            $Obstacle.create(this.$refs.send, {
-                action: function () {
-                    $Pages.$mailer.send({
-                        name: _this.name,
-                        email: _this.email,
-                        subject: _this.subject,
-                        message: _this.msg
-                    }).then(done => {
-                        $Obstacle.destroy(_this.$refs.send)
-                        if (done)
-                        {
-                            _this.name = _this.email = _this.subject = _this.msg = ''
-                            _this.$refs.msg.textContent = ''
-                        }
-                    })
-                }
-            })
-            //     }).catch(() => {
-            //         $Pages.$mailer.error = 'connection error!'
-            //     })
-            // })
-
+            return true
         }
         const errors = $Validator.getErrors()
         this.email_err = errors[ 'Email' ]
         this.name_err = errors[ 'Name' ]
         this.subj_err = errors[ 'Subject' ]
         this.msg_err = errors[ 'Message' ]
-
     }
+
 }
 </script>
 <style lang="scss">
