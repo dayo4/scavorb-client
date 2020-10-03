@@ -15,17 +15,17 @@ module.exports = {
             }
         }
     },
-    pwa: {
-        // workboxPluginMode: 'InjectManifest',
-        // workboxOptions: {
-        //     swSrc: 'src/registerServiceWorker.js',
-        //     exclude: [
-        //         /\.map$/,
-        //         /manifest\.json$/
-        //     ],
-        // },
-        themeColor: '#1da025'
-    },
+    // pwa: {
+    // workboxPluginMode: 'InjectManifest',
+    // workboxOptions: {
+    //     swSrc: 'src/registerServiceWorker.js',
+    //     exclude: [
+    //         /\.map$/,
+    //         /manifest\.json$/
+    //     ],
+    // },
+    //     themeColor: '#0097a7'
+    // },
     chainWebpack: config => {
         config.module.rules.delete('eslint')
         config.plugins.delete('prefetch')
