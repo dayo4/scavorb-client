@@ -18,11 +18,22 @@
 
                 <h3>When Submitting Forms or Sending Mail</h3>
 
-                <p>When you submit a form, you choose to provide me with your personal information and information about your project. You provide certain personal information, such as your name, and email address. At this time, the most information you would be required to submit is your name, email address and the details of your message which may or maynot contain project or personal information.</p>
+                <p>When you submit a form, you choose to provide me with your personal information and information about your project if you choose to. You provide certain personal information, such as your name, and email address. At this time, the most information you would be required to submit is your name, email address and the details of your message which may or may not contain project or personal information.</p>
                 <p>Any information received during interaction will be used to handle your requests and utilized towards engagement with your project by those directly involved in the development process.</p>
 
-                <h2>Data storage</h2>
-                <p>When you visit and interact with scavorb.com, for you to have a better experience, certain information may be temporarily stored on your computer. Currently this site does not use cookies.</p>
+                <h2>Data Storage and Use of Cookies</h2>
+                <p>When you visit and interact with scavorb.com, for you to have a better experience, certain information may be temporarily stored on your computer.</p>
+                <p>
+                    Googles services like analytics and reCAPTCHA used on this site rely on cookies. For more information on this stuffs kindly refer to the
+                    <a
+                        href="https://www.google.com/intl/en/policies/privacy/"
+                        target="_blank"
+                    >Google's privacy-policy</a> and
+                    <a
+                        href="https://www.google.com/intl/en/policies/terms/"
+                        target="_blank"
+                    >Terms</a>
+                </p>
             </div>
         </section>
     </Container>

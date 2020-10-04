@@ -89,6 +89,7 @@ export default class Composer extends Vue {
         if (this.contentToEdit)
         {
             this.title = this.$refs.titleInput.textContent = this.contentToEdit.title
+            this.slug = this.$refs.slugInput.textContent = this.contentToEdit.slug
         }
     }
 
@@ -239,7 +240,7 @@ export default class Composer extends Vue {
         {
             $Posts.$compose.newPost({
                 title: this.title,
-                slug: this.slug.split(' ').join('-').toLowerCase(),
+                slug: this.slug.replace(/\s{2,}/g, ' ').split(' ').join('-').toLowerCase(),
                 content: this.content,
                 contentImages
             }).then(() => {

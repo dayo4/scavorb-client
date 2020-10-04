@@ -94,10 +94,10 @@
                             @click="showCommentModal(post)"
                             class="icon-comment btn cyan-gradient-btn"
                         >Comments ({{post.comments}})</span>
-                        <span
+                        <!-- <span
                             class="icon-thumbs-up-alt btn pink-gradient-btn"
                             @click="thumbUp"
-                        >{{post.up}}</span>
+                        >{{post.up}}</span>-->
                     </div>
                 </section>
 
@@ -325,11 +325,11 @@ export default class PostView extends Vue {
 
     & .Actions {
         & span:first-child {
-            border-radius: 28px 0 0 28px;
+            border-radius: 28px /*  0 0 28px */;
         }
-        & span:last-child {
-            border-radius: 0 28px 28px 0;
-        }
+        // & span:last-child {
+        //     border-radius: 0 28px 28px 0;
+        // }
     }
     & hr {
         color: $blue-grey-4;

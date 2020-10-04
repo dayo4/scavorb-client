@@ -3,7 +3,7 @@ function pageLoader () {
     const div = document.createElement('div')
     div.classList.add('Overlay')
     div.innerHTML = `
-        <div class="logo-base logo-large logo-fast shadow-5">
+        <div class="logo-base logo-trans logo-large logo-fast shadow-5">
             <span>
                 <span>
                     <b>S</b>

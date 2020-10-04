@@ -177,8 +177,8 @@ export default class ListOfPost extends Vue {
     // }
 
     openPost (slug: string) {
-        let route = this.$router.resolve({ path: '/posts/' + slug })
-        window.open(route.href, '_blank')
+        /* let route = */ this.$router.push({ path: '/posts/' + slug })
+        // window.open(route.href, '_blank')
     }
 
     addToQueue (post_id, post_image: File, post_title: string, slug: string) {

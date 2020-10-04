@@ -49,6 +49,14 @@
                     <div>{{ L.text }}</div>
                 </div>
             </div>
+
+            <button
+                @click="$router.push({name: 'about'})"
+                class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5 m-auto noselect"
+            >
+                <span class="icon-right-big mr-3"></span>
+                <span>More Info</span>
+            </button>
         </section>
 
         <hr class="shadow-8" />
@@ -107,7 +115,7 @@ export default class Home extends Vue {
         { img: 'clean', text: 'Clean and Readable Code' },
         { img: 'flexb', text: 'Flexible Business Logic Implementation' },
         { img: 'effect', text: 'Cost Effective Development Service' },
-        { img: 'effect', text: 'Genuine and Minimal Design' },
+        { img: 'effect', text: 'Genuine Design' },
     ]
 }
 </script>
@@ -174,8 +182,8 @@ export default class Home extends Vue {
             }
         }
         & > div:nth-child(1) {
-            text-shadow: none;
-            color: $pink--1;
+            // text-shadow: none;
+            color: $pink-3;
             margin-left: -10px;
         }
     }
