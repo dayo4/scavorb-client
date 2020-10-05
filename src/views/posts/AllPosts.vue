@@ -1,6 +1,6 @@
 <template>
     <Container ownID="MC-AllPosts">
-        <div v-show="posts">
+        <div v-show="posts" class="Cover">
             <div class="Header flex j-c-between a-i-center shadow-8 bg-white br2 mb-2 px-2">
                 <Dropdown
                     ownID="pages"
@@ -121,6 +121,9 @@ export default class AllPost extends Vue {
     height: 50px;
     transition: 0.3s;
     z-index: 2;
+}
+.Cover {
+    margin-bottom: 50px;
 }
 // .sss {
 //     background-color: blue;

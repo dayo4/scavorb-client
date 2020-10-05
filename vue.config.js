@@ -70,13 +70,13 @@ module.exports = {
 
         return {
             plugins: [
-                // new PrerenderSPAPlugin(
-                //     // Absolute path to compiled SPA
-                //     path.resolve(__dirname, 'dist'),
-                //     // List of routes to prerender
-                //     [ '/', '/about', '/contact', '/profile/dayo' ],
-                //     new PuppeteerRenderer()
-                // ),
+                new PrerenderSPAPlugin(
+                    // Absolute path to compiled SPA
+                    path.resolve(__dirname, 'dist'),
+                    // List of routes to prerender
+                    [ '/', '/about', '/contact', '/profile/dayo' ],
+                    new PuppeteerRenderer()
+                ),
             ]
         }
     }
