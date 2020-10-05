@@ -1,50 +1,57 @@
 <template>
     <Container ownID="MC-AllPosts">
-        <div
-            v-show="posts"
-            class="Header flex j-c-between a-i-center shadow-8 bg-white br2 mb-2 px-2"
-        >
-            <Dropdown
-                ownID="pages"
-                :text="'Go to Page: '+ curPage"
-                :optPos="{right: -30}"
-                class="font-3 btn bg-trans-3 noselect"
-            >
-                <!-- slots -->
-                <template v-slot:default>
-                    <a v-for="num in Math.floor(count/10 + 1)" :key="num">
-                        <span @click="page(num)">{{num}}</span>
-                    </a>
-                </template>
-            </Dropdown>
+        <div v-show="posts">
+            <div class="Header flex j-c-between a-i-center shadow-8 bg-white br2 mb-2 px-2">
+                <Dropdown
+                    ownID="pages"
+                    :text="'Go to Page: '+ curPage"
+                    :optPos="{right: -30}"
+                    class="font-3 btn bg-trans-3 noselect"
+                >
+                    <!-- slots -->
+                    <template v-slot:default>
+                        <a v-for="num in Math.floor(count/10 + 1)" :key="num">
+                            <span @click="page(num)">{{num}}</span>
+                        </a>
+                    </template>
+                </Dropdown>
 
-            <Dropdown
-                ownID="PostSort"
-                :text="'Sort By: ' + sort"
-                class="icon-sort-alt-up font-3 btn bg-trans-3 noselect"
-            >
-                <!-- slots -->
-                <template v-slot:default>
-                    <a @click="sortBy('Newest','desc')">
-                        <span class="icon-down-open"></span>
-                        <span>Newest</span>
-                    </a>
-                    <a @click="sortBy('Oldest', 'asc')">
-                        <span class="icon-up-open"></span>
-                        <span>Oldest</span>
-                    </a>
-                </template>
-            </Dropdown>
+                <Dropdown
+                    ownID="PostSort"
+                    :text="'Sort By: ' + sort"
+                    class="icon-sort-alt-up font-3 btn bg-trans-3 noselect"
+                >
+                    <!-- slots -->
+                    <template v-slot:default>
+                        <a @click="sortBy('Newest','desc')">
+                            <span class="icon-down-open"></span>
+                            <span>Newest</span>
+                        </a>
+                        <a @click="sortBy('Oldest', 'asc')">
+                            <span class="icon-up-open"></span>
+                            <span>Oldest</span>
+                        </a>
+                    </template>
+                </Dropdown>
+            </div>
+
+            <!-- ListOfPosts Component -->
+            <div v-if="posts && posts.length > 0">
+                <ListOfPosts :posts="posts" />
+            </div>
+
+            <div v-else class="px-10">
+                <h2
+                    class="t-blue-grey text-center text-cap font- mt-8 letter-space-1"
+                >Sorry! No Posts Published At The Moment.</h2>
+            </div>
+
+            <div v-if="posts.length < 3" class="px-10 mt-10">
+                <h4
+                    class="t-blue-grey text-center text-cap font- mt-8 letter-space-1"
+                >SCAVORB is Just Created and More Contents Will Be Available Shortly.</h4>
+            </div>
         </div>
-
-        <!-- ListOfPosts Component -->
-        <div class="postList">
-            <ListOfPosts :posts="posts" />
-        </div>
-
-        <!--		<div v-else>
-			<h2 class="t-blue-grey text-center text-cap font-9 mt-8 letter-space-1">No Posts Found!.</h2>
-        </div>-->
     </Container>
 </template>
 <script lang="ts">
@@ -115,13 +122,13 @@ export default class AllPost extends Vue {
     transition: 0.3s;
     z-index: 2;
 }
-.sss {
-    background-color: blue;
-    height: 200px;
-}
+// .sss {
+//     background-color: blue;
+//     height: 200px;
+// }
 
-.Footer {
-    position: absolute;
-    bottom: 0;
-}
+// .Footer {
+//     position: absolute;
+//     bottom: 0;
+// }
 </style>

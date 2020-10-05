@@ -291,6 +291,7 @@ nav {
 }
 .DropBtn {
     position: relative;
+    padding: 0 !important;
     & img {
         margin-top: 4px;
         min-width: 46px;

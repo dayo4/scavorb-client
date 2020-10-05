@@ -17,25 +17,24 @@
 
             <div class="Img">
                 <img src="/defaults/usr/me.jpg" alt="profile image" draggable="false" />
-                <!-- <div class="Icon" @click="$router.push({path: '/profile/dayo'})"> -->
                 <span
                     @click="$router.push({path: '/profile/dayo'})"
                     class="Icon b1 shadow-4"
                 >View Profile</span>
-                <!-- </div> -->
-                <!-- <div class="Icon" @click="$router.push({path: '/profile/dayo'})">
-                    <span class="flex a-i-center j-c-center">
-                        <span class="icon-user"></span>
-                    </span>
-                    <span>View Profile</span>
-                </div>-->
             </div>
+
+            <!-- <div
+                 class="Title bg-white p-3 mt-3 text-center font-7 letter-space-1 t-cyan--3"
+            >scavorb.com</div>-->
         </section>
 
-        <hr class="shadow-8" />
+        <div class="Divider">
+            <span></span>
+        </div>
+
         <section class="Section_2">
             <h2 class="text-center t-blue-grey--1">
-                <span class="icon-chart-line-1 mr-3"></span>
+                <span class="icon-check mr-3"></span>
                 <span>
                     Deliverables
                     <!-- <i class="font-2">Few</i> -->
@@ -62,7 +61,10 @@
             </button>
         </section>
 
-        <hr class="shadow-8" />
+        <div class="Divider">
+            <span></span>
+        </div>
+
         <section>
             <h2 class="text-center t-blue-grey--1">
                 <span class="icon-chart-line-1 mr-3"></span>
@@ -73,7 +75,11 @@
             </h2>
             <SkillChart></SkillChart>
         </section>
-        <hr class="shadow-8" />
+
+        <div class="Divider">
+            <span></span>
+        </div>
+
         <!-- Flipper Component -->
         <!-- <Flipper></Flipper> -->
         <!-- Flipper Component -->
@@ -83,7 +89,7 @@
             <span class="icon-mail-alt mr-3"></span>
             <span>
                 Message Me
-                <i class="font-3">I'm available</i>
+                <i class="font-3">Let's Work Together</i>
             </span>
         </h2>
         <!-- Contact Component -->
@@ -118,11 +124,31 @@ export default class Home extends Vue {
         { img: 'clean', text: 'Clean and Readable Code' },
         { img: 'flexb', text: 'Flexible Business Logic Implementation' },
         { img: 'effect', text: 'Cost Effective Development Service' },
-        { img: 'effect', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
+        { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
     ]
 }
 </script>
 <style lang="scss" scoped>
+.Divider {
+    display: flex;
+    justify-content: center;
+    margin: 60px 0px;
+    & span {
+        width: 50%;
+        border-top: solid 5px $pink--4;
+        border-bottom: solid 5px $cyan--4;
+        box-shadow: $shadow-8;
+        border-radius: 73%;
+    }
+}
+// .Title {
+//     margin: 6px 0 40px 0;
+//     font-size: 16px;
+//     font-weight: bold;
+//     border-top: solid 2px $cyan--3;
+//     border-bottom: solid 2px $cyan--3;
+//     // text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
+// }
 .Top {
     position: relative;
     height: 500px;
@@ -188,6 +214,8 @@ export default class Home extends Vue {
             // text-shadow: none;
             color: $pink-3;
             margin-left: -10px;
+            font-size: 16px;
+            -webkit-text-stroke: white 0.5px;
         }
     }
 
@@ -275,6 +303,11 @@ export default class Home extends Vue {
 }
 
 @include xs-only {
+    .Divider {
+        & span {
+            width: 70%;
+        }
+    }
     .Top {
         height: 600px;
         & .Intro {

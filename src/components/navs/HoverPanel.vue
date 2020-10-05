@@ -36,6 +36,15 @@
                     </router-link>
                 </div>
             </div>
+
+            <div class="Body flex wrap j-c-between p-4">
+                <div v-for="(icon, i) in socialLinks" :key="i" class="IconWrapper m-2 text-center">
+                    <a :href="icon.link" target="_blank" class="t-white">
+                        <span :class="icon.font" class="Icon"></span>
+                        <span class="IconText">{{ icon.text }}</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Handle -->
@@ -68,18 +77,18 @@ export default class HoverPanel extends Vue {
         { font: 'icon-cog-alt', text: 'Admin', link: 'admin-dashboard', auth: 'admin' },
         { font: 'icon-plus-1', text: 'New Post', link: 'compose-post', auth: 'admin' },
         { font: 'icon-cog-1', text: 'Settings', link: 'manage-settings', auth: 'user' },
-        // { font: 'icon-graduation-cap', text: 'Talent', link: '' },
-        // { font: 'icon-puzzle', text: 'Puzzle', link: '' },
-        // { font: 'icon-chart-line-1', text: 'Chart', link: '' },
-        // { font: 'icon-address-book', text: 'Contact', link: '' },
     ]
 
     pageIcons = [
-        { font: 'icon-youtube', text: 'YouTube', link: '' },
         { font: 'icon-mail-alt', text: 'Mail', link: 'contact' },
         { font: 'icon-info', text: 'About', link: 'about' },
         { font: 'icon-doc-text', text: 'Posts', link: 'posts' },
 
+    ]
+
+    socialLinks = [
+        // { font: 'icon-youtube', text: 'YouTube', link: '' },
+        { font: 'icon-whatsapp', text: 'WhatsApp', link: 'https://wa.me/message/3NSQPMZJFTDHL1' },
     ]
 
     /* lifecycle hooks */
@@ -177,6 +186,7 @@ export default class HoverPanel extends Vue {
 .Body {
     border-top: $cyan--3 solid 3px;
     border-radius: 10px;
+    padding-right: 30px;
 }
 
 .IconWrapper {

@@ -69,10 +69,9 @@
 
                 <!-- regular posts(ARTICLE) template-->
                 <section class="Article br2 mb-3">
-                    <section class="PostImage noselect">
+                    <section class="PostImage noselect" @click="openPost(post.slug)">
                         <img
                             :src="post.img ? $postBaseUrl + post.img : '/defaults/4.jpg'"
-                            @click="openPost(post.slug)"
                             draggable="false"
                             class="br2"
                         />
@@ -87,9 +86,7 @@
                                 class="noselect"
                             />
                             <div>
-                                <h5
-                                    class="font-3 my-1 mx-5 t-white"
-                                >{{post.title}}jjjjjjjjj gggggggggggggggg gggggggggg dddddd ssssss aaaaaa aaaaa rrrrr ggggg hhhh hhhh jjjj jjjj hhhh</h5>
+                                <h5 class="font-3 my-1 mx-5 t-white">{{post.title}}</h5>
                                 <p class="font-2 my-2 mx-5 t-grey-1 bold-3">
                                     <span
                                         class="mr-2 bold-5 t-grey-2"
@@ -206,6 +203,7 @@ export default class ListOfPost extends Vue {
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        min-height: 200px;
         height: 100%;
         min-width: 50%;
         width: 50%;

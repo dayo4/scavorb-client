@@ -5,7 +5,14 @@
                 Send me the detail of your request using the form below or talk to me through other medium
                 <a
                     class="icon-mail-alt t-pink--3"
+                    title="e-mail"
                     href="mailto:scavorb@gmail.com"
+                ></a>
+                <a
+                    class="icon-whatsapp t-green--1"
+                    title="whatsapp"
+                    href="https://wa.me/message/3NSQPMZJFTDHL1"
+                    target="_blank"
                 ></a>
             </section>
 

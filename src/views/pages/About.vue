@@ -89,7 +89,7 @@ export default class About extends Vue {
             Q: 'So you build Single Page web Applications(SPAs)',
             A: [ `<p>Yes! SPAs are web apps that give you a similar mobile apps experience on the web without the need to download and install on your device. Progressive, faster navigation, fully customized, and no boring loadings between pages...</p>
 
-            <p>A good example is <span class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> created from scratch by me, both frontend and backend in Javascript technologies.</p>
+            <p>A good example is <span class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> custom built by me, both frontend and backend in Javascript technologies.</p>
             <p>Unlike most traditional websites built on wordpress requiring mostly basic templates to setup and with , SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
             <p>Likewise i create wordpress websites if it's what you need. Whether personal or ecommerce websites.<p>
             `
@@ -201,4 +201,5 @@ learning programming had recently helped me
         Deep knowledge of API design principles and best practices,
         I am a fullstack web developer who loves exploring deeper the nature of things and experimenting with different strategies. I enjoy engaging in intuitive conversations and visualization about the abstract design of nature and derive pleasure in driving the architecture of things towards perfection. 
         I'm often quite definite about missions, not relenting until a useful solution is delivered.`
+         Though recently started in this field, i had sharpened my skills while simultaneously 
  */
