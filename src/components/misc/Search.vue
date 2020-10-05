@@ -3,12 +3,7 @@
         <div v-if="show" class="SearchModal br3 pl-3 p-1">
             <div class="InputBox flex bg-white br4 p-1">
                 <span class="SearchIcon icon-search-2 flex a-i-center font-6 px-5"></span>
-                <input
-                    ref="search"
-                    type="text"
-                    placeholder="Search people, posts..."
-                    class="p-2 w-full"
-                />
+                <input ref="search" type="text" placeholder="Search..." class="p-2 w-full" />
                 <span
                     @click="$emit('close')"
                     class="SearchIcon icon-cancel flex a-i-center font-9 px-3"
@@ -16,7 +11,7 @@
             </div>
             <hr />
             <div class="Result flex a-i-center bg-white br3 pl-5">
-                <span class="font-8 t-grey">Search result</span>
+                <span class="font-4 t-grey">Search result</span>
             </div>
         </div>
     </transition>
@@ -79,8 +74,8 @@ input {
 }
 @include xs-only {
     .SearchModal {
-        left: 2%;
-        right: 2%;
+        left: 0;
+        right: 0;
     }
 }
 @include sm-only {

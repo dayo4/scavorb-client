@@ -1,7 +1,7 @@
 <template>
     <Container ownID="MC-About">
-        <div class="flex j-c-center pt-5 noselect my-10">
-            <div class="logo-base logo-large shadow-5t my-10">
+        <div class="flex j-c-center pt-5 noselect">
+            <div class="logo-base shadow-5">
                 <span>
                     <span>
                         <b>S</b>
@@ -11,7 +11,9 @@
                 <span></span>
             </div>
         </div>
-        <h1 class="text-center my-3 t-blue-grey mt-10">SCAVORB</h1>
+        <div class="Title text-center t-blue-grey">SCAVORB</div>
+
+        <h1 class="Head text-center t-blue-grey font-8">JUST A LITTLE MORE ABOUT ME</h1>
 
         <section class="flex j-c-center wrap">
             <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">
@@ -77,7 +79,7 @@ export default class About extends Vue {
         },
         {
             Q: 'Great, what do you do?',
-            A: [ `<p>You see, it is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard. This is where i come in!</p>
+            A: [ `<p>You see, it is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard, engineered to their taste. This is where i come in!</p>
 <p class="mb-1">From creating regular SEO responsive webpages to implementing complex business and functional ui logic for web technologies. I'm versed in presenting a genuine design and overall development services. In my time doing this, i've worked physically and remotely with a number of people building their projects.</p>
 <p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?.  Or you are a company/agency looking to hire more talents for your course. Or just need someone to work with your team part-time remotely in building your next big project. I'll be happy to get onboard in bringing your ideas to live.</p> 
 <p>We can discuss the detail <a href="/contact" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">here. Send me a message.</a></p>`
@@ -87,7 +89,7 @@ export default class About extends Vue {
             Q: 'So you build Single Page web Applications(SPAs)',
             A: [ `<p>Yes! SPAs are web apps that give you a similar mobile apps experience on the web without the need to download and install on your device. Progressive, faster navigation, fully customized, and no boring loadings between pages...</p>
 
-            <p>A good example is <span href="/" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> created from scratch by me, both frontend and backend in Javascript technologies.</p>
+            <p>A good example is <span class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco">scavorb.com</span> created from scratch by me, both frontend and backend in Javascript technologies.</p>
             <p>Unlike most traditional websites built on wordpress requiring mostly basic templates to setup and with , SPAs are most often custom built for your specific purpose and will have better overall user experience, without requiring too much more resources.<p>
             <p>Likewise i create wordpress websites if it's what you need. Whether personal or ecommerce websites.<p>
             `
@@ -96,7 +98,7 @@ export default class About extends Vue {
         {
             Q: 'Would you be available to work alongside our team on private projects?',
             A: [ `<p>Yes! Depending on the kind of project I can be available, if you send me the detail. 
-            I've worked collaboratively with teams. from creating app pages, designing UI, to structuring business logic. </p>
+            I've worked collaboratively with people. from creating app pages, designing UI, to building APIs. </p>
             <p>Whether you need me as your frontend developer or nodejs backend engineer, I'll be glad to join you in achieving your targets.<p>
             `
             ]
@@ -107,6 +109,15 @@ export default class About extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.Title {
+    margin: 6px 0 40px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.Head {
+    margin-bottom: 30px;
+}
 /* Question & Answer Styling*/
 .Ques,
 .Ans {

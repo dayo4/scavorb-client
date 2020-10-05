@@ -12,7 +12,7 @@
         </div>
 
         <!-- SIDE NAVIGATION SLOT -->
-        <div v-if="!noSideNav" class="hide-lg-down" :class="SideCB ? SideCB : 'md3'">
+        <div v-if="!noSideNav" class="hide-lg-down" :class="SideCB ? SideCB : 'lg3'">
             <slot name="SideNav"></slot>
         </div>
     </div>

@@ -111,7 +111,7 @@
                         >
                             <!-- slots -->
                             <template v-slot:default>
-                                <router-link :to="{path:'/posts/'+post.slug}" target="_blank">
+                                <router-link :to="{path:'/posts/'+post.slug}">
                                     <span class="icon-eye"></span>
                                     <span>Open</span>
                                 </router-link>

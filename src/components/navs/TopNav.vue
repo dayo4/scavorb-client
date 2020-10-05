@@ -1,13 +1,25 @@
 <template>
     <nav ref="topNav" id="TopNav" class="flex a-i-center j-c-center noselect">
         <div class="bg-gradient-1 flex a-i-center j-c-between shadow-11">
-            <router-link to="/" class="Logo hide-xs px-4">scavorb</router-link>
+            <router-link to="/" class="Logo flex a-i-center px-4">
+                <div class="logo-base logo-x-small logo-static mr-4">
+                    <span>
+                        <span>
+                            <b>S</b>
+                        </span>
+                        <span></span>
+                    </span>
+                    <span></span>
+                </div>
+                <!-- <img src="/defaults/logo/scavorb.png" width="45" height="45" class="mr-4" /> -->
+                <b class="hide-sm-down">scavorb</b>
+            </router-link>
 
             <div class="SearchBox flex ml-5 pl-4 a-i-center shadow-6">
                 <input
                     @focus="showSearch = true"
                     type="search"
-                    placeholder="Search people, posts..."
+                    placeholder="Search..."
                     class="grow hide-sm-down"
                 />
                 <span
@@ -53,9 +65,8 @@
                 <a @click="avatarDropdown = !avatarDropdown" class="DropBtn">
                     <img
                         :src="user ? $userBaseUrl + userData.profile_image: '/defaults/usr/0.jpg'"
-                        width="50"
-                        height="50"
-                        alt="image"
+                        width="46"
+                        height="46"
                         draggable="false"
                     />
 
@@ -222,10 +233,6 @@ nav {
             cursor: pointer;
             color: white;
             text-decoration: none;
-            transition: 0.3s;
-            &:not(.DropBtn):hover {
-                transform: scale(1.1);
-            }
         }
     }
 
@@ -255,6 +262,10 @@ nav {
         padding: 7px;
         margin-right: 16px;
         white-space: nowrap;
+        transition: 0.3s;
+        &:not(.DropBtn):hover {
+            transform: scale(1.1);
+        }
         &::before {
             content: "";
             position: absolute;
@@ -282,8 +293,8 @@ nav {
     position: relative;
     & img {
         margin-top: 4px;
-        min-width: 50px;
-        min-height: 50px;
+        min-width: 46px;
+        min-height: 46px;
         border: solid rgba(175, 175, 175, 0.39) 4px;
         border-radius: 100%;
     }
@@ -337,6 +348,14 @@ nav {
         }
         & a {
             margin-right: 2px;
+        }
+    }
+    .SearchBox {
+        padding-left: 0px;
+        height: 25px !important;
+        & .SearchIcon {
+            width: 40px;
+            font-size: 14px !important;
         }
     }
 }

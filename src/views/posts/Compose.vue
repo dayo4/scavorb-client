@@ -45,11 +45,11 @@
                 ref="saveBtn"
                 @click="startProcessing"
                 class="icon-floppy btn cyan-gradient-btn"
-            >{{ currentPost_slug ? 'UPDATE' : 'SAVE NEW' }}</button>
+            >{{ currentPost_id ? 'UPDATE' : 'SAVE NEW' }}</button>
             <span
                 ref="previewBtn"
                 class="btn cyan-gradient-btn"
-                @click="preview(currentPost_slug)"
+                @click="preview(currentPost_id)"
             >PREVIEW</span>
         </div>
     </Container>
@@ -70,7 +70,7 @@ import Composer from "@/components/posts/new/Composer.vue"
         ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
     },
     computed: {
-        currentPost_slug: () => $Posts.$compose.currentPost_slug,
+        currentPost_id: () => $Posts.$compose.currentPost_id,
         postImageSrc: () => $Posts.$compose.featuredImage.postImageSrc
     },
 })

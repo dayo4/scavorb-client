@@ -44,7 +44,10 @@
             <div class="Tiles flex wrap j-c-center py-8">
                 <div class="shadow-3" v-for="(L, i) in list" :key="i">
                     <div>
-                        <img :src="'/defaults/pgs/icons/'+L.img+'.jpg'" draggable="false" />
+                        <img
+                            :src="L.link ? L.link : '/defaults/pgs/icons/'+L.img+'.jpg'"
+                            draggable="false"
+                        />
                     </div>
                     <div>{{ L.text }}</div>
                 </div>
@@ -115,7 +118,7 @@ export default class Home extends Vue {
         { img: 'clean', text: 'Clean and Readable Code' },
         { img: 'flexb', text: 'Flexible Business Logic Implementation' },
         { img: 'effect', text: 'Cost Effective Development Service' },
-        { img: 'effect', text: 'Genuine Design' },
+        { img: 'effect', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
     ]
 }
 </script>

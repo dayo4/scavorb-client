@@ -16,14 +16,15 @@ module.exports = {
         }
     },
     pwa: {
-        // workboxPluginMode: 'InjectManifest',
-        // workboxOptions: {
-        //     swSrc: 'src/registerServiceWorker.js',
-        //     exclude: [
-        //         /\.map$/,
-        //         /manifest\.json$/
-        //     ],
-        // },
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+            swSrc: 'service-worker.js',
+            // exclude: [
+            //     /\.map$/,
+            //     /manifest\.json$/
+            // ],
+        },
+        manifestPath: 'manifest.json',
         assetsVersion: 4,
         themeColor: '#0097a7'
     },

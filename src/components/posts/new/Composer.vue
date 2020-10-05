@@ -60,7 +60,7 @@ import { Component, Vue, Prop } from "vue-property-decorator"
         user: () => $Auth.user,
         editorConfig: () => $Posts.$compose.editorConfig,
         /* These bellow only matter when editing or updating existing posts. Otherwise they'll be null */
-        currentPost_id: () => $Posts.$compose.currentPost_slug,
+        currentPost_id: () => $Posts.$compose.currentPost_id,
         contentToEdit: () => $Posts.$compose.contentToEdit,
     },
 })
@@ -250,7 +250,7 @@ export default class Composer extends Vue {
         {
             $Posts.$compose.update({
                 title: this.title,
-                slug: this.slug.split(' ').join('-').toLowerCase(),
+                slug: this.slug.replace(/\s{2,}/g, ' ').split(' ').join('-').toLowerCase(),
                 content: this.content,
                 contentImages
             }).then(() => {

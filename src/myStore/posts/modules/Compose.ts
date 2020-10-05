@@ -4,7 +4,7 @@ import { $Axios, $Process, $Notify } from '@/plugins'
 
 export class Compose {
     content = ''
-    currentPost_slug = null
+    currentPost_id = null
     contentToEdit = null
     featuredImage = {
         postImageSrc: null,
@@ -58,11 +58,13 @@ export class Compose {
             const { data } = await $Axios.post("posts/new/" + $Auth.user.id, {
                 ...payload
             })
-            this.currentPost_slug = data
+            this.currentPost_id = data
             if (this.featuredImage.formData)
             {
                 this.uploadImages(this.featuredImage.formData)
             }
+
+            this.featuredImage.formData = null
             $Notify.success('Content Saved.')
 
             $Process.done()
@@ -85,7 +87,7 @@ export class Compose {
             if (data)
             {
                 this.contentToEdit = data
-                this.currentPost_slug = payload.slug
+                this.currentPost_id = data.id
                 this.featuredImage.postImageSrc = data.img
                 return data
             }
@@ -97,12 +99,12 @@ export class Compose {
     }
 
     async update (payload: { title: string, slug: string, content: string, contentImages: string[] }) {
-        // this.currentPost_slug
+        // this.currentPost_id
         try
         {
             const { data } = await $Axios.patch('posts/' + $Auth.user.id, {
                 ...payload,
-                postsIds: [ this.currentPost_slug ]
+                postsIds: [ this.currentPost_id ]
             })
             if (data)
                 if (this.featuredImage.formData)
@@ -124,7 +126,7 @@ export class Compose {
     async uploadImages (formData: FormData) {
         try
         {
-            const { data } = await $Axios.patch('posts/uploadImages/' + this.currentPost_slug + '/' + $Auth.user.id,
+            const { data } = await $Axios.patch('posts/uploadImages/' + this.currentPost_id + '/' + $Auth.user.id,
                 formData
             )
             if (data)
