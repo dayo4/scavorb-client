@@ -20,7 +20,7 @@ export default class SCHT extends Vue {
         let width = Canvas.width
         const ctx = Canvas.getContext("2d")
 
-        const values = [ 0.93, 0.94, 0.93, 0.90, 0.92, 0.90, 0.72, 0.68, 0.73, 0.51 ]
+        const values = [ 0.93, 0.94, 0.93, 0.90, 0.92, 0.90, 0.82, 0.55, 0.65, 0.51 ]
         const text = [
             'JAVASCRIPT',
             'CSS',
@@ -28,8 +28,8 @@ export default class SCHT extends Vue {
             'TYPESCRIPT',
             'VUEJS',
             'NODEJS',
-            'PYTHON',
             'UI DESIGN',
+            'PYTHON',
             'GRAPHICS',
             'PHP'
         ]

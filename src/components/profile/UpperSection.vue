@@ -3,7 +3,7 @@
         <div id="UpperSection">
             <div class="CoverImage" ref="CoverImage">
                 <div class="Blur noselect">
-                    <div class="flex j-c-center pt-5">
+                    <div class="flex j-c-center pt-5 pl-3">
                         <div class="logo-base logo-small shadow-5">
                             <span>
                                 <span>
@@ -14,7 +14,7 @@
                             <span></span>
                         </div>
                     </div>
-                    <h1 class="text-center my-3 t-white">SCAVORB</h1>
+                    <h1 class="text-center w-full my-3 t-white">SCAVORB</h1>
                 </div>
 
                 <!-- :style="!profile.cover_image ? 'background-image: url(/defaults/4.jpg)' : 'background-image: url('+profile.cover_image+')'" -->

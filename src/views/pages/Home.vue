@@ -1,20 +1,23 @@
 <template>
     <Container ownID="MC-Home bg-blue-grey--2">
-        <section class="Top noselect br3">
-            <div class="Intro">
-                <div>Adedayo Adeniyi</div>
-                <div>A Fullstack Web Applications Developer</div>
-            </div>
-            <div class="More">
-                <div>I develop and implement custom web software solutions tailored to your needs.</div>
-                <div>Frontend Development</div>
-                <div>Backend Development</div>
-                <div>UI Designs</div>
-                <div>Single Page Applications(SPAs)</div>
-                <div>Ecommerce Development</div>
-                <div>Wordpress Development</div>
+        <section class="Top noselect br1">
+            <div class="Detail noselect br1">
+                <div class="Intro">
+                    <div>Adedayo Adeniyi</div>
+                    <div>A Full-stack Web Applications Developer</div>
+                </div>
+                <div class="More">
+                    <div>I develop and implement custom web software solutions tailored to your needs.</div>
+                    <div>Front-end Development</div>
+                    <div>Back-end Development</div>
+                    <div>UI Designs</div>
+                    <div>Single Page Applications(SPAs)</div>
+                    <div>Ecommerce Development</div>
+                    <div>Wordpress Development</div>
+                </div>
             </div>
 
+            <!-- image -->
             <div class="Img">
                 <img src="/defaults/usr/me.jpg" alt="profile image" draggable="false" />
                 <span
@@ -23,6 +26,18 @@
                 >View Profile</span>
             </div>
 
+            <!-- logo -->
+            <div class="Logo flex j-c-center pt-5 noselect">
+                <div class="logo-base logo-large logo-trans">
+                    <span>
+                        <span>
+                            <b>S</b>
+                        </span>
+                        <span></span>
+                    </span>
+                    <span></span>
+                </div>
+            </div>
             <!-- <div
                  class="Title bg-white p-3 mt-3 text-center font-7 letter-space-1 t-cyan--3"
             >scavorb.com</div>-->
@@ -34,7 +49,7 @@
 
         <section class="Section_2">
             <h2 class="text-center t-blue-grey--1">
-                <span class="icon-check mr-3"></span>
+                <span class="icon-check-1 mr-3"></span>
                 <span>
                     Deliverables
                     <!-- <i class="font-2">Few</i> -->
@@ -154,72 +169,84 @@ export default class Home extends Vue {
     height: 500px;
     width: 100%;
     background-color: $blue-grey--3;
-    // background-image: url("/defaults/pgs/cd.jpg");
-    background-image: url("/defaults/pgs/prfcv1.jpg");
+    background-image: url("/defaults/pgs/blue.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     // filter: blur(3px);
     // -webkit-filter: blur(3px);
-
-    & .Intro {
-        width: calc(100% - 160px);
-        padding: 30px 0 0 20px;
-        & > div {
-            padding: 15px 6px;
-            letter-spacing: 1px;
-            font-weight: bold;
-            border-radius: 28px;
-            border-left: solid 5px $pink-1;
-            // text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
-        }
-        & > div:nth-child(1) {
-            color: $cyan-3;
-            font-size: 28px;
-            max-width: 260px;
-        }
-        & > div:nth-child(2) {
-            color: $pink-5;
-            font-size: 35px;
-            margin-top: 30px;
-            max-width: 700px;
-        }
+    & .Logo {
+        position: relative;
+        z-index: 1;
+        top: 37%;
+        // margin-bottom: -60px;
     }
-
-    & .More {
-        padding: 20px 0 0 0;
-        letter-spacing: 1px;
-        font-weight: bold;
-        // text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
-        color: white;
-        font-size: 14px;
-        margin-left: 80px;
-
-        & > div {
-            margin: 3px 0;
-            &:not(:first-child):before {
-                content: "";
-                display: inline-block;
-                position: relative;
-                left: -15px;
-                width: 3px;
-                height: 10px;
-                border-top: 5px solid transparent;
-                border-bottom: 13px solid transparent;
-                border-right: 7px solid $cyan--3;
-                transform: rotateZ(55deg);
+    & .Detail {
+        z-index: 4;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        & .Intro {
+            width: calc(100% - 160px);
+            padding: 30px 0 0 20px;
+            & > div {
+                padding: 15px 6px;
+                letter-spacing: 1px;
+                font-weight: bold;
+                border-radius: 28px 4px 15px 28px;
+                border-left: solid 5px $pink-1;
+                border-top: solid 2px $pink-2;
+                // border-bottom: solid 1px $pink-3;
+                // text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
+            }
+            & > div:nth-child(1) {
+                color: $cyan-3;
+                font-size: 28px;
+                max-width: 260px;
+            }
+            & > div:nth-child(2) {
+                color: $pink-5;
+                font-size: 35px;
+                margin-top: 30px;
+                max-width: 700px;
             }
         }
-        & > div:nth-child(1) {
-            // text-shadow: none;
-            color: $pink-3;
-            margin-left: -10px;
-            font-size: 16px;
-            -webkit-text-stroke: white 0.5px;
+
+        & .More {
+            padding: 20px 0 0 0;
+            letter-spacing: 1px;
+            font-weight: bold;
+            // text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
+            color: white;
+            font-size: 14px;
+            margin-left: 80px;
+
+            & > div {
+                margin: 3px 0;
+                &:not(:first-child):before {
+                    content: "";
+                    display: inline-block;
+                    position: relative;
+                    left: -15px;
+                    width: 3px;
+                    height: 10px;
+                    border-top: 5px solid transparent;
+                    border-bottom: 13px solid transparent;
+                    border-right: 7px solid $cyan--3;
+                    transform: rotateZ(55deg);
+                }
+            }
+            & > div:nth-child(1) {
+                // text-shadow: none;
+                color: $pink-3;
+                margin-left: -10px;
+                font-size: 16px;
+                -webkit-text-stroke: white 0.5px;
+            }
         }
     }
-
     & .Img {
+        z-index: 5;
         position: absolute;
         right: -27px;
         top: 90px;
@@ -309,23 +336,24 @@ export default class Home extends Vue {
         }
     }
     .Top {
-        height: 600px;
-        & .Intro {
-            width: calc(100% - 120px);
-            padding: 30px 0 0 2px;
-            & > div:nth-child(1) {
-                font-size: 26px;
+        height: 610px;
+        .Detail {
+            & .Intro {
+                width: calc(100% - 120px);
+                padding: 30px 0 0 2px;
+                & > div:nth-child(1) {
+                    font-size: 26px;
+                }
+                & > div:nth-child(2) {
+                    font-size: 28px;
+                    margin-top: 10px;
+                    max-width: 700px;
+                }
             }
-            & > div:nth-child(2) {
-                font-size: 28px;
-                margin-top: 10px;
-                max-width: 700px;
+            & .More {
+                margin-left: 40px;
             }
         }
-        & .More {
-            margin-left: 40px;
-        }
-
         & .Img {
             width: 120px;
             height: 120px;
@@ -350,4 +378,7 @@ export default class Home extends Vue {
         }
     }
 }
+// @media only screen and (max-width: 360px) {
+
+// }
 </style>

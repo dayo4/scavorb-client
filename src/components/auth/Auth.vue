@@ -36,8 +36,8 @@
                     <!-- </div> -->
 
                     <!--current mode Title -->
-                    <div class="Title flex j-c-center noselect">
-                        <h3 class="text-center">SCAVORB</h3>
+                    <div class="Title flex text-center noselect">
+                        <h3>SCAVORB</h3>
                     </div>
 
                     <!-- Reset password -->
@@ -50,15 +50,24 @@
                     </div>
 
                     <!-- Alternate btw login and signUp modes -->
-                    <div v-if="sysSet.allow_new_reg" class="flex wrap a-i-center mb-5">
+                    <div
+                        v-if="sysSet.allow_new_reg && mode === 1"
+                        class="flex wrap a-i-center mb-5 t-blue-grey-1"
+                    >
+                        <span class="mr-3 bold-2">Dont have an account yet?</span>
+                        <span
+                            @click="switchMode(2)"
+                            class="Alternate bold-4 shadow-1 icon-user-add noselect"
+                        >Create New Account</span>
+                    </div>
+                    <div v-if="mode != 1" class="flex wrap a-i-center mb-5 t-blue-grey-1">
                         <span
                             class="mr-3 bold-2"
-                        >{{ mode === 1 ? 'Dont have an account yet?' : 'Already have an account?' }}</span>
+                        >{{ mode === 3 ? 'Oh! I just remembered' : 'Already have an account?'}}</span>
                         <span
-                            @click="mode === 1 ? switchMode(2) : switchMode(1)"
-                            :class="mode === 1 ? 'icon-user-add' : 'icon-login'"
-                            class="Alternate bold-4 shadow-1 noselect"
-                        >{{ mode === 1 ? 'Create New Account' : 'Login' }}</span>
+                            @click="switchMode(1)"
+                            class="Alternate bold-4 shadow-1 icon-login noselect"
+                        >Login</span>
                     </div>
 
                     <!-- MAIN FORM COMPONENTS -->
@@ -138,7 +147,8 @@ export default class Auth extends Vue {
         & .Logo {
             position: absolute;
             top: -20px;
-            left: 45.3%;
+            left: 50%;
+            margin-left: -27px;
         }
     }
 
@@ -150,8 +160,9 @@ export default class Auth extends Vue {
 
         & h3 {
             color: $blue-grey-2;
-            text-shadow: 0.5px 1px 2px white;
-            padding: 10px 20px;
+            width: 100%;
+            // text-shadow: 0.5px 1px 2px white;
+            padding: 10px 0px;
         }
     }
 
@@ -232,11 +243,11 @@ export default class Auth extends Vue {
 }
 
 @include xs-only {
-    .AuthModal {
-        & .Logo {
-            left: 44% !important;
-        }
-    }
+    // .AuthModal {
+    //     & .Logo {
+    //         left: 44% !important;
+    //     }
+    // }
     .GenFormStyle {
         & > div {
             & > .Head {

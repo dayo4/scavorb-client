@@ -1,5 +1,5 @@
 <template>
-    <div class="GBLMContainer flex">
+    <div class="GBLMContainer flex j-c-center">
         <!-- MAIN CONTENT SLOT -->
         <div
             :id="ownID?ownID:''"

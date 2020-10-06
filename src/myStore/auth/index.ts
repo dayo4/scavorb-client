@@ -59,13 +59,17 @@ export class Authentication {
     }
 
     async getSysSettings () {
+
         try
         {
             const { data } = await $Axios.get("system/settings")
-            $LSAgent.setData(data, 'sysSet')
+            if (data)
+                $LSAgent.setData(data, 'sysSet')
+
+            this.sysSettings = $LSAgent.getData('sysSet')
         } catch (e)
         {
-            $Notify.error(e)
+            // $Notify.error(e)
         }
     }
 
