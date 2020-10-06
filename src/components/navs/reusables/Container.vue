@@ -1,5 +1,5 @@
 <template>
-    <div class="GBLMContainer flex j-c-center">
+    <div class="GBLMContainer flex">
         <!-- MAIN CONTENT SLOT -->
         <div
             :id="ownID?ownID:''"
@@ -32,7 +32,7 @@ export default class GBLMContainer extends Vue {
     // $ref!: {
     // 	Container: HTMLElement
     // }
-    @Prop({ required: false, default: false }) noSideNav: boolean
+    @Prop({ required: false, default: true }) noSideNav: boolean
     @Prop({ required: false, default: false }) ownID: string
     /* additional special classname binding for the slots if necessary */
     @Prop({ required: false, }) readonly MainCB /* Main_class_binding */: string  /* Good for passing custom class names to the inner components for custom styling. */
@@ -57,6 +57,13 @@ export default class GBLMContainer extends Vue {
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+@include lg-and-up {
+    .MC-ViewArea {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
 }
 
 @include sm-and-down {

@@ -136,7 +136,7 @@ export default class Home extends Vue {
     list = [
         { img: 'resp', text: 'Fully Responsive Webpages' },
         { img: 'scale', text: 'Progressive and Easily Scalable Apps' },
-        { img: 'clean', text: 'Clean and Readable Code' },
+        { img: '', text: 'Clean and Readable Code', link: '/defaults/pgs/icons/clean.png' },
         { img: 'flexb', text: 'Flexible Business Logic Implementation' },
         { img: 'effect', text: 'Cost Effective Development Service' },
         { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
@@ -173,6 +173,7 @@ export default class Home extends Vue {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    overflow-x: hidden;
     // filter: blur(3px);
     // -webkit-filter: blur(3px);
     & .Logo {
@@ -202,7 +203,7 @@ export default class Home extends Vue {
             & > div:nth-child(1) {
                 color: $cyan-3;
                 font-size: 28px;
-                max-width: 260px;
+                max-width: 360px;
             }
             & > div:nth-child(2) {
                 color: $pink-5;
@@ -342,12 +343,12 @@ export default class Home extends Vue {
                 width: calc(100% - 120px);
                 padding: 30px 0 0 2px;
                 & > div:nth-child(1) {
+                    max-width: 260px;
                     font-size: 26px;
                 }
                 & > div:nth-child(2) {
                     font-size: 28px;
-                    margin-top: 10px;
-                    max-width: 700px;
+                    margin-top: 30px;
                 }
             }
             & .More {
@@ -378,7 +379,15 @@ export default class Home extends Vue {
         }
     }
 }
-// @media only screen and (max-width: 360px) {
-
-// }
+@media only screen and (max-width: 360px) {
+    .Top {
+        .Detail {
+            & .Intro {
+                & > div:nth-child(2) {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
 </style>

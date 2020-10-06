@@ -163,6 +163,9 @@ export default class ProfileUpperSection extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+#UpperSection {
+    overflow-x: hidden;
+}
 .CoverImage {
     & img {
         height: 100%;
@@ -248,6 +251,7 @@ export default class ProfileUpperSection extends Vue {
 .Cover {
     position: relative;
 }
+
 .ProfileImage {
     position: absolute;
     left: -15px;

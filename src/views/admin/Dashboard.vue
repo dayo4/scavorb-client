@@ -1,5 +1,5 @@
 <template>
-    <Container ownID="MC-Adm">
+    <Container ownID="MC-Adm" :noSideNav="false">
         <div class="MainView flex wrap j-c-center pl-4">
             <!-- All tabs go here -->
             <keep-alive>

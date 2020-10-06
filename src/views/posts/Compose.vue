@@ -1,5 +1,5 @@
 <template>
-    <Container ownID="MC-NewPosts" :noSideNav="true">
+    <Container ownID="MC-NewPosts" :noSideNav="false">
         <div class="flex j-c-center wrap">
             <div class="xs12 md9">
                 <!-- The composer component -->
