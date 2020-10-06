@@ -171,7 +171,7 @@ export default class Home extends Vue {
             font-weight: bold;
             border-radius: 28px;
             border-left: solid 5px $pink-1;
-            text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
+            // text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
         }
         & > div:nth-child(1) {
             color: $cyan-3;
@@ -190,7 +190,7 @@ export default class Home extends Vue {
         padding: 20px 0 0 0;
         letter-spacing: 1px;
         font-weight: bold;
-        text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
+        // text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
         color: white;
         font-size: 14px;
         margin-left: 80px;
