@@ -5,7 +5,7 @@ import '@/globalStyles/general.css'
 import '@/globalStyles/plugins.scss'
 import '@/globalStyles/transitions.css'
 import '@/globalStyles/cropper.css'
-import '@/polyfills'
+import '@/polyfills.js'
 
 /* import modules */
 import Vue from 'vue'

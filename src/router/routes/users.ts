@@ -1,4 +1,5 @@
 import { $Profile } from "@/myStore"
+import { $Notify } from '@/plugins'
 
 
 const routes = [
@@ -20,6 +21,7 @@ const routes = [
                             next()
                         } else
                         {
+                            $Notify.error('A connection error occured')
                             next(false)
                         }
                     })

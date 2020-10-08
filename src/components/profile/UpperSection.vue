@@ -14,7 +14,7 @@
                             <span></span>
                         </div>
                     </div>
-                    <h1 class="text-center w-full my-3 t-white">SCAVORB</h1>
+                    <div class="text-center font-3 bold-4 my-3 t-white">SCAVORB</div>
                 </div>
 
                 <!-- :style="!profile.cover_image ? 'background-image: url(/defaults/4.jpg)' : 'background-image: url('+profile.cover_image+')'" -->
@@ -189,11 +189,6 @@ export default class ProfileUpperSection extends Vue {
         border: solid 4px;
         border-color: #eceff1;
         box-shadow: #eceff1 inset 18px 18px 10px, #eceff1 inset -18px -18px 10px;
-
-        & h1 {
-            font-size: 18px;
-            text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
-        }
     }
 
     & .UploadActions {
@@ -332,11 +327,6 @@ export default class ProfileUpperSection extends Vue {
 // @include sm-only {
 // }
 @include xs-only {
-    .Blur {
-        & h1 {
-            font-size: 14px !important;
-        }
-    }
     .CoverImage {
         & img {
             width: 170%;

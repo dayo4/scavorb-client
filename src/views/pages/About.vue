@@ -13,7 +13,7 @@
         </div>
         <div class="Title text-center t-blue-grey">SCAVORB</div>
 
-        <h1 class="Head text-center t-blue-grey font-8">JUST A LITTLE MORE ABOUT ME</h1>
+        <h1 class="Head text-center t-blue-grey font-9">JUST A LITTLE MORE ABOUT ME</h1>
 
         <section class="flex j-c-center wrap">
             <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">
@@ -56,30 +56,30 @@ import { Component, Vue } from "vue-property-decorator"
 // import { $Notify, $Obstacle } from "@/plugins"
 
 import Container from '@/components/navs/reusables/Container.vue'
+import { $General } from '@/plugins'
 
 @Component({
     components: {
         Container,
     },
-    // metaInfo () {
-    //     return {
-    //         // title
-    //     }
-    // }
+    metaInfo () {
+        return $General.metaInfo('about', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
+    },
 })
 export default class About extends Vue {
 
     QueAns = [
         {
             Q: 'Hello, who are you?',
-            A: [ `I am a full-stack web applications developer with a deep knowledge of UI/API design principles and overall business logic abstraction. Though recently started in the field, a lot of ambitious effort had been devoted into surging my abilities while engaging in things i enjoy doing. I Have a knack to want to know how the whole of a thing works and a drive to implement ideas in a genuine way yet minimalistic as possible. 
-            But above all, i understand the need to deliver results. 
+            A: [ `I am a full-stack web applications developer with a deep knowledge of UI/API design principles and overall business logic abstraction. Recently started in the field, and a lot of ambitious effort had been devoted into surging my abilities while engaging in things i enjoy doing. I Have a knack to want to know how the whole of a thing works and a drive to implement ideas in a genuine way yet minimalistic as possible. 
+            But above all, i understand the need to deliver results and you can expect nothing less on your project.
             I enjoy working both personally and in a team.
             `]
         },
         {
             Q: 'Great, how can you be of service?',
             A: [ `<p>You see, it is a dynamic and fast-changing world, everyone here and there is looking to create a customized virtual identity either for themselves or their businesses to boost their reach beyond their local environment. And when they do, they need someone who would do it to a high standard, engineered to their taste. This is where i come in!</p>
+            <p>Everyone and every business deserves a virtual online profile that stands out, and i specialize in providing that.</p>
 <p class="mb-1">From creating regular SEO responsive webpages to implementing complex business and functional ui logic for web technologies. I'm versed in presenting a genuine design and overall development services. In my time doing this, i've worked physically and remotely with a number of people building their projects.</p>
 <p><b>What kind of website or web application do you need now?</b> Personal, for a hobby? for your business or vocation?.  Or you are a company/agency looking to hire more talents for your course. Or just need someone to work with your team part-time remotely in building your next big project. I'll be happy to get onboard in bringing your ideas to live.</p> 
 <p>We can discuss the detail <a href="/contact" class="t-blue bg-grey-3 cursor-pointer br2 p-2 no-deco" target="_blank">here. Send me a message.</a></p>`
@@ -116,6 +116,8 @@ export default class About extends Vue {
 }
 
 .Head {
+    font-family: "Courgette", cursive;
+    letter-spacing: 1px;
     margin-bottom: 30px;
 }
 /* Question & Answer Styling*/

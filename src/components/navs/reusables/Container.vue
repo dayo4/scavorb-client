@@ -4,7 +4,7 @@
         <div
             :id="ownID?ownID:''"
             class="MC-ViewArea"
-            :class="MainCB ? MainCB : `${ noSideNav ? 'xs12' : 'xs12 lg9'}`"
+            :class="MainCB ? MainCB : `${ noSideNav ? 'xs12 padded' : 'xs12 lg9'}`"
         >
             <slot></slot>
 
@@ -12,9 +12,9 @@
         </div>
 
         <!-- SIDE NAVIGATION SLOT -->
-        <div v-if="!noSideNav" class="hide-lg-down" :class="SideCB ? SideCB : 'lg3'">
+        <!-- <div v-if="!noSideNav" class="hide-lg-down" :class="SideCB ? SideCB : 'lg3'">
             <slot name="SideNav"></slot>
-        </div>
+        </div>-->
     </div>
 </template>
 <script lang="ts">
@@ -38,17 +38,18 @@ export default class GBLMContainer extends Vue {
     @Prop({ required: false, }) readonly MainCB /* Main_class_binding */: string  /* Good for passing custom class names to the inner components for custom styling. */
     @Prop({ required: false, }) readonly SideCB /* Side_class_binding */: string
 
-    mounted () {
-        $Navs.$container.element = document.getElementById(this.ownID)
-        $Navs.$container.ScrollingHandler()
-    }
+    // mounted () {
+    // $Navs.$container.element = window //document.getElementsByClassName('GBLMContainer')[ 0 ]
+    // // $Navs.$container.element = document.getElementById(this.ownID)
+    // $Navs.$container.ScrollingHandler()
+    // }
 
 }
 </script>
 <style lang="scss">
 .GBLMContainer {
     position: relative;
-    height: 100vh;
+    height: 100%;
 }
 .MC-ViewArea {
     position: relative;
@@ -60,7 +61,7 @@ export default class GBLMContainer extends Vue {
 }
 
 @include lg-and-up {
-    .MC-ViewArea {
+    .MC-ViewArea.padded {
         padding-left: 15%;
         padding-right: 15%;
     }

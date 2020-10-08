@@ -2,17 +2,17 @@
 import { $Navs } from '@/myStore'
 export class Container {
 
-    element: HTMLElement = null  /* This will be used to point to the MainContainer component from other components */
+    element: Window = null  /* This will be used to point to the MainContainer component from other components */
     scrolled: boolean = false
 
-    ScrollingHandler() {
+    ScrollingHandler () {
         let topNav = $Navs.$top.element
         // let bottomNav = $Navs.$bottom.element
-        let scrollPos = this.element.scrollTop
+        let scrollPos = this.element.pageYOffset
 
         let _this = this
         this.element.addEventListener('scroll', function () {
-            var subsequentScrollPos = _this.element.scrollTop
+            var subsequentScrollPos = _this.element.pageYOffset
 
             /* For monitoring the container scrolled status */
             if (subsequentScrollPos > 50)

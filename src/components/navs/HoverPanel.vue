@@ -134,6 +134,7 @@ export default class HoverPanel extends Vue {
     width: 400px;
     height: 100%;
     z-index: 8;
+    background-color: #006064;
     transition: width 0.2s;
 
     & .Panel {

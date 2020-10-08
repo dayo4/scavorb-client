@@ -1,7 +1,7 @@
 <template>
     <section class="flex j-c-center">
         <div class="GenFormStyle xs11 sm9 md7">
-            <section class="TopInfo icon-info bg-blue-5 p-3 mb-3 no-deco">
+            <section class="TopInfo bg-blue-5 p-3 mb-3 no-deco">
                 Send me the detail of your request using the form below or talk to me through other medium
                 <a
                     class="icon-mail-alt t-pink--3"
@@ -133,39 +133,43 @@ export default class Contact extends Vue {
     mounted () {
         let _this = this
         // @ts-ignore
-        grecaptcha.ready(() => {
+        if (grecaptcha)
+        {
             // @ts-ignore
-            grecaptcha.render(this.$refs.reCaptcha, {
-                'sitekey': '6LdDQ9MZAAAAAAXOm_j-i-gaGUjqzNcIDDDyAXzw',
-                'error-callback': function (err) {
-                    _this.error = err
-                },
-                'callback': function (token: string) {
-                    $Obstacle.create(_this.$refs.send, {
-                        icon: '',
-                        action: function () {
-                            $Pages.$mailer.send({
-                                name: _this.name,
-                                email: _this.email,
-                                subject: _this.subject,
-                                message: _this.msg,
-                                token: token
-                            }).then(done => {
-                                $Obstacle.destroy(_this.$refs.send)
-                                // @ts-ignore
-                                grecaptcha.reset()
-                                _this.showCaptcha = false
-                                if (done)
-                                {
-                                    _this.name = _this.email = _this.subject = _this.msg = ''
-                                    _this.$refs.msg.textContent = ''
-                                }
-                            })
-                        }
-                    })
-                }
+            grecaptcha.ready(() => {
+                // @ts-ignore
+                grecaptcha.render(this.$refs.reCaptcha, {
+                    'sitekey': '6LdDQ9MZAAAAAAXOm_j-i-gaGUjqzNcIDDDyAXzw',
+                    'error-callback': function (err) {
+                        _this.error = err
+                    },
+                    'callback': function (token: string) {
+                        $Obstacle.create(_this.$refs.send, {
+                            icon: '',
+                            action: function () {
+                                $Pages.$mailer.send({
+                                    name: _this.name,
+                                    email: _this.email,
+                                    subject: _this.subject,
+                                    message: _this.msg,
+                                    token: token
+                                }).then(done => {
+                                    $Obstacle.destroy(_this.$refs.send)
+                                    // @ts-ignore
+                                    grecaptcha.reset()
+                                    _this.showCaptcha = false
+                                    if (done)
+                                    {
+                                        _this.name = _this.email = _this.subject = _this.msg = ''
+                                        _this.$refs.msg.textContent = ''
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
             })
-        })
+        }
     }
     beforeDestroy () {
         this.error = this.success = ''

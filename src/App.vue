@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <!-- <Container ownID="MC-Home bg-blue-grey--2"> -->
         <TopNav />
         <HoverPanel />
         <Notify />
@@ -14,22 +15,28 @@
         <BottomNav />
         <Auth />
         <!--<component :is="loadAuth"></component> -->
+        <!-- </Container> -->
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import { $Auth } from "@/myStore"
+import { $Auth, $Navs } from "@/myStore"
 
+// import Container from '@/components/navs/reusables/Container.vue'
 
 import TopNav from "@/components/navs/TopNav.vue"
 import BottomNav from "@/components/navs/BottomNav.vue"
 import HoverPanel from "@/components/navs/HoverPanel.vue"
 import Process from "@/components/GlobalComponents/notification/Process.vue"
 import Notify from "@/components/GlobalComponents/notification/Notify.vue"
+// import Footer from "@/components/navs/Footer.vue"
+
+// import { $Navs } from '@/myStore'
 
 @Component({
     components: {
+        // Container,
         TopNav,
         BottomNav,
         HoverPanel,
@@ -47,6 +54,8 @@ import Notify from "@/components/GlobalComponents/notification/Notify.vue"
 export default class App extends Vue {
     mounted () {
         $Auth.getSysSettings()
+        $Navs.$container.element = window //document.getElementsByClassName('GBLMContainer')[ 0 ]
+        $Navs.$container.ScrollingHandler()
     }
 }
 </script>

@@ -25,8 +25,8 @@ module.exports = {
         // ],
         // },
         // manifestPath: 'manifest.json',
-        assetsVersion: 4,
-        themeColor: '#0097a7'
+        assetsVersion: 5,
+        themeColor: '#880e4f'
     },
     chainWebpack: config => {
         config.module.rules.delete('eslint')

@@ -43,13 +43,13 @@
             <div v-else class="px-10">
                 <h2
                     class="t-blue-grey text-center text-cap font- mt-8 letter-space-1"
-                >Sorry! No Posts Published At The Moment.</h2>
+                >No Posts Published At The Moment.</h2>
             </div>
 
             <div v-if="posts.length < 3" class="px-10 mt-10">
                 <h4
                     class="t-blue-grey text-center text-cap font- mt-8 letter-space-1"
-                >SCAVORB is Just Created and More Contents Will Be Available Shortly.</h4>
+                >More Contents Will Be Available Shortly.</h4>
             </div>
         </div>
     </Container>

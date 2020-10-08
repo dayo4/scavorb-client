@@ -61,6 +61,8 @@
                         ></div>
                         <div class="font-7 pl-10 py-2 pr-4 br4 flex j-c-around">
                             <a
+                                :href="`https://www.facebook.com/sharer.php?u=${href}`"
+                                target="_blank"
                                 @mouseout="shareIconsTooltip = ''"
                                 @mouseover="shareIconsTooltip = 'facebook'"
                                 class="icon-facebook t-blue--2"
@@ -72,12 +74,17 @@
                                 @mouseover="shareIconsTooltip = 'twitter'"
                                 class="icon-twitter t-cyan"
                             ></a>
-                            <a
+                            <!-- <a
+                                :href="`whatsapp://send?text=${href}`"
+                                data-action="share/whatsapp/share"
+                                target="_blank"
                                 @mouseout="shareIconsTooltip = ''"
                                 @mouseover="shareIconsTooltip = 'whatsapp'"
                                 class="icon-whatsapp t-green--2"
-                            ></a>
+                            ></a>-->
                             <a
+                                :href="`https://reddit.com/submit?url=${href}`"
+                                target="_blank"
                                 @mouseout="shareIconsTooltip = ''"
                                 @mouseover="shareIconsTooltip = 'reddit'"
                                 class="icon-reddit t-red-1"
@@ -93,7 +100,7 @@
                         <span
                             @click="showCommentModal(post)"
                             class="icon-comment btn cyan-gradient-btn"
-                        >Comments ({{post.comments}})</span>
+                        >Comments {{post.comments ? `(${post.comments})` : ''}}</span>
                         <!-- <span
                             class="icon-thumbs-up-alt btn pink-gradient-btn"
                             @click="thumbUp"
@@ -287,6 +294,9 @@ export default class PostView extends Vue {
 }
 .Meta {
     & .ShareIcons {
+        & a {
+            text-decoration: none;
+        }
         position: relative;
         & div:first-child {
             width: 50px;
