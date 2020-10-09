@@ -10,8 +10,8 @@
                 <div
                     v-if="projects.length === 0"
                     class="t-blue-grey text-center bold-3 font-9 mt-8 letter-space-1"
-                >Your Portfolio Is Currently Empty.</div>
-                <div v-else class="mt-5">
+                >Nothing to show in this filter</div>
+                <div class="mt-5">
                     <Dropdown
                         ownID="filt"
                         :text="'Filter: '+ filter"

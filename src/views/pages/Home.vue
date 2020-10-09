@@ -90,7 +90,7 @@
                     <span class="icon-chart-line-1 mr-3"></span>
                     <span>
                         Base Skills Chart
-                        <i class="font-2">Confident in my skills</i>
+                        <!-- <i class="font-2">Confident in my skills</i> -->
                     </span>
                 </h2>
                 <!-- <SkillChart></SkillChart> -->
@@ -198,7 +198,7 @@ export default class Home extends Vue {
     font-family: "Courgette", cursive;
     font-size: 30px;
     color: $pink-3;
-    padding: 0 10px 10px 30px;
+    padding: 0 20px 10px 20px;
 }
 
 .Top {

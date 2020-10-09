@@ -13,7 +13,7 @@
         </div>
         <div class="Title text-center t-blue-grey">SCAVORB</div>
 
-        <h1 class="Head text-center t-blue-grey font-9">JUST A LITTLE MORE ABOUT ME</h1>
+        <h1 class="Head text-center t-blue-grey font-9 px-5">JUST A LITTLE MORE ABOUT ME</h1>
 
         <section class="flex j-c-center wrap">
             <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">

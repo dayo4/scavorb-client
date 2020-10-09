@@ -60,7 +60,7 @@
             <span v-if="errors && errors['Detail']" class="t-red p-1 my-1">{{errors['Detail']}}</span>
             <!-- editor -->
             <TextEditor @contentUpdated="setDetail" :initialContent="initialDetail"></TextEditor>
-            <div class="p-3" :class="charCount > 2000 ? 't-red' : ''">Count:{{charCount}} / 2000</div>
+            <div class="p-3">Count:{{charCount}}</div>
         </section>
 
         <!-- Save all changes -->
@@ -152,7 +152,7 @@ export default class PtfEdit extends Vue {
                 rules: {
                     required: true,
                     min: 100,
-                    max: 2000
+                    // max: 2000
                 },
             }
         ]

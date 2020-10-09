@@ -21,7 +21,7 @@ const routes = [
                             next()
                         } else
                         {
-                            $Notify.error('A connection error occured')
+                            // $Notify.error('A connection error occured')
                             next(false)
                         }
                     })
