@@ -9,7 +9,6 @@ export class SinglePost {
         {
             const { data } = await $Axios.get("posts/" + payload.slug + '/' + (preview ? 'preview' : ''))
             this.post = data
-            console.log(data)
             return true
         }
         catch (e)

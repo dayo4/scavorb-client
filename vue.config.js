@@ -2,6 +2,7 @@ const path = require('path')
 var PrerenderSPAPlugin = require('prerender-spa-plugin')
 const PuppeteerRenderer = PrerenderSPAPlugin.PuppeteerRenderer
 module.exports = {
+    productionSourceMap: false,
     css: {
         loaderOptions: {
             sass: {

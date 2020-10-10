@@ -4,7 +4,7 @@ import webSokect from 'socket.io-client'
 const connStack: string[] = []
 
 class WS {
-  baseUrl = process.env.NODE_ENV === 'production' ? 'wss://scavorb.com' : 'ws://127.0.0.1:3000'
+  baseUrl = process.env.NODE_ENV === 'production' ? 'ws://scavorb.com' : 'ws://127.0.0.1:3000'
 
   createConnection (nsp: string, opts?: SocketIOClient.ConnectOpts) {
     const defaultOptions: SocketIOClient.ConnectOpts = {
