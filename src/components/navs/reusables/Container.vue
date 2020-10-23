@@ -7,7 +7,6 @@
             :class="MainCB ? MainCB : `${ noSideNav ? 'xs12 padded' : 'xs12 lg9'}`"
         >
             <slot></slot>
-
             <Footer />
         </div>
 
@@ -54,7 +53,7 @@ export default class GBLMContainer extends Vue {
 .MC-ViewArea {
     position: relative;
     padding-top: 52px;
-    padding-bottom: 45px;
+    padding-bottom: 165px; /* Bottom-nav height + Footer height + 0px*/
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;

@@ -1,4 +1,4 @@
-import { $Posts } from "@/myStore"
+// import { $Posts } from "@/myStore"
 
 const routes = [
   {

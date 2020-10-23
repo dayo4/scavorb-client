@@ -1,6 +1,6 @@
 <template>
     <div v-show="show" class="GenFormWrapper py-4 shadow-12 bg-cyan--3">
-        <div class="GenFormStyle noselect shadow-12 bg-white py-8 px-5" @keydown.enter="send">
+        <div class="GenFormStyle shadow-12 bg-white py-8 px-5" @keydown.enter="send">
             <h3
                 class="icon-arrows-cw text-center t-blue-grey--2 font-8 mt-0 mb-8 noselect"
             >Reset Password</h3>
@@ -8,7 +8,7 @@
             <!-- Stage one -->
             <section v-if="stage===1" class="StageWrapper">
                 <div class="Section">
-                    <span class="Head py-6 px-8">Your E-mail</span>
+                    <span class="Head">Your E-mail</span>
                     <span v-show="email_err" class="Error t-red-1">{{email_err}}</span>
                     <input
                         v-model="email"
@@ -23,7 +23,7 @@
             <!-- Stage two -->
             <section v-if="stage===2" class="StageWrapper">
                 <div class="Section">
-                    <span class="Head py-6 px-8">Enter Code</span>
+                    <span class="Head">Enter Code</span>
                     <span v-if="code_err" class="Error t-red-1">{{code_err}}</span>
                     <input
                         v-model="code"
@@ -38,7 +38,7 @@
             <!-- Stage three -->
             <section v-if="stage ===3" class="StageWrapper">
                 <div class="Section">
-                    <span class="Head py-6 px-8">New Password</span>
+                    <span class="Head">New Password</span>
                     <span v-if="pass_err" class="Error t-red-1">{{pass_err}}</span>
                     <input
                         v-model="password"

@@ -1,6 +1,6 @@
 <template>
     <transition name="slide-fade">
-        <div class="AuthModal" v-if="showModal">
+        <div class="AuthModal noselect" v-if="showModal">
             <!-- HEADER -->
             <h3
                 class="Head flex a-i-center j-c-between bg-white t-blue-grey font-7 p-4 my-0 noselect"
@@ -215,6 +215,7 @@ export default class Auth extends Vue {
         & > .Head {
             text-align: center;
             margin: auto;
+            padding: 12px 16px;
             height: 40px;
             border-radius: 73% 73% 20% 20%;
             border-left: white double 10px;

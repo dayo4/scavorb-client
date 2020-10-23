@@ -1,6 +1,6 @@
 <template>
     <section class="flex j-c-center">
-        <div class="GenFormStyle xs11 sm9 md7">
+        <div class="GenFormStyle xs11 sm9 md7 noselect">
             <section class="TopInfo bg-blue-5 p-3 mb-3 no-deco">
                 Send me the detail of your request using the form below or talk to me through other medium
                 <a
@@ -17,7 +17,7 @@
             </section>
 
             <div class="Section">
-                <span class="Head py-6 px-8">Name</span>
+                <span class="Head">Name</span>
                 <span v-show="name_err" class="Error t-red-1">{{name_err}}</span>
                 <input
                     v-model="name"
@@ -28,7 +28,7 @@
             </div>
 
             <div class="Section">
-                <span class="Head py-6 px-8">E-mail</span>
+                <span class="Head">E-mail</span>
                 <span v-if="email_err" class="Error t-red-1">{{email_err}}</span>
                 <i v-else class="font-2">Please ensure your E-mail is correct!</i>
                 <input
@@ -40,7 +40,7 @@
             </div>
 
             <div class="Section">
-                <span class="Head py-6 px-8">Subject</span>
+                <span class="Head">Subject</span>
                 <span v-show="subj_err" class="Error t-red-1">{{subj_err}}</span>
                 <input
                     v-model="subject"
@@ -51,7 +51,7 @@
             </div>
 
             <div class="Section">
-                <span class="Head py-6 px-8">Your Message</span>
+                <span class="Head">Your Message</span>
                 <span v-show="msg_err" class="Error t-red-1">{{msg_err}}</span>
                 <div
                     ref="msg"
@@ -248,6 +248,8 @@ export default class Contact extends Vue {
 }
 </script>
 <style lang="scss">
+/* NOTE: "GenFormStyle GenFormWrapper" shared classes are found in the main "Auth" components */
+
 .TopInfo {
     & > a {
         font-size: 26px;

@@ -94,7 +94,7 @@
                     </span>
                 </h2>
                 <!-- <SkillChart></SkillChart> -->
-                <div class="SkillsWrapper">
+                <div class="SkillsWrapper noselect">
                     <div class="Skills" v-for="(skill, i) in skills" :key="i">
                         <div>
                             <!-- <span :style="`background-color:#${skill.color};`"> -->

@@ -14,6 +14,8 @@
 
         <BottomNav />
         <Auth />
+
+        <!-- <Footer /> -->
         <!--<component :is="loadAuth"></component> -->
         <!-- </Container> -->
     </div>
@@ -33,6 +35,7 @@ import Notify from "@/components/GlobalComponents/notification/Notify.vue"
 // import Footer from "@/components/navs/Footer.vue"
 
 // import { $Navs } from '@/myStore'
+// import Footer from "@/components/navs/Footer.vue"
 
 @Component({
     components: {

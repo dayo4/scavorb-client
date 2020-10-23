@@ -7,6 +7,9 @@ import posts from "@/router/routes/posts.ts"
 import settings from "@/router/routes/settings.ts"
 // import notifications from "@/router/routes/notifications.ts"
 
+/* OTHER FEATURES */
+import gallery from "@/router/routes/gallery"
+
 export default [
     { path: '*', component: () => import("@/views/pages/ERRORS/404.vue") },
     ...admin,
@@ -14,5 +17,6 @@ export default [
     ...users,
     ...pages,
     ...posts,
-    ...settings
+    ...settings,
+    ...gallery
 ]

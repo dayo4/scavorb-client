@@ -1,12 +1,12 @@
 <template>
     <div v-show="show" class="GenFormWrapper py-4 shadow-12 bg-cyan--3">
-        <div class="GenFormStyle noselect shadow-12 bg-white py-8 px-5" @keydown.enter="send">
+        <div class="GenFormStyle shadow-12 bg-white py-8 px-5" @keydown.enter="send">
             <h3
                 class="icon-user-add text-center t-blue-grey--2 font-8 mt-0 mb-8 noselect"
             >New Account</h3>
 
             <div class="Section">
-                <span class="Head icon-user py-6 px-8">Username</span>
+                <span class="Head icon-user">Username</span>
                 <span class="Error t-red-1" v-show="username_err">{{username_err}}</span>
                 <input
                     v-model="username"
@@ -17,7 +17,7 @@
             </div>
 
             <div class="Section">
-                <span class="Head icon-at py-6 px-8">E-mail</span>
+                <span class="Head icon-at">E-mail</span>
                 <span v-show="email_err" class="Error t-red-1">{{email_err}}</span>
                 <input
                     v-model="email"
@@ -28,7 +28,7 @@
             </div>
 
             <div class="Section">
-                <span class="Head icon-lock-open-alt py-6 px-8">Password</span>
+                <span class="Head icon-lock-open-alt">Password</span>
                 <span v-if="pass_err" class="Error t-red-1">{{pass_err}}</span>
                 <input
                     v-model="password"

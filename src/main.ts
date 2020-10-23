@@ -20,6 +20,7 @@ const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.BASE_URL : 
 
 Vue.prototype.$moment = moment
 /* Add assets baseurl to global scope */
+Vue.prototype.$baseUrl = BASE_URL
 Vue.prototype.$postBaseUrl = BASE_URL + 'pst/'
 Vue.prototype.$userBaseUrl = BASE_URL + 'usr/'
 
