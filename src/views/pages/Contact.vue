@@ -27,7 +27,7 @@ export default class About extends Vue {
 </script>
 <style lang="scss" scoped>
 .Head {
-    font-family: "Courgette", cursive;
+    font-family: /* "Courgette", */ cursive;
     letter-spacing: 1px;
 }
 </style>

@@ -1,23 +1,23 @@
 <template>
     <div id="app">
-        <!-- <Container ownID="MC-Home bg-blue-grey--2"> -->
+        <!-- <div v-if="appMode === 1"> -->
         <TopNav />
         <HoverPanel />
         <Notify />
         <ReadQueue />
         <Input />
         <Process />
+        <Auth />
 
         <transition name="fade-in">
             <router-view />
         </transition>
 
         <BottomNav />
-        <Auth />
+        <!-- </div> -->
 
+        <!-- <div v-else></div> -->
         <!-- <Footer /> -->
-        <!--<component :is="loadAuth"></component> -->
-        <!-- </Container> -->
     </div>
 </template>
 
@@ -32,6 +32,7 @@ import BottomNav from "@/components/navs/BottomNav.vue"
 import HoverPanel from "@/components/navs/HoverPanel.vue"
 import Process from "@/components/GlobalComponents/notification/Process.vue"
 import Notify from "@/components/GlobalComponents/notification/Notify.vue"
+import { $General } from './plugins'
 // import Footer from "@/components/navs/Footer.vue"
 
 // import { $Navs } from '@/myStore'
@@ -55,6 +56,11 @@ import Notify from "@/components/GlobalComponents/notification/Notify.vue"
 })
 
 export default class App extends Vue {
+    // appMode: number
+
+    // created () {
+    //     this.appMode = $General.appMode
+    // }
     mounted () {
         $Auth.getSysSettings()
         $Navs.$container.element = window //document.getElementsByClassName('GBLMContainer')[ 0 ]

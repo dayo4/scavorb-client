@@ -116,7 +116,7 @@ export default class About extends Vue {
 }
 
 .Head {
-    font-family: "Courgette", cursive;
+    font-family: /* "Courgette", */ cursive;
     letter-spacing: 1px;
     margin-bottom: 30px;
 }

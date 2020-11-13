@@ -195,7 +195,7 @@ export default class Home extends Vue {
 }
 .Quote {
     text-align: center;
-    font-family: "Courgette", cursive;
+    font-family: /* "Courgette", */ cursive;
     font-size: 30px;
     color: $pink-3;
     padding: 0 20px 10px 20px;
@@ -228,7 +228,7 @@ export default class Home extends Vue {
             width: calc(100% - 160px);
             padding: 30px 0 0 20px;
             & > div {
-                font-family: "Courgette", cursive;
+                font-family: /* "Courgette", */ cursive;
                 padding: 15px 6px;
                 letter-spacing: 1px;
                 font-weight: bold;

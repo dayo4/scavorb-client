@@ -1,7 +1,8 @@
 <template>
-    <transition name="slide-fade">
+    <div>Something</div>
+    <!-- <transition name="slide-fade">
         <div class="Modal noselect" v-if="showModal"></div>
-    </transition>
+    </transition>-->
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
@@ -17,7 +18,7 @@ import { $General } from '@/plugins'
         Container,
     },
     metaInfo () {
-        return $General.metaInfo('about', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
+        return $General.metaInfo('scavorb gallery', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
     },
 })
 
