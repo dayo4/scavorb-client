@@ -93,73 +93,80 @@
 
         <!-- ViewUser Component -->
         <transition name="slide-fade">
-            <ViewUser v-if="selectedUser" :user="selectedUser" @closeUser="closeUser" />
+            <ViewUser
+                v-if="selectedUser"
+                :user="selectedUser"
+                @closeUser="closeUser"
+                @refresh="openUser"
+            />
             <!-- ViewUser Component -->
         </transition>
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Auth, $Profile, $Admin } from '@/myStore'
 
 import ViewUser from './subComponents/ViewUser.vue'
-@Component({
+export default defineComponent({
     components: {
         ViewUser,
         Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+    },
+
+    props: {
+        activeTab: { required: true, type: String },
+    },
+
+    data () {
+        return {
+            selectedUser: null,
+
+            filter: 'All Users',
+            sort: 'Newest',
+            query: {
+                limit: 40,
+                filter: {},
+                sort: [ 'created_at', 'desc' ]
+            }
+        }
     },
 
     computed: {
         users: () => $Admin.$users.users,
         count: () => $Admin.$users.count
     },
-})
-export default class MgtUsers extends Vue {
-    @Prop({ required: true, type: String }) readonly activeTab: string
-    selectedUser: any = null
 
+    methods: {
+        filterBy (txt, v: object) {
+            this.query.filter = v
+            this.filter = txt
+            $Admin.$users.fetchAll(this.query, true)
+        },
 
-    filter: string = 'All Users'
-    sort: string = 'Newest'
-    query = {
-        limit: 40,
-        filter: {},
-        sort: [ 'created_at', 'desc' ]
-    }
+        sortBy (txt, v: string) {
+            this.query.sort[ 1 ] = v
+            this.sort = txt
+            $Admin.$users.fetchAll(this.query, true)
+        },
+
+        openUser (user_id) {
+            $Admin.$users.fetch(user_id).then(user => {
+                if (user)
+                    this.selectedUser = user
+            })
+        },
+
+        closeUser (refresh?: boolean) {
+            this.selectedUser = null
+            if (refresh) $Admin.$users.fetchAll(this.query, true)
+        }
+    },
 
     mounted () {
         $Admin.$users.fetchAll(this.query, true)
     }
-
-    // createManyDummy () {
-    //     $Admin.$users.createManyDummy()
-    // }
-
-    filterBy (txt, v: object) {
-        this.query.filter = v
-        this.filter = txt
-        $Admin.$users.fetchAll(this.query, true)
-    }
-
-    sortBy (txt, v: string) {
-        this.query.sort[ 1 ] = v
-        this.sort = txt
-        $Admin.$users.fetchAll(this.query, true)
-    }
-
-    openUser (user_id) {
-        $Admin.$users.fetch(user_id).then(user => {
-            if (user)
-                this.selectedUser = user
-        })
-    }
-
-    closeUser (refresh?: boolean) {
-        this.selectedUser = null
-        if (refresh) $Admin.$users.fetchAll(this.query, true)
-    }
-
-}
+})
 </script>
 <style lang="scss" scoped>
 .UsersBox {

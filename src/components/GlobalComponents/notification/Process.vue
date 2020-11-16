@@ -23,10 +23,10 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Process } from '@/plugins'
 
-@Component({
+export default defineComponent({
     computed: {
         status: () => $Process.status,
         info: () => $Process.info,
@@ -34,7 +34,6 @@ import { $Process } from '@/plugins'
         // fullscreen: () => $Process.fullscreen,
     }
 })
-export default class Loading extends Vue { }
 </script>
 <style lang="scss" scoped>
 .Wrapper {

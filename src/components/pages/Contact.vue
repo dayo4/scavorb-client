@@ -54,7 +54,7 @@
                 <span class="Head">Your Message</span>
                 <span v-show="msg_err" class="Error t-red-1">{{msg_err}}</span>
                 <div
-                    ref="msg"
+                    ref="msgInput"
                     @input="setMsg"
                     class="TextArea bg-white font-5 br2 p-7 mt-2"
                     contenteditable="true"
@@ -93,47 +93,117 @@
     </section>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 
 import { $Pages } from "@/myStore"
 import { $Validator, $Obstacle } from "@/plugins"
 
-@Component({
+export default defineComponent({
+
+    data () {
+        return {
+            name: '',
+            email: '',
+            subject: '',
+            msg: '',
+
+            name_err: '',
+            email_err: '',
+            subj_err: '',
+            msg_err: '',
+
+            showCaptcha: false
+        }
+    },
+
     computed: {
         error: {
-            get: () => $Pages.$mailer.error,
-            set: (v) => $Pages.$mailer.error = v,
+            get: (): string => $Pages.$mailer.error,
+            set: (v: string) => $Pages.$mailer.error = v,
         },
         success: {
-            get: () => $Pages.$mailer.success,
-            set: (v) => $Pages.$mailer.success = v,
+            get: (): string => $Pages.$mailer.success,
+            set: (v: string) => $Pages.$mailer.success = v,
         }
-    }
-})
-export default class Contact extends Vue {
-    error!: string
-    success!: string
-    $refs!: {
-        reCaptcha
-        msg
-        send
-    }
-    name = ''
-    email = ''
-    subject = ''
-    msg = ''
+    },
 
-    name_err = ''
-    email_err = ''
-    subj_err = ''
-    msg_err = ''
+    methods: {
+        setMsg (e) {
+            this.msg = e.target.textContent
+            if (this.msg_err)
+            {
+                this.msg_err = ''
+            }
+        },
 
-    showCaptcha = false
+
+        send () {
+            if (this.validate())
+            {
+                this.showCaptcha = true
+
+            }
+        },
+
+        validate () {
+            const schema = [
+                {
+                    fieldName: 'Email',
+                    data: this.email,
+                    rules: {
+                        required: true,
+                        email: true,
+                    }
+                },
+                {
+                    fieldName: 'Name',
+                    data: this.name,
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 3,
+                        max: 50
+                    }
+                },
+                {
+                    fieldName: 'Subject',
+                    data: this.subject,
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 3,
+                        max: 100
+                    }
+                },
+                {
+                    fieldName: 'Message',
+                    data: this.msg,
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 20,
+                        max: 4000
+                    }
+                }
+            ]
+
+            if ($Validator.validate(schema))
+            {
+                return true
+            }
+            const errors = $Validator.getErrors()
+            this.email_err = errors[ 'Email' ]
+            this.name_err = errors[ 'Name' ]
+            this.subj_err = errors[ 'Subject' ]
+            this.msg_err = errors[ 'Message' ]
+        }
+
+    },
 
     mounted () {
-        let _this = this
+        const _this = this
         // @ts-ignore
-        if (grecaptcha)
+        if (typeof grecaptcha !== 'undefined')
         {
             // @ts-ignore
             grecaptcha.ready(() => {
@@ -144,7 +214,7 @@ export default class Contact extends Vue {
                         _this.error = err
                     },
                     'callback': function (token: string) {
-                        $Obstacle.create(_this.$refs.send, {
+                        $Obstacle.create(_this.$refs.send as HTMLButtonElement, {
                             icon: '',
                             action: function () {
                                 $Pages.$mailer.send({
@@ -154,14 +224,14 @@ export default class Contact extends Vue {
                                     message: _this.msg,
                                     token: token
                                 }).then(done => {
-                                    $Obstacle.destroy(_this.$refs.send)
+                                    $Obstacle.destroy(_this.$refs.send as HTMLButtonElement)
                                     // @ts-ignore
                                     grecaptcha.reset()
                                     _this.showCaptcha = false
                                     if (done)
                                     {
-                                        _this.name = _this.email = _this.subject = _this.msg = ''
-                                        _this.$refs.msg.textContent = ''
+                                        _this.name = _this.email = _this.subject = _this.msg = '';
+                                        (_this.$refs.msgInput as HTMLDivElement).textContent = ''
                                     }
                                 })
                             }
@@ -170,82 +240,15 @@ export default class Contact extends Vue {
                 })
             })
         }
-    }
-    beforeDestroy () {
+    },
+
+    unmounted () {
         this.error = this.success = ''
     }
 
-    setMsg (e) {
-        this.msg = e.target.textContent
-        if (this.msg_err)
-        {
-            this.msg_err = ''
-        }
-    }
+})
 
 
-    send () {
-        if (this.validate())
-        {
-            this.showCaptcha = true
-
-        }
-    }
-
-    validate () {
-        const schema = [
-            {
-                fieldName: 'Email',
-                data: this.email,
-                rules: {
-                    required: true,
-                    email: true,
-                }
-            },
-            {
-                fieldName: 'Name',
-                data: this.name,
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 3,
-                    max: 50
-                }
-            },
-            {
-                fieldName: 'Subject',
-                data: this.subject,
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 3,
-                    max: 100
-                }
-            },
-            {
-                fieldName: 'Message',
-                data: this.msg,
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 20,
-                    max: 4000
-                }
-            }
-        ]
-
-        if ($Validator.validate(schema))
-        {
-            return true
-        }
-        const errors = $Validator.getErrors()
-        this.email_err = errors[ 'Email' ]
-        this.name_err = errors[ 'Name' ]
-        this.subj_err = errors[ 'Subject' ]
-        this.msg_err = errors[ 'Message' ]
-    }
-
-}
 </script>
 <style lang="scss">
 /* NOTE: "GenFormStyle GenFormWrapper" shared classes are found in the main "Auth" components */

@@ -78,60 +78,61 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 import AccStatusUpdate from './AccStatusUpdate.vue'
 
 import { $Auth, $Profile, $Admin } from '@/myStore'
 import { $Confirm } from '@/plugins'
 
-@Component({
+export default defineComponent({
     components: {
         AccStatusUpdate,
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
     },
-
+    data () {
+        return {
+            modal: false /* Disable Account Modal  */
+        }
+    },
+    props: {
+        user: { required: true, type: Object }
+    },
     computed: {
-        isSAdmin: () => $Auth.isSAdmin,
+        isSAdmin: (): boolean => $Auth.isSAdmin,
     },
+    methods: {
+        closeModal (refresh?: boolean) {
+            this.modal = false
+            if (refresh)
+                this.$emit('refresh', this.user.id)
+        },
+
+        del (user_id) {
+            let _this = this
+            if (this.isSAdmin)
+                $Confirm({
+                    header: 'Delete Account',
+                    message: `<b>Confirm?</b>`,
+                    type: 'danger',
+                    onConfirm: function () {
+                        return $Admin.$users.delete(user_id).then((data) => {
+                            if (data)
+                            {
+                                _this.$emit('closeUser', true)
+                                return true
+                            }
+                        })
+                    }
+
+                })
+        },
+
+        changeAccess () {
+
+        }
+    }
 })
-export default class Admin_Users_Tab extends Vue {
-    @Prop({ required: true }) user: any
-    isSAdmin!: boolean
 
-    modal = false /* Disable Account Modal  */
-
-    closeModal (refresh?: boolean) {
-        this.modal = false
-        if (refresh)
-            $Admin.$users.fetch(this.user.id).then(user => {
-                if (user) this.user = user
-            })
-    }
-
-    del (user_id) {
-        let _this = this
-        if (this.isSAdmin)
-            $Confirm({
-                header: 'Delete Account',
-                message: `<b>Confirm?</b>`,
-                type: 'danger',
-                onConfirm: function () {
-                    return $Admin.$users.delete(user_id).then((data) => {
-                        if (data)
-                        {
-                            _this.$emit('closeUser', true)
-                            return true
-                        }
-                    })
-                }
-
-            })
-    }
-
-    changeAccess () {
-
-    }
-}
 </script>
 <style lang="scss" scoped>
 img {

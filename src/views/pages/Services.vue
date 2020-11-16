@@ -2,73 +2,22 @@
     <Container ownID="MC-Srv">
         <div class="Srv">
             <h1 class="text-center t-blue-grey">SERVICES I OFFER</h1>
-
-            <section class="flex j-c-center wrap">
-                <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">
-                    <!-- Question -->
-                    <div class="Ques br2 px-4 noselect">
-                        <div
-                            class="Name flex nowrap a-i-center text-left t-blue-grey bold-5 font-3"
-                        >
-                            <div class="bg-blue-grey-5">Anonymous X</div>
-                        </div>
-                        <div class="bg-blue-grey-5 shadow-4 br3">
-                            <div class="Title t-blue-grey bold-4 p-4">{{ QA.Q }}</div>
-                            <span class="Img br5">
-                                <img class="br5" src="/defaults/anon.jpg" draggable="false" />
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Answer -->
-                    <div class="Ans br2 px-4">
-                        <div
-                            class="Name flex nowrap a-i-center j-c-end text-right t-blue-grey bold-5 font-3"
-                        >
-                            <div class="bg-grey-5 mr-2">Adney Myles</div>
-                        </div>
-                        <div class="shadow-2 bg-grey-5 br3">
-                            <!--Content Minimizer Component -->
-                            <Minimizer :initialHeight="120">
-                                <div class="CommentContent p-2">{{ QA.A }}</div>
-                            </Minimizer>
-
-                            <span class="Img br5">
-                                <img
-                                    class="br5 noselect"
-                                    src="/defaults/anon.jpg"
-                                    draggable="false"
-                                />
-                            </span>
-                        </div>
-                    </div>
-                </section>
-            </section>
         </div>
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
 
 import Container from '@/components/navs/reusables/Container.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
     },
 })
-export default class About extends Vue {
-
-    services = [
-        {
-            H: '',
-            B: ''
-        },
-    ]
-}
 </script>
 <style lang="scss" scoped>
 .Srv {

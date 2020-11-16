@@ -42,11 +42,11 @@
 import { $Auth, $Posts } from '@/myStore'
 import { $Process, $Notify, $Obstacle, $Validator, $General } from '@/plugins'
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref, defineAsyncComponent } from "vue"
 
-@Component({
+export default defineComponent({
     components: {
-        TextEditor: () => import('@/components/GlobalComponents/utils/TextEditor.vue')
+        TextEditor: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/TextEditor.vue'))
     },
     // beforeRouteEnter(to, from, next) {
     // 	next(vm => {
@@ -56,6 +56,17 @@ import { Component, Vue, Prop } from "vue-property-decorator"
     // 	})
     // },
 
+    data () {
+        return {
+            // initialContent: string = this.contentToEdit.content || '' /* Only useful when editing existing post */
+            title: '',
+            slug: '',
+            content: '',
+            errors: null as object
+            // mode: 'compose'
+        }
+    },
+
     computed: {
         user: () => $Auth.user,
         editorConfig: () => $Posts.$compose.editorConfig,
@@ -63,206 +74,196 @@ import { Component, Vue, Prop } from "vue-property-decorator"
         currentPost_id: () => $Posts.$compose.currentPost_id,
         contentToEdit: () => $Posts.$compose.contentToEdit,
     },
-})
 
-export default class Composer extends Vue {
-    /* THIS COMPONENT IS USED FOR BOTH EDITING AND CREATING NEW POSTS. */
-    user!: any
-    currentPost_id!: string
-    contentToEdit!: any /* object */
+    methods: {
+        setTitle (e: any) {
+            this.title = e.target.textContent
+            if (this.errors)
+            {
+                this.errors[ 'Title' ] = ''
+            }
+        },
 
-    $refs!: {
-        titleInput: any
-        slugInput: any
-    }
+        setSlug (e: any) {
+            this.slug = e.target.textContent
+            if (this.errors)
+            {
+                this.errors[ 'Slug' ] = ''
+            }
+        },
 
-    /* instance properties */
-    // initialContent: string = this.contentToEdit.content || '' /* Only useful when editing existing post */
-    title: string = ''
-    slug: string = ''
-    content: string = ''
-    errors: object = null
-    // mode: string = 'compose'
+        setContent (content: string) {
+            this.content = content
+        },
 
-    /* lifecycle hooks */
+        showError (fieldName: string) {
+            if (this.errors)
+            {
+                return this.errors[ 'Title' ]
+            }
+        },
+
+        validate () {
+            const schema = [
+                {
+                    fieldName: 'Title',
+                    data: $Validator.sanitize(this.title),
+                    rules: {
+                        required: true,
+                        min: 10,
+                        max: 100
+                    },
+                },
+                {
+                    fieldName: 'Slug',
+                    data: $Validator.sanitize(this.slug),
+                    rules: {
+                        required: true,
+                        min: 5,
+                        max: 100
+                    },
+                },
+                {
+                    fieldName: 'Content',
+                    data: this.content,
+                    rules: {
+                        required: true,
+                    },
+                }
+            ]
+            return $Validator.validate(schema)
+        },
+
+        init () {
+            if (this.validate())
+            {
+                $Obstacle.create('#saveBtn', {
+                    action: this.captureContentImages,
+                })
+
+            }
+            this.errors = $Validator.getErrors()
+
+            $Process.abort()
+
+            if (this.errors[ 'Content' ])
+            {
+                $Notify.error(this.errors[ 'Content' ])
+            }
+            if (this.errors[ 'Slug' ])
+            {
+                $Notify.error(this.errors[ 'Slug' ])
+            }
+        },
+
+        captureContentImages () {
+            /* Before content is saved. convert all base64 image src to "file"... */
+            $Process.add('Intializing...')
+            const editor = document.getElementById('main-ql-editor')
+            const fetchedImages = editor.getElementsByTagName('img')
+            const uploadables = Array.prototype.filter.call(fetchedImages, function (img) {
+                return img.src.match(/^data:/)
+            })
+
+            if (uploadables.length > 0)
+            {
+                // console.log(uploadables)
+                let imageUrlArray: Array<string> = []
+                $Process.add('Uploading Images...')
+                let _this = this
+                Array.prototype.forEach.call(uploadables, function (img: HTMLImageElement) {
+
+                    const canvas = document.createElement('canvas')
+                    canvas.width = img.width
+                    canvas.height = img.height
+                    const ctx = canvas.getContext('2d')
+                    ctx.drawImage(img, 0, 0, img.width, img.height)
+
+                    ctx.canvas.toBlob((blob) => {
+                        const file = new File([ blob ], 'filename', {
+                            type: "image/jpeg",
+                        })
+                        // console.log(file)
+                        // imgArray.push(filename)
+                        const formData = new FormData()
+                        formData.append('contentImages', file)
+
+                        $Posts.$compose.uploadImages(formData).then((data) => {
+                            if (data)
+                            {
+                                //@ts-ignore
+                                const url = _this.$postBaseUrl + data.imageUrl  //${ this.user.id }/${ filename }.jpeg`		{
+                                img.src = url
+                                imageUrlArray.push(data.imageUrl)
+                                // console.log(img)
+                                if (imageUrlArray.length === uploadables.length)
+                                {
+
+                                    _this.saveContent(imageUrlArray)
+                                }
+                            } else
+                            {
+                                imageUrlArray.length > 0 ? $Posts.$compose.removeImages(imageUrlArray) : null
+
+                                $Process.abort()
+                            }
+                        })
+                    }, 'image/jpeg')
+                })
+            } else
+            {
+                $Process.add('Saving content...')
+                this.saveContent()
+            }
+
+        },
+
+        saveContent (contentImages?: any) {
+            // console.log(contentImages)
+
+            if (!this.currentPost_id)
+            {
+                $Posts.$compose.newPost({
+                    title: this.title,
+                    slug: this.slug.replace(/\s{2,}/g, ' ').split(' ').join('-').toLowerCase(),
+                    content: this.content,
+                    contentImages
+                }).then(() => {
+                    $Obstacle.destroy('#saveBtn')
+                })
+            } else
+            {
+                $Posts.$compose.update({
+                    title: this.title,
+                    slug: this.slug.replace(/\s{2,}/g, ' ').split(' ').join('-').toLowerCase(),
+                    content: this.content,
+                    contentImages
+                }).then(() => {
+                    $Obstacle.destroy('#saveBtn')
+                })
+            }
+
+        },
+        plainText (e: ClipboardEvent) {
+            $General.pasteAsPlainText(e)
+        }
+
+    },
+
     mounted () {
         if (this.contentToEdit)
         {
-            this.title = this.$refs.titleInput.textContent = this.contentToEdit.title
-            this.slug = this.$refs.slugInput.textContent = this.contentToEdit.slug
+            this.title = (this.$refs.titleInput as HTMLDivElement).textContent = this.contentToEdit.title
+            this.slug = (this.$refs.slugInput as HTMLDivElement).textContent = this.contentToEdit.slug
         }
     }
+})
 
-    /* instance methods */
-    setTitle (e: any) {
-        this.title = e.target.textContent
-        if (this.errors)
-        {
-            this.errors[ 'Title' ] = ''
-        }
-    }
-    setSlug (e: any) {
-        this.slug = e.target.textContent
-        if (this.errors)
-        {
-            this.errors[ 'Slug' ] = ''
-        }
-    }
-    setContent (content: string) {
-        this.content = content
-    }
+    // $refs!: {
+    //     titleInput: any
+    //     slugInput: any
+    // }
 
-    showError (fieldName: string) {
-        if (this.errors)
-        {
-            return this.errors[ 'Title' ]
-        }
-    }
-
-    validate () {
-        const schema = [
-            {
-                fieldName: 'Title',
-                data: $Validator.sanitize(this.title),
-                rules: {
-                    required: true,
-                    min: 10,
-                    max: 100
-                },
-            },
-            {
-                fieldName: 'Slug',
-                data: $Validator.sanitize(this.slug),
-                rules: {
-                    required: true,
-                    min: 5,
-                    max: 100
-                },
-            },
-            {
-                fieldName: 'Content',
-                data: this.content,
-                rules: {
-                    required: true,
-                },
-            }
-        ]
-        return $Validator.validate(schema)
-    }
-
-    init () {
-        if (this.validate())
-        {
-            $Obstacle.create('#saveBtn', {
-                action: this.captureContentImages,
-            })
-
-        }
-        this.errors = $Validator.getErrors()
-
-        $Process.abort()
-
-        if (this.errors[ 'Content' ])
-        {
-            $Notify.error(this.errors[ 'Content' ])
-        }
-        if (this.errors[ 'Slug' ])
-        {
-            $Notify.error(this.errors[ 'Slug' ])
-        }
-    }
-    captureContentImages () {
-        /* Before content is saved. convert all base64 image src to "file"... */
-        $Process.add('Intializing...')
-        const editor = document.getElementById('main-ql-editor')
-        const fetchedImages = editor.getElementsByTagName('img')
-        const uploadables = Array.prototype.filter.call(fetchedImages, function (img) {
-            return img.src.match(/^data:/)
-        })
-
-        if (uploadables.length > 0)
-        {
-            // console.log(uploadables)
-            let imageUrlArray: Array<string> = []
-            $Process.add('Uploading Images...')
-            let _this = this
-            Array.prototype.forEach.call(uploadables, function (img: HTMLImageElement) {
-
-                const canvas = document.createElement('canvas')
-                canvas.width = img.width
-                canvas.height = img.height
-                const ctx = canvas.getContext('2d')
-                ctx.drawImage(img, 0, 0, img.width, img.height)
-
-                ctx.canvas.toBlob((blob) => {
-                    const file = new File([ blob ], 'filename', {
-                        type: "image/jpeg",
-                    })
-                    // console.log(file)
-                    // imgArray.push(filename)
-                    const formData = new FormData()
-                    formData.append('contentImages', file)
-
-                    $Posts.$compose.uploadImages(formData).then((data) => {
-                        if (data)
-                        {
-                            // console.log(data)
-                            const url = _this.$postBaseUrl + data.imageUrl  //${ this.user.id }/${ filename }.jpeg`		{
-                            img.src = url
-                            imageUrlArray.push(data.imageUrl)
-                            // console.log(img)
-                            if (imageUrlArray.length === uploadables.length)
-                            {
-
-                                _this.saveContent(imageUrlArray)
-                            }
-                        } else
-                        {
-                            imageUrlArray.length > 0 ? $Posts.$compose.removeImages(imageUrlArray) : null
-
-                            $Process.abort()
-                        }
-                    })
-                }, 'image/jpeg')
-            })
-        } else
-        {
-            $Process.add('Saving content...')
-            this.saveContent()
-        }
-
-    }
-
-    saveContent (contentImages?: any) {
-        // console.log(contentImages)
-
-        if (!this.currentPost_id)
-        {
-            $Posts.$compose.newPost({
-                title: this.title,
-                slug: this.slug.replace(/\s{2,}/g, ' ').split(' ').join('-').toLowerCase(),
-                content: this.content,
-                contentImages
-            }).then(() => {
-                $Obstacle.destroy('#saveBtn')
-            })
-        } else
-        {
-            $Posts.$compose.update({
-                title: this.title,
-                slug: this.slug.replace(/\s{2,}/g, ' ').split(' ').join('-').toLowerCase(),
-                content: this.content,
-                contentImages
-            }).then(() => {
-                $Obstacle.destroy('#saveBtn')
-            })
-        }
-
-    }
-    plainText (e: ClipboardEvent) {
-        $General.pasteAsPlainText(e)
-    }
-}
 </script>
 <style lang="scss">
 #main-ql-editor {

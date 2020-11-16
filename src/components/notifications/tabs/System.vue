@@ -1,13 +1,13 @@
 <template></template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 // import { $Posts } from '@/myStore'
 // import { $ScrollLoader, $Notify, $Obstacle } from '@/plugins'
 
-@Component({
+export default defineComponent({
 })
-export default class sys extends Vue {
+// export default class sys extends Vue {
 
-}
+// }
 </script>

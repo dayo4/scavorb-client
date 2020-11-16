@@ -5,7 +5,7 @@
     </transition>-->
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
@@ -13,20 +13,21 @@ import { Component, Vue } from "vue-property-decorator"
 import Container from '@/components/navs/reusables/Container.vue'
 import { $General } from '@/plugins'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
     },
     metaInfo () {
         return $General.metaInfo('scavorb gallery', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
     },
+
+    data () {
+        return {
+            showModal: false
+        }
+    },
 })
 
-export default class Demo extends Vue {
-
-    showModal = false
-
-}
 
 </script>
 <style lang="scss" scoped>

@@ -94,8 +94,11 @@
                             >@{{ userData.username}}</div>
                             <div v-if="user" class="MoreLinks p-1">
                                 <hr />
-                                <router-link :to="{path:'/profile/'+userData.username}">
-                                    <span class="icon-user"></span>Profile
+                                <router-link
+                                    v-slot="{ navigate }"
+                                    :to="{path:'/profile/'+userData.username}"
+                                >
+                                    <span @click="navigate" class="icon-user"></span>Profile
                                 </router-link>
                             </div>
                             <hr />
@@ -115,68 +118,110 @@
     </nav>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
+import { } from "vue-class-component"
 import { $Auth, $Profile, $Navs } from '@/myStore'
 
 import Search from '@/components/misc/Search.vue'
 // import NotifPopup from '@/components/notifications/Popup.vue'
 
-@Component({
+export default defineComponent({
     components: {
         // NotifPopup,
         Search
     },
+
+    data () {
+        return {
+            miniScreen: false,
+            avatarDropdown: false,
+            showSearch: false,
+
+            navLinks: [
+                { name: 'home', icon: 'icon-home-1' },
+                { name: 'contact', icon: 'icon-mail-alt' },
+                { name: 'about', icon: 'icon-info' },
+                { name: 'posts', icon: 'icon-doc-text' }
+            ]
+        }
+    },
     watch: {
         $route () {
-            this.$refs.topNav.classList.remove('rotated')
+            (this.$refs.topNav as HTMLElement).classList.remove('rotated')
         }
     },
     computed: {
         user: () => $Auth.user,
-        userData: () => $Auth.userData,
+        userData: (): object => $Auth.userData,
     },
-})
-export default class TopNav extends Vue {
-    userData!: any
-    $refs!: {
-        topNav: HTMLElement
-    }
+    methods: {
+        dropdownHandler () {
+            let $this = this
+            function dropdown (e: any) {
+                if (!(e.target.closest('.DropBtn')))
+                {
+                    $this.avatarDropdown = false
+                    $this.miniScreen = false
+                }
+            }
+            document.addEventListener('click', dropdown, false)
+        },
 
-    miniScreen = false
-    avatarDropdown = false
-    showSearch = false
+        login () {
+            $Auth.$form.show()
+        },
+        logout () {
+            $Auth.$form.logout()
+        }
+    },
 
     mounted () {
-        $Navs.$top.element = this.$refs.topNav
+        $Navs.$top.element = this.$refs.topNav as HTMLElement
         this.dropdownHandler()
     }
+})
 
-    navLinks = [
-        { name: 'home', icon: 'icon-home-1' },
-        { name: 'contact', icon: 'icon-mail-alt' },
-        { name: 'about', icon: 'icon-info' },
-        { name: 'posts', icon: 'icon-doc-text' }
-    ]
+// export default class TopNav extends Vue {
+//     userData!: any
+//     $refs!: {
+//         topNav: HTMLElement
+//     }
 
-    dropdownHandler () {
-        let $this = this
-        function dropdown (e) {
-            if (!(e.target.closest('.DropBtn')))
-            {
-                $this.avatarDropdown = false
-                $this.miniScreen = false
-            }
-        }
-        document.addEventListener('click', dropdown, false)
-    }
+//     miniScreen = false
+//     avatarDropdown = false
+//     showSearch = false
 
-    login () {
-        $Auth.$form.show()
-    }
-    logout () {
-        $Auth.$form.logout()
-    }
-}
+//     mounted () {
+//         $Navs.$top.element = this.$refs.topNav
+//         this.dropdownHandler()
+//     }
+
+//     navLinks = [
+//         { name: 'home', icon: 'icon-home-1' },
+//         { name: 'contact', icon: 'icon-mail-alt' },
+//         { name: 'about', icon: 'icon-info' },
+//         { name: 'posts', icon: 'icon-doc-text' }
+//     ]
+
+//     dropdownHandler () {
+//         let $this = this
+//         function dropdown (e) {
+//             if (!(e.target.closest('.DropBtn')))
+//             {
+//                 $this.avatarDropdown = false
+//                 $this.miniScreen = false
+//             }
+//         }
+//         document.addEventListener('click', dropdown, false)
+//     }
+
+//     login () {
+//         $Auth.$form.show()
+//     }
+//     logout () {
+//         $Auth.$form.logout()
+//     }
+// }
 </script>
 <style lang="scss" scoped>
 nav {
@@ -365,7 +410,7 @@ nav {
         display: none;
     }
 }
-@media only screen and (max-width: 360px) {
+@include xxs-only {
     .MiniScreenLink {
         display: block;
         margin-right: 8px;

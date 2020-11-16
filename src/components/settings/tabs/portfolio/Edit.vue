@@ -78,143 +78,148 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref, defineAsyncComponent } from "vue"
 import { $Auth, $Profile } from '@/myStore'
 import { $Confirm, $Validator, $General } from '@/plugins'
 
-@Component({
+export default defineComponent({
     components: {
-        TextEditor: () => import('@/components/GlobalComponents/utils/TextEditor.vue'),
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        TextEditor: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/TextEditor.vue')),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+    },
+
+    props: {
+        projectToView: { required: false, type: Object },
+    },
+
+    data () {
+        return {
+            initialDetail: this.projectToView ? this.projectToView.detail : '' as string,/* Only useful when viewing existing project detail */
+            title: '',
+            detail: '',
+            active: null as number, /* project active status. 0 or 1 */
+
+            charCount: 0,
+
+            errors: null as object /* Records validation errors  */
+        }
     },
 
     computed: {
         editorConfig: () => $Profile.$Portfolio.editorConfig,
     },
-})
-export default class PtfEdit extends Vue {
-    @Prop({ required: false, type: Object }) readonly projectToView: any
 
-    $refs!: {
-        titleInput
-    }
-    initialDetail: string = this.projectToView ? this.projectToView.detail : '' /* Only useful when viewing existing project detail */
-    title = ''
-    detail = ''
-    active: number = null /* project active status. 0 or 1 */
+    methods: {
+        setTitle (e: any) {
+            this.title = e.target.textContent
+            if (this.errors)
+            {
+                this.errors[ 'Title' ] = ''
+            }
+        },
 
-    charCount = 0
+        setDetail (content: string) {
+            this.detail = content
+            this.charCount = content.length
+            if (this.errors)
+            {
+                this.errors[ 'Detail' ] = ''
+            }
+        },
 
-    errors: object = null /* Records validation errors  */
+        validate () {
+            const schema = [
+                {
+                    fieldName: 'Title',
+                    data: $Validator.sanitize(this.title),
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 3,
+                        max: 100
+                    },
+                },
+                {
+                    fieldName: 'Detail',
+                    data: this.detail,
+                    rules: {
+                        required: true,
+                        min: 100,
+                        // max: 2000
+                    },
+                }
+            ]
+            return $Validator.validate(schema)
+        },
 
-    /* LC Hook */
+        saveChanges () {
+
+            if (this.validate())
+            {
+                if (!this.projectToView)
+                {
+                    $Profile.$Portfolio.create({
+                        title: this.title,
+                        detail: this.detail
+                    }).then(done => {
+                        if (done)
+                            this.$emit('back', true /* To refresh list upon completed */)
+                    })
+                } else
+                {
+                    $Profile.$Portfolio.update({
+                        id: this.projectToView.id,
+                        title: this.title,
+                        detail: this.detail,
+                        active: this.active
+                    }).then(done => {
+                        if (done)
+                            this.$emit('back', true)
+                    })
+                }
+            }
+            this.errors = $Validator.getErrors()
+        },
+
+        changeStatus (status: number /* 1=true, 0=false */) {
+            this.active = status
+        },
+
+        deleteProject (project_id) {
+            let _this = this
+            $Confirm({
+                header: 'Delete Project',
+                message: `<b class="t-grey--2">Are You Sure You Want To delete this Project?</b>`,
+                type: 'danger',
+                onConfirm: function () {
+                    return new Promise(function (resolve) {
+                        $Profile.$Portfolio.delete(project_id).then(data => {
+                            if (data)
+                            {
+                                _this.$emit('back', true /* To refresh list upon deletion */)
+                                resolve(data)
+                            }
+                        })
+                    })
+                }
+
+            })
+        },
+
+        plainText (e: ClipboardEvent) {
+            $General.pasteAsPlainText(e)
+        }
+
+    },
+
     mounted () {
         if (this.projectToView)
         {
             this.active = this.projectToView.active
-            this.title = this.$refs.titleInput.textContent = this.projectToView.title
+            this.title = (this.$refs.titleInput as HTMLDivElement).textContent = this.projectToView.title
         }
     }
-
-    /* Instance Methods */
-    setTitle (e: any) {
-        this.title = e.target.textContent
-        if (this.errors)
-        {
-            this.errors[ 'Title' ] = ''
-        }
-    }
-
-    setDetail (content: string) {
-        this.detail = content
-        this.charCount = content.length
-        if (this.errors)
-        {
-            this.errors[ 'Detail' ] = ''
-        }
-    }
-
-    validate () {
-        const schema = [
-            {
-                fieldName: 'Title',
-                data: $Validator.sanitize(this.title),
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 3,
-                    max: 100
-                },
-            },
-            {
-                fieldName: 'Detail',
-                data: this.detail,
-                rules: {
-                    required: true,
-                    min: 100,
-                    // max: 2000
-                },
-            }
-        ]
-        return $Validator.validate(schema)
-    }
-    saveChanges () {
-
-        if (this.validate())
-        {
-            if (!this.projectToView)
-            {
-                $Profile.$Portfolio.create({
-                    title: this.title,
-                    detail: this.detail
-                }).then(done => {
-                    if (done)
-                        this.$emit('back', true /* To refresh list upon completed */)
-                })
-            } else
-            {
-                $Profile.$Portfolio.update({
-                    id: this.projectToView.id,
-                    title: this.title,
-                    detail: this.detail,
-                    active: this.active
-                }).then(done => {
-                    if (done)
-                        this.$emit('back', true)
-                })
-            }
-        }
-        this.errors = $Validator.getErrors()
-    }
-
-    changeStatus (status: number /* 1=true, 0=false */) {
-        this.active = status
-    }
-    deleteProject (project_id) {
-        let _this = this
-        $Confirm({
-            header: 'Delete Project',
-            message: `<b class="t-grey--2">Are You Sure You Want To delete this Project?</b>`,
-            type: 'danger',
-            onConfirm: function () {
-                return new Promise(function (resolve) {
-                    $Profile.$Portfolio.delete(project_id).then(data => {
-                        if (data)
-                        {
-                            _this.$emit('back', true /* To refresh list upon deletion */)
-                            resolve(data)
-                        }
-                    })
-                })
-            }
-
-        })
-    }
-
-    plainText (e: ClipboardEvent) {
-        $General.pasteAsPlainText(e)
-    }
-}
+})
 
 </script>
 <style lang="scss" scoped>

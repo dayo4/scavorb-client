@@ -4,16 +4,11 @@
     </div>
 </template>
 <script lang="ts">
-import { Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 import { $General } from '@/plugins'
 
 
-export default class Demo extends Vue {
-
-    // created () {
-    //     $General.appMode = 2
-    // }
-}
+export default defineComponent({})
 
 </script>

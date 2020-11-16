@@ -181,16 +181,36 @@
     </transition>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 
 import { $Comments, $Posts, $Auth } from "@/myStore"
 import { $Validator, $Obstacle, WS } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
         Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue'),
         Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
         SubComments: () => import("@/components/posts/comment/SubComments.vue"),
+    },
+
+    props: {
+        showComments: { required: true, type: Boolean },
+        post: { required: true } as any, /* current post which's comment is being viewed */
+        socket: { required: true/* SocketIOClient.Socket  */ } as any, /* An instance of the comments socket connection */
+    },
+
+    data () {
+        return {
+            /* Major comments properties */
+            commentContent: '',
+
+            /* Sub comments properties */
+            subCommentMode: false,
+            activeSubComment: null,  /* object */
+            subComment_Socket: null as any // SocketIOClient.Socket
+
+
+        }
     },
 
     computed: {
@@ -202,30 +222,109 @@ import { $Validator, $Obstacle, WS } from "@/plugins"
         comments: () => $Comments.comments,
         commentCount: () => $Comments.commentCount,
         subCommentCount: () => $Comments.$SubComments.commentCount,
-    }
-})
-export default class Comments extends Vue {
-    @Prop({ required: true }) showComments: boolean
-    @Prop({ required: true }) readonly post: any /* current post which's comment is being viewed */
-    @Prop({ required: true }) readonly socket: SocketIOClient.Socket /* An instance of the comments socket connection */
+    },
 
-    user!: any
-    $refs!: {
-        SubCommentsComponent: any /* for reference to the component's methods */
-        CommentBody: HTMLElement
-        Input: HTMLDivElement
-    }
+    methods: {
+        replies (comment: any, focusInput: boolean = false) {
+            this.subComment_Socket = WS('/subComments/fetch-' + comment.id)
 
-    /* Major comments properties */
-    commentContent: string = ''
+            if (this.user && focusInput)
+                (this.$refs.Input as HTMLDivElement).focus()
+            $Comments.$SubComments.fetchAll(this.subComment_Socket, comment.id, {}, true).then((data) => {
+                if (data)
+                {
+                    this.activeSubComment = comment
+                    this.subCommentMode = true
+                }
+            })
+        },
 
-    /* Sub comments properties */
-    subCommentMode = false
-    activeSubComment = null  /* object */
-    subComment_Socket: SocketIOClient.Socket = null
+        input (event) {
+            // console.log(event)
+            if (this.user)
+                this.commentContent = event.target.textContent
+        },
 
+        send () {
+            if (this.user)
+            {
 
-    /*Lifecycle Hooks */
+                const schema = [
+                    {
+                        fieldName: 'Comment',
+                        data: this.commentContent,
+                        rules: {
+                            required: true,
+                            string: true,
+                        }
+                    }
+                ]
+
+                if ($Validator.validate(schema))
+                    if (!this.subCommentMode)
+                        $Comments.new({ post_id: this.post.id, comment: this.commentContent }).then(sent => {
+                            if (sent)
+                            {
+                                this.socket.emit('newComment')
+                                this.commentContent = '';
+                                (this.$refs.Input as HTMLDivElement).textContent = ''
+                            }
+                        })
+                    else
+                        $Comments.$SubComments.new({ comment_id: this.activeSubComment.id, comment: this.commentContent }).then(sent => {
+                            if (sent)
+                            {
+                                this.subComment_Socket.emit('newComment')
+                                this.commentContent = '';
+                                (this.$refs.Input as HTMLDivElement).textContent = ''
+                            }
+                        })
+                // else
+                // console.log($Validator.getErrors())
+            }
+        },
+
+        edit (comment_id) {
+
+        },
+        del (comment_id) {
+
+        },
+        report (comment_id, username: string) {
+
+        },
+
+        /* Misc Actions */
+        scrollUp () {
+            if (this.subCommentMode === true)
+                document.getElementById('SubCommentBody').scrollTo({ top: 0, left: 0, behavior: "smooth" })
+            else
+                (this.$refs.CommentBody as HTMLDivElement).scrollTo({ top: 0, left: 0, behavior: "smooth" })
+        },
+
+        goBack () {
+            if (this.subCommentMode)
+            {
+                this.subComment_Socket.close()
+                this.subCommentMode = false
+            }
+            else
+                this.close()
+        },
+
+        close () {
+            if (this.subCommentMode)
+            {
+                this.subComment_Socket.close()
+                this.subCommentMode = false
+            }
+
+            this.$emit('dismiss')
+            this.socket.close()
+        }
+
+    },
+
     updated () {
         if (!this.user)
         {
@@ -242,102 +341,13 @@ export default class Comments extends Vue {
         }
     }
 
-    /* Instance methods */
-    replies (comment: any, focusInput: boolean = false) {
-        this.subComment_Socket = WS('/subComments/fetch-' + comment.id)
+})
+    // $refs!: {
+    //     SubCommentsComponent: any /* for reference to the component's methods */
+    //     CommentBody: HTMLElement
+    //     Input: HTMLDivElement
+    // }
 
-        if (this.user && focusInput)
-            this.$refs.Input.focus()
-        $Comments.$SubComments.fetchAll(this.subComment_Socket, comment.id, {}, true).then((data) => {
-            if (data)
-            {
-                this.activeSubComment = comment
-                this.subCommentMode = true
-            }
-        })
-    }
-
-    input (event) {
-        // console.log(event)
-        if (this.user)
-            this.commentContent = event.target.textContent
-    }
-    send () {
-        if (this.user)
-        {
-
-            const schema = [
-                {
-                    fieldName: 'Comment',
-                    data: this.commentContent,
-                    rules: {
-                        required: true,
-                        string: true,
-                    }
-                }
-            ]
-
-            if ($Validator.validate(schema))
-                if (!this.subCommentMode)
-                    $Comments.new({ post_id: this.post.id, comment: this.commentContent }).then(sent => {
-                        if (sent)
-                        {
-                            this.socket.emit('newComment')
-                            this.commentContent = ''
-                            this.$refs.Input.textContent = ''
-                        }
-                    })
-                else
-                    $Comments.$SubComments.new({ comment_id: this.activeSubComment.id, comment: this.commentContent }).then(sent => {
-                        if (sent)
-                        {
-                            this.subComment_Socket.emit('newComment')
-                            this.commentContent = ''
-                            this.$refs.Input.textContent = ''
-                        }
-                    })
-            // else
-            // console.log($Validator.getErrors())
-        }
-    }
-
-    edit (comment_id) {
-
-    }
-    del (comment_id) {
-
-    }
-    report (comment_id, username: string) {
-
-    }
-
-    /* Misc Actions */
-    scrollUp () {
-        if (this.subCommentMode === true)
-            document.getElementById('SubCommentBody').scrollTo({ top: 0, left: 0, behavior: "smooth" })
-        else
-            this.$refs.CommentBody.scrollTo({ top: 0, left: 0, behavior: "smooth" })
-    }
-    goBack () {
-        if (this.subCommentMode)
-        {
-            this.subComment_Socket.close()
-            this.subCommentMode = false
-        }
-        else
-            this.close()
-    }
-    close () {
-        if (this.subCommentMode)
-        {
-            this.subComment_Socket.close()
-            this.subCommentMode = false
-        }
-
-        this.$emit('dismiss')
-        this.socket.close()
-    }
-}
 </script>
 <style lang="scss" >
 .CommentsModal {

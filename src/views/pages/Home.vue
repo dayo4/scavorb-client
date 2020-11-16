@@ -134,7 +134,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
@@ -145,40 +145,44 @@ import Contact from '@/components/pages/Contact.vue'
 import { $General } from '@/plugins'
 // import SkillChart from '@/components/pages/SkillChart.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
         // Flipper,
         Contact,
         // SkillChart
     },
+
     metaInfo () {
         return $General.metaInfo('scavorb', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
     },
+
+    data () {
+        return {
+            list: [
+                { img: 'resp', text: 'Fully Responsive Webpages' },
+                { img: 'scale', text: 'Progressive and Easily Scalable Apps' },
+                { img: '', text: 'Clean and Readable Code', link: '/defaults/pgs/icons/clean.png' },
+                { img: 'flexb', text: 'Flexible Business Logic Implementation' },
+                { img: 'effect', text: 'Cost Effective Development Service' },
+                { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
+            ],
+
+            skills: [
+                { text: 'JAVASCRIPT', value: 0.91, color: 'E57373' },
+                { text: 'CSS & HTML', value: 0.93, color: '673ab7' },
+                { text: 'TYPESCRIPT', value: 0.93, color: '42A5F5' },
+                { text: 'VUEJS', value: 0.90, color: '4CAF50' },
+                { text: 'NODEJS', value: 0.89, color: '8d6e63' },
+                { text: 'UI DESIGN', value: 0.83, color: '4db6ac' },
+                { text: 'GRAPHICS DESIGN', value: 0.7, color: '00bcd4' },
+                // { text: 'PYTHON', value: 0.6, color: 'ba68c8' },
+                { text: 'PHP', value: 0.65, color: '3f51b5' },
+            ]
+
+        }
+    },
 })
-export default class Home extends Vue {
-
-    list = [
-        { img: 'resp', text: 'Fully Responsive Webpages' },
-        { img: 'scale', text: 'Progressive and Easily Scalable Apps' },
-        { img: '', text: 'Clean and Readable Code', link: '/defaults/pgs/icons/clean.png' },
-        { img: 'flexb', text: 'Flexible Business Logic Implementation' },
-        { img: 'effect', text: 'Cost Effective Development Service' },
-        { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
-    ]
-
-    skills = [
-        { text: 'JAVASCRIPT', value: 0.91, color: 'E57373' },
-        { text: 'CSS & HTML', value: 0.93, color: '673ab7' },
-        { text: 'TYPESCRIPT', value: 0.93, color: '42A5F5' },
-        { text: 'VUEJS', value: 0.90, color: '4CAF50' },
-        { text: 'NODEJS', value: 0.89, color: '8d6e63' },
-        { text: 'UI DESIGN', value: 0.83, color: '4db6ac' },
-        { text: 'GRAPHICS DESIGN', value: 0.7, color: '00bcd4' },
-        // { text: 'PYTHON', value: 0.6, color: 'ba68c8' },
-        { text: 'PHP', value: 0.65, color: '3f51b5' },
-    ]
-}
 </script>
 <style lang="scss" scoped>
 .Divider {

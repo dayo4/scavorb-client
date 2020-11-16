@@ -19,31 +19,29 @@
 <script lang="ts">
 
 import Footer from "@/components/navs/Footer.vue"
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Navs } from '@/myStore'
 
-@Component({
+export default defineComponent({
     components: {
         Footer
-    }
-})
-export default class GBLMContainer extends Vue {
-    // $ref!: {
-    // 	Container: HTMLElement
-    // }
-    @Prop({ required: false, default: true }) noSideNav: boolean
-    @Prop({ required: false, default: false }) ownID: string
-    /* additional special classname binding for the slots if necessary */
-    @Prop({ required: false, }) readonly MainCB /* Main_class_binding */: string  /* Good for passing custom class names to the inner components for custom styling. */
-    @Prop({ required: false, }) readonly SideCB /* Side_class_binding */: string
+    },
+
+    props: {
+        noSideNav: { required: false, type: Boolean, default: true },
+        ownID: { required: false, type: String, default: false },
+        /* additional special classname binding for the slots if necessary */
+        MainCB: { required: false, type: String }, /* Main_class_binding. Good for passing custom class names to the inner components for custom styling. */
+        SideCB: { required: false, type: String }, /* Side_class_binding */
+
+    },
 
     // mounted () {
     // $Navs.$container.element = window //document.getElementsByClassName('GBLMContainer')[ 0 ]
     // // $Navs.$container.element = document.getElementById(this.ownID)
     // $Navs.$container.ScrollingHandler()
     // }
-
-}
+})
 </script>
 <style lang="scss">
 .GBLMContainer {

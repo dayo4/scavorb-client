@@ -86,121 +86,127 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 import { $Auth } from "@/myStore"
 import { $Validator, $Obstacle } from "@/plugins"
 
-@Component({
+export default defineComponent({
+    props: {
+        show: { required: true, type: Boolean },
+    },
+
+    data () {
+        return {
+            stage: 1,
+
+            email: '',
+            password: '',
+            code: '',
+
+            email_err: '',
+            pass_err: '',
+            code_err: '',
+
+            staticEmail: ''
+        }
+    },
+
     computed: {
         response: () => $Auth.$reset.response,
+    },
+
+    methods: {
+        send () {
+            this.resetResponse()
+
+            const schema1 = [
+                {
+                    fieldName: 'Email',
+                    data: this.email,
+                    rules: { required: true, email: true, }
+                }
+            ]
+            const schema2 = [
+                {
+                    fieldName: 'Code',
+                    data: this.code,
+                    rules: { required: true }
+                }
+            ]
+            const schema3 = [
+                {
+                    fieldName: 'Password',
+                    data: this.password,
+                    rules: { required: true, string: true, min: 8, max: 50 }
+                }
+            ]
+
+            const _this = this
+            const sendBtn = this.$refs.send as HTMLButtonElement
+
+            if ($Validator.validate(this.stage === 1 ? schema1 : this.stage === 2 ? schema2 : schema3))
+            {
+                $Obstacle.create(sendBtn, {
+                    action: function () {
+                        if (_this.stage === 1)
+                        {
+                            _this.staticEmail = _this.email
+                            $Auth.$reset.send({
+                                stage_1: {
+                                    email: _this.email,
+                                }
+                            }).then(data => {
+                                $Obstacle.destroy(sendBtn)
+                                if (data && data.stage === 2)
+                                {
+                                    _this.stage = 2
+                                }
+                            })
+                        } else if (_this.stage === 2)
+                        {
+                            $Auth.$reset.send({
+                                stage_2: {
+                                    email: _this.staticEmail,
+                                    token: _this.code,
+                                }
+                            }).then(data => {
+                                $Obstacle.destroy(sendBtn)
+                                if (data && data.stage === 3)
+                                {
+                                    _this.stage = 3
+                                }
+                            })
+                        } else
+                        {
+                            $Auth.$reset.send({
+                                stage_3: {
+                                    email: _this.staticEmail,
+                                    password: _this.password,
+                                }
+                            }).then(done => {
+                                $Obstacle.destroy(sendBtn)
+                            })
+                        }
+                    }
+                })
+            }
+            const errors = $Validator.getErrors()
+            this.email_err = errors[ 'Email' ]
+            this.pass_err = errors[ 'Password' ]
+            this.code_err = errors[ 'Code' ]
+        },
+
+        resetResponse (err?: string) {
+            if (this[ err ])
+                this[ err ] = ''
+            if (this.response)
+            {
+                this.response.message = ''
+            }
+        }
     }
 })
-export default class Reset extends Vue {
-    $refs!: {
-        send
-    }
-    response!: any
-    @Prop({ required: true }) show: boolean
-    stage = 1
 
-    email = ''
-    password = ''
-    code = ''
-
-    email_err = ''
-    pass_err = ''
-    code_err = ''
-
-    staticEmail = ''
-
-    send () {
-        this.resetResponse()
-
-        const schema1 = [
-            {
-                fieldName: 'Email',
-                data: this.email,
-                rules: { required: true, email: true, }
-            }
-        ]
-        const schema2 = [
-            {
-                fieldName: 'Code',
-                data: this.code,
-                rules: { required: true }
-            }
-        ]
-        const schema3 = [
-            {
-                fieldName: 'Password',
-                data: this.password,
-                rules: { required: true, string: true, min: 8, max: 50 }
-            }
-        ]
-
-        let _this = this
-
-        if ($Validator.validate(this.stage === 1 ? schema1 : this.stage === 2 ? schema2 : schema3))
-        {
-            $Obstacle.create(this.$refs.send, {
-                action: function () {
-                    if (_this.stage === 1)
-                    {
-                        _this.staticEmail = _this.email
-                        $Auth.$reset.send({
-                            stage_1: {
-                                email: _this.email,
-                            }
-                        }).then(data => {
-                            $Obstacle.destroy(_this.$refs.send)
-                            if (data && data.stage === 2)
-                            {
-                                _this.stage = 2
-                            }
-                        })
-                    } else if (_this.stage === 2)
-                    {
-                        $Auth.$reset.send({
-                            stage_2: {
-                                email: _this.staticEmail,
-                                token: _this.code,
-                            }
-                        }).then(data => {
-                            $Obstacle.destroy(_this.$refs.send)
-                            if (data && data.stage === 3)
-                            {
-                                _this.stage = 3
-                            }
-                        })
-                    } else
-                    {
-                        $Auth.$reset.send({
-                            stage_3: {
-                                email: _this.staticEmail,
-                                password: _this.password,
-                            }
-                        }).then(done => {
-                            $Obstacle.destroy(_this.$refs.send)
-                        })
-                    }
-                }
-            })
-        }
-        const errors = $Validator.getErrors()
-        this.email_err = errors[ 'Email' ]
-        this.pass_err = errors[ 'Password' ]
-        this.code_err = errors[ 'Code' ]
-    }
-
-    resetResponse (err?: string) {
-        if (this[ err ])
-            this[ err ] = ''
-        if (this.response)
-        {
-            this.response.message = ''
-        }
-    }
-}
 </script>
 <style lang="scss">
 /* NOTE: "GenFormStyle GenFormWrapper" shared classes are found in the main "Auth" components */

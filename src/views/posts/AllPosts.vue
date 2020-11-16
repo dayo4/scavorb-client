@@ -57,30 +57,52 @@
 <script lang="ts">
 import Container from '@/components/navs/reusables/Container.vue'
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 import { $Posts } from "@/myStore"
 import { /* $ScrollLoader, */ $Obstacle } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
         Container,
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
-        ListOfPosts: () => import("@/components/posts/ListOfPosts.vue"),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        ListOfPosts: defineAsyncComponent(() => import("@/components/posts/ListOfPosts.vue")),
     },
+
+    data () {
+        return {
+            curPage: 1,
+            sort: 'Newest',
+            query: {
+                sort: 'desc'
+            }
+        }
+    },
+
     computed: {
         posts: () => $Posts.posts,
         count: () => $Posts.postsCount,
-    }
-})
-export default class AllPost extends Vue {
+    },
 
-    curPage: number = 1
-    sort: string = 'Newest'
-    query = {
-        sort: 'desc'
-    }
+    methods: {
+        sortBy (txt, v: string) {
+            this.query.sort = v
+            this.sort = txt
+            $Posts.fetchAll(this.query, true)
+        },
 
-    /* LC Hooks */
+        page (n: number) {
+            let query = {
+                offset: n * 10 - 10, /* 10 is the default offset value */
+                sort: this.query.sort
+            }
+            if (n != this.curPage)
+                $Posts.fetchAll(query, true).then(loaded => {
+                    if (loaded) this.curPage = n
+                })
+        }
+
+    },
+
     mounted () {
         // let _this = this
         // $ScrollLoader('#MC-AllPosts').init(async function () {
@@ -95,25 +117,7 @@ export default class AllPost extends Vue {
         $Posts.fetchAll({}, true).then(ok => $Obstacle.destroy('#MC-AllPosts'))
         // this.$gtag.event('login', { method: 'Google' })
     }
-
-    /* instance methods */
-    sortBy (txt, v: string) {
-        this.query.sort = v
-        this.sort = txt
-        $Posts.fetchAll(this.query, true)
-    }
-
-    page (n: number) {
-        let query = {
-            offset: n * 10 - 10, /* 10 is the default offset value */
-            sort: this.query.sort
-        }
-        if (n != this.curPage)
-            $Posts.fetchAll(query, true).then(loaded => {
-                if (loaded) this.curPage = n
-            })
-    }
-}
+})
 </script>
 <style lang="scss" scoped>
 .Header {

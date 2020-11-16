@@ -19,19 +19,20 @@
     </transition>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Notify } from '@/plugins'
 
-@Component({
+export default defineComponent({
     computed: {
         notifs: () => $Notify.notifs,
+    },
+
+    methods: {
+        clear (notif) {
+            $Notify.clear(notif)
+        }
     }
 })
-export default class GlobalNotif extends Vue {
-    clear (notif) {
-        $Notify.clear(notif)
-    }
-}
 </script>
 <style lang="scss">
 .Notifier {

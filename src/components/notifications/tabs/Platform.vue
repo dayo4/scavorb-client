@@ -4,16 +4,16 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+// import { defineComponent } from "vue"
 import { $Auth, $Profile } from '@/myStore'
 import { $Confirm } from '@/plugins'
 
-@Component({
-    computed: {
-        userData: () => $Auth.userData
-    },
-})
-export default class Platform extends Vue {
-    @Prop({ required: true, type: String }) readonly activeTab: string
-}
+// export default defineComponent({
+//     computed: {
+//         userData: () => $Auth.userData
+//     },
+// })
+// export default class Platform extends Vue {
+//     @Prop({ required: true, type: String }) readonly activeTab: string
+// }
 </script>

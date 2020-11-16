@@ -12,15 +12,14 @@
     </footer>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Navs } from '@/myStore'
 
-@Component({
-    // computed: {
-    //     scrolled: () => $Navs.$container.scrolled,
-    // },
+export default defineComponent({
+    computed: {
+        scrolled: () => $Navs.$container.scrolled,
+    },
 })
-export default class Footer extends Vue { }
 </script>
 <style  lang="scss" scoped>
 .Footer {

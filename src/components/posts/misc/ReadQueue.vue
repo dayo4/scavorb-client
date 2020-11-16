@@ -42,40 +42,40 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import Modal from "@/components/GlobalComponents/utils/Modal.vue"
 import { $ReadQueue } from "@/myStore"
 
-@Component({
+export default defineComponent({
     components: {
         Modal
     },
     computed: {
         show: () => $ReadQueue.status,
         queue: () => $ReadQueue.queue,
+    },
+
+    methods: {
+        close () {
+            $ReadQueue.hide()
+        },
+
+        remove (id) {
+            $ReadQueue.remove(id)
+        },
+
+        clear () {
+            $ReadQueue.clear()
+        },
+
+        goToPosts () {
+            this.$router.push({ path: '/posts' })
+            this.close()
+        },
+
     }
 })
-export default class GlobalNotification extends Vue {
 
-
-    close () {
-        $ReadQueue.hide()
-    }
-
-    remove (id) {
-        $ReadQueue.remove(id)
-    }
-
-    clear () {
-        $ReadQueue.clear()
-    }
-
-    goToPosts () {
-        this.$router.push({ path: '/posts' })
-        this.close()
-    }
-
-}
 </script>
 <style lang="scss" scoped>
 .Post {

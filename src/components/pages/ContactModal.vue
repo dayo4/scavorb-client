@@ -44,24 +44,24 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue } from "vue-property-decorator"
+// import { defineComponent } from "vue"
 
-import { $Auth } from "@/myStore"
-import { $Validator } from "@/plugins"
+// import { $Auth } from "@/myStore"
+// import { $Validator } from "@/plugins"
 
 
-@Component({
-    // computed: {
+// export default defineComponent({
+//     // computed: {
 
-    // }
-})
-export default class Auth extends Vue {
+//     // }
+// })
+// export default class Auth extends Vue {
 
-    dismiss () {
+//     dismiss () {
 
-    }
+//     }
 
-}
+// }
 </script>
 <style lang="scss" scoped>
 .contactModal {

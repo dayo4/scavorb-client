@@ -58,73 +58,79 @@
     <!-- </div> -->
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $ReadQueue, $Auth } from "@/myStore"
 
-@Component({
+export default defineComponent({
+    data () {
+        return {
+            collapsed: true,
+
+
+            icons: [
+                { font: 'icon-sort-alt-up', text: 'Read Queue', link: '', store: '$ReadQueue' },
+                { font: 'icon-bookmarks', text: 'Bookmarks', link: '', store: '', auth: 'user' },
+                { font: 'icon-cog-alt', text: 'Admin', link: 'admin-dashboard', auth: 'admin' },
+                { font: 'icon-plus-1', text: 'New Post', link: 'compose-post', auth: 'admin' },
+                { font: 'icon-cog-1', text: 'Settings', link: 'manage-settings', auth: 'user' },
+            ],
+
+            pageIcons: [
+                { font: 'icon-mail-alt', text: 'Mail', link: 'contact' },
+                { font: 'icon-info', text: 'About', link: 'about' },
+                { font: 'icon-doc-text', text: 'Posts', link: 'posts' },
+
+            ],
+
+            socialLinks: [
+                // { font: 'icon-youtube', text: 'YouTube', link: '' },
+                { font: 'icon-whatsapp', text: 'WhatsApp', link: 'https://wa.me/message/3NSQPMZJFTDHL1' },
+            ]
+
+        }
+    },
+
     computed: {
         isUser: () => $Auth.isUser,
         isAdmin: () => $Auth.isAdmin,
-    }
-})
-export default class HoverPanel extends Vue {
-    collapsed = true
+    },
 
+    methods: {
+        /* This ensures that panel will only close if target links to somewhere. */
+        click ({ link, store, auth }) {
+            if (link)
+            {
+                this.collapsed = !this.collapsed
+            }
+            else if (store)
+            {
+                this.collapsed = !this.collapsed
+                if (store == '$ReadQueue')
+                    $ReadQueue.show()
+            }
+        },
 
-    icons = [
-        { font: 'icon-sort-alt-up', text: 'Read Queue', link: '', store: '$ReadQueue' },
-        { font: 'icon-bookmarks', text: 'Bookmarks', link: '', store: '', auth: 'user' },
-        { font: 'icon-cog-alt', text: 'Admin', link: 'admin-dashboard', auth: 'admin' },
-        { font: 'icon-plus-1', text: 'New Post', link: 'compose-post', auth: 'admin' },
-        { font: 'icon-cog-1', text: 'Settings', link: 'manage-settings', auth: 'user' },
-    ]
+        unAuthClick () {
+            $Auth.$form.show({ showQuery: true, message: 'Sorry! That resource you tried to access require you to login.' })
+        },
 
-    pageIcons = [
-        { font: 'icon-mail-alt', text: 'Mail', link: 'contact' },
-        { font: 'icon-info', text: 'About', link: 'about' },
-        { font: 'icon-doc-text', text: 'Posts', link: 'posts' },
+        collapse () {
+            let _this = this
+            function collapse (e) {
+                if (!(e.target.closest('.HPWrapper')))
+                {
+                    _this.collapsed = true
+                }
+            }
+            window.addEventListener('click', collapse, false)
+        }
+    },
 
-    ]
-
-    socialLinks = [
-        // { font: 'icon-youtube', text: 'YouTube', link: '' },
-        { font: 'icon-whatsapp', text: 'WhatsApp', link: 'https://wa.me/message/3NSQPMZJFTDHL1' },
-    ]
-
-    /* lifecycle hooks */
     mounted () {
         this.collapse()
     }
+})
 
-    /* This ensures that panel will only close if target links to somewhere. */
-    click ({ link, store, auth }) {
-        if (link)
-        {
-            this.collapsed = !this.collapsed
-        }
-        else if (store)
-        {
-            this.collapsed = !this.collapsed
-            if (store == '$ReadQueue')
-                $ReadQueue.show()
-        }
-    }
-
-    unAuthClick () {
-        $Auth.$form.show({ showQuery: true, message: 'Sorry! That resource you tried to access require you to login.' })
-    }
-
-    collapse () {
-        let _this = this
-        function collapse (e) {
-            if (!(e.target.closest('.HPWrapper')))
-            {
-                _this.collapsed = true
-            }
-        }
-        window.addEventListener('click', collapse, false)
-    }
-}
 </script>
 <style lang="scss" scoped>
 .HPWrapper {

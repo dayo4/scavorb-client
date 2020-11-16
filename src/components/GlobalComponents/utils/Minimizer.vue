@@ -23,68 +23,78 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 
-@Component({})
-export default class Minimizer extends Vue {
-    $refs!: {
-        GblMinimizer: HTMLDivElement
-    }
-    @Prop({ required: true, type: Number }) initialHeight: number /* initial height on which to minimize content displayed*/
-    @Prop({ required: false, type: Number }) readonly nextHeight: number /* next step height if content is very long */
-    @Prop({ required: false, default: true, type: Boolean }) readonly closeable: boolean /* Determines whether the trigger will not disappear when max height is reached. Allowing user to minimise */
+export default defineComponent({
+    props: {
+        initialHeight: { required: true, type: Number },
+        nextHeight: { required: false, type: Number },
+        closeable: { required: false, type: Boolean, default: true },
+    },
 
-    onMountHeight: number = null /* set when the element is first mounted */
-    elementHeight: object | string = '' /* dynamically created height to override onMountHeight */
-    prevHeight: number = null /* Useful when next height is provided and the ShowMore btn is clicked once */
-    deactivated: boolean = false /* disables the component */
-    maxHeightReached: boolean = false
+    data () {
+        return {
+            onMountHeight: null as number, /* set when the element is first mounted */
+            elementHeight: '' as object | string,  /* dynamically created height to override onMountHeight */
+            prevHeight: null as number,  /* Useful when next height is provided and the ShowMore btn is clicked once */
+            deactivated: false, /* disables the component */
+            maxHeightReached: false
+        }
+    },
+
+    methods: {
+        increaseHeight () {
+            if (this.nextHeight && this.nextHeight < this.onMountHeight)
+            {
+                if (this.prevHeight)
+                {
+                    const newHeight = this.prevHeight + this.nextHeight
+                    if (newHeight < this.onMountHeight)
+                        this.elementHeight = { height: newHeight + 'px' }
+                    else
+                    {
+                        this.deactivated = true
+                        this.elementHeight = ''
+                    }
+                }
+                else
+                {
+                    this.prevHeight = this.nextHeight || null
+                    this.elementHeight = { height: this.nextHeight + 'px' }
+                }
+            }
+            else
+            {
+                this.elementHeight = ''
+                if (this.closeable === true)
+                    this.maxHeightReached = true
+                else
+                {
+                    this.maxHeightReached = false
+                    this.deactivated = true
+                }
+            }
+        },
+
+        decreaseHeight () {
+            this.elementHeight = { height: this.initialHeight + 'px' }
+            this.maxHeightReached = false
+        }
+    },
 
     mounted () {
-        this.onMountHeight = this.$refs.GblMinimizer.clientHeight
+        this.onMountHeight = (this.$refs.GblMinimizer as HTMLElement).clientHeight
         if (this.onMountHeight > this.initialHeight)
             this.elementHeight = { height: this.initialHeight + 'px' }
         else
             this.deactivated = true
     }
+})
 
-    increaseHeight () {
-        if (this.nextHeight && this.nextHeight < this.onMountHeight)
-        {
-            if (this.prevHeight)
-            {
-                const newHeight = this.prevHeight + this.nextHeight
-                if (newHeight < this.onMountHeight)
-                    this.elementHeight = { height: newHeight + 'px' }
-                else
-                {
-                    this.deactivated = true
-                    this.elementHeight = ''
-                }
-            }
-            else
-            {
-                this.prevHeight = this.nextHeight || null
-                this.elementHeight = { height: this.nextHeight + 'px' }
-            }
-        }
-        else
-        {
-            this.elementHeight = ''
-            if (this.closeable === true)
-                this.maxHeightReached = true
-            else
-            {
-                this.maxHeightReached = false
-                this.deactivated = true
-            }
-        }
-    }
-    decreaseHeight () {
-        this.elementHeight = { height: this.initialHeight + 'px' }
-        this.maxHeightReached = false
-    }
-}
+    // $refs!: {
+    //     GblMinimizer: HTMLDivElement
+    // }
+
 </script>
 <style lang="scss" scoped>
 .GblMinimizer {

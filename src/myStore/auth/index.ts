@@ -75,4 +75,4 @@ export class Authentication {
 
 }
 
-export const $Auth = $Vue.observable(new Authentication())
+export const $Auth = $Vue.reactive(new Authentication())

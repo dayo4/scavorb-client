@@ -1,0 +1,96 @@
+/* gradient backgrounds */
+.bg-gradient-1{
+	background-color: #006064;
+	background:linear-gradient(
+			#880e4f 0%,
+			#006064 25%,
+			#00bcd4 50%,
+			#006064 75%,
+			#880e4f 100%
+		);
+}
+.bg-gradient-2 {
+	background-color: #006064;
+	background:linear-gradient(
+				#d81b60 0%,
+				#006064 25%,
+				#00bcd4 50%,
+				#006064 75%,
+				#d81b60 100%
+		);
+}
+
+        /* cyan buttons */
+.cyan-gradient-btn {
+	background:  linear-gradient(
+		#006064 25%,
+		#00bcd4 50%,
+		#006064 75%,
+	);
+
+	&:not(.isDisabled):active{
+		background: linear-gradient(
+			#006064 15%,
+			#00acc1 35%,
+			#00acc1 65%,
+			#006064 85%,
+		);
+	}
+}
+
+		/* pink buttons */
+.pink-gradient-btn {
+	background-color: #ad1457;
+	background:  linear-gradient(
+		#880e4f 25%,
+		#e91e63 50%,
+		#880e4f 75%,
+		);
+
+		&:not(.isDisabled):active{
+		background: linear-gradient(
+			#880e4f 15%,
+			#ec407a 35%,
+			#ec407a 65%,
+			#880e4f 85%,
+		);
+	}
+}
+
+			/* blue-grey buttons */
+// .blue-grey-gradient-btn {
+// 	background-color: #37474f;
+// 	background:  linear-gradient(
+// 		#263238 25%,
+// 		#607d8b 50%,
+// 		#263238 75%,
+// 	);
+
+// 	&:not(.isDisabled):active{
+// 		background: linear-gradient(
+// 			#263238 15%,
+// 			#78909c 35%,
+// 			#78909c 65%,
+// 			#263238 85%,
+// 		);
+// 	}
+// }
+
+// 			/* grey buttons */
+// .grey-gradient-btn {
+// 	background-color: #424242;
+// 	background:  linear-gradient(
+// 		#424242 25%,
+// 		#9e9e9e 50%,
+// 		#424242 75%,
+// 	);
+
+// 	&:not(.isDisabled):active{
+// 		background: linear-gradient(
+// 			#424242 15%,
+// 			#bdbdbd 35%,
+// 			#bdbdbd 65%,
+// 			#424242 85%,
+// 		);
+// 	}
+// }

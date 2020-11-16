@@ -35,11 +35,11 @@
     </div>
 </template>
  <script lang="ts">
-// import { Component, Vue, Prop, Watch } from "vue-property-decorator"
+// import { Component, Vue, Prop, Watch } from "vue"
 // import { $Auth, $Profile } from '@/myStore'
 // import { $Confirm } from '@/plugins'
 
-// @Component({
+// export default defineComponent({
 //     computed: {
 //         user: () => $Auth.user,
 //         profile: () => $Profile.data,

@@ -11,12 +11,12 @@ import settings from "@/router/routes/settings.ts"
 import gallery from "@/router/routes/gallery"
 
 export default [
-    { path: '*', component: () => import("@/views/pages/ERRORS/404.vue") },
     ...admin,
     ...auth,
     ...users,
     ...pages,
     ...posts,
     ...settings,
-    ...gallery
+    ...gallery,
+    { path: '/:pathMatch(.*)*', component: () => import("@/views/pages/ERRORS/404.vue") }
 ]

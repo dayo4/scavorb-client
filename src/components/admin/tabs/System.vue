@@ -9,50 +9,53 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 import { $Admin, $Auth } from '@/myStore'
-import { $Notify, $Confirm } from '@/plugins'
+import { $Confirm } from '@/plugins'
 
-@Component({
+export default defineComponent({
+
+    data () {
+        return {
+            allowReg: null as boolean
+        }
+    },
+
     computed: {
-        isSAdmin: () => $Auth.isSAdmin,
+        isSAdmin: (): boolean => $Auth.isSAdmin,
         settings: () => $Auth.sysSettings
     },
-})
-export default class SystemSettings extends Vue {
 
-    settings!: any
-    isSAdmin!: boolean
+    methods: {
+        saveChanges () {
+            let _this = this
+            if (this.isSAdmin)
+                $Confirm({
+                    header: 'Save Settings',
+                    message: `<b>Confirm?</b>`,
+                    type: 'info',
+                    onConfirm: function () {
+                        return $Admin.$system.update({
+                            allow_new_reg: _this.allowReg
+                        }).then(done => {
+                            if (done)
+                            {
+                                $Auth.getSysSettings()
+                                return done
+                            }
+                        })
+                    }
 
-    allowReg: boolean = null
+                })
+        }
+    },
 
     mounted () {
         this.allowReg = this.settings.allow_new_reg
     }
+})
 
-    saveChanges () {
-        let _this = this
-        if (this.isSAdmin)
-            $Confirm({
-                header: 'Save Settings',
-                message: `<b>Confirm?</b>`,
-                type: 'info',
-                onConfirm: function () {
-                    return $Admin.$system.update({
-                        allow_new_reg: _this.allowReg
-                    }).then(done => {
-                        if (done)
-                        {
-                            $Auth.getSysSettings()
-                            return done
-                        }
-                    })
-                }
-
-            })
-    }
-}
 </script>
 <style lang="scss" scoped>
 input[type="checkbox"] {

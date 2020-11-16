@@ -3,17 +3,20 @@
     "target": "esnext",
     "module": "esnext",
     "strict": false,
+    "noImplicitThis": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "mocha",
+      "chai",
+      "socket.io-client"
     ],
     "paths": {
       "@/*": [
@@ -32,9 +35,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/registerServiceWorker.js",
-    "src/polyfills.js"
+    "tests/**/*.tsx"
   ],
   "exclude": [
     "node_modules"

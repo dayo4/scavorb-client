@@ -114,120 +114,121 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 
 import { $Posts, $Auth } from '@/myStore'
 import { $Notify } from '@/plugins'
 
-@Component({
+export default defineComponent({
     components: {
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+    },
+
+    data () {
+        return {
+            selectedPosts: [] as string[],
+
+            filter: 'All', /* Filters posts list */
+            query: {
+                filter: {}
+            }
+        }
     },
 
     computed: {
-        user: () => $Auth.user,
-        posts: () => $Posts.$settings.posts,
+        user: (): object => $Auth.user,
+        posts: (): object[] => $Posts.$settings.posts,
         // count: () => this.postsCount,
     },
-})
-export default class ManagePosts extends Vue {
-    user!: any
-    posts!: object[]
-    // $refs!: {
-    //     dropBtnActions
-    // }
-    selectedPosts: string[] = []
 
-    filter: string = 'All' /* Filters posts list */
-    query = {
-        filter: {}
-    }
+    methods: {
+        filterBy (txt, v: object) {
+            this.filter = txt
+            this.query.filter = v
+            $Posts.$settings.fetchAll(this.query, true)
+        },
 
-    filterBy (txt, v: object) {
-        this.filter = txt
-        this.query.filter = v
-        $Posts.$settings.fetchAll(this.query, true)
-    }
-    changeActions (action: string, value: boolean) {
-        if (this.query.filter[ action ] === value)
-            return true
-        return false
-    }
+        changeActions (action: string, value: boolean) {
+            if (this.query.filter[ action ] === value)
+                return true
+            return false
+        },
 
-    selectPost (post_id) {
-        if (!this.selectedPosts.includes(post_id))
-            this.selectedPosts.push(post_id)
-        else
-            this.selectedPosts.splice(this.selectedPosts.indexOf(post_id), 1)
-    }
+        selectPost (post_id) {
+            if (!this.selectedPosts.includes(post_id))
+                this.selectedPosts.push(post_id)
+            else
+                this.selectedPosts.splice(this.selectedPosts.indexOf(post_id), 1)
+        },
 
-    checkBox (post_id): boolean {
-        if (this.selectedPosts.includes(post_id))
-            return true
-    }
+        checkBox (post_id): boolean {
+            if (this.selectedPosts.includes(post_id))
+                return true
+        },
 
-    selectAll () {
-        if (this.selectedPosts.length < 2)
-            this.posts.forEach((post: any) => {
-                if (!this.selectedPosts.includes(post.id))
-                    this.selectedPosts.push(post.id)
-            })
-        else
-            this.selectedPosts = []
-    }
-
-    deletePosts (post_id) {
-        if (post_id)
-            $Posts.$settings.delete({ postsIds: [ post_id ] }).then(() => {
-                $Posts.$settings.fetchAll(this.query, true)
+        selectAll () {
+            if (this.selectedPosts.length < 2)
+                this.posts.forEach((post: any) => {
+                    if (!this.selectedPosts.includes(post.id))
+                        this.selectedPosts.push(post.id)
+                })
+            else
                 this.selectedPosts = []
-            })
-        else
-            if (this.selectedPosts.length > 0)
-                $Posts.$settings.delete({ postsIds: this.selectedPosts }).then(() => {
+        },
+
+        deletePosts (post_id) {
+            if (post_id)
+                $Posts.$settings.delete({ postsIds: [ post_id ] }).then(() => {
                     $Posts.$settings.fetchAll(this.query, true)
                     this.selectedPosts = []
                 })
             else
+                if (this.selectedPosts.length > 0)
+                    $Posts.$settings.delete({ postsIds: this.selectedPosts }).then(() => {
+                        $Posts.$settings.fetchAll(this.query, true)
+                        this.selectedPosts = []
+                    })
+                else
+                    $Notify.error('No Posts selected')
+        },
+
+        editPost (slug: string) {
+            $Posts.$compose.fetch({
+                slug: slug
+            }, true).then((data) => {
+                if (data)
+                    this.$router.push({ path: '/compose', query: { mode: 'edit' } })
+            })
+        },
+
+        publish (publish: boolean = true) {
+            if (this.selectedPosts.length > 0)
+                $Posts.$settings.publish({
+                    postsIds: this.selectedPosts, published: { value: publish ? true : false }
+                })
+                    .then(() => {
+                        $Posts.$settings.fetchAll(this.query, true)
+                        this.selectedPosts = []
+                    })
+            else
                 $Notify.error('No Posts selected')
-    }
+        },
 
-    editPost (slug: string) {
-        $Posts.$compose.fetch({
-            slug: slug
-        }, true).then((data) => {
-            if (data)
-                this.$router.push({ path: '/compose', query: { mode: 'edit' } })
-        })
-    }
-
-    publish (publish: boolean = true) {
-        if (this.selectedPosts.length > 0)
-            $Posts.$settings.publish({
-                postsIds: this.selectedPosts, published: { value: publish ? true : false }
-            })
-                .then(() => {
-                    $Posts.$settings.fetchAll(this.query, true)
-                    this.selectedPosts = []
+        archive (archive: boolean = true) {
+            if (this.selectedPosts.length > 0)
+                $Posts.$settings.archive({
+                    postsIds: this.selectedPosts, archived: { value: archive ? true : false }
                 })
-        else
-            $Notify.error('No Posts selected')
+                    .then(() => {
+                        $Posts.$settings.fetchAll(this.query, true)
+                        this.selectedPosts = []
+                    })
+            else
+                $Notify.error('No Posts selected')
+        }
     }
+})
 
-    archive (archive: boolean = true) {
-        if (this.selectedPosts.length > 0)
-            $Posts.$settings.archive({
-                postsIds: this.selectedPosts, archived: { value: archive ? true : false }
-            })
-                .then(() => {
-                    $Posts.$settings.fetchAll(this.query, true)
-                    this.selectedPosts = []
-                })
-        else
-            $Notify.error('No Posts selected')
-    }
-
-}
 </script>
 <style lang="scss" scoped>
 section {

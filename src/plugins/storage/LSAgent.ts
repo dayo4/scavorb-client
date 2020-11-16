@@ -35,7 +35,7 @@ class LocalStorageService {
         const token = this.getToken()
         if (token)
         {
-            const decoded = decoder(token)
+            const decoded = decoder(token) as any
             return decoded.data
         }
         return null

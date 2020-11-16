@@ -4,53 +4,53 @@
     </section>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
-@Component({})
-export default class SCHT extends Vue {
-    $refs!: {
-        Canvas: HTMLCanvasElement
-    }
+// import { defineComponent } from "vue"
+// export default defineComponent({})
+// export default class SCHT extends Vue {
+//     $refs!: {
+//         Canvas: HTMLCanvasElement
+//     }
 
-    mounted () {
-        this.createCanvas()
-    }
+//     mounted () {
+//         this.createCanvas()
+//     }
 
-    createCanvas () {
-        const Canvas = this.$refs.Canvas
-        let width = Canvas.width
-        const ctx = Canvas.getContext("2d")
+//     createCanvas () {
+//         const Canvas = this.$refs.Canvas
+//         let width = Canvas.width
+//         const ctx = Canvas.getContext("2d")
 
-        const values = [ 0.93, 0.94, 0.93, 0.91, 0.92, 0.90, 0.82, 0.60, 0.68, 0.62 ]
-        const text = [
-            'JAVASCRIPT',
-            'CSS',
-            'HTML',
-            'TYPESCRIPT',
-            'VUEJS',
-            'NODEJS',
-            'UI DESIGN',
-            'PYTHON',
-            'GRAPHICS',
-            'PHP'
-        ]
+//         const values = [ 0.93, 0.94, 0.93, 0.91, 0.92, 0.90, 0.82, 0.60, 0.68, 0.62 ]
+//         const text = [
+//             'JAVASCRIPT',
+//             'CSS',
+//             'HTML',
+//             'TYPESCRIPT',
+//             'VUEJS',
+//             'NODEJS',
+//             'UI DESIGN',
+//             'PYTHON',
+//             'GRAPHICS',
+//             'PHP'
+//         ]
 
-        drawRails()
-        function drawRails () {
+//         drawRails()
+//         function drawRails () {
 
-            for (let i = 0; i < values.length; i++)
-            {
-                ctx.fillStyle = "#bdbdbd"
-                ctx.fillRect(0, i * 30, width, 20)
-                ctx.fillStyle = "#ad1457"
-                ctx.fillRect(0, i * 30, width * values[ i ], 20)
-                ctx.fillStyle = "#c2185b"
-                ctx.fillRect(0, i * 30, 72, 20)
-                ctx.fillStyle = "white"
-                ctx.fillText(text[ i ], 3, i * 30 + 13)
-            }
-        }
-    }
-}
+//             for (let i = 0; i < values.length; i++)
+//             {
+//                 ctx.fillStyle = "#bdbdbd"
+//                 ctx.fillRect(0, i * 30, width, 20)
+//                 ctx.fillStyle = "#ad1457"
+//                 ctx.fillRect(0, i * 30, width * values[ i ], 20)
+//                 ctx.fillStyle = "#c2185b"
+//                 ctx.fillRect(0, i * 30, 72, 20)
+//                 ctx.fillStyle = "white"
+//                 ctx.fillText(text[ i ], 3, i * 30 + 13)
+//             }
+//         }
+//     }
+// }
 </script>
 <style lang="scss" scoped>
 .CanvasCont {

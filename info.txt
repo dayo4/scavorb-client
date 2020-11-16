@@ -1,7 +1,3 @@
-added vue.config.js file to inport scss variables into the project.
-
-
-
 
 z-index info {
     GlobalDropdown - 5

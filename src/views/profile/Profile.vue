@@ -10,16 +10,21 @@ import Container from '@/components/navs/reusables/Container.vue'
 
 import UpperSection from "@/components/profile/UpperSection.vue"
 import LowerSection from "@/components/profile/LowerSection.vue"
-import { Component, Vue, Watch } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Profile } from "@/myStore"
 
-@Component({
+export default defineComponent({
     components: {
         Container,
         UpperSection,
         LowerSection
     },
 
+    watch: {
+        $route () {
+            $Profile.fetch({ username: this.$route.params.username as string }, true)
+        }
+    },
     // beforeRouteUpdate(to, from, next) {
     // 	this.$store.dispatch('profile/fetch', {
     // 		username: this.$route.params.username
@@ -47,13 +52,6 @@ import { $Profile } from "@/myStore"
     // 	// }
     // },
 })
-export default class Profile extends Vue {
-    @Watch('$route')
-    refreshProfile () {
-        $Profile.fetch({ username: this.$route.params.username }, true)
-    }
-
-}
 </script>
 <style lang="scss" scoped>
 </style>

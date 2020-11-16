@@ -12,4 +12,4 @@ export class Navs {
 
 }
 
-export const $Navs = $Vue.observable(new Navs())
+export const $Navs = $Vue.reactive(new Navs())

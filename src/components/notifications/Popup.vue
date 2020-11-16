@@ -21,38 +21,41 @@
     </a>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Auth } from '@/myStore'
 import { $Confirm } from '@/plugins'
 
-@Component({
-    components: {},
+export default defineComponent({
+    // components: {},
+    data () {
+        return {
+            show: false
+
+        }
+    },
 
     computed: {
         user: () => $Auth.user,
         userData: () => $Auth.userData
     },
-})
-export default class Platform extends Vue {
-    // @Prop({ required: true }) show: boolean
 
-    show = false
+    methods: {
+        updated () {
+            this.dropdownHandler()
+        },
 
-    updated () {
-        this.dropdownHandler()
-    }
-
-    dropdownHandler () {
-        let $this = this
-        function dropdown (e) {
-            if (!(e.target.closest('.Notif')))
-            {
-                $this.show = false
+        dropdownHandler () {
+            let $this = this
+            function dropdown (e) {
+                if (!(e.target.closest('.Notif')))
+                {
+                    $this.show = false
+                }
             }
+            document.addEventListener('click', dropdown, false)
         }
-        document.addEventListener('click', dropdown, false)
     }
-}
+})
 </script>
 <style lang="scss" scoped>
 .Notif {

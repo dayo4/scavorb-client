@@ -29,33 +29,37 @@
     </button>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
-@Component({
+import { defineComponent } from "vue"
+export default defineComponent({
+    props: {
+        ownID: { required: true, type: [ String, Number ] },
+        text: { required: false, type: String },
+        pos: { required: false, type: Object /* { type?, top?, bottom?, right?, left?} */ },
+        optPos: { required: false, type: Object /* { type?, top?, bottom?, right?, left?} */ }
+    },
+    data () {
+        return {
+            dropdown: false
+        }
+    },
 
-})
-export default class Dropdown extends Vue {
-    @Prop({ required: true }) readonly ownID: string
-    @Prop({ required: false }) text: string
-    @Prop({ required: false }) pos: { type?, top?, bottom?, right?, left?} /* type means either relative, fixed or absolute */
-    @Prop({ required: false }) optPos: { top?, bottom?, right?, left?} /* Sets the position of the dropdown options */
-
-
-    dropdown = false
-
+    methods: {
+        dropdownHandler () {
+            // const _this = this
+            const dropdown = (e) => {
+                if (!(e.target.closest('.DropBtnId-' + this.ownID)))
+                {
+                    this.dropdown = false
+                }
+            }
+            window.addEventListener('click', dropdown, false)
+        }
+    },
     mounted () {
         this.dropdownHandler()
     }
-    dropdownHandler () {
-        let _this = this
-        function dropdown (e) {
-            if (!(e.target.closest('.DropBtnId-' + _this.ownID)))
-            {
-                _this.dropdown = false
-            }
-        }
-        window.addEventListener('click', dropdown, false)
-    }
-}
+})
+
 </script>
 <style lang="scss">
 .GlobalDropBtn {

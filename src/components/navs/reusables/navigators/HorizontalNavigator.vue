@@ -13,13 +13,14 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
-@Component({})
-export default class Navigation extends Vue {
-    @Prop({ required: true, type: Array }) readonly tabsList: []/* Array of objects containing -> {icon,name} */
-    @Prop({ required: true, type: String }) activeTab: string/*Currently active tab*/
-}
+export default defineComponent({
+    props: {
+        tabsList: { required: true, type: Array },/* Array of objects containing -> {icon,name} */
+        activeTab: { required: true, type: String },/*Currently active tab*/
+    },
+})
 </script>
 <style lang="scss" scoped>
 .Nav {

@@ -122,27 +122,28 @@
     <!-- BODY-->
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 
 import { $Comments, $Auth } from "@/myStore"
 import { $Validator } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
-        Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue'),
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        Minimizer: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Minimizer.vue')),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
     },
+
+    props: {
+        subCommentMode: { required: true, type: Boolean },
+        activeComment: { required: true, type: Object },
+    },
+
     computed: {
         user: () => $Auth.user,
         comments: () => $Comments.$SubComments.comments,
     }
 })
-export default class SubComments extends Vue {
-    @Prop({ required: true }) readonly subCommentMode: boolean
-    @Prop({ required: true }) readonly activeComment: object
 
-
-}
 </script>
 <style lang="scss">
 /* Shares same style as the main comment */

@@ -138,22 +138,41 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 import { $ReadQueue, $Posts, $Auth } from "@/myStore"
 import { $Process } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
         // Comments: () => import('@/components/posts/comment/Comments.vue')
     },
+
+    props: {
+        posts: { required: true, type: Array },
+    },
+
     computed: {
         user: () => $Auth.user,
+    },
+
+    methods: {
+        openPost (slug: string) {
+        /* let route = */ this.$router.push({ path: '/posts/' + slug })
+            // window.open(route.href, '_blank')
+        },
+
+        addToQueue (post_id, post_image: File, post_title: string, slug: string) {
+            $ReadQueue.add({
+                id: post_id,
+                //@ts-ignore
+                image: post_image ? this.$postBaseUrl + post_image : '/defaults/4.jpg',
+                title: post_title,
+                slug: slug
+            })
+        }
     }
 })
-export default class ListOfPost extends Vue {
-    @Prop({ required: true, type: Array }) readonly posts: []
-
     // activePost: object = null
     // showComments: boolean = false
     // comment_Socket: SocketIOClient.Socket = null
@@ -172,21 +191,6 @@ export default class ListOfPost extends Vue {
     //         }
     //     }).finally(() => $Process.hide())
     // }
-
-    openPost (slug: string) {
-        /* let route = */ this.$router.push({ path: '/posts/' + slug })
-        // window.open(route.href, '_blank')
-    }
-
-    addToQueue (post_id, post_image: File, post_title: string, slug: string) {
-        $ReadQueue.add({
-            id: post_id,
-            image: post_image ? this.$postBaseUrl + post_image : '/defaults/4.jpg',
-            title: post_title,
-            slug: slug
-        })
-    }
-}
 </script>
 <style lang="scss" scoped>
 .Wrapper {

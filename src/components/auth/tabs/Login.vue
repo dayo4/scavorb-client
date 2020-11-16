@@ -87,113 +87,121 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 import { $Auth } from "@/myStore"
 import { $Validator, $Obstacle } from "@/plugins"
 
-@Component({
+export default defineComponent({
+    props: {
+        show: { required: true, type: Boolean },
+    },
+
+    data () {
+        return {
+            stage_2: false,
+
+            email: '',
+            password: '',
+            fname: '',
+            lname: '',
+
+            email_err: '',
+            pass_err: '',
+            fname_err: '',
+            lname_err: '',
+
+            staticData: [] /* to keep user email and password between stages */
+
+        }
+    },
+
     computed: {
         response: () => $Auth.$form.response,
+    },
+
+    methods: {
+        send () {
+            this.resetResponse()
+
+            const schema1 = [
+                {
+                    fieldName: 'Email',
+                    data: this.email,
+                    rules: { required: true, email: true, }
+                },
+                {
+                    fieldName: 'Password',
+                    data: this.password,
+                    rules: { required: true, string: true, min: 8, max: 50 }
+                }
+            ]
+            const schema2 = [
+                {
+                    fieldName: 'First Name',
+                    data: this.fname,
+                    rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
+                    message: { pattern: 'Name may only contain letters' }
+                },
+                {
+                    fieldName: 'First Name',
+                    data: this.lname,
+                    rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
+                    message: { pattern: 'Name may only contain letters' }
+                },
+            ]
+
+            const _this = this
+            const sendBtn = this.$refs.send as HTMLButtonElement
+            // if(!this.stage_2){
+
+            // }
+            if ($Validator.validate(!this.stage_2 ? schema1 : schema2))
+            {
+                $Obstacle.create(sendBtn, {
+                    action: function () {
+                        if (_this.stage_2)
+                        {
+                            $Auth.$form.login({
+                                email: _this.staticData[ 0 ],
+                                password: _this.staticData[ 1 ],
+                                first_name: _this.fname,
+                                last_name: _this.lname,
+                            }, 2).then(done => {
+                                $Obstacle.destroy(sendBtn)
+                            })
+                        } else
+                        {
+                            _this.staticData = [ _this.email, _this.password ]
+                            $Auth.$form.login({
+                                email: _this.email,
+                                password: _this.password,
+                            }).then(data => {
+                                $Obstacle.destroy(sendBtn)
+                                if (data.next)
+                                    _this.stage_2 = true
+                            })
+                        }
+                    }
+                })
+            }
+            const errors = $Validator.getErrors()
+            this.email_err = errors[ 'Email' ]
+            this.pass_err = errors[ 'Password' ]
+            this.fname_err = errors[ 'First Name' ]
+            this.lname_err = errors[ 'Last Name' ]
+        },
+
+        resetResponse (err?: string) {
+            if (this[ err ])
+                this[ err ] = ''
+            if (this.response)
+            {
+                $Auth.$form.resetResponse()
+            }
+        }
     }
 })
-export default class Login extends Vue {
-    $refs!: {
-        send
-    }
-    response!: any
-    @Prop({ required: true }) show: boolean
-    stage_2 = false
 
-    email = ''
-    password = ''
-    fname = ''
-    lname = ''
-
-    email_err = ''
-    pass_err = ''
-    fname_err = ''
-    lname_err = ''
-
-    staticData = [] /* to keep user email and password between stages */
-
-    send () {
-        this.resetResponse()
-
-        const schema1 = [
-            {
-                fieldName: 'Email',
-                data: this.email,
-                rules: { required: true, email: true, }
-            },
-            {
-                fieldName: 'Password',
-                data: this.password,
-                rules: { required: true, string: true, min: 8, max: 50 }
-            }
-        ]
-        const schema2 = [
-            {
-                fieldName: 'First Name',
-                data: this.fname,
-                rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
-                message: { pattern: 'Name may only contain letters' }
-            },
-            {
-                fieldName: 'First Name',
-                data: this.lname,
-                rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
-                message: { pattern: 'Name may only contain letters' }
-            },
-        ]
-        let _this = this
-        // if(!this.stage_2){
-
-        // }
-        if ($Validator.validate(!this.stage_2 ? schema1 : schema2))
-        {
-            $Obstacle.create(this.$refs.send, {
-                action: function () {
-                    if (_this.stage_2)
-                    {
-                        $Auth.$form.login({
-                            email: _this.staticData[ 0 ],
-                            password: _this.staticData[ 1 ],
-                            first_name: _this.fname,
-                            last_name: _this.lname,
-                        }, 2).then(done => {
-                            $Obstacle.destroy(_this.$refs.send)
-                        })
-                    } else
-                    {
-                        _this.staticData = [ _this.email, _this.password ]
-                        $Auth.$form.login({
-                            email: _this.email,
-                            password: _this.password,
-                        }).then(data => {
-                            $Obstacle.destroy(_this.$refs.send)
-                            if (data.next)
-                                _this.stage_2 = true
-                        })
-                    }
-                }
-            })
-        }
-        const errors = $Validator.getErrors()
-        this.email_err = errors[ 'Email' ]
-        this.pass_err = errors[ 'Password' ]
-        this.fname_err = errors[ 'First Name' ]
-        this.lname_err = errors[ 'Last Name' ]
-    }
-
-    resetResponse (err?: string) {
-        if (this[ err ])
-            this[ err ] = ''
-        if (this.response)
-        {
-            $Auth.$form.resetResponse()
-        }
-    }
-}
 </script>
 <style lang="scss">
 /* NOTE: "GenFormStyle GenFormWrapper" shared classes are found in the main "Auth" components */

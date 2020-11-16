@@ -105,7 +105,7 @@ export class Form {
     logout (notify?: boolean) {
         $LSAgent.selfDestruct()
 
-        if ($Router.currentRoute.name !== 'home')
+        if ($Router.currentRoute.value.name !== 'home')
         {
             $Router.push({ path: '/' })
         }

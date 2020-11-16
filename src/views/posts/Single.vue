@@ -167,76 +167,82 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 
 import { $Auth, $Posts, $Comments } from "@/myStore"
 import { $Notify, $Process, $General, WS } from "@/plugins"
 
 import Container from '@/components/navs/reusables/Container.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
-        Comments: () => import("@/components/posts/comment/Comments.vue"),
-        Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue')
+        Comments: defineAsyncComponent(() => import("@/components/posts/comment/Comments.vue")),
+        Minimizer: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Minimizer.vue'))
     },
     metaInfo () {
+        // @ts-ignore
         return $General.metaInfo(this.post.title, this.post.content, this.$postBaseUrl + this.post.img, this.href, 'Article')
     },
+
+    data () {
+        return {
+            shareIconsTooltip: '',
+            href: window.location.href,
+            body: document.querySelector('.Body'), /* Post body element */
+
+            /* comments properties */
+            activePost: null as object,
+            showComments: false,
+            socket: null as any // SocketIOClient.Socket
+        }
+    },
+
+    watch: {
+        $route () {
+            $Posts.$single.fetch({
+                slug: this.$route.params.slug as string
+            })
+        }
+    },
+
     computed: {
         user: () => $Auth.user,
         post: () => $Posts.$single.post,
         // content_images: () => $Posts.$single.post.content_images
     },
+
+    methods: {
+        showCommentModal (post) {
+            $Process.add('Setting up comments')
+            this.socket = WS('/comments/fetch-' + post.id)
+            this.activePost = post
+            $Comments.fetchAll(this.socket, post.id, {}, true).then((data) => {
+                if (data)
+                {
+                    this.showComments = true
+                }
+            }).finally(() => $Process.hide())
+        },
+
+        editPost (slug) {
+            $Posts.$compose.fetch({
+                slug: slug
+            }, true).then((data) => {
+                if (data)
+                    this.$router.push({ path: '/compose', query: { mode: 'edit' } })
+                // let route = this.$router.resolve({ path: '/compose' })
+                // window.open(route.href, '_blank')
+            })
+        },
+
+        thumbUp () {
+            // $Posts.$single.fetch({
+            //     post_id: this.$route.params.post_id
+            // })
+        }
+    }
 })
-export default class PostView extends Vue {
-
-    /* own properties */
-    shareIconsTooltip = ''
-    href = window.location.href
-    body = document.querySelector('.Body') /* Post body element */
-
-    /* comments properties */
-    activePost: object = null
-    showComments: boolean = false
-    socket: SocketIOClient.Socket = null
-
-    @Watch('$route')
-    refreshProfile () {
-        $Posts.$single.fetch({
-            slug: this.$route.params.slug
-        })
-    }
-
-    showCommentModal (post) {
-        $Process.add('Setting up comments')
-        this.socket = WS('/comments/fetch-' + post.id)
-        this.activePost = post
-        $Comments.fetchAll(this.socket, post.id, {}, true).then((data) => {
-            if (data)
-            {
-                this.showComments = true
-            }
-        }).finally(() => $Process.hide())
-    }
-
-    editPost (slug) {
-        $Posts.$compose.fetch({
-            slug: slug
-        }, true).then((data) => {
-            if (data)
-                this.$router.push({ path: '/compose', query: { mode: 'edit' } })
-            // let route = this.$router.resolve({ path: '/compose' })
-            // window.open(route.href, '_blank')
-        })
-    }
-
-    thumbUp () {
-        // $Posts.$single.fetch({
-        //     post_id: this.$route.params.post_id
-        // })
-    }
-}
 </script>
 <style lang="scss" scoped>
 .Wrapper > div {

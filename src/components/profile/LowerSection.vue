@@ -26,79 +26,80 @@
 import Tab_1 from "@/components/profile/mainTabs/Portfolio.vue"
 import Tab_2 from "@/components/profile/mainTabs/PostsTab.vue"
 // import MediaTab from "@/components/profile/mainTabs/MediaTab.vue"
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Auth, $Posts, $Profile } from "@/myStore"
 import { /* $ScrollLoader */ $Process, $Obstacle } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
         // DetailsTab,
         Tab_1,
         Tab_2,
         // MediaTab
     },
+
+    data () {
+        return {
+            currentTab: 'Tab_1',
+
+            MCMV: null as HTMLElement, /* root element */
+
+            tabsList: [
+                { id: 1, name: 'SCRAPBOOK', icon: 'icon-folder-open' },
+                { id: 2, name: 'POSTS', icon: 'icon-doc-text' },
+                // { id: 3, name: 'MEDIA', icon: 'icon-picture' },
+            ]
+        }
+    },
+
     computed: {
         user: () => $Auth.user,
         profile: () => $Profile.data
-    }
-})
-export default class ProfileLowerSection extends Vue {
-    user!: any
-    profile!: any
+    },
 
-    currentTab = 'Tab_1'
+    methods: {
+        switchTab (tab_id) {
+            this.currentTab = 'Tab_' + tab_id
+            // if (tab_id === 2 && this.profile.pr === 10)
+            // {
+            //     $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.create('.Tab_2')/* $Process.hide() */)
+            // }
+        },
 
-    MCMV: HTMLElement = null /* root element */
+        handleScroll () {
+            this.MCMV = document.getElementById('MC-ProfileView') /* parent element - profile view*/
+            let TopNav = document.getElementById('TopNav')
+            let TabsContainer = document.getElementById('TabsContainer')
+            let TabsHeader = document.getElementById('TabsHeader')
+            let UpperSection = document.getElementById('UpperSection')
 
-    tabsList = [
-        { id: 1, name: 'SCRAPBOOK', icon: 'icon-folder-open' },
-        { id: 2, name: 'POSTS', icon: 'icon-doc-text' },
-        // { id: 3, name: 'MEDIA', icon: 'icon-picture' },
-    ]
+            let _this = this
 
-    /* lifecycle hook */
+            /* sticks the TabHeader to the top when scrolling down and replaces the main TopNav.*/
+            function scroll () {
+                let TabsHeaderPos = UpperSection.clientHeight + 52/* TopNav height */
+                let scrollTop = _this.MCMV.scrollTop
+                if (scrollTop >= TabsHeaderPos)
+                {
+                    TabsHeader.classList.add('fixed')
+                    TopNav.classList.add('rotated')
+                    TabsContainer.style.marginTop = '47px'
+                } else
+                {
+                    TabsHeader.classList.remove('fixed')
+                    TopNav.classList.remove('rotated')
+                    TabsContainer.style.marginTop = '0'
+                }
+            }
+            this.MCMV.addEventListener('scroll', scroll, false)
+
+        }
+    },
+
     mounted () {
         this.handleScroll()
     }
-
-    /* instance methods */
-    switchTab (tab_id) {
-        this.currentTab = 'Tab_' + tab_id
-        // if (tab_id === 2 && this.profile.pr === 10)
-        // {
-        //     $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.create('.Tab_2')/* $Process.hide() */)
-        // }
-    }
-
-    handleScroll () {
-        this.MCMV = document.getElementById('MC-ProfileView') /* parent element - profile view*/
-        let TopNav = document.getElementById('TopNav')
-        let TabsContainer = document.getElementById('TabsContainer')
-        let TabsHeader = document.getElementById('TabsHeader')
-        let UpperSection = document.getElementById('UpperSection')
-
-        let _this = this
-
-        /* sticks the TabHeader to the top when scrolling down and replaces the main TopNav.*/
-        function scroll () {
-            let TabsHeaderPos = UpperSection.clientHeight + 52/* TopNav height */
-            let scrollTop = _this.MCMV.scrollTop
-            if (scrollTop >= TabsHeaderPos)
-            {
-                TabsHeader.classList.add('fixed')
-                TopNav.classList.add('rotated')
-                TabsContainer.style.marginTop = '47px'
-            } else
-            {
-                TabsHeader.classList.remove('fixed')
-                TopNav.classList.remove('rotated')
-                TabsContainer.style.marginTop = '0'
-            }
-        }
-        this.MCMV.addEventListener('scroll', scroll, false)
-
-    }
-}
+})
 </script>
 <style lang="scss" scoped>
 .TabsHeader {

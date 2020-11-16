@@ -12,7 +12,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Profile, $Posts, $Auth } from "@/myStore"
 import { $Process } from "@/plugins"
 
@@ -24,7 +24,7 @@ import Tab_1 from '@/components/settings/tabs/ProfileInfo.vue'
 import Tab_3 from '@/components/settings/tabs/portfolio/List.vue'
 import Tab_4 from '@/components/settings/tabs/Posts.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
         VerticalNavigator,
@@ -36,33 +36,51 @@ import Tab_4 from '@/components/settings/tabs/Posts.vue'
     beforeRouteEnter (to, from, next) {
         next(vm => {
             if (to.query.tab)
-            {
+            {// @ts-ignore
                 vm.$data.switchTab(to.query.tab)
-            }
+            }// @ts-ignore
             vm.$data.activeTab = 'Tab_1'
         })
+    },
+
+    data () {
+        return {
+            activeTab: 'Tab_1',
+            sideBar: false,
+
+            tabsList: [
+                { id: 1, name: 'Profile Information', icon: 'icon-user' },
+                // { id: 2, name: 'Manage Bookmarks', icon: 'icon-bookmarks' },
+                // { id: 5, name: 'Message Settings', icon: 'icon-mail-alt' },
+                // { id: 6, name: 'Manage Preferences', icon: 'icon-resize-small' },
+                // { id: 7, name: 'Profile Information', icon: 'icon-user' },
+                // { id: 8, name: 'Privacy Settings', icon: 'icon-key' },
+                // { id: 9, name: 'Help', icon: 'icon-help' },  
+            ]
+        }
     },
 
     computed: {
         user: () => $Auth.user,
     },
-})
-export default class Settings extends Vue {
-    user!: any
 
-    /* INSTANCE PROPERTIES */
-    activeTab = 'Tab_1'
-    sideBar = false
+    methods: {
+        switchTab (tab_id) {
+            this.activeTab = 'Tab_' + tab_id
+            if (tab_id === 3)
+            {
+                $Profile.$Portfolio.fetchAll({
+                    user_id: $Auth.user.id,
+                    filter: {}
+                })
+            }
+            else if (tab_id === 4)
+            {
+                $Posts.$settings.fetchAll({ filter: {} }, true)
+            }
+        }
 
-    tabsList = [
-        { id: 1, name: 'Profile Information', icon: 'icon-user' },
-        // { id: 2, name: 'Manage Bookmarks', icon: 'icon-bookmarks' },
-        // { id: 5, name: 'Message Settings', icon: 'icon-mail-alt' },
-        // { id: 6, name: 'Manage Preferences', icon: 'icon-resize-small' },
-        // { id: 7, name: 'Profile Information', icon: 'icon-user' },
-        // { id: 8, name: 'Privacy Settings', icon: 'icon-key' },
-        // { id: 9, name: 'Help', icon: 'icon-help' },  
-    ]
+    },
 
     mounted () {
         const adminTabs = [
@@ -75,23 +93,7 @@ export default class Settings extends Vue {
             this.tabsList.push(...adminTabs)
         }
     }
-    /* INSTANCE METHODS */
-    switchTab (tab_id) {
-        this.activeTab = 'Tab_' + tab_id
-        if (tab_id === 3)
-        {
-            $Profile.$Portfolio.fetchAll({
-                user_id: $Auth.user.id,
-                filter: {}
-            })
-        }
-        else if (tab_id === 4)
-        {
-            $Posts.$settings.fetchAll({ filter: {} }, true)
-        }
-    }
-
-}
+})
 </script>
 <style lang="scss" scoped>
 .Wrapper {

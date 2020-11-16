@@ -112,55 +112,56 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent, ref, defineAsyncComponent } from "vue"
 import { $Auth, $Profile } from "@/myStore"
 import { $Notify, $InputModal } from "@/plugins"
 import { max } from 'moment'
 
-@Component({
+export default defineComponent({
     components: {
-        ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
+        ImageTransformer: defineAsyncComponent(() => import("@/components/uploads/ImageTransformer.vue")),
     },
 
     computed: {
         user: () => $Auth.user,
         profile: () => $Profile.data,
-    }
+    },
+
+    methods: {
+        triggerImageTransformer (ref) {
+            ref === 'profileUpload' ?
+                (this.$refs.profileUpload as any /* child component */).trigger() :
+                ref === 'coverUpload' ?
+                    (this.$refs.coverUpload as any  /* child component */).trigger() :
+                    $Notify.error('invalid imageUploadHandler query!')
+        },
+
+        finalizeImageUpload (formData) {
+            $Profile.$images.uploadImages(formData)
+        },
+
+        updateStatus () {
+            $InputModal.set({
+                header: 'Update Your Status',
+                fieldName: 'status', /* NOTE: Let this match the colomn name to update in database. Otherwise there will be server error. */
+                type: 'text',
+                validation: {
+                    rules: {
+                        required: true,
+                        max: 150
+                    }
+                },
+            })
+        }
+
+    },
+
 })
-export default class ProfileUpperSection extends Vue {
-    $refs!: {
-        profileUpload: HTMLFormElement
-        coverUpload: HTMLFormElement
-        CoverImage: HTMLFormElement
-    }
-
-    triggerImageTransformer (ref) {
-        ref === 'profileUpload' ?
-            this.$refs.profileUpload.trigger() :
-            ref === 'coverUpload' ?
-                this.$refs.coverUpload.trigger() :
-                $Notify.error('invalid imageUploadHandler query!')
-    }
-
-    finalizeImageUpload (formData) {
-        $Profile.$images.uploadImages(formData)
-    }
-
-    updateStatus () {
-        $InputModal.set({
-            header: 'Update Your Status',
-            fieldName: 'status', /* NOTE: Let this match the colomn name to update in database. Otherwise there will be server error. */
-            type: 'text',
-            validation: {
-                rules: {
-                    required: true,
-                    max: 150
-                }
-            },
-        })
-    }
-
-}
+    // $refs!: {
+    //     profileUpload: HTMLFormElement
+    //     coverUpload: HTMLFormElement
+    //     CoverImage: HTMLFormElement
+    // }
 </script>
 <style lang="scss" scoped>
 #UpperSection {
@@ -377,7 +378,7 @@ export default class ProfileUpperSection extends Vue {
         display: none;
     }
 }
-@media only screen and (max-width: 360px) {
+@include xxs-only  {
     .Details {
         & .About,
         .Status {

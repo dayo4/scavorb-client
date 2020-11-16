@@ -7,7 +7,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
@@ -15,15 +15,12 @@ import { Component, Vue } from "vue-property-decorator"
 import Container from '@/components/navs/reusables/Container.vue'
 import Contact from '@/components/pages/Contact.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
         Contact
     },
 })
-export default class About extends Vue {
-
-}
 </script>
 <style lang="scss" scoped>
 .Head {

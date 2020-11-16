@@ -11,30 +11,30 @@
     </section>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import Container from '@/components/navs/reusables/Container.vue'
+// import { defineComponent } from "vue"
+// import Container from '@/components/navs/reusables/Container.vue'
 
-import { $Pages } from "@/myStore"
+// import { $Pages } from "@/myStore"
 
-@Component({
-    components: {
-        Container,
-    },
+// export default defineComponent({
+//     components: {
+//         Container,
+//     },
 
-    computed: {
-        flips: () => $Pages.$home.flips
-    }
-})
-export default class Flipper extends Vue {
+//     computed: {
+//         flips: () => $Pages.$home.flips
+//     }
+// })
+// export default class Flipper extends Vue {
 
-    mounted () {
-        $Pages.$home.startFlipper()
-    }
+//     mounted () {
+//         $Pages.$home.startFlipper()
+//     }
 
-    beforeDestroy () {
-        $Pages.$home.endFlipper()
-    }
-}
+//     beforeDestroy () {
+//         $Pages.$home.endFlipper()
+//     }
+// }
 </script>
 <style lang="scss" scoped>
 .Cont {

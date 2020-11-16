@@ -113,184 +113,187 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 import { $Auth, $Profile } from '@/myStore'
 import { $Confirm, $Validator, $General } from '@/plugins'
 
-@Component({
+export default defineComponent({
     // components: {},
+
+    data () {
+        return {
+            changeNames: false,
+            changeAbout: false,
+            changePassword: false,
+            // changeDOB : false,
+
+
+            first_name: '',
+            last_name: '',
+            oldPassword: '',
+            newPassword: '',
+            about: '',
+            // date_of_birth : '',
+
+            errors: {
+                name: '',
+                about: '',
+                password: ''
+            }
+        }
+    },
 
     computed: {
         user: () => $Auth.user,
         userData: () => $Auth.userData
     },
-})
-export default class ProfInfo extends Vue {
-    $refs!: {
-        about
-    }
-    userData!: any
 
-    changeNames = false
-    changeAbout = false
-    changePassword = false
-    // changeDOB = false
+    methods: {
+        saveName () {
+            const schema = [
+                {
+                    fieldName: 'First Name',
+                    data: this.first_name,
+                    rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
+                    message: { pattern: 'Name may only contain letters' }
+                },
+                {
+                    fieldName: 'First Name',
+                    data: this.last_name,
+                    rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
+                    message: { pattern: 'Name may only contain letters' }
+                },
+            ]
 
+            if ($Validator.validate(schema))
+            {
+                $Profile.$settings.editName({
+                    first_name: this.first_name,
+                    last_name: this.last_name,
+                })
+            }
+            const error = $Validator.getErrors({ format: 'single' })
+            this.errors.name = error
+        },
 
-    first_name = ''
-    last_name = ''
-    oldPassword = ''
-    newPassword = ''
-    about = ''
-    // date_of_birth = ''
+        setAbout (e) {
+            this.about = e.target.textContent
+            if (this.errors.about)
+            {
+                this.errors.about = ''
+            }//10.121.32.3  SHA256:5Bwm5o3lezLXjccI9qwfyL6TW92tWlFyP0cUseGD3Ek dayorx68g@cs-6000-devshell-vm-6b2290c6-db32-4783-a9bc-0b6272f1c1b6
+        },
 
-    errors = {
-        name: '',
-        about: '',
-        password: ''
-    }
+        saveAbout () {
+            const schema = [
+                {
+                    fieldName: 'About',
+                    data: this.about,
+                    rules: { required: true, string: true, min: 15, max: 1000 }
+                },
+            ]
+
+            if ($Validator.validate(schema))
+            {
+                $Profile.$settings.editAbout({
+                    about: this.about,
+                })
+            }
+            const error = $Validator.getErrors({ format: 'single' })
+            this.errors.about = error
+        },
+
+        savePassword () {
+            const schema = [
+                {
+                    fieldName: 'Old Password',
+                    data: this.oldPassword,
+                    rules: { required: true, string: true, min: 8, max: 50 }
+                },
+                {
+                    fieldName: 'New Password',
+                    data: this.newPassword,
+                    rules: { required: true, string: true, min: 8, max: 50 }
+                },
+            ]
+
+            if ($Validator.validate(schema))
+            {
+                $Profile.$settings.changePassword({
+                    old_password: this.oldPassword,
+                    new_password: this.newPassword
+                }).then((data) => {
+                    if (data)
+                    {
+                        this.oldPassword = ''
+                        this.newPassword = ''
+                        this.changePassword = false
+                    }
+                })
+            }
+            const error = $Validator.getErrors({ format: 'single' })
+            this.errors.password = error
+        },
+
+        deactivateAccount () {
+            $Confirm({
+                header: 'Deactivate Account',
+                // message: `Your account will be deactivated for 30days, after which it will be parmanetly deleted.
+                // 	<br>
+                // 		<i>You can simply login anytime within this period to reactivate your account.</i>
+                // 		<br>
+                // 		<b>Are you sure you want to do delete your Account?</b>`,
+                message: `<b>Are you sure you want to deactivate your Account?</b>`,
+                type: 'danger',
+                onConfirm: function () {
+                    return $Profile.$settings.deactivateAccount().then(data => {
+                        if (data)
+                        {
+                            $Auth.$form.logout()
+                            return data
+                        }
+                    })
+                }
+            })
+        },
+
+        deleteAccount () {
+            $Confirm({
+                header: 'Delete Account',
+                // message: `Your account will be deactivated for 30days, after which it will be parmanetly deleted.
+                // 	<br>
+                // 		<i>You can simply login anytime within this period to reactivate your account.</i>
+                // 		<br>
+                // 		<b>Are you sure you want to do delete your Account?</b>`,
+                message: `Your account will be parmanetly deleted.
+				<br>
+					<b>Are you sure you want to delete your Account?</b>`,
+                type: 'danger',
+                onConfirm: function () {
+                    return $Profile.$settings.deleteAccount().then(data => {
+                        if (data)
+                        {
+                            $Auth.$form.logout()
+                            return data
+                        }
+                    })
+                }
+            })
+        },
+
+        plainText (e: ClipboardEvent) {
+            $General.pasteAsPlainText(e)
+        }
+
+    },
 
     mounted () {
         this.first_name = this.userData.first_name
         this.last_name = this.userData.last_name
-        this.$refs.about.textContent = this.about = this.userData.about
+            (this.$refs.about as HTMLDivElement).textContent = this.about = this.userData.about
     }
+})
 
-    saveName () {
-        const schema = [
-            {
-                fieldName: 'First Name',
-                data: this.first_name,
-                rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
-                message: { pattern: 'Name may only contain letters' }
-            },
-            {
-                fieldName: 'First Name',
-                data: this.last_name,
-                rules: { required: true, string: true, min: 2, max: 20, pattern: /^[a-zA-Z]$/ },
-                message: { pattern: 'Name may only contain letters' }
-            },
-        ]
-
-        if ($Validator.validate(schema))
-        {
-            $Profile.$settings.editName({
-                first_name: this.first_name,
-                last_name: this.last_name,
-            })
-        }
-        const error = $Validator.getErrors({ format: 'single' })
-        this.errors.name = error
-    }
-
-    setAbout (e) {
-        this.about = e.target.textContent
-        if (this.errors.about)
-        {
-            this.errors.about = ''
-        }//10.121.32.3  SHA256:5Bwm5o3lezLXjccI9qwfyL6TW92tWlFyP0cUseGD3Ek dayorx68g@cs-6000-devshell-vm-6b2290c6-db32-4783-a9bc-0b6272f1c1b6
-    }
-    saveAbout () {
-        const schema = [
-            {
-                fieldName: 'About',
-                data: this.about,
-                rules: { required: true, string: true, min: 15, max: 1000 }
-            },
-        ]
-
-        if ($Validator.validate(schema))
-        {
-            $Profile.$settings.editAbout({
-                about: this.about,
-            })
-        }
-        const error = $Validator.getErrors({ format: 'single' })
-        this.errors.about = error
-    }
-
-    savePassword () {
-        const schema = [
-            {
-                fieldName: 'Old Password',
-                data: this.oldPassword,
-                rules: { required: true, string: true, min: 8, max: 50 }
-            },
-            {
-                fieldName: 'New Password',
-                data: this.newPassword,
-                rules: { required: true, string: true, min: 8, max: 50 }
-            },
-        ]
-
-        if ($Validator.validate(schema))
-        {
-            $Profile.$settings.changePassword({
-                old_password: this.oldPassword,
-                new_password: this.newPassword
-            }).then((data) => {
-                if (data)
-                {
-                    this.oldPassword = ''
-                    this.newPassword = ''
-                    this.changePassword = false
-                }
-            })
-        }
-        const error = $Validator.getErrors({ format: 'single' })
-        this.errors.password = error
-    }
-
-    deactivateAccount () {
-        $Confirm({
-            header: 'Deactivate Account',
-            // message: `Your account will be deactivated for 30days, after which it will be parmanetly deleted.
-            // 	<br>
-            // 		<i>You can simply login anytime within this period to reactivate your account.</i>
-            // 		<br>
-            // 		<b>Are you sure you want to do delete your Account?</b>`,
-            message: `<b>Are you sure you want to deactivate your Account?</b>`,
-            type: 'danger',
-            onConfirm: function () {
-                return $Profile.$settings.deactivateAccount().then(data => {
-                    if (data)
-                    {
-                        $Auth.$form.logout()
-                        return data
-                    }
-                })
-            }
-        })
-    }
-    deleteAccount () {
-        $Confirm({
-            header: 'Delete Account',
-            // message: `Your account will be deactivated for 30days, after which it will be parmanetly deleted.
-            // 	<br>
-            // 		<i>You can simply login anytime within this period to reactivate your account.</i>
-            // 		<br>
-            // 		<b>Are you sure you want to do delete your Account?</b>`,
-            message: `Your account will be parmanetly deleted.
-				<br>
-					<b>Are you sure you want to delete your Account?</b>`,
-            type: 'danger',
-            onConfirm: function () {
-                return $Profile.$settings.deleteAccount().then(data => {
-                    if (data)
-                    {
-                        $Auth.$form.logout()
-                        return data
-                    }
-                })
-            }
-        })
-    }
-
-    plainText (e: ClipboardEvent) {
-        $General.pasteAsPlainText(e)
-    }
-
-}
 </script>
 <style lang="scss" scoped>
 .Header {

@@ -1,40 +1,24 @@
 /* import some global assets */
-import "../../../../GreyCore/icons/css/fontello.css"
-import "../../../../GreyCore/GC/dist/greycore.css"
-import '@/globalStyles/general.css'
-import '@/globalStyles/plugins.scss'
-import '@/globalStyles/transitions.css'
-import '@/globalStyles/cropper.css'
-import '@/polyfills.js'
+import './globalStyles/deploy'
 
 /* import modules */
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import moment from 'moment'
-import VueMeta from 'vue-meta'
+import VueMeta from 'vue-3-meta'
+import globalPlugins from './vue-plugins'
 
-// import VueGtag from 'vue-gtag'
-const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.BASE_URL : 'http://127.0.0.1:3000/'
+/* create App */
+const app = createApp(App)
 
-Vue.prototype.$moment = moment
-/* Add assets baseurl to global scope */
-Vue.prototype.$baseUrl = BASE_URL
-Vue.prototype.$postBaseUrl = BASE_URL + 'pst/'
-Vue.prototype.$userBaseUrl = BASE_URL + 'usr/'
-
-Vue.config.productionTip = false
-/*google analytics gtag*/
-// Vue.use(VueGtag, {
-//   config: { id: 'gggggg' }
+/* use plugins */
+app.use(globalPlugins)
+app.use(router)
+// app.use(VueMeta as any, {
+//     // optional pluginOptions
+//     refreshOnceOnNavigation: true
 // })
-Vue.use(VueMeta, {
-  // optional pluginOptions
-  refreshOnceOnNavigation: true
-})
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+/* mount the App */
+app.mount('#app')

@@ -20,64 +20,68 @@
     </Modal>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import Modal from "@/components/GlobalComponents/utils/Modal.vue"
 import { $InputModal, $Validator } from "@/plugins"
 import { $Profile } from "@/myStore"
 
-@Component({
+export default defineComponent({
     components: {
         Modal
     },
+
+    data () {
+        return {
+            error: '',
+            content: ''
+        }
+    },
+
     computed: {
         header: () => $InputModal.header,
         validation: () => $InputModal.validation,
         fieldName: () => $InputModal.fieldName,
+    },
+
+    methods: {
+        close () {
+            $InputModal.set({
+                header: null,
+                fieldName: null,
+                type: null
+            })
+        },
+
+        setContent (e) {
+            this.content = e.target.textContent
+            if (this.error)
+            {
+                this.error = ''
+            }
+        },
+
+        validate () {
+            const schema = [
+                {
+                    fieldName: this.fieldName,
+                    data: this.content,
+                    rules: this.validation.rules
+                }
+            ]
+            return $Validator.validate(schema)
+        },
+        submit () {
+            if (this.validate())
+            {
+                $Profile.$status.updateStatus({ status: this.content }).then(done => {
+                    if (done) this.close()
+                })
+            }
+            this.error = $Validator.getErrors({ format: 'single' })
+
+        }
+
     }
 })
-export default class GblInput extends Vue {
-    header
-    validation
-    fieldName
 
-    error = ''
-    content = ''
-
-    close () {
-        $InputModal.set({
-            header: null,
-            fieldName: null,
-            type: null
-        })
-    }
-
-    setContent (e) {
-        this.content = e.target.textContent
-        if (this.error)
-        {
-            this.error = ''
-        }
-    }
-
-    validate () {
-        const schema = [
-            {
-                fieldName: this.fieldName,
-                data: this.content,
-                rules: this.validation.rules
-            }
-        ]
-        return $Validator.validate(schema)
-    }
-    submit () {
-        if (this.validate())
-        {
-            $Profile.$status.updateStatus({ status: this.content }).then(done => {
-                if (done) this.close()
-            })
-        }
-        this.error = $Validator.getErrors({ format: 'single' })
-
-    }
-}
 </script>

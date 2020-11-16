@@ -1,17 +1,16 @@
 <template>
-	<div>
-		<div>message</div>
-	</div>
+    <div>
+        <div>message</div>
+    </div>
 </template>
 <script lang="ts">
-	import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
-	@Component({
-		components: {},
+// export default defineComponent({
+//     components: {},
 
-	})
-	export default class Chat extends Vue {
-	}
+// })
+
 </script>
 <style lang="scss" scoped>
 </style>

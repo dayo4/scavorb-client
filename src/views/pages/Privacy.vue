@@ -39,16 +39,15 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 import Container from '@/components/navs/reusables/Container.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Container
     }
 })
-export default class Contact extends Vue { }
 </script>
 <style lang="scss">
 </style>

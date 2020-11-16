@@ -53,34 +53,52 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 import { $Auth, $Profile, $Posts } from "@/myStore"
 import { $ScrollLoader, $Obstacle } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
-        ListOfPosts: () => import('@/components/posts/ListOfPosts.vue'),
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        ListOfPosts: defineAsyncComponent(() => import('@/components/posts/ListOfPosts.vue')),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
     },
+
+    data () {
+        return {
+            curPage: 1,
+            sort: 'Newest',
+            query: {
+                sort: 'desc'
+            }
+        }
+    },
+
     computed: {
         profile: () => $Profile.data,
         posts: () => $Posts.userPosts,
         count: () => $Posts.userPostsCount,
         user: () => $Auth.user
-    }
-})
-export default class PostsTab extends Vue {
-    profile!: any
-    // @Prop({ required: true, type: String }) readonly currentTab: string
-    // refs!: {
-    // 	PostsWrapper
-    // }
+    },
 
-    curPage: number = 1
-    sort: string = 'Newest'
-    query = {
-        sort: 'desc'
-    }
+    methods: {
+
+        sortBy (txt, v: string) {
+            this.query.sort = v
+            this.sort = txt
+            $Posts.fetchUserPosts(this.profile.id, this.query, true)
+        },
+
+        page (n: number) {
+            let query = {
+                offset: n * 10 - 10, /* 10 is the default offset value */
+                sort: this.query.sort
+            }
+            if (n != this.curPage)
+                $Posts.fetchUserPosts(this.profile.id, query, true).then(loaded => {
+                    if (loaded) this.curPage = n
+                })
+        }
+    },
 
     mounted () {
         $Obstacle.create('.Tab_2', {
@@ -88,25 +106,7 @@ export default class PostsTab extends Vue {
         })
         $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.destroy('.Tab_2'))
     }
-
-    sortBy (txt, v: string) {
-        this.query.sort = v
-        this.sort = txt
-        $Posts.fetchUserPosts(this.profile.id, this.query, true)
-    }
-
-    page (n: number) {
-        let query = {
-            offset: n * 10 - 10, /* 10 is the default offset value */
-            sort: this.query.sort
-        }
-        if (n != this.curPage)
-            $Posts.fetchUserPosts(this.profile.id, query, true).then(loaded => {
-                if (loaded) this.curPage = n
-            })
-    }
-
-}
+})
 </script>
 <style lang="scss" scoped>
 .Tab_2 {

@@ -46,19 +46,19 @@
     </transition>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
-@Component({})
-export default class GlobalNotification extends Vue {
-    @Prop({ required: true }) readonly condition: any
-    @Prop({ required: false }) readonly minHeight: number
-    @Prop({ required: false }) readonly maxHeight: number
-    /* additional special classname binding for the slots if necessary */
-    @Prop({ required: false, type: String }) readonly HCB /* header_class_binding */: string
-    @Prop({ required: false, type: String }) readonly LCB /* leftBtn_class_binding */: string
-    @Prop({ required: false, type: String }) readonly RCB /* rightBtn_class_binding */: string
-
-}
+export default defineComponent({
+    props: {
+        condition: { required: true },
+        minHeight: { required: false, type: Number },
+        maxHeight: { required: false, type: Number },
+        /* additional special classname binding for the slots if necessary */
+        HCB: { required: false, type: String },/* header_class_binding */
+        LCB: { required: false, type: String },/* leftBtn_class_binding */
+        RCB: { required: false, type: String },/* rightBtn_class_binding */
+    },
+})
 </script>
 <style lang="scss">
 .GlobalModal {

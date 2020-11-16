@@ -43,7 +43,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
@@ -51,22 +51,15 @@ import { Component, Vue } from "vue-property-decorator"
 import Container from '@/components/navs/reusables/Container.vue'
 import { $General } from '@/plugins'
 
-@Component({
+export default defineComponent({
     components: {
         Container,
     },
     metaInfo () {
+        //@ts-ignore
         return $General.metaInfo('scavorb gallery', null, '', this.$baseUrl, 'website')
     },
 })
-
-export default class Gallery extends Vue {
-    Gallery = [
-        { title: '', img: '', }
-    ]
-
-    filter () { }
-}
 
 </script>
 <style lang="scss" scoped>

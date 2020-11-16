@@ -27,7 +27,7 @@ _axios.interceptors.request.use(
     // Do something before request is sent
     const token = LSAgent.getToken()
     config.headers.common[ 'Authorization' ] = 'Bearer ' + token
-
+    console.log('sent')
     return config
   },
   function (error) {
@@ -57,7 +57,7 @@ _axios.interceptors.response.use(
     {
       if (response.status === 401)
       {
-        const redirectUrl = router.currentRoute.path
+        const redirectUrl = router.currentRoute.value.path
         if (error === 'Re-login!')
         {
           $Auth.$form.logout()

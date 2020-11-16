@@ -68,6 +68,6 @@ class Posts {
     }
 }
 
-export const $Posts = $Vue.observable(new Posts())
+export const $Posts = $Vue.reactive(new Posts())
 
 export * from './misc'

@@ -1,21 +1,17 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import routes from "@/router/routes/index.ts"
 import { $Auth } from '@/myStore'
 import { $Process } from '@/plugins'
 
-Vue.use(VueRouter)
 
 
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
-
+console.log(routes)
 //GLOBAL ROUTE GAURDS
 router.beforeEach((to, from, next) => {
   const isUser = $Auth.isUser

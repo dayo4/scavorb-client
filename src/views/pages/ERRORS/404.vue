@@ -17,16 +17,13 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
-@Component({
+export default defineComponent({
     // beforeRouteEnter(to, from, next) {
     // 	next(vm => {
     // 		vm.$data.preRouteQuery = to.query.data
     // 	})
     // }
 })
-export default class NotFound extends Vue {
-    // preRouteQuery = null;
-}
 </script>

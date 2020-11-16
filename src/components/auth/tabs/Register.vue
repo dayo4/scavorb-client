@@ -62,100 +62,106 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, ref } from "vue"
 import { $Auth } from "@/myStore"
 import { $Validator, $Obstacle } from "@/plugins"
 
 
-@Component({
-    components: {},
+export default defineComponent({
+    props: {
+        show: { required: true, type: Boolean },
+    },
+
+    data () {
+        return {
+            username: '',
+            email: '',
+            password: '',
+
+            username_err: '',
+            email_err: '',
+            pass_err: ''
+        }
+    },
+
+
     computed: {
         response: () => $Auth.$form.response,
+    },
+
+    methods: {
+        send () {
+            this.resetResponse()
+
+            const schema = [
+                {
+                    fieldName: 'Username',
+                    data: this.username,
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 3,
+                        max: 15,
+                        pattern: /^([a-zA-Z]{3,})([0-9])*$/
+                    },
+                    messages: {
+                        pattern: 'Username may only contain letters and numbers. Must start with minimum of 3 letters'
+                    }
+                },
+                {
+                    fieldName: 'Email',
+                    data: this.email,
+                    rules: {
+                        required: true,
+                        email: true,
+                    }
+                },
+                {
+                    fieldName: 'Password',
+                    data: this.password,
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 8,
+                        max: 50
+                    }
+                }
+            ]
+
+            const _this = this
+            const sendBtn = this.$refs.send as HTMLButtonElement
+
+            if ($Validator.validate(schema))
+            {
+                $Obstacle.create(sendBtn, {
+                    action: function () {
+                        $Auth.$form.register({
+                            username: _this.username,
+                            email: _this.email,
+                            password: _this.password
+                        }).then(done => {
+                            $Obstacle.destroy(sendBtn)
+                        })
+                    }
+                })
+            }
+            const errors = $Validator.getErrors()
+            this.username_err = errors[ 'Username' ]
+            this.email_err = errors[ 'Email' ]
+            this.pass_err = errors[ 'Password' ]
+        },
+
+        resetResponse (err?: string) {
+            if (this[ err ])
+                this[ err ] = ''
+            if (this.response)
+            {
+                $Auth.$form.resetResponse()
+            }
+        }
     }
 })
-export default class Reg extends Vue {
-    response!: any
-    $refs!: {
-        send
-    }
-    @Prop({ required: true }) show: boolean
 
-    username = ''
-    email = ''
-    password = ''
-
-    username_err = ''
-    email_err = ''
-    pass_err = ''
-
-    send () {
-        this.resetResponse()
-
-        const schema = [
-            {
-                fieldName: 'Username',
-                data: this.username,
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 3,
-                    max: 15,
-                    pattern: /^([a-zA-Z]{3,})([0-9])*$/
-                },
-                messages: {
-                    pattern: 'Username may only contain letters and numbers. Must start with minimum of 3 letters'
-                }
-            },
-            {
-                fieldName: 'Email',
-                data: this.email,
-                rules: {
-                    required: true,
-                    email: true,
-                }
-            },
-            {
-                fieldName: 'Password',
-                data: this.password,
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 8,
-                    max: 50
-                }
-            }
-        ]
-
-        let _this = this
-        if ($Validator.validate(schema))
-        {
-            $Obstacle.create(this.$refs.send, {
-                action: function () {
-                    $Auth.$form.register({
-                        username: _this.username,
-                        email: _this.email,
-                        password: _this.password
-                    }).then(done => {
-                        $Obstacle.destroy(_this.$refs.send)
-                    })
-                }
-            })
-        }
-        const errors = $Validator.getErrors()
-        this.username_err = errors[ 'Username' ]
-        this.email_err = errors[ 'Email' ]
-        this.pass_err = errors[ 'Password' ]
-    }
-
-    resetResponse (err?: string) {
-        if (this[ err ])
-            this[ err ] = ''
-        if (this.response)
-        {
-            $Auth.$form.resetResponse()
-        }
-    }
-}
 </script>
 <style lang="scss">
 /* NOTE: "GenFormStyle GenFormWrapper" shared classes are found in the main "Auth" components */

@@ -50,57 +50,62 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
 import { $Auth, $Profile } from '@/myStore'
 import { $Confirm, $Validator } from '@/plugins'
 
 import Editor from './Edit.vue'
 
-@Component({
+export default defineComponent({
     components: {
         Editor,
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue')
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue'))
+    },
+
+    data () {
+        return {
+            createNew: false, /* Toggles the editor component for new project */
+            selectedProject: null as object,
+
+            filter: 'All', /* Filters projects list */
+            query: {
+                user_id: $Auth.user.id,
+                filter: {}
+            }
+        }
     },
 
     computed: {
         projects: () => $Profile.$Portfolio.projects_B
     },
+
+    methods: {
+        load () {
+            $Profile.$Portfolio.fetchAll(this.query)
+        },
+
+        filterBy (txt, v: object) {
+            this.filter = txt
+            this.query.filter = v
+            $Profile.$Portfolio.fetchAll(this.query)
+        },
+
+        openProject (project_id) {
+            $Profile.$Portfolio.fetch(project_id).then(project => {
+                if (project)
+                    this.selectedProject = project
+            })
+        },
+
+        back (refresh: boolean) {
+            this.selectedProject = null
+            this.createNew = false
+            if (refresh)
+                this.load()
+        }
+
+    },
 })
-export default class Portfolio extends Vue {
-
-    createNew: boolean = false /* Toggles the editor component for new project */
-    selectedProject: object = null
-
-    filter: string = 'All' /* Filters projects list */
-    query = {
-        user_id: $Auth.user.id,
-        filter: {}
-    }
-
-    load () {
-        $Profile.$Portfolio.fetchAll(this.query)
-    }
-
-    filterBy (txt, v: object) {
-        this.filter = txt
-        this.query.filter = v
-        $Profile.$Portfolio.fetchAll(this.query)
-    }
-
-    openProject (project_id) {
-        $Profile.$Portfolio.fetch(project_id).then(project => {
-            if (project)
-                this.selectedProject = project
-        })
-    }
-
-    back (refresh: boolean) {
-        this.selectedProject = null
-        this.createNew = false
-        if (refresh)
-            this.load()
-    }
-}
 </script>
 <style lang="scss" scoped>
 .Header {

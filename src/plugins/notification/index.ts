@@ -6,11 +6,11 @@ import { Notify } from './Notify'
 import { $Confirm } from './Confirm'
 import { InputModal } from './InputModal'
 
-const $Process = $Vue.observable(new LoadingProcessNotification())
-const $Notify = $Vue.observable(new Notify())
+const $Process = $Vue.reactive(new LoadingProcessNotification())
+const $Notify = $Vue.reactive(new Notify())
 
 
-const $InputModal = $Vue.observable(new InputModal())
+const $InputModal = $Vue.reactive(new InputModal())
 
 export {
     $Process,

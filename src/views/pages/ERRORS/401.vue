@@ -22,10 +22,10 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Auth } from "@/myStore"
 
-@Component({
+export default defineComponent({
     // beforeRouteEnter(to, from, next) {
     // 	next(vm => {
     // 		vm.$data.preRouteQuery = to.query.data
@@ -33,14 +33,14 @@ import { $Auth } from "@/myStore"
     // }
     computed: {
         isUser: () => $Auth.isUser,
+    },
+
+    methods: {
+
+        relogin () {
+            $Auth.$form.logout()
+            $Auth.$form.show()
+        }
     }
 })
-export default class NotFound extends Vue {
-    // preRouteQuery = null;
-
-    relogin () {
-        $Auth.$form.logout()
-        $Auth.$form.show()
-    }
-}
 </script>

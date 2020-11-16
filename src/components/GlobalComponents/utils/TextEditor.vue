@@ -12,7 +12,7 @@
 // import { $Auth, $Posts } from '@/myStore'
 // import { $Process, $Notify, $Obstacle, $Validator } from '@/plugins'
 
-import { Component, Vue, Prop, Watch } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 import { VueEditor, Quill } from "vue2-editor"
 import ImageResize from 'quill-image-resize'
@@ -20,11 +20,25 @@ import { ImageDrop } from 'quill-image-drop-module'
 
 import { $General } from '@/plugins'
 
-@Component({
+export default defineComponent({
     components: {
         VueEditor
     },
-
+    props: {
+        initialContent: { required: false, type: String },
+        config: { required: false, type: Array },
+        enableImage: { required: false, default: false, type: Boolean },
+    },
+    data () {
+        return {
+            content: '' as string | undefined
+        }
+    },
+    watch: {
+        content (val: string) {
+            this.$emit('content-updated', val)
+        }
+    },
     computed: {
 
         editorOptions: () => {
@@ -80,28 +94,14 @@ import { $General } from '@/plugins'
         ],
 
     },
-})
-
-export default class Composer extends Vue {
-    @Prop({ required: false, type: String }) initialContent: string /* longtext */
-    @Prop({ required: false, type: Array }) readonly config: any[]
-    @Prop({ required: false, default: false, type: Boolean }) enableImage: boolean
-
-
-    content: string = ''
-
-    @Watch('content')
-    updateContent () {
-        this.$emit('contentUpdated', this.content)
-    }
 
     mounted () {
         this.content = this.initialContent
-        const editor = document.getElementsByClassName('ql-editor')[ 0 ]
+        const editor: HTMLElement = document.getElementsByClassName('ql-editor')[ 0 ] as any
         editor.addEventListener('paste', $General.pasteAsPlainText, false)
     }
+})
 
-}
 </script>
 <style lang="scss">
 .ql-editor {

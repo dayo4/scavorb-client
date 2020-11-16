@@ -18,29 +18,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
-@Component({})
-export default class Search extends Vue {
-    $refs!: {
-        search: HTMLInputElement
-    }
-    @Prop({ required: true, type: Boolean }) show: boolean
+export default defineComponent({
+    props: {
+        show: { required: true, type: Boolean },
+    },
+
+    methods: {
+        displayHandler () {
+            let $this = this
+            function showSearch (e) {
+                if (!(e.target.closest('nav')))
+                {
+                    $this.$emit('close')
+                }
+            }
+            window.addEventListener('click', showSearch, false)
+        }
+    },
 
     mounted () {
         this.displayHandler()
     }
-    displayHandler () {
-        let $this = this
-        function showSearch (e) {
-            if (!(e.target.closest('nav')))
-            {
-                $this.$emit('close')
-            }
-        }
-        window.addEventListener('click', showSearch, false)
-    }
-}
+})
+    // $refs!: {
+    //     search: HTMLInputElement
+    // }
+
 </script>
 <style lang="scss" >
 .SearchModal {

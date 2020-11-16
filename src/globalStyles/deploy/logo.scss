@@ -1,0 +1,187 @@
+.logo-base {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+	overflow: hidden;
+	background-color: #00838f;
+	background: linear-gradient(#00838f 25%, #00bcd4 50%, #00838f 75%);
+	
+    & > span:nth-child(1) {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        z-index: 2;
+        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+		overflow: hidden;
+		background-color: #ad1457;
+        background: linear-gradient(to right,#ad1457 25%, #e91e63 50%, #ad1457 75%);
+
+        & span:nth-child(1) {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 38px;
+			color: #d81b60;
+			background-color: #00838f;
+            // background: linear-gradient(#006064 25%, #00bcd4 50%, #006064 75%);
+        }
+        & span:nth-child(2) {
+            display:block;
+            position: absolute;
+            top: 17px;
+            left: -23px;
+            width: 100px;
+			height: 20px;
+			background-color: #00838f;
+			background: linear-gradient(to right, #006064 25%, #00bcd4 50%, #006064 75%);
+            animation: rotateL 15s linear infinite;
+                        // transform: rotateZ(180deg);
+        }
+    }
+    & span:nth-child(2) {
+        position: absolute;
+        width: 100px;
+		height: 20px;
+            background-color: #ad1457;
+                                    // transform: rotateZ(90deg);
+
+        animation: rotateR 9s linear infinite;
+    }
+
+}
+
+.logo-static {
+    & > span:nth-child(1) {
+        & span:nth-child(2) {
+            animation: none;
+            transform: rotateZ(180deg);
+        }
+    }
+    & span:nth-child(2) {
+        transform: rotateZ(90deg);
+        animation: none;
+    }
+}
+
+.logo-x-small {
+    width: 45px;
+    height: 45px;
+	
+    & > span:nth-child(1) {
+        top: 4.3px;
+        left: 4.6px;
+        width: 36px;
+        height: 36px;
+
+        & span:nth-child(1) {
+            top: 4px;
+            left: 4px;
+            width: 28px;
+            height: 28px;
+            font-size: 30px;
+        }
+        & span:nth-child(2) {
+            top: 13px;
+            left: 0px;
+            width: 40px;
+			height: 11px;
+        }
+    }
+    & span:nth-child(2) {
+        width: 50px;
+		height: 14px;
+    }
+}
+
+.logo-small {
+    width: 54px;
+    height: 54px;
+	
+    & > span:nth-child(1) {
+        top: 7px;
+        left: 7px;
+        width: 40px;
+        height: 40px;
+
+        & span:nth-child(1) {
+            top: 7px;
+            left: 7px;
+            width: 26px;
+            height: 26px;
+            font-size: 26px;
+        }
+        & span:nth-child(2) {
+            top: 13px;
+            left: -13px;
+            width: 70px;
+			height: 16px;
+        }
+    }
+    & span:nth-child(2) {
+        width: 80px;
+		height: 18px;
+    }
+
+}
+
+.logo-large {
+    width: 120px;
+    height: 120px;
+
+    & > span:nth-child(1) {
+        top: 10px;
+        left: 10px;
+        width: 100px;
+        height: 100px;
+
+        & span:nth-child(1) {
+            top: 10px;
+            left: 10px;
+            width: 80px;
+            height: 80px;
+            font-size: 85px;
+        }
+        & span:nth-child(2) {
+            top: 34px;
+            left: -50px;
+            width: 200px;
+			height: 30px;
+        }
+    }
+    & span:nth-child(2) {
+        width: 200px;
+		height: 40px;
+    }
+}
+.logo-trans-1::after, .logo-trans-2::after {
+    content: "";
+    z-index: 3;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}	
+.logo-trans-1::after {
+    background-color: rgba(72, 72, 72, 0.2)
+}	
+.logo-trans-2::after {
+    background-color: rgba(72, 72, 72, 0.55)
+}	
+
+.logo-fast {
+    & span:nth-child(2) {
+        animation: rotateR 0.8s linear infinite;
+    }
+}

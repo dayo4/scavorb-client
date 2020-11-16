@@ -82,7 +82,7 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent } from "vue"
 
 import Login from '@/components/auth/tabs/Login.vue'
 import Register from '@/components/auth/tabs/Register.vue'
@@ -91,33 +91,32 @@ import { $Auth } from "@/myStore"
 import { $Validator } from "@/plugins"
 
 
-@Component({
+export default defineComponent({
     components: {
         Login,
         Register,
         Reset
     },
+
     computed: {
         sysSet: () => $Auth.sysSettings,
         response: () => $Auth.$form.response,
         showModal: () => $Auth.$form.status,
         mode: () => $Auth.$form.mode,
         query: () => $Auth.$form.query,
+    },
+
+    methods: {
+        switchMode (mode: number) {
+            $Auth.$form.resetResponse()
+            $Auth.$form.mode = mode
+        },
+
+        dismiss () {
+            $Auth.$form.dismiss()
+        }
     }
 })
-export default class Auth extends Vue {
-    response!: any
-
-    switchMode (mode: number) {
-        $Auth.$form.resetResponse()
-        $Auth.$form.mode = mode
-    }
-
-    dismiss () {
-        $Auth.$form.dismiss()
-    }
-
-}
 </script>
 <style lang="scss">
 .AuthModal {

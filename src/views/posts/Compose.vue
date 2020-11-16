@@ -55,7 +55,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { defineComponent, ref, defineAsyncComponent } from "vue"
 
 import { $Posts } from "@/myStore"
 import { $Notify, $Obstacle } from "@/plugins"
@@ -63,65 +63,64 @@ import { $Notify, $Obstacle } from "@/plugins"
 import Container from '@/components/navs/reusables/Container.vue'
 import Composer from "@/components/posts/new/Composer.vue"
 
-@Component({
+export default defineComponent({
     components: {
         Container,
         Composer,
-        ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
+        ImageTransformer: defineAsyncComponent(() => import("@/components/uploads/ImageTransformer.vue")),
     },
+
     computed: {
         currentPost_id: () => $Posts.$compose.currentPost_id,
         postImageSrc: () => $Posts.$compose.featuredImage.postImageSrc
     },
+
+    methods: {
+        preview (slug) {
+
+
+            if (!slug)
+            {
+                $Notify.info('You have to Save content first before you can preview.')
+                return
+            }
+            else
+            {
+                let route = this.$router.resolve({ path: 'posts-preview/' + slug })
+                window.open(route.href, '_blank')
+            }
+
+        },
+
+        triggerImageTransformer () {
+            (this.$refs.imageTransformer as any /* child component */).trigger()
+        },
+
+        addPostImage (formData, base64Image) {
+            $Posts.$compose.setFeaturedImage({
+                postImageSrc: base64Image,
+                formData
+            })
+        },
+
+        startProcessing () {
+            // $Obstacle.create(this.$refs.saveBtn, {
+            // timer: 4000,
+            (this.$refs.composer as any /* child component */).init()
+            // })
+
+        }
+
+    }
 })
-export default class Compose extends Vue {
-    postImageSrc!: any
-    $refs!: {
-        composer
-        imageTransformer
-        postImage: HTMLImageElement
+    // $refs!: {
+    //     composer
+    //     imageTransformer
+    //     postImage: HTMLImageElement
 
-        saveBtn
-        previewBtn
-    }
-
-    preview (slug) {
-
-
-        if (!slug)
-        {
-            $Notify.info('You have to Save content first before you can preview.')
-            return
-        }
-        else
-        {
-            let route = this.$router.resolve({ path: 'posts-preview/' + slug })
-            window.open(route.href, '_blank')
-        }
-
-    }
-
-    triggerImageTransformer () {
-        this.$refs.imageTransformer.trigger()
-    }
-
-    addPostImage (formData, base64Image) {
-        $Posts.$compose.setFeaturedImage({
-            postImageSrc: base64Image,
-            formData
-        })
-    }
-
-    startProcessing () {
-        // $Obstacle.create(this.$refs.saveBtn, {
-        // timer: 4000,
-        this.$refs.composer.init()
-        // })
-
-    }
-
-
-}
+    //     saveBtn
+    //     previewBtn
+    // }
 </script>
 <style lang="scss" scoped>
 .Actions {

@@ -20,11 +20,11 @@
 </template>
 <script lang="ts">
 
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent } from "vue"
 import { $Auth, $Profile, $Posts } from "@/myStore"
 // import { $ScrollLoader } from "@/plugins"
 
-@Component({
+export default defineComponent({
     // components: {
     // Minimizer: () => import(/* webpackChunkName: "minimizer" */ '@/components/GlobalComponents/utils/Minimizer.vue'),
     // ListOfPosts: () => import(/* webpackChunkName: "list-o-posts" */ "@/components/posts/ListOfPosts.vue"),
@@ -37,10 +37,10 @@ import { $Auth, $Profile, $Posts } from "@/myStore"
         // user: () => $Auth.user
     }
 })
-export default class PTFL extends Vue {
-    projects!: any
+// export default class PTFL extends Vue {
+    // projects!: any
     // @Prop({ required: true, type: String }) readonly currentTab: string
-    // refs!: {
+    // $refs!: {
     // 	PostsWrapper
     // }
     // query = {user_id: $Profile.data.id,filter: { active: true }}
@@ -48,8 +48,7 @@ export default class PTFL extends Vue {
     // mounted () {
     //     $Profile.$Portfolio.fetchAll(this.query, true)
     // }
-
-}
+// }
 </script>
 <style lang="scss" scoped>
 .Tab_1 {

@@ -132,4 +132,4 @@ export class Comments {
 }
 
 
-export const $Comments = $Vue.observable(new Comments())
+export const $Comments = $Vue.reactive(new Comments())

@@ -8,4 +8,4 @@ class Admin {
     $system = new System()
 }
 
-export const $Admin = $Vue.observable(new Admin())
+export const $Admin = $Vue.reactive(new Admin())

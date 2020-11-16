@@ -41,93 +41,101 @@
     </Modal>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { defineComponent, defineAsyncComponent } from "vue"
+// import { defineComponent } from "vue"
 import Modal from "@/components/GlobalComponents/utils/Modal.vue"
 import { $Admin, $Auth } from "@/myStore"
 import { $Confirm, $Validator } from "@/plugins"
 
-@Component({
+export default defineComponent({
     components: {
         Modal,
-        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+    },
+
+    props: {
+        show: { required: true, type: Boolean },
+        user: { required: true, type: Object }
+    },
+    data () {
+        return {
+            error: '',
+            reason: '',
+            action: ''
+        }
+    },
+
+    methods: {
+        close (refresh?: boolean) {
+            this.$emit('close', refresh ? true : '')
+            this.action = ''
+            this.reason = ''
+        },
+
+        setReason (e) {
+            this.reason = e.target.textContent
+            if (this.error)
+            {
+                this.error = ''
+            }
+        },
+        setAction (v: string) {
+            this.action = v
+        },
+
+        validate () {
+            const schema = [
+                {
+                    fieldName: 'Reason',
+                    data: this.reason,
+                    rules: {
+                        required: true,
+                        string: true,
+                        min: 20,
+                        max: 500,
+                    },
+                },
+                {
+                    fieldName: 'Action',
+                    data: this.action,
+                    rules: {
+                        required: true,
+                        string: true,
+                    },
+                }
+            ]
+            return $Validator.validate(schema)
+        },
+        submit () {
+            let _this = this
+            const payload = {
+                user_id: this.user.id,
+                actor_id: $Auth.user.id,
+                action: this.action,
+                reason: this.reason
+            }
+
+            if (this.validate())
+            {
+                $Confirm({
+                    header: 'Confirm your action',
+                    message: `<b class="t-grey--2">Are You Sure You Want To ${this.action} This Account?</b>`,
+                    type: 'info',
+                    onConfirm: function () {
+                        return $Admin.$users.changeStatus(payload).then(data => {
+                            if (data)
+                            {
+                                _this.close(true)
+                                return data
+                            }
+                        })
+                    }
+
+                })
+            }
+            this.error = $Validator.getErrors({ format: 'single' })
+        }
     }
 })
-export default class DisableAcc extends Vue {
-    @Prop({ required: true }) show: boolean
-    @Prop({ required: true }) readonly user: any
 
-    error = ''
-    reason: string = ''
-    action: string = ''
-
-    close (refresh?: boolean) {
-        this.$emit('close', refresh ? true : '')
-        this.action = ''
-        this.reason = ''
-    }
-
-    setReason (e) {
-        this.reason = e.target.textContent
-        if (this.error)
-        {
-            this.error = ''
-        }
-    }
-    setAction (v: string) {
-        this.action = v
-    }
-
-    validate () {
-        const schema = [
-            {
-                fieldName: 'Reason',
-                data: this.reason,
-                rules: {
-                    required: true,
-                    string: true,
-                    min: 20,
-                    max: 500,
-                },
-            },
-            {
-                fieldName: 'Action',
-                data: this.action,
-                rules: {
-                    required: true,
-                    string: true,
-                },
-            }
-        ]
-        return $Validator.validate(schema)
-    }
-    submit () {
-        let _this = this
-        const payload = {
-            user_id: this.user.id,
-            actor_id: $Auth.user.id,
-            action: this.action,
-            reason: this.reason
-        }
-
-        if (this.validate())
-        {
-            $Confirm({
-                header: 'Confirm your action',
-                message: `<b class="t-grey--2">Are You Sure You Want To ${this.action} This Account?</b>`,
-                type: 'info',
-                onConfirm: function () {
-                    return $Admin.$users.changeStatus(payload).then(data => {
-                        if (data)
-                        {
-                            _this.close(true)
-                            return data
-                        }
-                    })
-                }
-
-            })
-        }
-        this.error = $Validator.getErrors({ format: 'single' })
-    }
-}
 </script>
