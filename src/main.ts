@@ -3,10 +3,12 @@ import './globalStyles/deploy'
 
 /* import modules */
 import { createApp } from 'vue'
+import VueMeta from 'vue-3-meta'
+
+/* import resources */
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import VueMeta from 'vue-3-meta'
 import globalPlugins from './vue-plugins'
 
 /* create App */

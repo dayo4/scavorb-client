@@ -1,7 +1,7 @@
 // import { $Notify, $Axios, $LSAgent, $Router } from '@/plugins'
 import { $Navs } from '@/myStore'
 export class Container {
-
+    /* Container element is currently defaulted to window, but will be changed later... */
     element: Window = null  /* This will be used to point to the MainContainer component from other components */
     scrolled: boolean = false
 

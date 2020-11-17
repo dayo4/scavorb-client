@@ -2,18 +2,20 @@
     <section class="flex j-c-center">
         <div class="GenFormStyle xs11 sm9 md7 noselect">
             <section class="TopInfo bg-blue-5 p-3 mb-3 no-deco">
-                Send me the detail of your request using the form below or talk to me through other medium
-                <a
-                    class="icon-mail-alt t-pink--3"
-                    title="e-mail"
-                    href="mailto:scavorb@gmail.com"
-                ></a>
-                <a
-                    class="icon-whatsapp t-green--1"
-                    title="whatsapp"
-                    href="https://wa.me/message/3NSQPMZJFTDHL1"
-                    target="_blank"
-                ></a>
+                <div>Quickly send the detail of your project/request using the form below or talk to us through other mediums here</div>
+                <div class="flex a-i-center j-c-center">
+                    <a
+                        class="icon-mail-alt t-pink--3"
+                        title="e-mail"
+                        href="mailto:scavorb@gmail.com"
+                    ></a>
+                    <a
+                        class="icon-whatsapp t-green--1"
+                        title="whatsapp"
+                        href="https://wa.me/message/3NSQPMZJFTDHL1"
+                        target="_blank"
+                    ></a>
+                </div>
             </section>
 
             <div class="Section">
@@ -128,7 +130,7 @@ export default defineComponent({
     },
 
     methods: {
-        setMsg (e) {
+        setMsg (e: any) {
             this.msg = e.target.textContent
             if (this.msg_err)
             {
@@ -210,7 +212,7 @@ export default defineComponent({
                 // @ts-ignore
                 grecaptcha.render(this.$refs.reCaptcha, {
                     'sitekey': '6LdDQ9MZAAAAAAXOm_j-i-gaGUjqzNcIDDDyAXzw',
-                    'error-callback': function (err) {
+                    'error-callback': function (err: string) {
                         _this.error = err
                     },
                     'callback': function (token: string) {
@@ -223,7 +225,7 @@ export default defineComponent({
                                     subject: _this.subject,
                                     message: _this.msg,
                                     token: token
-                                }).then(done => {
+                                }).then((done: boolean) => {
                                     $Obstacle.destroy(_this.$refs.send as HTMLButtonElement)
                                     // @ts-ignore
                                     grecaptcha.reset()

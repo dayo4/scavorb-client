@@ -8,7 +8,7 @@
                         <div>A Full-stack Web Applications Developer</div>
                     </div>
                     <div class="More">
-                        <div>I create custom personal and business websites tailored to your needs.</div>
+                        <div>Scavorb creates custom personal and business websites tailored to your needs.</div>
                         <div>Front-end Development</div>
                         <div>Back-end Development</div>
                         <div>UI Designs</div>
@@ -61,7 +61,7 @@
                     </span>
                 </h2>
                 <div class="Tiles flex wrap j-c-center py-8">
-                    <div class="shadow-3" v-for="(L, i) in list" :key="i">
+                    <div class="xs11 sm4 md3 shadow-3" v-for="(L, i) in list" :key="i">
                         <div class="noselect">
                             <img
                                 :src="L.link ? L.link : '/defaults/pgs/icons/'+L.img+'.jpg'"
@@ -69,6 +69,7 @@
                             />
                         </div>
                         <div>{{ L.text }}</div>
+                        <div>{{ L.detail }}</div>
                     </div>
                 </div>
 
@@ -77,7 +78,7 @@
                     class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5 m-auto noselect"
                 >
                     <span class="icon-right-big mr-3"></span>
-                    <span>More About Me</span>
+                    <span>More About Scavorb</span>
                 </button>
             </section>
 
@@ -115,6 +116,7 @@
                 <span></span>
             </div>
 
+            <!-- <div>Industries We Serve</div> -->
             <!-- Flipper Component -->
             <!-- <Flipper></Flipper> -->
             <!-- Flipper Component -->
@@ -123,8 +125,8 @@
             <h2 class="text-center t-blue-grey--1">
                 <span class="icon-mail-alt mr-3"></span>
                 <span>
-                    Message Me
-                    <i class="font-3">Let's Work Together</i>
+                    Message Scavorb
+                    <i class="font-3">Let's Get Things Done!</i>
                 </span>
             </h2>
             <!-- Contact Component -->
@@ -160,12 +162,12 @@ export default defineComponent({
     data () {
         return {
             list: [
-                { img: 'resp', text: 'Fully Responsive Webpages' },
-                { img: 'scale', text: 'Progressive and Easily Scalable Apps' },
-                { img: '', text: 'Clean and Readable Code', link: '/defaults/pgs/icons/clean.png' },
+                { img: 'resp', text: 'Fully Responsive Webpages', detail: "Designs at scavorb are expertly hand crafted, and you are delivered webpages that look and feel perfect on devices of various screen sizes." },
+                { img: 'scale', text: 'Performant and Easily Scalable Apps', detail: "A successful web application should be reliable, well-planned and seemlessly accommodate growth. At scavorb, apps are designed to welcome subsequent growths without friction. And we technically avoid anything that can make our apps stuck in a hole." },
+                { img: '', text: 'Concise and Readable Code', link: '/defaults/pgs/icons/clean.png', detail: "Everything that makes up your webpages' layout are structured in codes and are required to be easily understandale. At scavorb you can be rest assured." },
                 { img: 'flexb', text: 'Flexible Business Logic Implementation' },
-                { img: 'effect', text: 'Cost Effective Development Service' },
-                { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png' },
+                { img: 'effect', text: 'Cost Effective Development Service', detail: "It is scavorb's uthmost priority to ensure that you get the right value for your cost." },
+                { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png', detail: "Some people desire minimalist designs and layouts while others want it outright customized. Regardless of your requirement, scavorb is versed as presenting you with a design that simply stands out." },
             ],
 
             skills: [
@@ -345,8 +347,8 @@ export default defineComponent({
 .Section_2 {
     & .Tiles {
         & > div {
-            width: 150px;
-            height: 230px;
+            // width: 150px;
+            height: 400px;
             background-color: white;
             border-radius: 28px;
             margin: 0px 30px 30px 20px;
@@ -364,12 +366,19 @@ export default defineComponent({
                 width: 100%;
                 height: 150px;
             }
-            & > div:last-child {
+            & > div:nth-child(2) {
                 padding: 2px 5px;
                 text-align: center;
                 font-weight: bold;
                 font-size: 18px;
                 color: $blue-grey;
+            }
+            & > div:last-child {
+                padding: 2px 5px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 14px;
+                color: $blue-grey-2;
             }
         }
     }

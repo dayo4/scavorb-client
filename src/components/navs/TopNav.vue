@@ -180,48 +180,6 @@ export default defineComponent({
         this.dropdownHandler()
     }
 })
-
-// export default class TopNav extends Vue {
-//     userData!: any
-//     $refs!: {
-//         topNav: HTMLElement
-//     }
-
-//     miniScreen = false
-//     avatarDropdown = false
-//     showSearch = false
-
-//     mounted () {
-//         $Navs.$top.element = this.$refs.topNav
-//         this.dropdownHandler()
-//     }
-
-//     navLinks = [
-//         { name: 'home', icon: 'icon-home-1' },
-//         { name: 'contact', icon: 'icon-mail-alt' },
-//         { name: 'about', icon: 'icon-info' },
-//         { name: 'posts', icon: 'icon-doc-text' }
-//     ]
-
-//     dropdownHandler () {
-//         let $this = this
-//         function dropdown (e) {
-//             if (!(e.target.closest('.DropBtn')))
-//             {
-//                 $this.avatarDropdown = false
-//                 $this.miniScreen = false
-//             }
-//         }
-//         document.addEventListener('click', dropdown, false)
-//     }
-
-//     login () {
-//         $Auth.$form.show()
-//     }
-//     logout () {
-//         $Auth.$form.logout()
-//     }
-// }
 </script>
 <style lang="scss" scoped>
 nav {
