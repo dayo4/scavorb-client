@@ -26,7 +26,7 @@
                         class="Icon b1 shadow-4"
                     >View Profile</span>
                 </div>
-
+                <div>{{dummy}}</div>
                 <!-- logo -->
                 <div class="Logo flex j-c-center pt-5 noselect">
                     <div class="logo-base logo-large logo-trans-2">
@@ -137,10 +137,19 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue"
-
+import { ghostAPI, postIndexFields } from "@/ghostContent"
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
 
+async function dd () {
+
+    const posts = await ghostAPI().posts.browse({
+        fields: postIndexFields
+    })
+
+    return { posts }
+}
+dd()
 import Container from '@/components/navs/reusables/Container.vue'
 // import Flipper from '@/components/pages/Flipper.vue'
 import Contact from '@/components/pages/Contact.vue'
@@ -161,6 +170,7 @@ export default defineComponent({
 
     data () {
         return {
+            dummy: dd(),
             list: [
                 { img: 'resp', text: 'Fully Responsive Webpages', detail: "Designs at scavorb are expertly hand crafted, and you are delivered webpages that look and feel perfect on devices of various screen sizes." },
                 { img: 'scale', text: 'Performant and Easily Scalable Apps', detail: "A successful web application should be reliable, well-planned and seemlessly accommodate growth. At scavorb, apps are designed to welcome subsequent growths without friction. And we technically avoid anything that can make our apps stuck in a hole." },

@@ -196,7 +196,7 @@ export default defineComponent({
     props: {
         showComments: { required: true, type: Boolean },
         post: { required: true } as any, /* current post which's comment is being viewed */
-        socket: { required: true/* SocketIOClient.Socket  */ } as any, /* An instance of the comments socket connection */
+        socket: { required: true,/* SocketIOClient.Socket  */ } as any, /* An instance of the comments socket connection */
     },
 
     data () {
@@ -207,7 +207,7 @@ export default defineComponent({
             /* Sub comments properties */
             subCommentMode: false,
             activeSubComment: null,  /* object */
-            subComment_Socket: null as any // SocketIOClient.Socket
+            subComment_Socket: null as SocketIOClient.Socket
 
 
         }
