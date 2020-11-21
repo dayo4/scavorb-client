@@ -26,7 +26,6 @@
                         class="Icon b1 shadow-4"
                     >View Profile</span>
                 </div>
-                <div>{{dummy}}</div>
                 <!-- logo -->
                 <div class="Logo flex j-c-center pt-5 noselect">
                     <div class="logo-base logo-large logo-trans-2">
@@ -52,6 +51,7 @@
                 class="Quote"
             >Every person and every business deserves a virtual online profile that stands out, and I specialize in providing that.</div>
 
+            <div v-for="(d, i) in dummy" :key="i">{{d}}</div>
             <section class="Section_2">
                 <h2 class="text-center t-blue-grey--1">
                     <span class="icon-check-1 mr-3"></span>
@@ -137,40 +137,37 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue"
-import { ghostAPI, postIndexFields } from "@/ghostContent"
+import { ghostAPI, postIndexFields, fdata } from "@/ghostContent"
 // import { $Posts } from "@/myStore"
-// import { $Notify, $Obstacle } from "@/plugins"
-
-async function dd () {
-
-    const posts = await ghostAPI().posts.browse({
-        fields: postIndexFields
-    })
-
-    return { posts }
-}
-dd()
+// import { $Axios } from "@/plugins"
 import Container from '@/components/navs/reusables/Container.vue'
-// import Flipper from '@/components/pages/Flipper.vue'
 import Contact from '@/components/pages/Contact.vue'
 import { $General } from '@/plugins'
-// import SkillChart from '@/components/pages/SkillChart.vue'
+
+
+// async function dd () {
+//     const posts = await ghostAPI().posts.browse({
+//         fields: postIndexFields
+//     })
+//     console.log(posts)
+//     return posts
+// }
+
 
 export default defineComponent({
     components: {
         Container,
-        // Flipper,
         Contact,
-        // SkillChart
     },
 
     metaInfo () {
         return $General.metaInfo('scavorb', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
     },
-
+    computed: {
+        dummy: () => fdata.tdata
+    },
     data () {
         return {
-            dummy: dd(),
             list: [
                 { img: 'resp', text: 'Fully Responsive Webpages', detail: "Designs at scavorb are expertly hand crafted, and you are delivered webpages that look and feel perfect on devices of various screen sizes." },
                 { img: 'scale', text: 'Performant and Easily Scalable Apps', detail: "A successful web application should be reliable, well-planned and seemlessly accommodate growth. At scavorb, apps are designed to welcome subsequent growths without friction. And we technically avoid anything that can make our apps stuck in a hole." },
