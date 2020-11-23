@@ -2,44 +2,33 @@
     <Container ownID="MC-Home bg-blue-grey--2">
         <div>
             <section class="Top flex col bg-img-masked noselect br1">
-                <div class="Detail xs12 md8 noselect br1">
-                    <div class="Intro text-center">
-                        <div>SCAVORB</div>
-                        <div>Full-stack Web Applications Development</div>
+                <div class="Detail noselect br1">
+                    <div class="Intro">
+                        <div>Adedayo Adeniyi</div>
+                        <div>A Full-stack Web Applications Developer</div>
                     </div>
                     <div class="More">
-                        <div>We create custom personal and business websites tailored to your needs.</div>
-                        <ul>
-                            UI Designs
-                            <li>Have your website's UI professionally designed for maximum user experience.</li>
-                        </ul>
-                        <ul>
-                            Single Page Applications(SPAs)
-                            <li>Give your website a mobile app appearance and experience with fast page navigation.</li>
-                        </ul>
-                        <ul>
-                            Ecommerce Development
-                            <li>Render your products to the market with various e-commerce integrations.</li>
-                        </ul>
-                        <ul>
-                            Back-end Development
-                            <li>Deploy your apps with a fast back-end using powerful NodeJS frameworks.</li>
-                        </ul>
-                        <ul>
-                            CMS Development
-                            <li>Publish contents with great SEO using CMSs like Wordpress, Ghost, ...</li>
-                        </ul>
+                        <div>Scavorb creates custom personal and business websites tailored to your needs.</div>
+                        <div>Front-end Development</div>
+                        <div>Back-end Development</div>
+                        <div>UI Designs</div>
+                        <div>Single Page Applications(SPAs)</div>
+                        <div>Ecommerce Development</div>
+                        <div>Wordpress Development</div>
                     </div>
                 </div>
 
                 <!-- image -->
-                <div class="Img md4 hide-sm-down">
-                    <img src="/defaults/pgs/r/a1.png" alt="intro-image" draggable="false" />
+                <div class="Img">
+                    <img src="/defaults/usr/me.jpg" alt="profile image" draggable="false" />
+                    <span
+                        @click="$router.push({path: '/profile/dayo'})"
+                        class="Icon b1 shadow-4"
+                    >View Profile</span>
                 </div>
-
                 <!-- logo -->
-                <div class="Logo flex j-c-center noselect">
-                    <div class="logo-base logo-small logo-trans-2">
+                <div class="Logo flex j-c-center pt-5 noselect">
+                    <div class="logo-base logo-large logo-trans-2">
                         <span>
                             <span>
                                 <b>S</b>
@@ -49,13 +38,9 @@
                         <span></span>
                     </div>
                 </div>
-
-                <div class="flex j-c-center">
-                    <button
-                        @click="callToAction"
-                        class="btn pink-gradient-btn shadow-5 font-5 br4 py-7"
-                    >START A PROJECT NOW</button>
-                </div>
+                <!-- <div
+                 class="Title bg-white p-3 mt-3 text-center font-7 letter-space-1 t-cyan--3"
+                >scavorb.com</div>-->
             </section>
 
             <div class="Divider">
@@ -64,7 +49,7 @@
 
             <div
                 class="Quote"
-            >Every person and every business deserves a virtual online profile that stands out, and We specialize in providing that.</div>
+            >Every person and every business deserves a virtual online profile that stands out, and I specialize in providing that.</div>
 
             <!-- <div v-for="(d, i) in dummy" :key="i">{{d}}</div> -->
             <section class="Section_2">
@@ -101,21 +86,33 @@
                 <span></span>
             </div>
 
-            <div class="Quote">Meet Scavorb's creator and lead developer</div>
-
             <section>
                 <h2 class="text-center t-blue-grey--1">
-                    <!-- <span class="icon-chart-line-1 mr-3"></span> -->
+                    <span class="icon-chart-line-1 mr-3"></span>
                     <span>
-                        Adedayo Adeniyi
+                        Base Skills Chart
                         <!-- <i class="font-2">Confident in my skills</i> -->
                     </span>
                 </h2>
                 <!-- <SkillChart></SkillChart> -->
-                <div class="img-logo-border noselect"></div>
+                <div class="SkillsWrapper noselect">
+                    <div class="Skills" v-for="(skill, i) in skills" :key="i">
+                        <div>
+                            <!-- <span :style="`background-color:#${skill.color};`"> -->
+                            <span
+                                :style="`background-image: linear-gradient(#${skill.color} 20%, #006064 45%, #${skill.color} 75%);`"
+                            >
+                                <b>{{skill.text}}</b>
+                            </span>
+                            <span
+                                :style="`transform: rotateZ(${-(180 - (180 * skill.value))}deg);`"
+                            ></span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <div ref="contactCTA" class="Divider">
+            <div class="Divider">
                 <span></span>
             </div>
 
@@ -140,7 +137,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue"
-// import { ghostAPI, postIndexFields, fdata } from "@/ghostContent"
+import { ghostAPI, postIndexFields, fdata } from "@/ghostContent"
 // import { $Posts } from "@/myStore"
 // import { $Axios } from "@/plugins"
 import Container from '@/components/navs/reusables/Container.vue'
@@ -166,9 +163,9 @@ export default defineComponent({
     metaInfo () {
         return $General.metaInfo('scavorb', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
     },
-    // computed: {
-    //     dummy: () => fdata.tdata
-    // },
+    computed: {
+        dummy: () => fdata.tdata
+    },
     data () {
         return {
             list: [
@@ -194,11 +191,6 @@ export default defineComponent({
 
         }
     },
-    methods: {
-        callToAction () {
-            (this.$refs.contactCTA as HTMLElement).scrollIntoView({ behavior: "smooth" })
-        }
-    }
 })
 </script>
 <style lang="scss" scoped>
@@ -228,35 +220,44 @@ export default defineComponent({
     width: 100%;
     padding-bottom: 20px;
     background-color: $blue-grey--3;
-    background-image: url("/defaults/pgs/r/3.png");
+    background-image: url("/defaults/pgs/blue.jpg");
     // filter: blur(3px);
     // -webkit-filter: blur(3px);
     & .Logo {
         position: absolute;
-        z-index: 2;
-        top: 15px;
-        width: 66.66%;
+        z-index: 0;
+        top: 37%;
+        left: 43%;
     }
-    &::after {
-        background-color: rgba(72, 72, 72, 0.65);
-    }
+    // &::after {
+    //     background-color: rgba(72, 72, 72, 0.5);
+    // }
     & .Detail {
         z-index: 1;
         & .Intro {
-            padding: 70px 0 0 0;
+            width: calc(100% - 160px);
+            padding: 30px 0 0 20px;
             & > div {
+                font-family: /* "Courgette", */ cursive;
+                padding: 15px 6px;
                 letter-spacing: 1px;
                 font-weight: bold;
+                border-radius: 28px 4px 15px 28px;
+                border-left: solid 5px $pink-1;
+                border-top: solid 2px $pink-2;
+                // border-bottom: solid 1px $pink-3;
+                // text-shadow: 0 0 40px black, 0 0 30px black, 0 0 60px black;
             }
             & > div:nth-child(1) {
-                color: rgba(204, 235, 238, 0.7);
-                font-size: 35px;
+                color: $cyan-3;
+                font-size: 30px;
+                max-width: 360px;
             }
             & > div:nth-child(2) {
-                font-family: /* "Courgette", */ cursive;
                 color: $pink-5;
                 font-size: 35px;
-                margin-top: 25px;
+                margin-top: 30px;
+                max-width: 700px;
             }
         }
 
@@ -264,29 +265,14 @@ export default defineComponent({
             padding: 20px 0 0 0;
             letter-spacing: 1px;
             font-weight: bold;
+            // text-shadow: 0 0 20px black, 0 0 30px black, 0 0 60px black;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             margin-left: 80px;
 
-            & > ul {
-                list-style: none;
+            & > div {
                 margin: 3px 0;
-                padding: 5px 3px;
-                background-color: rgba(0, 97, 100, 0.4);
-                background: linear-gradient(
-                    to right,
-                    rgba(0, 131, 143, 0.4),
-                    rgba(0, 97, 100, 0) 90%
-                );
-                border-radius: 4px;
-
-                & li {
-                    font-size: 13px;
-                    font-weight: normal;
-                    padding-left: 16px;
-                }
-
-                &::before {
+                &:not(:first-child):before {
                     content: "";
                     display: inline-block;
                     position: relative;
@@ -295,37 +281,70 @@ export default defineComponent({
                     height: 10px;
                     border-top: 5px solid transparent;
                     border-bottom: 13px solid transparent;
-                    border-right: 7px solid rgba(0, 131, 143, 0.65);
+                    border-right: 7px solid $cyan--3;
                     transform: rotateZ(55deg);
                 }
             }
-            & > div {
+            & > div:nth-child(1) {
+                // font-family: "Courgette", cursive;
                 font-family: "Courier New", Courier, monospace;
+                // text-shadow: none;
                 color: $pink-3;
                 margin-top: 18px;
-                margin-left: -20px;
-                padding-left: 10px;
-                font-size: 28px;
-                border-radius: 10px;
-                border-left: solid 3px $pink-1;
+                margin-left: -10px;
+                font-size: 24px;
                 // -webkit-text-stroke: white 0.5px;
             }
         }
     }
     & .Img {
-        //     z-index: 5;
+        z-index: 5;
         position: absolute;
-        right: 0;
-        top: 180px;
-        height: 350px;
+        right: -27px;
+        top: 90px;
+        box-shadow: 0 0 20px $cyan;
+        background-color: $cyan--4;
+        background: linear-gradient(
+            to right,
+            $blue-grey-5 15%,
+            $cyan--4 40%,
+            $cyan 60%,
+            $cyan--4 90%
+        );
+        border-radius: 50% 4% 4% 50%;
+        width: 150px;
+        height: 150px;
         & img {
-            width: 100%;
-            height: 100%;
+            width: 150px;
+            height: 150px;
+            min-width: 150px;
+            min-height: 150px;
+            border-radius: 50% 4% 4% 50%;
+            border: solid transparent 9px;
+            transition: all 0.5s;
         }
-    }
-    & button {
-        margin-top: 40px;
-        z-index: 2;
+        & .Icon {
+            position: absolute;
+            bottom: 57px;
+            left: -40px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 8px;
+            color: $cyan--3;
+            background-color: $blue-grey-5;
+            transition: 0.4s;
+            text-align: center;
+            padding: 1px 5px;
+            width: 60px;
+            font-size: 14px;
+            &:hover {
+                background-color: $cyan--3;
+                color: $blue-grey-5;
+            }
+            &:active {
+                background-color: $cyan--1;
+            }
+        }
     }
 }
 
@@ -431,14 +450,11 @@ export default defineComponent({
     }
 }
 
-@include sm-and-down {
+@include sm-only {
     .Top {
-        & .Logo {
-            width: 100%;
-        }
+        // height: 600px;
     }
 }
-
 @include xs-only {
     .Divider {
         & span {
@@ -448,15 +464,33 @@ export default defineComponent({
     .Top {
         .Detail {
             & .Intro {
+                width: calc(100% - 120px);
+                padding: 30px 0 0 2px;
                 & > div:nth-child(1) {
+                    max-width: 260px;
                     font-size: 26px;
                 }
                 & > div:nth-child(2) {
                     font-size: 28px;
+                    margin-top: 30px;
                 }
             }
             & .More {
                 margin-left: 40px;
+            }
+        }
+        & .Img {
+            width: 120px;
+            height: 120px;
+            & img {
+                width: 120px;
+                height: 120px;
+                min-width: 120px;
+                min-height: 120px;
+                border: solid transparent 7px;
+            }
+            & .Icon {
+                bottom: 40px;
             }
         }
     }
@@ -472,13 +506,12 @@ export default defineComponent({
 @include xxs-only {
     .Top {
         .Detail {
-            // & .Intro {
-            // & > div:nth-child(2) {
-            // margin-top: 10px;
-            // }
-            // }
+            & .Intro {
+                & > div:nth-child(2) {
+                    margin-top: 10px;
+                }
+            }
             & .More {
-                margin-left: 20px;
                 & > div:nth-child(1) {
                     margin-top: 3px;
                     font-size: 18px !important;

@@ -2,8 +2,8 @@
     <section class="flex j-c-center">
         <div class="GenFormStyle xs11 sm9 md7 noselect">
             <section class="TopInfo bg-blue-5 p-3 mb-3 no-deco">
-                <div>Quickly send the detail of your project/request using the form below or talk to us through other mediums here</div>
-                <div class="flex a-i-center j-c-center">
+                <div>Quickly send the detail of your request using the form below or talk to us through other mediums here</div>
+                <div class="flex a-i-center j-c-center font-12">
                     <a
                         class="icon-mail-alt t-pink--3"
                         title="e-mail"

@@ -119,7 +119,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue"
-import { } from "vue-class-component"
 import { $Auth, $Profile, $Navs } from '@/myStore'
 
 import Search from '@/components/misc/Search.vue'

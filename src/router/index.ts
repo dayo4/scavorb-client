@@ -1,19 +1,32 @@
 import Vue from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 
 import routes from "@/router/routes/index.ts"
 import { $Auth } from '@/myStore'
-import { $Process } from '@/plugins'
+// import { $Process } from '@/plugins'
 
+/* ssr purpose */
+const isServer = typeof window === 'undefined'
+let history = isServer ? createMemoryHistory() : createWebHistory()
 
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  history /* : createWebHistory(process.env.BASE_URL) */,
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition)
+    {
+      return savedPosition
+    } else
+    {
+      return { top: 0 }
+    }
+  },
 })
-console.log(routes)
+
 //GLOBAL ROUTE GAURDS
 router.beforeEach((to, from, next) => {
+
   const isUser = $Auth.isUser
   const isAdmin = $Auth.isAdmin
 
@@ -30,9 +43,9 @@ router.beforeEach((to, from, next) => {
       next()
     } else if (isUser && !isAdmin)
     {
-      next(/* {
+      next({
         path: "/401",
-      } */)
+      })
     } else
     {
       $Auth.$form.show({ showQuery: true, redirect: to.fullPath })
@@ -82,13 +95,13 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.beforeResolve((to, from, next) => {
-  $Process.add('resolving route')
-  next()
-})
+// router.beforeResolve((to, from, next) => {
+// $Process.add('resolving route')
+// next()
+// })
 
-router.afterEach((to, from) => {
-  $Process.hide()
-})
+// router.afterEach((to, from) => {
+//   $Process.hide()
+// })
 
 export default router

@@ -4,6 +4,7 @@ import { $Notify } from '@/plugins'
 
 const routes = [
     {
+        // path: '/profile/:username(^adedayo$)',
         path: '/profile/:username',
         component: () => import(/* webpackPrefetch: true */'@/views/profile/Index.vue'),
         // alias: '/:username',

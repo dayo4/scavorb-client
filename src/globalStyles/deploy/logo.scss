@@ -185,3 +185,27 @@
         animation: rotateR 0.8s linear infinite;
     }
 }
+
+
+.img-logo-border {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+	// overflow: hidden;
+	background-color: #00838f;
+	background: linear-gradient(#00838f 25%, #00bcd4 50%, #00838f 75%);
+	
+    &::after {
+        display: block;
+        position: absolute;
+        width: 110%;
+		height: 20%;
+        background-color: #ad1457;
+        z-index: 4;
+    }
+
+}

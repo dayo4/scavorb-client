@@ -288,8 +288,8 @@ export default defineComponent({
     },
 
     mounted () {
-        this.first_name = this.userData.first_name
-        this.last_name = this.userData.last_name
+        this.first_name = this.userData.first_name,
+            this.last_name = this.userData.last_name,
             (this.$refs.about as HTMLDivElement).textContent = this.about = this.userData.about
     }
 })

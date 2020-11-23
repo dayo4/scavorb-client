@@ -37,9 +37,9 @@ export default defineComponent({
         next(vm => {
             if (to.query.tab)
             {// @ts-ignore
-                vm.$data.switchTab(to.query.tab)
+                vm.switchTab(to.query.tab)
             }// @ts-ignore
-            vm.$data.activeTab = 'Tab_1'
+            vm.activeTab = 'Tab_1'
         })
     },
 

@@ -129,11 +129,18 @@ export default defineComponent({
 
     methods: {
         triggerImageTransformer (ref) {
-            ref === 'profileUpload' ?
-                (this.$refs.profileUpload as any /* child component */).trigger() :
-                ref === 'coverUpload' ?
-                    (this.$refs.coverUpload as any  /* child component */).trigger() :
-                    $Notify.error('invalid imageUploadHandler query!')
+            if (ref === 'profileUpload')
+            {
+                (this.$refs.profileUpload as any /* child component */).trigger()
+            }
+            else if (ref === 'coverUpload')
+            {
+
+                (this.$refs.coverUpload as any  /* child component */).trigger()
+            } else
+            {
+                $Notify.error('invalid imageUploadHandler query!')
+            }
         },
 
         finalizeImageUpload (formData) {
@@ -378,7 +385,7 @@ export default defineComponent({
         display: none;
     }
 }
-@include xxs-only  {
+@include xxs-only {
     .Details {
         & .About,
         .Status {
