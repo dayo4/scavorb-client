@@ -113,11 +113,11 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile } from '@/myStore'
 import { $Confirm, $Validator, $General } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     // components: {},
 
     data () {
@@ -176,7 +176,7 @@ export default defineComponent({
             this.errors.name = error
         },
 
-        setAbout (e) {
+        setAbout (e: any) {
             this.about = e.target.textContent
             if (this.errors.about)
             {

@@ -112,14 +112,14 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile } from "@/myStore"
 import { $Notify, $InputModal } from "@/plugins"
 import { max } from 'moment'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        ImageTransformer: defineAsyncComponent(() => import("@/components/uploads/ImageTransformer.vue")),
+        ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
     },
 
     computed: {
@@ -128,7 +128,7 @@ export default defineComponent({
     },
 
     methods: {
-        triggerImageTransformer (ref) {
+        triggerImageTransformer (ref: string) {
             if (ref === 'profileUpload')
             {
                 (this.$refs.profileUpload as any /* child component */).trigger()
@@ -143,7 +143,7 @@ export default defineComponent({
             }
         },
 
-        finalizeImageUpload (formData) {
+        finalizeImageUpload (formData: HTMLFormElement) {
             $Profile.$images.uploadImages(formData)
         },
 

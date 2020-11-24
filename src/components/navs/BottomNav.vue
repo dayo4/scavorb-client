@@ -19,10 +19,10 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch } from "vue"
+import Vue from "vue"
 import { $Navs } from '@/myStore'
 
-export default defineComponent({
+export default Vue.extend({
 
     data () {
         return {

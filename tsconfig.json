@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "strict": false,
-    "noImplicitThis": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -11,13 +10,11 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "noEmit": true, ///////////
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "mocha",
-      "chai",
-      "socket.io-client"
+      "socket.io-client",
+      "@uvue/core"
     ],
     "paths": {
       "@/*": [

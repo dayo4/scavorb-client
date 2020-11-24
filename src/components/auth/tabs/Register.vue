@@ -62,12 +62,12 @@
 </template>
 <script lang="ts">
 
-import { defineComponent, ref } from "vue"
+import Vue from "vue"
 import { $Auth } from "@/myStore"
 import { $Validator, $Obstacle } from "@/plugins"
 
 
-export default defineComponent({
+export default Vue.extend({
     props: {
         show: { required: true, type: Boolean },
     },

@@ -122,15 +122,15 @@
     <!-- BODY-->
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 
 import { $Comments, $Auth } from "@/myStore"
 import { $Validator } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        Minimizer: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Minimizer.vue')),
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue'),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
     },
 
     props: {

@@ -23,9 +23,9 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import Vue from "vue"
 
-export default defineComponent({
+export default Vue.extend({
     props: {
         initialHeight: { required: true, type: Number },
         nextHeight: { required: false, type: Number },

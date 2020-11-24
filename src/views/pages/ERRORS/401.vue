@@ -22,10 +22,10 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Auth } from "@/myStore"
 
-export default defineComponent({
+export default Vue.extend({
     // beforeRouteEnter(to, from, next) {
     // 	next(vm => {
     // 		vm.$data.preRouteQuery = to.query.data

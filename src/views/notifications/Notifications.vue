@@ -15,20 +15,20 @@
     </Container>
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $ReadQueue, $Posts, $Comments, $Auth } from "@/myStore"
 import { WS, $Process } from "@/plugins"
 import VerticalNavigator from '@/components/navs/reusables/navigators/VerticalNavigator.vue'
 import Container from '@/components/navs/reusables/Container.vue'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         VerticalNavigator,
         Container,
-        Plaform: defineAsyncComponent(() => import(/* webpackChunkName: "minimizer" */ '@/components/notifications/tabs/Platform.vue')),
-        System: defineAsyncComponent(() => import(/* webpackChunkName: "minimizer" */ '@/components/notifications/tabs/System.vue')),
-        Dropdown: defineAsyncComponent(() => import(/* webpackChunkName: "dropdown" */ '@/components/GlobalComponents/utils/Dropdown.vue')),
-        Comments: defineAsyncComponent(() => import(/* webpackChunkName: "comments" */"@/components/posts/comment/Comments.vue"))
+        Plaform: () => import(/* webpackChunkName: "minimizer" */ '@/components/notifications/tabs/Platform.vue'),
+        System: () => import(/* webpackChunkName: "minimizer" */ '@/components/notifications/tabs/System.vue'),
+        Dropdown: () => import(/* webpackChunkName: "dropdown" */ '@/components/GlobalComponents/utils/Dropdown.vue'),
+        Comments: () => import(/* webpackChunkName: "comments" */"@/components/posts/comment/Comments.vue")
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {

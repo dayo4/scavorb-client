@@ -181,12 +181,12 @@
     </transition>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import Vue from "vue"
 
 import { $Comments, $Posts, $Auth } from "@/myStore"
 import { $Validator, $Obstacle, WS } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue'),
         Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
@@ -207,7 +207,7 @@ export default defineComponent({
             /* Sub comments properties */
             subCommentMode: false,
             activeSubComment: null,  /* object */
-            subComment_Socket: null as SocketIOClient.Socket
+            subComment_Socket: null //as SocketIOClient.Socket
 
 
         }

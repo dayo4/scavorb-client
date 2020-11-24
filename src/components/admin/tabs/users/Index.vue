@@ -11,13 +11,13 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile, $Admin } from '@/myStore'
 
 import HorizontalNavigator from '@/components/navs/reusables/navigators/HorizontalNavigator.vue'
 
 import User from './Users.vue'
-export default defineComponent({
+export default Vue.extend({
     components: {
         User,
         HorizontalNavigator

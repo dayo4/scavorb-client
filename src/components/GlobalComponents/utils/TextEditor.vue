@@ -12,7 +12,7 @@
 // import { $Auth, $Posts } from '@/myStore'
 // import { $Process, $Notify, $Obstacle, $Validator } from '@/plugins'
 
-import { defineComponent } from "vue"
+import Vue from "vue"
 
 import { VueEditor, Quill } from "vue2-editor"
 import ImageResize from 'quill-image-resize'
@@ -20,7 +20,7 @@ import { ImageDrop } from 'quill-image-drop-module'
 
 import { $General } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         VueEditor
     },

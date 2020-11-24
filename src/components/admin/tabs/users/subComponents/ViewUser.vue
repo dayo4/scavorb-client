@@ -78,16 +78,16 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import AccStatusUpdate from './AccStatusUpdate.vue'
 
 import { $Auth, $Profile, $Admin } from '@/myStore'
 import { $Confirm } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         AccStatusUpdate,
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
     },
     data () {
         return {

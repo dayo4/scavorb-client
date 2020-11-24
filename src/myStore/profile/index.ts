@@ -38,4 +38,4 @@ class Profile {
     }
 }
 
-export const $Profile = $Vue.reactive(new Profile())
+export const $Profile = $Vue.observable(new Profile())

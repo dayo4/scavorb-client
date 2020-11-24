@@ -41,16 +41,16 @@
     </Modal>
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
-// import { defineComponent } from "vue"
+import Vue from "vue"
+// import Vue from "vue"
 import Modal from "@/components/GlobalComponents/utils/Modal.vue"
 import { $Admin, $Auth } from "@/myStore"
 import { $Confirm, $Validator } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Modal,
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
     },
 
     props: {

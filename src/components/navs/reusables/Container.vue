@@ -19,10 +19,10 @@
 <script lang="ts">
 
 import Footer from "@/components/navs/Footer.vue"
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Navs } from '@/myStore'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Footer
     },

@@ -104,11 +104,11 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile, $Admin } from '@/myStore'
 
 import ViewUser from './subComponents/ViewUser.vue'
-export default defineComponent({
+export default Vue.extend({
     components: {
         ViewUser,
         Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),

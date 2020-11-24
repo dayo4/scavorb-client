@@ -39,7 +39,7 @@
 // import { $Auth, $Profile } from '@/myStore'
 // import { $Confirm } from '@/plugins'
 
-// export default defineComponent({
+// export default Vue.extend({
 //     computed: {
 //         user: () => $Auth.user,
 //         profile: () => $Profile.data,

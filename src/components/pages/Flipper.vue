@@ -11,12 +11,12 @@
     </section>
 </template>
 <script lang="ts">
-// import { defineComponent } from "vue"
+// import Vue from "vue"
 // import Container from '@/components/navs/reusables/Container.vue'
 
 // import { $Pages } from "@/myStore"
 
-// export default defineComponent({
+// export default Vue.extend({
 //     components: {
 //         Container,
 //     },

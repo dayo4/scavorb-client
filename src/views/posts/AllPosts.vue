@@ -57,15 +57,15 @@
 <script lang="ts">
 import Container from '@/components/navs/reusables/Container.vue'
 
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $Posts } from "@/myStore"
 import { /* $ScrollLoader, */ $Obstacle } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container,
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
-        ListOfPosts: defineAsyncComponent(() => import("@/components/posts/ListOfPosts.vue")),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
+        ListOfPosts: () => import("@/components/posts/ListOfPosts.vue"),
     },
 
     data () {

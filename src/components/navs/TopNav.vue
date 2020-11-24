@@ -118,13 +118,13 @@
     </nav>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile, $Navs } from '@/myStore'
 
 import Search from '@/components/misc/Search.vue'
 // import NotifPopup from '@/components/notifications/Popup.vue'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         // NotifPopup,
         Search

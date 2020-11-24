@@ -95,12 +95,12 @@
     </section>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import Vue from "vue"
 
 import { $Pages } from "@/myStore"
 import { $Validator, $Obstacle } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
 
     data () {
         return {
@@ -244,7 +244,7 @@ export default defineComponent({
         }
     },
 
-    unmounted () {
+    destroyed () {
         this.error = this.success = ''
     }
 

@@ -19,10 +19,10 @@
     </transition>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Notify } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     computed: {
         notifs: () => $Notify.notifs,
     },

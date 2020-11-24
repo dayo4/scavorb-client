@@ -57,7 +57,7 @@ _axios.interceptors.response.use(
     {
       if (response.status === 401)
       {
-        const redirectUrl = router.currentRoute.value.path
+        const redirectUrl = router.currentRoute.path
         if (error === 'Re-login!')
         {
           $Auth.$form.logout()

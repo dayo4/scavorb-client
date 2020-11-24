@@ -46,7 +46,7 @@ class Posts {
         }
     }
 
-    async fetchUserPosts (user_id, payload: Query = {}, refresh: boolean = false) {
+    async fetchUserPosts (user_id: any, payload: Query = {}, refresh: boolean = false) {
         try
         {
             const query: Query = {
@@ -68,6 +68,6 @@ class Posts {
     }
 }
 
-export const $Posts = $Vue.reactive(new Posts())
+export const $Posts = $Vue.observable(new Posts())
 
 export * from './misc'

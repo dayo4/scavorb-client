@@ -23,10 +23,10 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Process } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     computed: {
         status: () => $Process.status,
         info: () => $Process.info,

@@ -78,14 +78,14 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile } from '@/myStore'
 import { $Confirm, $Validator, $General } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        TextEditor: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/TextEditor.vue')),
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        TextEditor: () => import('@/components/GlobalComponents/utils/TextEditor.vue'),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
     },
 
     props: {
@@ -97,7 +97,7 @@ export default defineComponent({
             initialDetail: this.projectToView ? this.projectToView.detail : '' as string,/* Only useful when viewing existing project detail */
             title: '',
             detail: '',
-            active: null as number, /* project active status. 0 or 1 */
+            active: 0 as number, /* project active status. 0 or 1 */
 
             charCount: 0,
 

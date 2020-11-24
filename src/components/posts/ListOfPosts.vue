@@ -138,13 +138,13 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $ReadQueue, $Posts, $Auth } from "@/myStore"
 import { $Process } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
         // Comments: () => import('@/components/posts/comment/Comments.vue')
     },
 

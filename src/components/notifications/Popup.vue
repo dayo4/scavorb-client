@@ -21,11 +21,11 @@
     </a>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Auth } from '@/myStore'
 import { $Confirm } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     // components: {},
     data () {
         return {

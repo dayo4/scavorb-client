@@ -2,25 +2,35 @@
 import './globalStyles/deploy'
 
 /* import modules */
-import { createApp } from 'vue'
-import VueMeta from 'vue-3-meta'
+import Vue from 'vue'
+import VueMeta from 'vue-meta'
+import moment from 'moment'
 
 /* import resources */
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import globalPlugins from './vue-plugins'
 
-/* create App */
-const app = createApp(App)
+Vue.config.productionTip = false
+
+/* Add assets baseurl to global scope */
+const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.BASE_URL : 'http://127.0.0.1:3000/'
+Vue.prototype.$baseUrl = BASE_URL
+Vue.prototype.$postBaseUrl = BASE_URL + 'pst/'
+Vue.prototype.$userBaseUrl = BASE_URL + 'usr/'
+
 
 /* use plugins */
-app.use(globalPlugins)
-app.use(router)
-// app.use(VueMeta as any, {
-//     // optional pluginOptions
-//     refreshOnceOnNavigation: true
-// })
+Vue.prototype.$moment = moment
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
+})
 
-/* mount the App */
-app.mount('#app')
+// export default () => {
+
+ /*  return */ new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+// }

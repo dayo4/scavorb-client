@@ -26,11 +26,11 @@
 import Tab_1 from "@/components/profile/mainTabs/Portfolio.vue"
 import Tab_2 from "@/components/profile/mainTabs/PostsTab.vue"
 // import MediaTab from "@/components/profile/mainTabs/MediaTab.vue"
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Posts, $Profile } from "@/myStore"
 import { /* $ScrollLoader */ $Process, $Obstacle } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         // DetailsTab,
         Tab_1,

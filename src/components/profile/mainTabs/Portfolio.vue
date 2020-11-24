@@ -20,11 +20,11 @@
 </template>
 <script lang="ts">
 
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile, $Posts } from "@/myStore"
 // import { $ScrollLoader } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     // components: {
     // Minimizer: () => import(/* webpackChunkName: "minimizer" */ '@/components/GlobalComponents/utils/Minimizer.vue'),
     // ListOfPosts: () => import(/* webpackChunkName: "list-o-posts" */ "@/components/posts/ListOfPosts.vue"),

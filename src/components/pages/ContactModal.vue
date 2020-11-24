@@ -44,13 +44,13 @@
 </template>
 <script lang="ts">
 
-// import { defineComponent } from "vue"
+// import Vue from "vue"
 
 // import { $Auth } from "@/myStore"
 // import { $Validator } from "@/plugins"
 
 
-// export default defineComponent({
+// export default Vue.extend({
 //     // computed: {
 
 //     // }

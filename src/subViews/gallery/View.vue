@@ -26,7 +26,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 
 // import { $Posts } from "@/myStore"
 // import { $Notify, $Obstacle } from "@/plugins"
@@ -34,7 +34,7 @@ import { defineComponent } from "vue"
 import Container from '@/components/navs/reusables/Container.vue'
 import { $General } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container,
     },

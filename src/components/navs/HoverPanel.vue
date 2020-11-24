@@ -58,10 +58,10 @@
     <!-- </div> -->
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $ReadQueue, $Auth } from "@/myStore"
 
-export default defineComponent({
+export default Vue.extend({
     data () {
         return {
             collapsed: true,

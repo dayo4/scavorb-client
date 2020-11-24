@@ -55,7 +55,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { defineComponent, ref, defineAsyncComponent } from "vue"
+import Vue from "vue"
 
 import { $Posts } from "@/myStore"
 import { $Notify, $Obstacle } from "@/plugins"
@@ -63,11 +63,11 @@ import { $Notify, $Obstacle } from "@/plugins"
 import Container from '@/components/navs/reusables/Container.vue'
 import Composer from "@/components/posts/new/Composer.vue"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container,
         Composer,
-        ImageTransformer: defineAsyncComponent(() => import("@/components/uploads/ImageTransformer.vue")),
+        ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
     },
 
     computed: {
@@ -76,7 +76,7 @@ export default defineComponent({
     },
 
     methods: {
-        preview (slug) {
+        preview (slug: string) {
 
 
             if (!slug)
@@ -96,7 +96,7 @@ export default defineComponent({
             (this.$refs.imageTransformer as any /* child component */).trigger()
         },
 
-        addPostImage (formData, base64Image) {
+        addPostImage (formData: FormData, base64Image: string) {
             $Posts.$compose.setFeaturedImage({
                 postImageSrc: base64Image,
                 formData

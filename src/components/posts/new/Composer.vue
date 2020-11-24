@@ -42,11 +42,11 @@
 import { $Auth, $Posts } from '@/myStore'
 import { $Process, $Notify, $Obstacle, $Validator, $General } from '@/plugins'
 
-import { defineComponent, ref, defineAsyncComponent } from "vue"
+import Vue from "vue"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        TextEditor: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/TextEditor.vue'))
+        TextEditor: () => import('@/components/GlobalComponents/utils/TextEditor.vue')
     },
     // beforeRouteEnter(to, from, next) {
     // 	next(vm => {
@@ -62,7 +62,7 @@ export default defineComponent({
             title: '',
             slug: '',
             content: '',
-            errors: null as object
+            errors: null as any /* object */
             // mode: 'compose'
         }
     },
@@ -159,7 +159,7 @@ export default defineComponent({
         captureContentImages () {
             /* Before content is saved. convert all base64 image src to "file"... */
             $Process.add('Intializing...')
-            const editor = document.getElementById('main-ql-editor')
+            const editor = document.getElementById('main-ql-editor') as HTMLElement
             const fetchedImages = editor.getElementsByTagName('img')
             const uploadables = Array.prototype.filter.call(fetchedImages, function (img) {
                 return img.src.match(/^data:/)

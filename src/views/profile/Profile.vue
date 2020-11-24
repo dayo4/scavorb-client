@@ -10,10 +10,10 @@ import Container from '@/components/navs/reusables/Container.vue'
 
 import UpperSection from "@/components/profile/UpperSection.vue"
 import LowerSection from "@/components/profile/LowerSection.vue"
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Profile } from "@/myStore"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container,
         UpperSection,

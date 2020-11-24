@@ -13,9 +13,9 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 
-export default defineComponent({
+export default Vue.extend({
     props: {
         tabsList: { required: true, type: Array },/* Array of objects containing -> {icon,name} */
         activeTab: { required: true, type: String },/*Currently active tab*/

@@ -12,7 +12,7 @@
     </Container>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Profile, $Posts, $Auth } from "@/myStore"
 import { $Process } from "@/plugins"
 
@@ -24,7 +24,7 @@ import Tab_1 from '@/components/settings/tabs/ProfileInfo.vue'
 import Tab_3 from '@/components/settings/tabs/portfolio/List.vue'
 import Tab_4 from '@/components/settings/tabs/Posts.vue'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container,
         VerticalNavigator,

@@ -167,18 +167,18 @@
     </Container>
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 
 import { $Auth, $Posts, $Comments } from "@/myStore"
 import { $Notify, $Process, $General, WS } from "@/plugins"
 
 import Container from '@/components/navs/reusables/Container.vue'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container,
-        Comments: defineAsyncComponent(() => import("@/components/posts/comment/Comments.vue")),
-        Minimizer: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Minimizer.vue'))
+        Comments: () => import("@/components/posts/comment/Comments.vue"),
+        Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue')
     },
     metaInfo () {
         // @ts-ignore

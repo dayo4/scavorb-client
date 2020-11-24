@@ -42,11 +42,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 import Modal from "@/components/GlobalComponents/utils/Modal.vue"
 import { $ReadQueue } from "@/myStore"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Modal
     },

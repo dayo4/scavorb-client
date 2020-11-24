@@ -1,4 +1,4 @@
 import { ReadQueue } from './ReadQueue'
 import { $Vue } from '@/plugins'
 
-export const $ReadQueue = $Vue.reactive(new ReadQueue())
+export const $ReadQueue = $Vue.observable(new ReadQueue())

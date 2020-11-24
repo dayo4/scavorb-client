@@ -114,14 +114,14 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 
 import { $Posts, $Auth } from '@/myStore'
 import { $Notify } from '@/plugins'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
     },
 
     data () {

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue"
+import Vue from "vue"
 import VerticalNavigator from "@/components/navs/reusables/navigators/VerticalNavigator.vue"
 import Tab_1 from "@/components/admin/tabs/users/Index.vue"
 import Tab_2 from "@/components/admin/tabs/System.vue"
@@ -21,7 +21,7 @@ import Container from "@/components/navs/reusables/Container.vue"
 
 import { $Admin } from "@/myStore"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         VerticalNavigator,
         Container,

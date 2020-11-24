@@ -53,14 +53,14 @@
 </template>
 <script lang="ts">
 
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Profile, $Posts } from "@/myStore"
 import { $ScrollLoader, $Obstacle } from "@/plugins"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
-        ListOfPosts: defineAsyncComponent(() => import('@/components/posts/ListOfPosts.vue')),
-        Dropdown: defineAsyncComponent(() => import('@/components/GlobalComponents/utils/Dropdown.vue')),
+        ListOfPosts: () => import('@/components/posts/ListOfPosts.vue'),
+        Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
     },
 
     data () {

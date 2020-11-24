@@ -52,13 +52,13 @@
 </template>
 <script lang="ts">
 
-import { defineComponent } from "vue"
+import Vue from "vue"
 import { $Profile } from '@/myStore'
 import { $Notify, } from '@/plugins'
 
 import Cropper from "cropperjs"
 
-export default defineComponent({
+export default Vue.extend({
     props: {
         fieldName: { required: true, type: String }, //this input field name is required on the server to upload.
         cropWidth: { required: false, type: Number },

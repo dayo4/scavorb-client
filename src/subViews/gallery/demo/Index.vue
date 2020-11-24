@@ -4,11 +4,11 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 
 import { $General } from '@/plugins'
 
 
-export default defineComponent({})
+export default Vue.extend({})
 
 </script>

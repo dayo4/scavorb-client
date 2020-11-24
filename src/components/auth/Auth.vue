@@ -82,7 +82,7 @@
 </template>
 <script lang="ts">
 
-import { defineComponent } from "vue"
+import Vue from "vue"
 
 import Login from '@/components/auth/tabs/Login.vue'
 import Register from '@/components/auth/tabs/Register.vue'
@@ -91,7 +91,7 @@ import { $Auth } from "@/myStore"
 import { $Validator } from "@/plugins"
 
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Login,
         Register,

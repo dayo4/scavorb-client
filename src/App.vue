@@ -1,25 +1,26 @@
 <template>
-    <TopNav />
-    <HoverPanel />
-    <Notify />
-    <ReadQueue />
-    <Input />
-    <Process />
-    <Auth />
+    <div>
+        <TopNav />
+        <HoverPanel />
+        <Notify />
+        <ReadQueue />
+        <Input />
+        <Process />
+        <Auth />
 
-    <!-- <transition name="fade-in">
+        <!-- <transition name="fade-in">
         <router-view />
-    </transition>-->
-    <router-view v-slot="{ Component }">
-        <transition name="fade-in">
-            <component :is="Component" />
-        </transition>
-    </router-view>
-    <BottomNav />
+        </transition>-->
+            <transition name="fade-in">
+        <router-view>
+        </router-view>
+            </transition>
+        <BottomNav />
+    </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent } from "vue"
+import Vue from "vue"
 import { $Auth, $Navs } from "@/myStore"
 
 import TopNav from "@/components/navs/TopNav.vue"
@@ -30,16 +31,16 @@ import Notify from "@/components/GlobalComponents/notification/Notify.vue"
 import { $General } from './plugins'
 // import Footer from "@/components/navs/Footer.vue"
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         TopNav,
         BottomNav,
         HoverPanel,
         Process,
         Notify,
-        ReadQueue: defineAsyncComponent(() => import("@/components/posts/misc/ReadQueue.vue")),
-        Input: defineAsyncComponent(() => import("@/components/GlobalComponents/Input.vue")),
-        Auth: defineAsyncComponent(() => import("@/components/auth/Auth.vue")),
+        ReadQueue: () => import("@/components/posts/misc/ReadQueue.vue"),
+        Input: () => import("@/components/GlobalComponents/Input.vue"),
+        Auth: () => import("@/components/auth/Auth.vue"),
     },
 
     // computed: {

@@ -4,8 +4,8 @@
     </section>
 </template>
 <script lang="ts">
-// import { defineComponent } from "vue"
-// export default defineComponent({})
+// import Vue from "vue"
+// export default Vue.extend({})
 // export default class SCHT extends Vue {
 //     $refs!: {
 //         Canvas: HTMLCanvasElement

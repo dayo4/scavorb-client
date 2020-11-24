@@ -1,12 +1,10 @@
 {
   "name": "scavorb",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -18,33 +16,21 @@
     "quill-image-resize": "^3.0.9",
     "register-service-worker": "^1.7.1",
     "socket.io-client": "^3.0.1",
-    "vue": "^3.0.0",
-    "vue-3-meta": "^2.4.0",
-    "vue-router": "^4.0.0-rc.5",
+    "vue": "^2.6.11",
+    "vue-meta": "^2.4.0",
+    "vue-router": "^3.2.0",
     "vue2-editor": "^2.10.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^5.2.4",
     "@types/socket.io-client": "^1.4.34",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-unit-mocha": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/eslint-config-typescript": "^5.0.2",
-    "@vue/test-utils": "^2.0.0-0",
-    "chai": "^4.1.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0",
     "node-sass": "^4.12.0",
-    "prerender-spa-plugin": "^3.4.0",
     "sass-loader": "^8.0.2",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "vue-template-compiler": "^2.6.11"
   }
 }

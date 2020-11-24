@@ -39,11 +39,11 @@
     </Container>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue"
+import Vue from "vue"
 
 import Container from '@/components/navs/reusables/Container.vue'
 
-export default defineComponent({
+export default Vue.extend({
     components: {
         Container
     }

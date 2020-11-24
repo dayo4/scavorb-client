@@ -1,32 +1,33 @@
 import Vue from 'vue'
-import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
+import VueRouter, { RouteConfig } from 'vue-router'
+import allRoutes from '@/router/routes/index.ts'
 
-import routes from "@/router/routes/index.ts"
+Vue.use(VueRouter)
+
+const routes: Array<RouteConfig> = allRoutes
+
 import { $Auth } from '@/myStore'
+
+// export default () => {
 // import { $Process } from '@/plugins'
 
-/* ssr purpose */
-const isServer = typeof window === 'undefined'
-let history = isServer ? createMemoryHistory() : createWebHistory()
-
-
-const router = createRouter({
-  history /* : createWebHistory(process.env.BASE_URL) */,
-  routes,
-  scrollBehavior (to, from, savedPosition) {
-    if (savedPosition)
-    {
-      return savedPosition
-    } else
-    {
-      return { top: 0 }
-    }
-  },
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+  // scrollBehavior (to, from, savedPosition) {
+  //   if (savedPosition)
+  //   {
+  //     return savedPosition
+  //   } else
+  //   {
+  //     return { top: 0 }
+  //   }
+  // },
 })
 
 //GLOBAL ROUTE GAURDS
 router.beforeEach((to, from, next) => {
-
   const isUser = $Auth.isUser
   const isAdmin = $Auth.isAdmin
 
@@ -44,7 +45,7 @@ router.beforeEach((to, from, next) => {
     } else if (isUser && !isAdmin)
     {
       next({
-        path: "/401",
+        path: '/401'
       })
     } else
     {
@@ -54,10 +55,9 @@ router.beforeEach((to, from, next) => {
       //   query: { redirect: to.fullPath }
       // })
     }
-  }
-  /*  Users Routes Guard */
-  else if (userOnly)
+  } else if (userOnly)
   {
+    /*  Users Routes Guard */
     if (isUser)
     {
       next()
@@ -65,13 +65,12 @@ router.beforeEach((to, from, next) => {
     {
       $Auth.$form.show({ showQuery: true, redirect: to.fullPath })
     }
-  }
-  /* Guests-Only Routes Guard */
-  else if (guestOnly)
+  } else if (guestOnly)
   {
+    /* Guests-Only Routes Guard */
     if (isUser)
     {
-      next({ path: "/" })
+      next({ path: '/' })
     } else
     {
       next()
@@ -95,13 +94,6 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-// router.beforeResolve((to, from, next) => {
-// $Process.add('resolving route')
-// next()
-// })
-
-// router.afterEach((to, from) => {
-//   $Process.hide()
-// })
-
 export default router
+//   return router
+// }

@@ -7,4 +7,4 @@ export class Pages {
     $mailer = new Mailer()
 }
 
-export const $Pages = $Vue.reactive(new Pages())
+export const $Pages = $Vue.observable(new Pages())
