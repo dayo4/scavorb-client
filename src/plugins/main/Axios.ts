@@ -27,7 +27,7 @@ _axios.interceptors.request.use(
     // Do something before request is sent
     const token = LSAgent.getToken()
     config.headers.common[ 'Authorization' ] = 'Bearer ' + token
-    console.log('sent')
+
     return config
   },
   function (error) {
