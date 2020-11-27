@@ -1,7 +1,7 @@
 <template>
     <section class="flex j-c-center">
-        <div class="GenFormStyle xs11 sm9 md7 noselect">
-            <section class="TopInfo bg-blue-5 p-3 mb-3 no-deco">
+        <div class="GenFormStyle xs11 sm9 md7 z-index-1 noselect">
+            <section class="TopInfo bg-blue-5 p-3 mb-7 no-deco">
                 <div>Quickly send the detail of your request using the form below or talk to us through other mediums here</div>
                 <div class="flex a-i-center j-c-center font-12">
                     <a
@@ -254,8 +254,8 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 /* NOTE: "GenFormStyle GenFormWrapper" shared classes are found in the main "Auth" components */
-
 .TopInfo {
+    border-radius: 0 0 15px 15px;
     & > a {
         font-size: 26px;
         margin-left: 10px;

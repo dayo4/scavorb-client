@@ -1,6 +1,6 @@
 <template>
     <Container ownID="MC-cntct">
-        <h1 class="Head text-center t-blue-grey">Let's Work Together</h1>
+        <h1 class="Head page-head-bg-grad text-center t-blue-grey py-8">Let's Get Things Done</h1>
 
         <!-- Contact Component -->
         <Contact></Contact>
@@ -14,11 +14,15 @@ import Vue from "vue"
 
 import Container from '@/components/navs/reusables/Container.vue'
 import Contact from '@/components/pages/Contact.vue'
+import { $General } from '@/plugins'
 
 export default Vue.extend({
     components: {
         Container,
         Contact
+    },
+    metaInfo () {
+        return $General.metaInfo({ title: 'Reach out' })
     },
 })
 </script>

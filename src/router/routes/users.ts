@@ -14,19 +14,27 @@ const routes = [
                 name: 'user-profile',
                 component: () => import(/*webpackPrefetch: true, webpackChunkName: "prf" */ '@/views/profile/Profile.vue'),
                 beforeEnter: (to, from, next) => {
-                    if (typeof to.params.username !== 'undefined')
-                        $Profile.fetch({
-                            username: to.params.username
-                        }).then((loaded) => {
-                            if (loaded)
-                            {
-                                next()
-                            } else
-                            {
-                                // $Notify.error('A connection error occured')
-                                next(false)
-                            }
-                        })
+                    // const profile: any = $Profile.data as object
+                    // const fetched = profile && profile.username === to.params.username
+                    // if (fetched)
+                    // {
+                    //     next()
+                    // }
+                    // else
+                    // {
+                    $Profile.fetch({
+                        username: to.params.username
+                    }).then((loaded) => {
+                        // if (fetched)
+                        // {
+                        next()
+                        // } else
+                        // {
+                        //     // $Notify.error('A connection error occured')
+                        //     next(false)
+                        // }
+                    })
+                    // }
                 }
             },
         ]

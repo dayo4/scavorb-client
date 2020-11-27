@@ -8,13 +8,10 @@
         <Process />
         <Auth />
 
-        <!-- <transition name="fade-in">
-        <router-view />
-        </transition>-->
-            <transition name="fade-in">
-        <router-view>
-        </router-view>
-            </transition>
+        <transition name="fade-in">
+            <router-view></router-view>
+        </transition>
+
         <BottomNav />
     </div>
 </template>

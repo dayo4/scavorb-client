@@ -2,11 +2,11 @@
     <Container ownID="MC-Privacy">
         <section class="flex j-c-center text-center">
             <div class="xs12 sm10 md9">
-                <h1 class="text-center t-blue-grey">Privacy Policy</h1>
+                <h1 class="page-head-bg-grad t-blue-grey px-5 py-8">Privacy Policy</h1>
 
                 <h4
                     class="t-blue-grey--2"
-                >I am committed to protecting the privacy of those who visit this SCAVORB Website and/or use my Services.</h4>
+                >We are committed to protecting the privacy of those who visit this SCAVORB Website and/or use our services.</h4>
 
                 <i>Any adjustment to this statement will be updated to this page and will be effective when posted. Your continued use of this site following the posting of any adjustment, modification, or change shall constitute your acceptance.</i>
 

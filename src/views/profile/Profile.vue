@@ -12,12 +12,20 @@ import UpperSection from "@/components/profile/UpperSection.vue"
 import LowerSection from "@/components/profile/LowerSection.vue"
 import Vue from "vue"
 import { $Profile } from "@/myStore"
+import { $General } from '@/plugins'
 
 export default Vue.extend({
     components: {
         Container,
         UpperSection,
         LowerSection
+    },
+    metaInfo () {
+        return $General.metaInfo({ title: $Profile.data.name })
+    },
+
+    computed: {
+        profile: () => $Profile.data,
     },
 
     watch: {

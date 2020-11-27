@@ -4,11 +4,11 @@
         <div
             :id="ownID?ownID:''"
             class="MC-ViewArea"
-            :class="MainCB ? MainCB : `${ noSideNav ? 'xs12 padded' : 'xs12 lg9'}`"
+            :class="MainCB ? MainCB : `${ noSideNav ? `xs12 ${!['home'].includes($route.name) ? 'padded' : ''}` : 'xs12 lg9'}`"
         >
             <slot></slot>
-            <Footer />
         </div>
+        <Footer />
 
         <!-- SIDE NAVIGATION SLOT -->
         <!-- <div v-if="!noSideNav" class="hide-lg-down" :class="SideCB ? SideCB : 'lg3'">

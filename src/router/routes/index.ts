@@ -17,6 +17,6 @@ export default [
     ...pages,
     ...posts,
     ...settings,
-    ...gallery,
+    // ...gallery,
     { path: '/:pathMatch(.*)*', component: () => import("@/views/pages/ERRORS/404.vue") }
 ]

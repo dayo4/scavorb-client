@@ -4,13 +4,13 @@ const routes = [
     {
         path: "/compose",
         name: "compose-post",
-        component: () => import("@/views/posts/Compose.vue"),
+        component: () => import(/* webpackChunkName: "cmps" */ "@/views/posts/Compose.vue"),
         meta: { adminOnly: true },
     },
     {
         path: "/posts",
         name: "posts",
-        component: () => import(/* webpackPrefetch: true, webpackChunkName: "all-pst" */ "@/views/posts/AllPosts.vue"),
+        component: () => import(/* webpackPrefetch: true, webpackChunkName: "psts" */ "@/views/posts/AllPosts.vue"),
         // beforeEnter: (to, from, next) => {
         //     $Posts.fetchAll({}, true)
         //     next()
@@ -23,19 +23,25 @@ const routes = [
             {
                 path: '',
                 name: 'post',
-                component: () => import(/* webpackChunkName: "sngl-pst" */ '@/views/posts/Single.vue'),
+                component: () => import(/* webpackChunkName: "pst" */ '@/views/posts/Single.vue'),
                 beforeEnter: (to, from, next) => {
-                    console.log(typeof to.params.slug)
-                    console.log(to.params.slug)
-                    if (typeof to.params.slug !== 'undefined')
-                        $Posts.$single.fetch({
-                            slug: to.params.slug
-                        }, to.params.preview ? true : false).then((loaded) => {
-                            if (loaded)
-                            {
-                                next()
-                            }
-                        })
+                    // const post: any = $Posts.$single.post as object
+                    // const fetched = post && post.slug === to.params.slug
+                    // if (fetched)
+                    // {
+                    //     next()
+                    // }
+                    // else
+                    // {
+                    $Posts.$single.fetch({
+                        slug: to.params.slug
+                    }, to.params.preview ? true : false).then((loaded) => {
+                        // if (fetched)
+                        // {
+                        next()
+                        // }
+                    })
+                    //     }
                 }
             },
         ]
@@ -46,7 +52,7 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import(/* webpackChunkName: "sngl-pst" */ '@/views/posts/Single.vue'),
+                component: () => import(/* webpackChunkName: "pst" */ '@/views/posts/Single.vue'),
                 beforeEnter: (to, from, next) => {
                     $Posts.$single.fetch({
                         slug: to.params.slug

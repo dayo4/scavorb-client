@@ -18,7 +18,7 @@ export class LoadingProcessNotification {
     }
 
     add (text?: string/* , opt: { full?: boolean } = {} */) {
-        this.info = text ? text : 'Processing request...'
+        this.info = text ? text : 'Requesting...'
         this.icon = 'icon-info'
         if (this.status === false)
             this.status = true

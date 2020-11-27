@@ -5,13 +5,13 @@
                 <div class="Detail xs12 md8 noselect br1">
                     <div class="Intro text-center">
                         <div>SCAVORB</div>
-                        <div>Full-stack Web Applications Development</div>
+                        <div>Websites Design and Web Applications Development</div>
                     </div>
                     <div class="More">
                         <div>We create custom personal and business websites tailored to your needs.</div>
                         <ul>
                             UI Designs
-                            <li>Have your website's UI professionally designed for maximum user experience.</li>
+                            <li>Have your website's UI professionally designed for the best user experience.</li>
                         </ul>
                         <ul>
                             Single Page Applications(SPAs)
@@ -39,7 +39,7 @@
 
                 <!-- logo -->
                 <div class="Logo flex j-c-center noselect">
-                    <div class="logo-base logo-small logo-trans-2">
+                    <div class="logo-base logo-trans-1 shadow-2">
                         <span>
                             <span>
                                 <b>S</b>
@@ -75,7 +75,7 @@
                         <!-- <i class="font-2">What i offer</i> -->
                     </span>
                 </h2>
-                <div class="Tiles flex wrap j-c-center py-8">
+                <div class="Tiles bg-img-masked bg-pink--3 flex wrap j-c-center py-8">
                     <div class="flex col xs8 sm4 md3 shadow-3" v-for="(L, i) in list" :key="i">
                         <div class="noselect">
                             <img
@@ -88,42 +88,84 @@
                     </div>
                 </div>
 
-                <button
-                    @click="$router.push({name: 'about'})"
-                    class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5 m-auto noselect"
-                >
-                    <span class="icon-right-big mr-3"></span>
-                    <span>More About Scavorb</span>
-                </button>
+                <div class="flex j-c-center">
+                    <button
+                        @click="$router.push({name: 'about'})"
+                        class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5"
+                    >
+                        <span class="icon-right-big mr-3"></span>
+                        <span>More About Scavorb</span>
+                    </button>
+                </div>
             </section>
 
             <div class="Divider">
                 <span></span>
             </div>
 
-            <div class="Quote">Meet Scavorb's creator and lead developer</div>
+            <!-- Developer profile -->
+            <div class="Quote">Scavorb's lead developer and creator</div>
 
             <section>
                 <h2 class="text-center t-blue-grey--1">
                     <!-- <span class="icon-chart-line-1 mr-3"></span> -->
-                    <span>
-                        Adedayo Adeniyi
-                        <!-- <i class="font-2">Confident in my skills</i> -->
-                    </span>
+                    <span>Adedayo Adeniyi</span>
                 </h2>
-                <!-- <SkillChart></SkillChart> -->
-                <div class="img-logo-border noselect"></div>
+
+                <div class="flex j-c-center">
+                    <div class="LogoBorder logo-base logo-static noselect">
+                        <span class="bg-img-masked-0">
+                            <img src="/defaults/usr/me.jpg" alt="Adedayo Adeniyi" draggable="false" />
+                        </span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="flex j-c-center">
+                    <button
+                        @click="$router.push({name:'user-profile', params:{username: 'dayo'}})"
+                        class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5"
+                    >
+                        <span class="icon-right-big mr-3"></span>
+                        <span>View Profile</span>
+                    </button>
+                </div>
+            </section>
+
+            <div class="Divider">
+                <span></span>
+            </div>
+
+            <!--Designs Gallery -->
+            <div class="Quote">Short preview gallery of recent site designs</div>
+
+            <section>
+                <h2 class="text-center t-blue-grey--1">
+                    <!-- <span class="icon-chart-line-1 mr-3"></span> -->
+                    <span>Scavorb Gallery</span>
+                </h2>
+
+                <div class="flex j-c-center">
+                    <div class="GalPreview xs11 sm18 md5 lg4 noselect">
+                        <img src="/defaults/pgs/scavorb_gallery.jpg" alt draggable="false" />
+                    </div>
+                </div>
+
+                <div class="flex j-c-center">
+                    <button
+                        ref="fkloading"
+                        class="btn cyan-gradient-btn shadow-5 font-5 br4 mt-5"
+                        @click="fkLoading"
+                    >
+                        <span class="icon-right-big mr-3"></span>
+                        <span>Full Gallery</span>
+                    </button>
+                </div>
             </section>
 
             <div ref="contactCTA" class="Divider">
                 <span></span>
             </div>
-
-            <!-- <div>Industries We Serve</div> -->
-            <!-- Flipper Component -->
-            <!-- <Flipper></Flipper> -->
-            <!-- Flipper Component -->
-            <!-- <hr class="shadow-8" /> -->
 
             <h2 class="text-center t-blue-grey--1">
                 <span class="icon-mail-alt mr-3"></span>
@@ -133,29 +175,21 @@
                 </span>
             </h2>
             <!-- Contact Component -->
-            <Contact></Contact>
+            <!-- <div class="ContactCont bg-img-maskedm"> -->
+            <div>
+                <Contact></Contact>
+            </div>
+
             <!-- Contact Component -->
         </div>
     </Container>
 </template>
 <script lang="ts">
 import Vue from "vue"
-// import { ghostAPI, postIndexFields, fdata } from "@/ghostContent"
-// import { $Posts } from "@/myStore"
-// import { $Axios } from "@/plugins"
+
 import Container from '@/components/navs/reusables/Container.vue'
 import Contact from '@/components/pages/Contact.vue'
-import { $General } from '@/plugins'
-
-
-// async function dd () {
-//     const posts = await ghostAPI().posts.browse({
-//         fields: postIndexFields
-//     })
-//     console.log(posts)
-//     return posts
-// }
-
+import { $General, $Obstacle } from '@/plugins'
 
 export default Vue.extend({
     components: {
@@ -164,39 +198,44 @@ export default Vue.extend({
     },
 
     metaInfo () {
-        return $General.metaInfo('scavorb', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
+        return $General.metaInfo({})
     },
-    // computed: {
-    //     dummy: () => fdata.tdata
-    // },
+
     data () {
         return {
             list: [
-                { img: 'resp', text: 'Fully Responsive Webpages', detail: "Designs at scavorb are expertly hand crafted, and you are delivered webpages that look and feel perfect on devices of various screen sizes." },
+                { img: 'resp', text: 'Fully Responsive Webpages', detail: "Designs at scavorb are expertly hand crafted with modern layouts, and you are delivered webpages that look and feel perfect on devices of various screen sizes." },
                 { img: 'scale', text: 'Performant and Easily Scalable Apps', detail: "A successful web application should be reliable, well-planned and seemlessly accommodate growth. At scavorb, apps are designed to welcome subsequent growths without friction. And we technically avoid anything that can make our apps stuck in a hole." },
                 { img: '', text: 'Concise and Readable Code', link: '/defaults/pgs/icons/clean.png', detail: "Everything that makes up your webpages' layout are structured in codes and are required to be easily understandale. At scavorb you can be rest assured." },
-                { img: 'flexb', text: 'Flexible Business Logic Implementation' },
-                { img: 'effect', text: 'Cost Effective Development Service', detail: "It is scavorb's uthmost priority to ensure that you get the right value for your cost." },
+                // { img: 'flexb', text: 'Flexible Business Logic Implementation' },
+                { img: 'effect', text: 'Effective Development and Customer Service', detail: "It is scavorb's utmost priority to ensure that you get the right value for your input." },
                 { img: '', text: 'Genuine Design Customized To Your Need', link: '/defaults/logo/scavorb.png', detail: "Some people desire minimalist designs and layouts while others want it outright customized. Regardless of your requirement, scavorb is versed as presenting you with a design that simply stands out." },
             ],
 
-            skills: [
-                { text: 'JAVASCRIPT', value: 0.91, color: 'E57373' },
-                { text: 'CSS & HTML', value: 0.93, color: '673ab7' },
-                { text: 'TYPESCRIPT', value: 0.93, color: '42A5F5' },
-                { text: 'VUEJS', value: 0.90, color: '4CAF50' },
-                { text: 'NODEJS', value: 0.89, color: '8d6e63' },
-                { text: 'UI DESIGN', value: 0.83, color: '4db6ac' },
-                { text: 'GRAPHICS DESIGN', value: 0.7, color: '00bcd4' },
-                // { text: 'PYTHON', value: 0.6, color: 'ba68c8' },
-                { text: 'PHP', value: 0.65, color: '3f51b5' },
-            ]
+            // skills: [
+            //     { text: 'JAVASCRIPT', value: 0.91, color: 'E57373' },
+            //     { text: 'CSS & HTML', value: 0.93, color: '673ab7' },
+            //     { text: 'TYPESCRIPT', value: 0.93, color: '42A5F5' },
+            //     { text: 'VUEJS', value: 0.90, color: '4CAF50' },
+            //     { text: 'NODEJS', value: 0.89, color: '8d6e63' },
+            //     { text: 'UI DESIGN', value: 0.83, color: '4db6ac' },
+            //     { text: 'GRAPHICS DESIGN', value: 0.7, color: '00bcd4' },
+            //     // { text: 'PYTHON', value: 0.6, color: 'ba68c8' },
+            //     { text: 'PHP', value: 0.65, color: '3f51b5' },
+            // ]
 
         }
     },
     methods: {
         callToAction () {
             (this.$refs.contactCTA as HTMLElement).scrollIntoView({ behavior: "smooth" })
+        },
+
+        fkLoading () {
+            // const _this = this
+            $Obstacle.create(this.$refs.fkloading, {
+                text: ''
+            })
         }
     }
 })
@@ -228,13 +267,13 @@ export default Vue.extend({
     width: 100%;
     padding-bottom: 20px;
     background-color: $blue-grey--3;
-    background-image: url("/defaults/pgs/r/3.png");
+    background-image: url("/defaults/pgs/scavorb_web_design_and_development_service.jpg");
     // filter: blur(3px);
     // -webkit-filter: blur(3px);
     & .Logo {
         position: absolute;
         z-index: 2;
-        top: 15px;
+        top: 12px;
         width: 66.66%;
     }
     &::after {
@@ -243,7 +282,7 @@ export default Vue.extend({
     & .Detail {
         z-index: 1;
         & .Intro {
-            padding: 70px 0 0 0;
+            padding: 75px 0 0 0;
             & > div {
                 letter-spacing: 1px;
                 font-weight: bold;
@@ -257,6 +296,7 @@ export default Vue.extend({
                 color: $pink-5;
                 font-size: 35px;
                 margin-top: 25px;
+                padding: 0 10px;
             }
         }
 
@@ -331,7 +371,9 @@ export default Vue.extend({
 
 .Section_2 {
     & .Tiles {
+        background-image: url("/defaults/pgs/scavorb_technolink.jpg");
         & > div {
+            z-index: 2;
             width: 250px;
             min-height: 330px;
             // height: 400px;
@@ -370,67 +412,32 @@ export default Vue.extend({
     }
 }
 
-.SkillsWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.Skills {
-    overflow: hidden;
-    height: 75px;
-    margin: 20px 30px;
-    border-bottom: solid 5px #ad1457;
-    border-radius: 10px;
-    & > div {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: none /* #00838f */;
-
-        & > span:nth-child(1) {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 2;
-            border-radius: 50%;
-            width: 130px;
-            height: 130px;
-            overflow: hidden;
-            // background-color: #00838f;
-            text-align: center;
-            font-size: 12px;
-            padding-top: 43px;
-            color: white;
-
-            & b {
-                border: solid 1px;
-                border-radius: 5px;
-                border-bottom: none;
-                padding: 1px 3px;
-                letter-spacing: 0.5px;
-            }
-        }
-
-        & span:nth-child(2) {
-            position: absolute;
-            // border-bottom: 5px solid red;
-            // border-radius: 50%;
-            // border-top-color: blue;
-            bottom: 0;
-            left: 0;
+/* Developer image */
+.LogoBorder {
+    height: 150px;
+    width: 150px;
+    & > span:nth-child(1) {
+        width: 90%;
+        height: 90%;
+        & img {
             width: 100%;
             height: 100%;
-            background-color: #ad1457;
-            background: linear-gradient(#ad1457 50%, white 50%);
         }
     }
 }
 
+.GalPreview {
+    max-height: 400px;
+    & img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
+
+// .ContactCont {
+//     // background-color: $cyan-5;
+//     // background-image: url("/defaults/pgs/r/2.png");
+// }
 @include sm-and-down {
     .Top {
         & .Logo {

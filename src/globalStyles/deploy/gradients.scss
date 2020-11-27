@@ -1,3 +1,13 @@
+.page-head-bg-grad {
+	    background-color: rgba(0, 97, 100, 0.4);
+    background: linear-gradient(
+        to right,
+        rgba(0, 97, 100, 0) 10%,
+        rgba(0, 131, 143, 0.4),
+        rgba(0, 97, 100, 0) 90%
+    );
+}
+
 /* gradient backgrounds */
 .bg-gradient-1{
 	background-color: #006064;

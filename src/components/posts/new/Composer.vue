@@ -46,7 +46,7 @@ import Vue from "vue"
 
 export default Vue.extend({
     components: {
-        TextEditor: () => import('@/components/GlobalComponents/utils/TextEditor.vue')
+        TextEditor: () => import(/* webpackChunkName: "txd" */'@/components/GlobalComponents/utils/TextEditor.vue')
     },
     // beforeRouteEnter(to, from, next) {
     // 	next(vm => {

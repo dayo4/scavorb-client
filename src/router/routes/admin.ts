@@ -7,7 +7,7 @@ const routes = [
       {
         path: "",
         name: "admin-dashboard",
-        component: () => import("@/views/admin/Dashboard.vue")
+        component: () => import(/* webpackChunkName: "dsh" */ "@/views/admin/Dashboard.vue")
       },
     ]
   }

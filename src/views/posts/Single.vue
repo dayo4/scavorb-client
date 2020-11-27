@@ -181,8 +181,13 @@ export default Vue.extend({
         Minimizer: () => import('@/components/GlobalComponents/utils/Minimizer.vue')
     },
     metaInfo () {
-        // @ts-ignore
-        return $General.metaInfo(this.post.title, this.post.content, this.$postBaseUrl + this.post.img, this.href, 'Article')
+        return $General.metaInfo({
+            title: this.post.title,
+            content: this.post.content,
+            image: this.$postBaseUrl + this.post.img,
+            url: this.href,
+            type: 'Article'
+        })
     },
 
     data () {

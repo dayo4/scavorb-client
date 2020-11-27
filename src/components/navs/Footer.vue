@@ -27,7 +27,7 @@ export default Vue.extend({
     width: 100%;
     height: 60px;
     bottom: 0;
-    margin: 60px 0 30px 0;
+    margin: 60px 0 40px 0;
 }
 
 // @include sm-and-down {

@@ -12,26 +12,25 @@
 	
     & > span:nth-child(1) {
         position: absolute;
-        top: 6px;
-        left: 6px;
-        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
         border-radius: 50%;
-        width: 52px;
-        height: 52px;
+        width: 78%;
+        height: 78%;
 		overflow: hidden;
 		background-color: #ad1457;
         background: linear-gradient(to right,#ad1457 25%, #e91e63 50%, #ad1457 75%);
 
         & span:nth-child(1) {
             position: absolute;
-            top: 8px;
-            left: 8px;
-            z-index: 2;
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 36px;
-            height: 36px;
+            width: 72%;
+            height: 72%;
             border-radius: 50%;
             font-size: 38px;
 			color: #d81b60;
@@ -39,25 +38,21 @@
             // background: linear-gradient(#006064 25%, #00bcd4 50%, #006064 75%);
         }
         & span:nth-child(2) {
-            display:block;
             position: absolute;
-            top: 17px;
-            left: -23px;
-            width: 100px;
-			height: 20px;
+            width: 110%;
+			height: 45%;
 			background-color: #00838f;
 			background: linear-gradient(to right, #006064 25%, #00bcd4 50%, #006064 75%);
             animation: rotateL 15s linear infinite;
-                        // transform: rotateZ(180deg);
+            // transform: rotateZ(180deg);
         }
     }
     & span:nth-child(2) {
         position: absolute;
-        width: 100px;
-		height: 20px;
-            background-color: #ad1457;
-                                    // transform: rotateZ(90deg);
-
+        width: 110%;
+		height: 40%;
+        background-color: #ad1457;
+        // transform: rotateZ(90deg);
         animation: rotateR 9s linear infinite;
     }
 
@@ -81,28 +76,10 @@
     height: 45px;
 	
     & > span:nth-child(1) {
-        top: 4.3px;
-        left: 4.6px;
-        width: 36px;
-        height: 36px;
 
         & span:nth-child(1) {
-            top: 4px;
-            left: 4px;
-            width: 28px;
-            height: 28px;
             font-size: 30px;
         }
-        & span:nth-child(2) {
-            top: 13px;
-            left: 0px;
-            width: 40px;
-			height: 11px;
-        }
-    }
-    & span:nth-child(2) {
-        width: 50px;
-		height: 14px;
     }
 }
 
@@ -111,30 +88,11 @@
     height: 54px;
 	
     & > span:nth-child(1) {
-        top: 7px;
-        left: 7px;
-        width: 40px;
-        height: 40px;
 
         & span:nth-child(1) {
-            top: 7px;
-            left: 7px;
-            width: 26px;
-            height: 26px;
             font-size: 26px;
         }
-        & span:nth-child(2) {
-            top: 13px;
-            left: -13px;
-            width: 70px;
-			height: 16px;
-        }
     }
-    & span:nth-child(2) {
-        width: 80px;
-		height: 18px;
-    }
-
 }
 
 .logo-large {
@@ -142,30 +100,13 @@
     height: 120px;
 
     & > span:nth-child(1) {
-        top: 10px;
-        left: 10px;
-        width: 100px;
-        height: 100px;
 
         & span:nth-child(1) {
-            top: 10px;
-            left: 10px;
-            width: 80px;
-            height: 80px;
             font-size: 85px;
         }
-        & span:nth-child(2) {
-            top: 34px;
-            left: -50px;
-            width: 200px;
-			height: 30px;
-        }
-    }
-    & span:nth-child(2) {
-        width: 200px;
-		height: 40px;
     }
 }
+
 .logo-trans-1::after, .logo-trans-2::after {
     content: "";
     z-index: 3;
@@ -187,25 +128,36 @@
 }
 
 
-.img-logo-border {
-    position: relative;
-    width: 64px;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-	// overflow: hidden;
-	background-color: #00838f;
-	background: linear-gradient(#00838f 25%, #00bcd4 50%, #00838f 75%);
+// .img-logo-border {
+//     position: relative;
+//     width: 64px;
+//     height: 64px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border-radius: 50%;
+// 	overflow: hidden;
+// 	background-color: #00838f;
+// 	background: linear-gradient(#00838f 25%, #00bcd4 50%, #00838f 75%);
 	
-    &::after {
-        display: block;
-        position: absolute;
-        width: 110%;
-		height: 20%;
-        background-color: #ad1457;
-        z-index: 4;
-    }
+//     & > span:nth-child(1) {
+//         position: absolute;
+//         z-index: 2;
+//         border-radius: 50%;
+//         width: 85%;
+//         height: 85%;
+// 		overflow: hidden;
+// 		background-color: white;
+//     }
+//     & span:nth-child(2) {
+//         position: absolute;
+//         width: 100%;
+// 		height: 40%;
+//             background-color: #ad1457;
+//                                     transform: rotateZ(90deg);
 
-}
+//         // animation: rotateR 9s linear infinite;
+//     }
+
+
+// }

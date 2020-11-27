@@ -59,13 +59,17 @@ import Container from '@/components/navs/reusables/Container.vue'
 
 import Vue from "vue"
 import { $Posts } from "@/myStore"
-import { /* $ScrollLoader, */ $Obstacle } from "@/plugins"
+import { /* $ScrollLoader, */ $Obstacle, $General } from "@/plugins"
 
 export default Vue.extend({
     components: {
         Container,
         Dropdown: () => import('@/components/GlobalComponents/utils/Dropdown.vue'),
         ListOfPosts: () => import("@/components/posts/ListOfPosts.vue"),
+    },
+
+    metaInfo () {
+        return $General.metaInfo({ title: 'blog - posts' })
     },
 
     data () {

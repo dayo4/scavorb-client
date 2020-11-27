@@ -1,3 +1,13 @@
+import { MetaInfo } from 'vue-meta'
+
+interface MyMetaInfo {
+    title?: string,
+    content?: string,
+    image?: string,
+    url?: string,
+    type?: string
+
+}
 
 export class General {
 
@@ -15,42 +25,43 @@ export class General {
 
     }
 
-    defaultContent = `Adedayo Adeniyi. Full-stack Web Applications Developer. Create custom personal and business websites tailored to your needs. Front-end Development,
-    Back-end Development, UI Designs, Single Page Applications(SPAs), Ecommerce Development, Wordpress Development`
     /* vue-meta abstraction method */
-    metaInfo (
-        title: string,
-        content: string,
-        image,
-        url: string,
-        type: string
-    ) {
+    metaInfo (data: MyMetaInfo) {
+        const defaults = {
+            title: 'scavorb - web design and web app development',
+            content: "scavorb - websites design, full-stack web applications development and consulting service. Have your personal and business website's UI professionally designed for the best user experience and satisfaction.",
+            image: 'https://www.scavorb.com/defaults/pgs/scavorb_website_design_and_development.jpg',
+            url: '',
+            type: 'website'
+        }
+
+
         return {
-            title,
+            title: data.title || defaults.title,
             meta: [
                 {
                     name: 'description',
-                    content: content ? content.slice(0, 250) + '...' : this.defaultContent
+                    content: data.content ? data.content.slice(0, 250) + '...' : defaults.content
                 },
                 {
                     property: 'og:title',
-                    content: title
+                    content: data.title || defaults.title
                 },
                 {
                     property: 'og:description',
-                    content: content ? content.slice(0, 250) + '...' : this.defaultContent
+                    content: data.content ? data.content.slice(0, 250) + '...' : defaults.content
                 },
                 {
                     property: 'og:url',
-                    content: url
+                    content: data.url || defaults.url
                 },
                 {
                     property: 'og:image',/* reccomended aspect-ratio 1200x630 */
-                    content: image
+                    content: data.image || defaults.image
                 },
                 {
                     property: 'og:type',
-                    content: type
+                    content: data.type || defaults.type
                 },
                 {
                     name: 'robots',

@@ -1,10 +1,10 @@
 <template>
     <div>
         <div id="UpperSection">
-            <div class="CoverImage" ref="CoverImage">
+            <div class="CoverImage flex col" ref="CoverImage">
                 <div class="Blur noselect">
                     <div class="flex j-c-center pt-5 pl-3">
-                        <div class="logo-base logo-small shadow-5">
+                        <div class="logo-base logo-small logo-static shadow-5">
                             <span>
                                 <span>
                                     <b>S</b>
@@ -14,7 +14,10 @@
                             <span></span>
                         </div>
                     </div>
-                    <div class="text-center font-3 bold-4 my-3 t-white">SCAVORB</div>
+
+                    <div
+                        class="text-center font-14 bold-4 mt-10 t-pink-5"
+                    >A Full-stack web developer</div>
                 </div>
 
                 <!-- :style="!profile.cover_image ? 'background-image: url(/defaults/4.jpg)' : 'background-image: url('+profile.cover_image+')'" -->
@@ -63,7 +66,7 @@
             </div>
             <!-- //// -->
             <div class="Cover">
-                <div class="ProfileImage noselect">
+                <div class="ProfileImage bg-img-masked-0 noselect">
                     <img
                         :src="$userBaseUrl + profile.profile_image"
                         alt="profile image"
@@ -119,7 +122,7 @@ import { max } from 'moment'
 
 export default Vue.extend({
     components: {
-        ImageTransformer: () => import("@/components/uploads/ImageTransformer.vue"),
+        ImageTransformer: () => import( /* webpackChunkName: "trfm" */"@/components/uploads/ImageTransformer.vue"),
     },
 
     computed: {
@@ -182,10 +185,11 @@ export default Vue.extend({
     }
     position: relative;
     // height: 200px;
-    height: fit-content;
-    background-color: lightblue;
-    background-repeat: no-repeat;
-    background-position: center;
+    min-height: 200px;
+    // height: fit-content;
+    // background-color: lightblue;
+    // background-repeat: no-repeat;
+    // background-position: center;
     // background-size: contain;
     // object-fit: ;
     & .Blur {
@@ -196,6 +200,7 @@ export default Vue.extend({
         right: -15px;
         border: solid 4px;
         border-color: #eceff1;
+        background-color: rgba(72, 72, 72, 0.6);
         box-shadow: #eceff1 inset 18px 18px 10px, #eceff1 inset -18px -18px 10px;
     }
 
