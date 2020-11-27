@@ -72,7 +72,7 @@ export default Vue.extend({
                 { font: 'icon-bookmarks', text: 'Bookmarks', link: '', store: '', auth: 'user' },
                 { font: 'icon-cog-alt', text: 'Admin', link: 'admin-dashboard', auth: 'admin' },
                 { font: 'icon-plus-1', text: 'New Post', link: 'compose-post', auth: 'admin' },
-                { font: 'icon-cog-1', text: 'Settings', link: 'manage-settings', auth: 'user' },
+                // { font: 'icon-cog-1', text: 'Settings', link: 'manage-settings', auth: 'user' },
             ],
 
             pageIcons: [

@@ -18,7 +18,7 @@ export default Vue.extend({
         Container,
     },
     metaInfo () {
-        return $General.metaInfo('scavorb gallery', null, 'https://www.scavorb.com/defaults/pgs/scavorb.jpg', '', 'website')
+        return $General.metaInfo({ title: 'scavorb gallery' })
     },
 
     data () {
