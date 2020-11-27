@@ -104,7 +104,7 @@
             </div>
 
             <!-- Developer profile -->
-            <div class="Quote">Scavorb's lead developer and creator</div>
+            <div class="Quote">Meet scavorb's lead developer and creator</div>
 
             <section>
                 <h2 class="text-center t-blue-grey--1">
@@ -146,7 +146,7 @@
                 </h2>
 
                 <div class="flex j-c-center">
-                    <div class="GalPreview xs11 sm18 md5 lg4 noselect">
+                    <div class="GalPreview bg-img-masked-0 xs11 sm18 md5 lg4 noselect">
                         <img src="/defaults/pgs/scavorb_gallery.jpg" alt draggable="false" />
                     </div>
                 </div>
@@ -170,7 +170,7 @@
             <h2 class="text-center t-blue-grey--1">
                 <span class="icon-mail-alt mr-3"></span>
                 <span>
-                    Message Scavorb
+                    Reach Out To Us
                     <i class="font-3">Let's Get Things Done!</i>
                 </span>
             </h2>
