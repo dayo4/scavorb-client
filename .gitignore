@@ -2,6 +2,7 @@
 node_modules
 /dist
 /public/defaults/pgs/r/*
+/dev_img
 
 
 # local env files

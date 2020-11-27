@@ -34,7 +34,7 @@
 
                 <!-- image -->
                 <div class="Img md4 hide-sm-down">
-                    <img src="/defaults/pgs/r/a1.png" alt="intro-image" draggable="false" />
+                    <img src="/defaults/pgs/a1.png" alt="intro-image" draggable="false" />
                 </div>
 
                 <!-- logo -->
