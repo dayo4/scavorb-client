@@ -39,7 +39,7 @@ export default Vue.extend({
         Container,
     },
     metaInfo () {
-        return $General.metaInfo('scavorb gallery', null, '', '', 'website')
+        return $General.metaInfo({ title: 'scavorb gallery' })
     },
 })
 
