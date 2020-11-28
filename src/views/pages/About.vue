@@ -15,7 +15,7 @@
 
         <h1
             class="Head text-center page-head-bg-grad t-blue-grey font-9 px-5 py-8"
-        >A LITTLE MORE INFO</h1>
+        >A Little More Info</h1>
 
         <section class="flex j-c-center wrap">
             <section v-for="(QA, i) in QueAns" :key="i" class="xs12 sm10 md9 mb-10">
@@ -65,13 +65,13 @@
             </div>
         </section>
 
-        <section class="dddddddd">
+        <!-- <section class="dddddddd">
             <div>
                 <img src="/defaults/pgs/r/hg/5.png" />
             </div>
-            <!-- <div>
+             <div>
                 <img src="/defaults/pgs/r/hg/6.png" />
-            </div>-->
+            </div>
             <div>
                 <img src="/defaults/pgs/r/hg/2.png" />
             </div>
@@ -84,7 +84,7 @@
             <div>
                 <img src="/defaults/pgs/r/hg/1.png" />
             </div>
-        </section>
+        </section>-->
     </Container>
 </template>
 <script lang="ts">
@@ -155,7 +155,10 @@ export default Vue.extend({
 }
 
 .Head {
-    font-family: /* "Courgette", */ cursive;
+    font-family: "Itim", "Roboto", sans-serif;
+    // font-family: "Itim", cursive;
+    // font-family: "Sriracha", /* cursive */;
+    // font-family: /* "Courgette", */ cursive;
     letter-spacing: 1px;
     margin-bottom: 30px;
 }
@@ -224,50 +227,50 @@ export default Vue.extend({
     }
 }
 
-.dddddddd {
-    height: 700px;
-    position: relative;
+// .dddddddd {
+//     height: 700px;
+//     position: relative;
 
-    & > div {
-        position: absolute;
-        & img {
-            // height: 600px;
-        }
-    }
+//     & > div {
+//         position: absolute;
+//         & img {
+//             // height: 600px;
+//         }
+//     }
 
-    & > div:nth-child(1) {
-        left: 100px;
-        bottom: 20px;
-        transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
-    }
-    & > div:nth-child(2) {
-        left: 100px;
-        bottom: 200px;
-        transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
-    }
-    & > div:nth-child(3) {
-        left: 150px;
-        bottom: 200px;
-        transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
-    }
-    & > div:nth-child(4) {
-        left: 200px;
-        bottom: 300px;
-        transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
-    }
-    & > div:nth-child(5) {
-        left: 300px;
-        bottom: 400px;
-        transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg)
-            translateX(-100px) translateY(280px);
-    }
-    // & > div:nth-child(6) {
-    //     left: 400px;
-    //     bottom: 450px;
-    //     transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg)
-    //         translateX(-100px) translateY(250px);
-    // }
-}
+//     & > div:nth-child(1) {
+//         left: 100px;
+//         bottom: 20px;
+//         transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
+//     }
+//     & > div:nth-child(2) {
+//         left: 100px;
+//         bottom: 200px;
+//         transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
+//     }
+//     & > div:nth-child(3) {
+//         left: 150px;
+//         bottom: 200px;
+//         transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
+//     }
+//     & > div:nth-child(4) {
+//         left: 200px;
+//         bottom: 300px;
+//         transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg);
+//     }
+//     & > div:nth-child(5) {
+//         left: 300px;
+//         bottom: 400px;
+//         transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg)
+//             translateX(-100px) translateY(280px);
+//     }
+//     // & > div:nth-child(6) {
+//     //     left: 400px;
+//     //     bottom: 450px;
+//     //     transform: rotateZ(-10deg) rotateY(40deg) rotateX(45deg)
+//     //         translateX(-100px) translateY(250px);
+//     // }
+// }
 @include xs-only {
     .Ques {
         margin-right: 35px;

@@ -28,7 +28,7 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .Head {
-    font-family: /* "Courgette", */ cursive;
+    font-family: "Itim", "Roboto", sans-serif;
     letter-spacing: 1px;
 }
 </style>

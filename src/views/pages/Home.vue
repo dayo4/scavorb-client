@@ -255,7 +255,10 @@ export default Vue.extend({
 }
 .Quote {
     text-align: center;
-    font-family: /* "Courgette", */ cursive;
+    font-family: "Itim", "Roboto", sans-serif;
+    // font-family: "Itim", cursive;
+    // font-family: "Sriracha", /* cursive */;
+    // font-family: /* "Courgette", */ cursive;
     font-size: 30px;
     color: $pink-3;
     padding: 0 20px 10px 20px;
@@ -292,7 +295,10 @@ export default Vue.extend({
                 font-size: 35px;
             }
             & > div:nth-child(2) {
-                font-family: /* "Courgette", */ cursive;
+                // font-family: "Merienda", cursive;
+                font-family: "Itim", "Roboto", sans-serif;
+
+                // font-family: "Sriracha", /* cursive */;
                 color: $pink-5;
                 font-size: 35px;
                 margin-top: 25px;

@@ -15,9 +15,7 @@
                         </div>
                     </div>
 
-                    <div
-                        class="text-center font-14 bold-4 mt-10 t-pink-5"
-                    >A Full-stack web developer</div>
+                    <div class="text-center bold-4 mt-10 t-pink-5">Full-stack web developer</div>
                 </div>
 
                 <!-- :style="!profile.cover_image ? 'background-image: url(/defaults/4.jpg)' : 'background-image: url('+profile.cover_image+')'" -->
@@ -178,6 +176,7 @@ export default Vue.extend({
     overflow-x: hidden;
 }
 .CoverImage {
+    font-size: 28px;
     & img {
         height: 100%;
         width: 100%;
@@ -185,7 +184,7 @@ export default Vue.extend({
     }
     position: relative;
     // height: 200px;
-    min-height: 200px;
+    min-height: 100px;
     // height: fit-content;
     // background-color: lightblue;
     // background-repeat: no-repeat;
@@ -333,6 +332,9 @@ export default Vue.extend({
 }
 
 @include sm-and-down {
+    .CoverImage {
+        font-size: 22px;
+    }
     .Details {
         background: linear-gradient(to right, $blue-grey-5, $pink--3 11%);
     }
@@ -391,6 +393,9 @@ export default Vue.extend({
     }
 }
 @include xxs-only {
+    .CoverImage {
+        font-size: 16px !important;
+    }
     .Details {
         & .About,
         .Status {

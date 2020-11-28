@@ -84,6 +84,7 @@ module.exports = {
     // }
 }
 
+// "@vue/cli-plugin-pwa": "~4.5.0",
 
 
 /* for non-vue-cli users */
