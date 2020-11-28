@@ -18,15 +18,24 @@ module.exports = {
     },
     pwa: {
         // workboxPluginMode: 'InjectManifest',
-        // workboxOptions: {
-        //     swSrc: 'service-worker.js',
-        // exclude: [
-        //     /\.map$/,
-        //     /manifest\.json$/
-        // ],
-        // },
+        workboxOptions: {
+            //     swSrc: 'service-worker.js',
+            cleanupOutdatedCaches: true,
+            skipWaiting: true,
+            clientsClaim: true,
+            exclude: [
+                /^cmps\./,
+                /^dsh\./,
+                /^pst\./,
+                /^stns\./,
+                /^trfm\./,
+                /^txd\./,
+                // /\.map$/,
+                // /manifest\.json$/
+            ],
+        },
         // manifestPath: 'manifest.json',
-        assetsVersion: 5,
+        assetsVersion: 6,
         themeColor: '#880e4f'
     },
     chainWebpack: config => {
@@ -83,8 +92,6 @@ module.exports = {
     //     }
     // }
 }
-
-// "@vue/cli-plugin-pwa": "~4.5.0",
 
 
 /* for non-vue-cli users */

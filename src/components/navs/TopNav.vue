@@ -94,11 +94,8 @@
                             >@{{ userData.username}}</div>
                             <div v-if="user" class="MoreLinks p-1">
                                 <hr />
-                                <router-link
-                                    v-slot="{ navigate }"
-                                    :to="{path:'/profile/'+userData.username}"
-                                >
-                                    <span @click="navigate" class="icon-user"></span>Profile
+                                <router-link :to="{path:'/profile/'+userData.username}">
+                                    <span class="icon-user"></span>Profile
                                 </router-link>
                             </div>
                             <hr />

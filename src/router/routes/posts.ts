@@ -1,4 +1,5 @@
 import { $Posts } from "@/myStore"
+import { $Notify } from '@/plugins'
 
 const routes = [
     {
@@ -39,6 +40,11 @@ const routes = [
                         // if (fetched)
                         // {
                         next()
+
+                        if (!loaded)
+                        {
+                            $Notify.error('unable to connect')
+                        }
                         // }
                     })
                     //     }

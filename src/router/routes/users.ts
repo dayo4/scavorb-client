@@ -33,6 +33,10 @@ const routes = [
                         //     // $Notify.error('A connection error occured')
                         //     next(false)
                         // }
+                        if (!loaded)
+                        {
+                            $Notify.error('unable to connect')
+                        }
                     })
                     // }
                 }
