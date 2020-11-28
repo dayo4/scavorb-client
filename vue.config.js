@@ -24,12 +24,12 @@ module.exports = {
             skipWaiting: true,
             clientsClaim: true,
             exclude: [
-                /^cmps\./,
-                /^dsh\./,
-                /^pst\./,
-                /^stns\./,
-                /^trfm\./,
-                /^txd\./,
+                /cmps\./,
+                /dsh\./,
+                /pst\./,
+                /stns\./,
+                /trfm\./,
+                /txd\./,
                 // /\.map$/,
                 // /manifest\.json$/
             ],
