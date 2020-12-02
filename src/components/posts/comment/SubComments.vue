@@ -135,7 +135,7 @@ export default Vue.extend({
 
     props: {
         subCommentMode: { required: true, type: Boolean },
-        activeComment: { required: true, type: Object },
+        activeComment: { required: true },
     },
 
     computed: {

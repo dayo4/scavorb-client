@@ -5,5 +5,9 @@ import './gradients.scss'
 import './logo.scss'
 import './plugins.scss'
 import './transitions.css'
+
 /* cropperjs styles */
 import './cropper.css'
+
+/* Obstacle styles */
+import '../../../node_modules/obstacle/dist/obstacle.min.css'

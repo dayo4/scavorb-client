@@ -147,6 +147,7 @@ export default Vue.extend({
             if ($Validator.validate(this.stage === 1 ? schema1 : this.stage === 2 ? schema2 : schema3))
             {
                 $Obstacle.create(sendBtn, {
+                    icon: 'icon-spin6',
                     action: function () {
                         if (_this.stage === 1)
                         {

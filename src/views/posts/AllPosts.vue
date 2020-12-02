@@ -108,7 +108,7 @@ export default Vue.extend({
     },
 
     mounted () {
-        // let _this = this
+        let _this = this
         // $ScrollLoader('#MC-AllPosts').init(async function () {
         //     return await $Posts.fetchAll(_this.query).then(data => {
         //         if (data)
@@ -116,7 +116,7 @@ export default Vue.extend({
         //     })
         // })
         $Obstacle.create('#MC-AllPosts', {
-            pageLoader: true
+            injectHTML: this.$appLogo
         })
         $Posts.fetchAll({}, true).then(ok => $Obstacle.destroy('#MC-AllPosts'))
         // this.$gtag.event('login', { method: 'Google' })

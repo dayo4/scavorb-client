@@ -134,6 +134,7 @@ export default Vue.extend({
             if ($Validator.validate(schema))
             {
                 $Obstacle.create(sendBtn, {
+                    icon: 'icon-spin6',
                     action: function () {
                         $Auth.$form.register({
                             username: _this.username,

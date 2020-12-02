@@ -102,7 +102,7 @@ export default Vue.extend({
 
     mounted () {
         $Obstacle.create('.Tab_2', {
-            pageLoader: true
+            injectHTML: this.$appLogo
         })
         $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.destroy('.Tab_2'))
     }

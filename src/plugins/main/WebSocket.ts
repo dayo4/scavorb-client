@@ -2,9 +2,9 @@
 import webSokect from 'socket.io-client'
 // import LSAgent from '@/plugins/storage/LSAgent'
 const connStack: string[] = []
-
+const devMode = process.env.NODE_ENV === 'production'
 class WS {
-  baseUrl = process.env.NODE_ENV === 'production' ? 'wss://scavorb.com' : 'ws://127.0.0.1:3000'
+  baseUrl = devMode ? 'wss://scavorb.com' : 'ws://127.0.0.1:3000'
 
   createConnection (nsp: string, opts?: SocketIOClient.ConnectOpts) {
     const defaultOptions: SocketIOClient.ConnectOpts = {
@@ -27,13 +27,13 @@ class WS {
 
     socket.on('disconnect', function (reason) {
       connStack.splice(connStack.indexOf(nsp), 1)
-      // console.log(socket.nsp + ' Disconnected from ws - Reason: ' + reason)
+      devMode ? console.log(socket.nsp + ' Disconnected from ws - Reason: ' + reason) : ''
     })
     socket.on('error', function (reason) {
-      // console.error('Error - Reason: ' + reason)
+      devMode ? console.error('Error - Reason: ' + reason) : ''
     })
     socket.on('reconnect', function (attemptNumber) {
-      // console.log('Reconnected - ' + attemptNumber)
+      //  console.log('Reconnected - ' + attemptNumber)
     })
 
     return socket

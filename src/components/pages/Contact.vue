@@ -217,7 +217,6 @@ export default Vue.extend({
                     },
                     'callback': function (token: string) {
                         $Obstacle.create(_this.$refs.send as HTMLButtonElement, {
-                            icon: '',
                             action: function () {
                                 $Pages.$mailer.send({
                                     name: _this.name,

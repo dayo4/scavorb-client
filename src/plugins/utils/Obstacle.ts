@@ -36,7 +36,7 @@ function overlayDelay (timer: number, text?: string, font?: number) {
     const span = document.createElement('span')
     span.classList.add('Overlay')
     span.innerHTML = `
-        <span class="DelayCount font-3 mr-2" style="font-size: ${font}px;">
+        <span class="DelayCounth mr-2" style="font-size: ${font}px;">
         </span>
         <span style="font-size: ${font}px;">
             ${text}

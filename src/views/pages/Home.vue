@@ -234,7 +234,8 @@ export default Vue.extend({
         fkLoading () {
             // const _this = this
             $Obstacle.create(this.$refs.fkloading, {
-                text: ''
+                text: '',
+                icon: 'icon-spin6'
             })
         }
     }

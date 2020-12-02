@@ -11,8 +11,6 @@ interface MyMetaInfo {
 
 export class General {
 
-    // appMode: number = 1 /* 1 = 'MainAppMode' 2 = GalleryDemoMode*/
-
     pasteAsPlainText (e: ClipboardEvent) {
         // e.preventDefault()
         // let t = e.target as any

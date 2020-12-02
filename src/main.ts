@@ -18,6 +18,17 @@ const BASE_URL = process.env.NODE_ENV === 'production' ? process.env.BASE_URL : 
 Vue.prototype.$baseUrl = BASE_URL
 Vue.prototype.$postBaseUrl = BASE_URL + 'pst/'
 Vue.prototype.$userBaseUrl = BASE_URL + 'usr/'
+Vue.prototype.$appLogo = `
+        <div class="logo-base logo-trans-2 logo-large logo-fast shadow-5">
+            <span>
+                <span>
+                    <b>S</b>
+                </span>
+                <span></span>
+            </span>
+            <span></span>
+        </div>
+    `
 
 
 /* use plugins */
