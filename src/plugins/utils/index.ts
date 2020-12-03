@@ -1,8 +1,8 @@
-// import { Obstacle } from './Obstacle'
-import { Obstacle } from 'obstacle'
+// import { Obstacl } from './Obstacl'
+import { Obstacl } from 'obstacl'
 import { General } from './General'
 export { $ScrollLoader } from './ScrollLoader'
 
 
-export const $Obstacle = Obstacle
+export const $Obstacl = Obstacl
 export const $General = new General()

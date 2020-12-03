@@ -3,7 +3,7 @@
 import Vue from "vue"
 
 // import { $Posts } from '@/myStore'
-// import { $ScrollLoader, $Notify, $Obstacle } from '@/plugins'
+// import { $ScrollLoader, $Notify, $Obstacl } from '@/plugins'
 
 export default Vue.extend({
 })

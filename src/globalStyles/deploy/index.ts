@@ -9,5 +9,5 @@ import './transitions.css'
 /* cropperjs styles */
 import './cropper.css'
 
-/* Obstacle styles */
-import '../../../node_modules/obstacle/dist/obstacle.min.css'
+/* Obstacl styles */
+import '../../../node_modules/obstacl/dist/obstacl.min.css'

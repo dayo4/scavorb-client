@@ -40,7 +40,7 @@
 </template>
 <script lang="ts">
 import { $Auth, $Posts } from '@/myStore'
-import { $Process, $Notify, $Obstacle, $Validator, $General } from '@/plugins'
+import { $Process, $Notify, $Obstacl, $Validator, $General } from '@/plugins'
 
 import Vue from "vue"
 
@@ -137,7 +137,7 @@ export default Vue.extend({
         init () {
             if (this.validate())
             {
-                $Obstacle.create('#saveBtn', {
+                $Obstacl.create('#saveBtn', {
                     action: this.captureContentImages,
                 })
 
@@ -229,7 +229,7 @@ export default Vue.extend({
                     content: this.content,
                     contentImages
                 }).then(() => {
-                    $Obstacle.destroy('#saveBtn')
+                    $Obstacl.destroy('#saveBtn')
                 })
             } else
             {
@@ -239,7 +239,7 @@ export default Vue.extend({
                     content: this.content,
                     contentImages
                 }).then(() => {
-                    $Obstacle.destroy('#saveBtn')
+                    $Obstacl.destroy('#saveBtn')
                 })
             }
 

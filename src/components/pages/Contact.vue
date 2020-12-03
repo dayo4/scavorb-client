@@ -98,7 +98,7 @@
 import Vue from "vue"
 
 import { $Pages } from "@/myStore"
-import { $Validator, $Obstacle } from "@/plugins"
+import { $Validator, $Obstacl } from "@/plugins"
 
 export default Vue.extend({
 
@@ -216,7 +216,7 @@ export default Vue.extend({
                         _this.error = err
                     },
                     'callback': function (token: string) {
-                        $Obstacle.create(_this.$refs.send as HTMLButtonElement, {
+                        $Obstacl.create(_this.$refs.send as HTMLButtonElement, {
                             action: function () {
                                 $Pages.$mailer.send({
                                     name: _this.name,
@@ -225,7 +225,7 @@ export default Vue.extend({
                                     message: _this.msg,
                                     token: token
                                 }).then((done: boolean) => {
-                                    $Obstacle.destroy(_this.$refs.send as HTMLButtonElement)
+                                    $Obstacl.destroy(_this.$refs.send as HTMLButtonElement)
                                     // @ts-ignore
                                     grecaptcha.reset()
                                     _this.showCaptcha = false

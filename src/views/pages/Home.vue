@@ -189,7 +189,7 @@ import Vue from "vue"
 
 import Container from '@/components/navs/reusables/Container.vue'
 import Contact from '@/components/pages/Contact.vue'
-import { $General, $Obstacle } from '@/plugins'
+import { $General, $Obstacl } from '@/plugins'
 
 export default Vue.extend({
     components: {
@@ -233,7 +233,7 @@ export default Vue.extend({
 
         fkLoading () {
             // const _this = this
-            $Obstacle.create(this.$refs.fkloading, {
+            $Obstacl.create(this.$refs.fkloading, {
                 text: '',
                 icon: 'icon-spin6'
             })

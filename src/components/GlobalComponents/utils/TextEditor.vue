@@ -10,7 +10,7 @@
 </template>
 <script lang="ts">
 // import { $Auth, $Posts } from '@/myStore'
-// import { $Process, $Notify, $Obstacle, $Validator } from '@/plugins'
+// import { $Process, $Notify, $Obstacl, $Validator } from '@/plugins'
 
 import Vue from "vue"
 

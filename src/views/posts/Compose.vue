@@ -58,7 +58,7 @@
 import Vue from "vue"
 
 import { $Posts } from "@/myStore"
-import { $Notify, $Obstacle } from "@/plugins"
+import { $Notify, $Obstacl } from "@/plugins"
 
 import Container from '@/components/navs/reusables/Container.vue'
 import Composer from "@/components/posts/new/Composer.vue"
@@ -104,7 +104,7 @@ export default Vue.extend({
         },
 
         startProcessing () {
-            // $Obstacle.create(this.$refs.saveBtn, {
+            // $Obstacl.create(this.$refs.saveBtn, {
             // timer: 4000,
             (this.$refs.composer as any /* child component */).init()
             // })

@@ -59,7 +59,7 @@ import Container from '@/components/navs/reusables/Container.vue'
 
 import Vue from "vue"
 import { $Posts } from "@/myStore"
-import { /* $ScrollLoader, */ $Obstacle, $General } from "@/plugins"
+import { /* $ScrollLoader, */ $Obstacl, $General } from "@/plugins"
 
 export default Vue.extend({
     components: {
@@ -115,10 +115,10 @@ export default Vue.extend({
         //             return data
         //     })
         // })
-        $Obstacle.create('#MC-AllPosts', {
+        $Obstacl.create('#MC-AllPosts', {
             injectHTML: this.$appLogo
         })
-        $Posts.fetchAll({}, true).then(ok => $Obstacle.destroy('#MC-AllPosts'))
+        $Posts.fetchAll({}, true).then(ok => $Obstacl.destroy('#MC-AllPosts'))
         // this.$gtag.event('login', { method: 'Google' })
     }
 })

@@ -184,7 +184,7 @@
 import Vue from "vue"
 
 import { $Comments, $Posts, $Auth } from "@/myStore"
-import { $Validator, $Obstacle, WS } from "@/plugins"
+import { $Validator, $Obstacl, WS } from "@/plugins"
 
 export default Vue.extend({
     components: {
@@ -329,7 +329,7 @@ export default Vue.extend({
         if (!this.user)
         {
             let _this = this
-            $Obstacle.create('.CommentsModal .Foot', {
+            $Obstacl.create('.CommentsModal .Foot', {
                 text: 'You must login to reply. Click to login',
                 icon: 'icon-shield',
                 animate: false,

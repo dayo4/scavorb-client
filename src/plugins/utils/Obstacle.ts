@@ -62,7 +62,7 @@ function breakClick (e) {
 
 interface Options {
     action?: Function | void /* NOTE: Do not call the function passed as action. Otherwise the function will be executed immediately. */
-    onClick?: Function  /* You can also add a click event to the obstacle to make users perform an action. */
+    onClick?: Function  /* You can also add a click event to the Obstacl to make users perform an action. */
     timer?: number
     showCountdown?: boolean
     pageLoader?: boolean
@@ -73,7 +73,7 @@ interface Options {
 
 }
 
-export class Obstacle {
+export class Obstacl {
 
     private stack: HTMLElement[] = []
 
@@ -140,7 +140,7 @@ export class Obstacle {
             }
             return
         }
-        console.error('invalid target supplied to $Obstacle creator.')
+        console.error('invalid target supplied to $Obstacl creator.')
     }
 
     destroy (element: HTMLElement | string) {
@@ -159,7 +159,7 @@ export class Obstacle {
 
             return
         }
-        console.error('invalid target supplied to $Obstacle destroyer.')
+        console.error('invalid target supplied to $Obstacl destroyer.')
 
     }
 

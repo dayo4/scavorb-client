@@ -89,7 +89,7 @@
 
 import Vue from "vue"
 import { $Auth } from "@/myStore"
-import { $Validator, $Obstacle } from "@/plugins"
+import { $Validator, $Obstacl } from "@/plugins"
 
 export default Vue.extend({
     props: {
@@ -157,7 +157,7 @@ export default Vue.extend({
             // }
             if ($Validator.validate(!this.stage_2 ? schema1 : schema2))
             {
-                $Obstacle.create(sendBtn, {
+                $Obstacl.create(sendBtn, {
                     icon: 'icon-spin6',
                     action: function () {
                         if (_this.stage_2)
@@ -168,7 +168,7 @@ export default Vue.extend({
                                 first_name: _this.fname,
                                 last_name: _this.lname,
                             }, 2).then(done => {
-                                $Obstacle.destroy(sendBtn)
+                                $Obstacl.destroy(sendBtn)
                             })
                         } else
                         {
@@ -177,7 +177,7 @@ export default Vue.extend({
                                 email: _this.email,
                                 password: _this.password,
                             }).then(data => {
-                                $Obstacle.destroy(sendBtn)
+                                $Obstacl.destroy(sendBtn)
                                 if (data.next)
                                     _this.stage_2 = true
                             })

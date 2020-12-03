@@ -64,7 +64,7 @@
 
 import Vue from "vue"
 import { $Auth } from "@/myStore"
-import { $Validator, $Obstacle } from "@/plugins"
+import { $Validator, $Obstacl } from "@/plugins"
 
 
 export default Vue.extend({
@@ -133,7 +133,7 @@ export default Vue.extend({
 
             if ($Validator.validate(schema))
             {
-                $Obstacle.create(sendBtn, {
+                $Obstacl.create(sendBtn, {
                     icon: 'icon-spin6',
                     action: function () {
                         $Auth.$form.register({
@@ -141,7 +141,7 @@ export default Vue.extend({
                             email: _this.email,
                             password: _this.password
                         }).then(done => {
-                            $Obstacle.destroy(sendBtn)
+                            $Obstacl.destroy(sendBtn)
                         })
                     }
                 })

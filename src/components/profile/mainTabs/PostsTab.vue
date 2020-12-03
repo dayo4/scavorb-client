@@ -55,7 +55,7 @@
 
 import Vue from "vue"
 import { $Auth, $Profile, $Posts } from "@/myStore"
-import { $ScrollLoader, $Obstacle } from "@/plugins"
+import { $ScrollLoader, $Obstacl } from "@/plugins"
 
 export default Vue.extend({
     components: {
@@ -101,10 +101,10 @@ export default Vue.extend({
     },
 
     mounted () {
-        $Obstacle.create('.Tab_2', {
+        $Obstacl.create('.Tab_2', {
             injectHTML: this.$appLogo
         })
-        $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.destroy('.Tab_2'))
+        $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacl.destroy('.Tab_2'))
     }
 })
 </script>

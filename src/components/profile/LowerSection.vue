@@ -28,7 +28,7 @@ import Tab_2 from "@/components/profile/mainTabs/PostsTab.vue"
 // import MediaTab from "@/components/profile/mainTabs/MediaTab.vue"
 import Vue from "vue"
 import { $Auth, $Posts, $Profile } from "@/myStore"
-import { /* $ScrollLoader */ $Process, $Obstacle } from "@/plugins"
+import { /* $ScrollLoader */ $Process, $Obstacl } from "@/plugins"
 
 export default Vue.extend({
     components: {
@@ -62,7 +62,7 @@ export default Vue.extend({
             this.currentTab = 'Tab_' + tab_id
             // if (tab_id === 2 && this.profile.pr === 10)
             // {
-            //     $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacle.create('.Tab_2')/* $Process.hide() */)
+            //     $Posts.fetchUserPosts($Profile.data.id, {}, true).then(ok => $Obstacl.create('.Tab_2')/* $Process.hide() */)
             // }
         },
 

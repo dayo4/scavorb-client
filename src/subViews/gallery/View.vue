@@ -29,7 +29,7 @@
 import Vue from "vue"
 
 // import { $Posts } from "@/myStore"
-// import { $Notify, $Obstacle } from "@/plugins"
+// import { $Notify, $Obstacl } from "@/plugins"
 
 import Container from '@/components/navs/reusables/Container.vue'
 import { $General } from '@/plugins'
