@@ -13,11 +13,11 @@
 </template>
 <script lang="ts">
 import Vue from "vue"
-import { $Navs } from '@/myStore'
+// import { $Navs } from '@/myStore'
 
 export default Vue.extend({
     computed: {
-        scrolled: () => $Navs.$container.scrolled,
+        // scrolled: () => $Navs.$container.scrolled,
     },
 })
 </script>

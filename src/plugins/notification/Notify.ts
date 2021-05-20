@@ -10,17 +10,20 @@ export class Notify {
 
     notifs: Notification[] = []
 
-    success (message: string) {
+    success(message: string) {
         this.set({ message, type: 'success' })
     }
-    error (msg?: string) {
-        this.set({ message: msg ? msg : 'An error occured!', type: 'error' })
+    error(msg?: string) {
+        const offline = function () {
+            return !navigator.onLine
+        }
+        this.set({ message: msg ? msg : !msg && offline ? 'Check your connection!' : 'An error occured!', type: 'error' })
     }
-    info (message: string) {
+    info(message: string) {
         this.set({ message })
     }
 
-    private set (params: Notification) {
+    private set(params: Notification) {
         this.notifs.unshift(params)
 
         let $this = this
@@ -32,7 +35,7 @@ export class Notify {
 
     }
 
-    clear (notification: Notification) {
+    clear(notification: Notification) {
         this.notifs.splice(this.notifs.indexOf(notification), 1)
     }
 }

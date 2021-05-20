@@ -21,12 +21,12 @@ class Posts {
     postsCount: number = 0
     userPosts: Array<object> = []
     userPostsCount: number = 0
+    wpp: any = []
 
 
-    async fetchAll (payload: Query = {}, refresh: boolean = false) {
+    async fetchAll(payload: Query = {}, refresh: boolean = false) {
 
-        try
-        {
+        try {
             const query: Query = {
                 limit: payload.limit || 10,
                 offset: payload.offset || refresh ? 0 : this.posts.length,
@@ -45,10 +45,26 @@ class Posts {
             $Notify.error()
         }
     }
+    async wpps() {
 
-    async fetchUserPosts (user_id: any, payload: Query = {}, refresh: boolean = false) {
-        try
-        {
+        try {
+
+
+            const { data } = await $Axios
+                .get("https://wp.scavorb.com/wp-json/wp/v2/posts?page=1&per_page=20")
+            console.log(data);
+
+            this.wpp = data
+
+            return data
+        }
+        catch {
+            $Notify.error()
+        }
+    }
+
+    async fetchUserPosts(user_id: any, payload: Query = {}, refresh: boolean = false) {
+        try {
             const query: Query = {
                 limit: payload.limit || 10,
                 offset: payload.offset || refresh ? 0 : this.userPosts.length,
@@ -62,7 +78,7 @@ class Posts {
                 this.userPosts.push(...data.posts)
             return data
         }
-        catch{
+        catch {
             $Notify.error()
         }
     }

@@ -2,6 +2,8 @@
 
 // import Vue from 'vue'
 import axios from 'axios'
+import { setupCache } from 'axios-cache-adapter'
+
 import router from '@/router'
 import { $Auth } from '@/myStore'
 import LSAgent from '@/plugins/storage/LSAgent'
@@ -12,11 +14,19 @@ const devMode = process.env.NODE_ENV === 'development'
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || 'http://127.0.0.1:3000/'
 // axios.defaults.headers.common['Authorization'] = store.getters["auth/authToken"]
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000,
+  readOnError: (error, request) => {
+    return error.response.status >= 400 && error.response.status < 600
+  },
+  // Deactivate `clearOnStale` option so that we can actually read stale cache data
+  clearOnStale: false
+})
 const config = {
   baseURL: (devMode ? 'http://127.0.0.1:3000/' : process.env.BASE_URL) + 'scv-v1/',
   timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
+  adapter: cache.adapter,
 }
 
 const _axios = axios.create(config)
@@ -26,7 +36,7 @@ _axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     const token = LSAgent.getToken()
-    config.headers.common[ 'Authorization' ] = 'Bearer ' + token
+    config.headers.common['Authorization'] = 'Bearer ' + token
 
     return config
   },
@@ -53,22 +63,17 @@ _axios.interceptors.response.use(
     if (devMode)
       console.log(response)
 
-    if (response)
-    {
-      if (response.status === 401)
-      {
+    if (response) {
+      if (response.status === 401) {
         const redirectUrl = router.currentRoute.path
-        if (error === 'Re-login!')
-        {
+        if (error === 'Re-login!') {
           $Auth.$form.logout()
           $Auth.$form.show({ showQuery: true, message: 'Please, Re-login to continue!', redirect: redirectUrl })
-        } else
-        {
+        } else {
           router.replace({ path: '/401' })
         }
       }
-      if (response.status === 404)
-      {
+      if (response.status === 404) {
         router.push({ path: '/404', /* query: { data: error } */ })
       }
     }

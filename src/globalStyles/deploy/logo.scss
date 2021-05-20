@@ -12,9 +12,11 @@
 	
     & > span:nth-child(1) {
         position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        top: 11%;
+        left: 11%;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
         z-index: 1;
         border-radius: 50%;
         width: 78%;
@@ -25,6 +27,8 @@
 
         & span:nth-child(1) {
             position: absolute;
+            top: 14%;
+            left: 14%;
             z-index: 1;
             display: flex;
             justify-content: center;
@@ -39,6 +43,8 @@
         }
         & span:nth-child(2) {
             position: absolute;
+            top: 27.5%;
+            left: -5%;
             width: 110%;
 			height: 45%;
 			background-color: #00838f;
