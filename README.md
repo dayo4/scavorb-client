@@ -3,7 +3,7 @@
 ```markdown
 # Scavorb - Version 2.0.1
 
-Scavorb is a private Vue.js application that includes various dependencies for building feature-rich web applications.
+Full CMS built in Vue.js
 
 ## Getting Started
 
